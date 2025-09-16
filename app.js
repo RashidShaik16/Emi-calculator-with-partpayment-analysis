@@ -420,9 +420,9 @@ function renderAmortization(schedule) {
 
     // Add table header row
     const tableHeader = document.createElement('div');
-    tableHeader.className = 'grid grid-cols-7 gap-2 font-semibold text-sm border-b pb-1 text-left md:grid-cols-7';
+    tableHeader.className = 'grid grid-cols-6 gap-2 font-semibold text-sm border-b pb-1 text-left';
     tableHeader.innerHTML = `
-      <div>Sr.</div>
+      
       <div>Month</div>
       <div>EMI (₹)</div>
       <div>Interest (₹)</div>
@@ -434,7 +434,7 @@ function renderAmortization(schedule) {
 
     years[yr].forEach((m, idx) => {
       const monthRow = document.createElement('div');
-      monthRow.className = 'grid grid-cols-7 gap-2 text-sm py-1 border-b hover:bg-gray-50 text-left md:grid-cols-7';
+      monthRow.className = 'grid grid-cols-6 gap-2 text-sm py-1 border-b hover:bg-gray-50 text-left';
 
       const monthName = new Date(m.year, m.month - 1).toLocaleString('default', { month: 'short' });
 
@@ -480,8 +480,8 @@ function renderAmortization(schedule) {
       }
 
       monthRow.innerHTML = `
-        <div>${m.serial}</div>
-        <div>${monthName}</div>
+        
+        <div>${m.serial}. ${monthName}</div>
         <div>₹${Math.round(m.emi).toLocaleString('en-IN')}</div>
         <div>₹${Math.round(m.interest).toLocaleString('en-IN')}</div>
         <div>₹${Math.round(m.principal).toLocaleString('en-IN')}</div>
@@ -494,7 +494,7 @@ function renderAmortization(schedule) {
       // Insert note row if exists on the schedule item
       if (m.note) {
         const noteRow = document.createElement('div');
-        noteRow.className = 'col-span-7 text-center font-bold mx-auto text-sm italic text-blue-700 bg-blue-100 p-2 rounded md:w-1/2';
+        noteRow.className = 'col-span-6 text-center font-bold mx-auto text-sm italic text-blue-700 bg-blue-100 p-2 rounded md:w-1/2';
         noteRow.textContent = m.note;
         monthContainer.appendChild(noteRow);
       }
