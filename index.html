@@ -428,7 +428,50 @@
                 </div>
             </section>
 
-                
+            <!-- Feedback Section -->
+            <section class="bg-gradient-to-r from-blue-100 to-indigo-100 shadow-lg rounded-2xl p-8 mt-12 w-full max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">We Value Your Feedback</h2>
+            <p class="text-sm text-gray-600 mb-6">Tell us what you think about our EMI Calculator. Your feedback helps us improve!</p>
+
+            <form id="feedbackForm" class="space-y-5">
+                <!-- Name -->
+                <div>
+                <label for="from_name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                <input id="from_name" name="from_name" type="text" required 
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm">
+                </div>
+
+                <!-- Email -->
+                <div>
+                <label for="from_email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+                <input id="from_email" name="from_email" type="email" required 
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm">
+                </div>
+
+                <!-- Message -->
+                <div>
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                <textarea id="message" name="message" rows="4" required 
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm"></textarea>
+                </div>
+
+                <!-- reCAPTCHA -->
+                <div class="flex justify-center">
+                <div class="g-recaptcha" data-sitekey="6LcFMc0rAAAAAO8qxEkn-AmuhqfOHrSVBGXAk3NS"></div>
+                </div>
+
+                <!-- Submit -->
+                <button id="feedbackSubmitBtn" type="submit" 
+                class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:from-blue-700 hover:to-indigo-700 transition font-semibold">
+                🚀 Send Feedback
+                </button>
+            </form>
+
+            <!-- Status Message -->
+            <p id="feedbackStatus" class="mt-4 text-center text-sm font-semibold"></p>
+            </section>
+
+      
         </div>
 
 <!-- Part Payment Modal -->
@@ -514,6 +557,11 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script src="./pdfGenerator.js"></script>
+   <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <!-- reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
    <script src="app.js"></script>
  
     </body>

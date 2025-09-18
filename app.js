@@ -19,6 +19,8 @@ let partPayments = [];
 
 // app.js - EMI Calculator logic
 document.addEventListener('DOMContentLoaded', function() {
+  emailjs.init("vGkMgPqy7msXERp1n");
+  console.log("EmailJS initialized:", emailjs);
   const locale = 'en-IN';
   const formatNumber = (v) => Number(v).toLocaleString(locale);
 
@@ -136,6 +138,7 @@ confirmBtn.addEventListener("click", () => {
     amount,
     option
   });
+
 
 
   // ✅ Recalculate amortization with new part payment
@@ -275,6 +278,57 @@ bindInputWithSlider(tenureInput, tenureRange, updateResults);
 
   // Initial update on page load
   updateResults();
+
+
+// --- Feedback Form (working version) ---
+const feedbackForm = document.getElementById("feedbackForm");
+const feedbackStatus = document.getElementById("feedbackStatus");
+const feedbackBtn = document.getElementById("feedbackSubmitBtn");
+
+if (feedbackForm) {
+  feedbackForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    console.log("🚀 Form submitted, preventDefault worked!");
+
+    // ✅ Check reCAPTCHA
+    const captchaResponse = grecaptcha.getResponse();
+    if (!captchaResponse) {
+      feedbackStatus.textContent = "⚠️ Please verify the reCAPTCHA before submitting.";
+      feedbackStatus.className = "mt-4 text-red-600 font-semibold";
+      return;
+    }
+
+    // Show loading state
+    feedbackBtn.disabled = true;
+    feedbackBtn.textContent = "⏳ Sending...";
+
+    // ✅ Attach captcha response
+    const captchaField = document.createElement("input");
+    captchaField.type = "hidden";
+    captchaField.name = "g-recaptcha-response";
+    captchaField.value = captchaResponse;
+    feedbackForm.appendChild(captchaField);
+
+    // Send via EmailJS
+    emailjs.sendForm("service_e5o8v41", "template_gt38jdj", feedbackForm)
+      .then(() => {
+        feedbackStatus.textContent = "✅ Thank you! Your feedback has been sent.";
+        feedbackStatus.className = "mt-4 text-green-600 font-semibold";
+        feedbackForm.reset();
+        grecaptcha.reset();
+      })
+      .catch((error) => {
+        console.error("❌ EmailJS error:", error.text || error);
+        feedbackStatus.textContent = "❌ Oops! Something went wrong. Please try again.";
+        feedbackStatus.className = "mt-4 text-red-600 font-semibold";
+      })
+      .finally(() => {
+        feedbackBtn.disabled = false;
+        feedbackBtn.textContent = "🚀 Send Feedback";
+      });
+  });
+}
 
 });
 
