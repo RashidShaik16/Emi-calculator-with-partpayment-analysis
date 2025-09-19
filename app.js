@@ -221,7 +221,7 @@ function updateResults() {
 
   // --- Savings Section (with chart + note) ---
   const savingsSection = document.getElementById('savingsSection'); // chart container
-  const savingsNote = document.getElementById('savingsNote');       // old note text
+  // const savingsNote = document.getElementById('savingsNote');       // old note text
   const savingsHighlight = document.getElementById("savingsHighlight"); // new fancy box
   const savingsAmountEl = document.getElementById("savingsAmount");
   const savingsDetailEl = document.getElementById("savingsDetail");
@@ -442,143 +442,6 @@ function generateAmortization(P, annualRate, N, partPayments = []) {
 
 
 
-
-// Render amortization schedule accordion with part-payment button
-// function renderAmortization(schedule) {
-//   const container = document.getElementById('amortizationAccordion');
-//   container.innerHTML = ''; // clear previous
-
-//   if (!Array.isArray(schedule) || schedule.length === 0) return;
-
-//   // Group by year
-//   const years = {};
-//   schedule.forEach(item => {
-//     if (!years[item.year]) years[item.year] = [];
-//     years[item.year].push(item);
-//   });
-
-//   // serial of the very last month in the whole schedule
-//   const lastSerial = schedule[schedule.length - 1].serial;
-
-
-//   let maxPaidYear = null;
-//   if (Array.isArray(partPayments) && partPayments.length > 0) {
-//     maxPaidYear = Math.max(...partPayments.map(pp => Number(pp.year)));
-//   }
-
-//   for (const yr in years) {
-//     const yearDiv = document.createElement('div');
-//     yearDiv.className = 'border rounded-lg text-blue-500';
-
-//     const header = document.createElement('button');
-//     header.className = 'w-full text-left p-3 font-semibold bg-blue-100 rounded-t-lg flex justify-between items-center focus:outline-none';
-//     header.innerHTML = `${yr} <span>+</span>`;
-
-//       const monthContainer = document.createElement('div');
-//       monthContainer.className = 'max-h-0 overflow-hidden ml-4 transition-all duration-500 ease-in-out';
-
-
-//     // Add table header row
-//     const tableHeader = document.createElement('div');
-//     tableHeader.className = 'grid grid-cols-6 gap-2 font-semibold text-sm border-b py-2 text-left';
-//     tableHeader.innerHTML = `
-      
-//       <div>Month</div>
-//       <div>EMI (₹)</div>
-//       <div>Interest (₹)</div>
-//       <div>Principal (₹)</div>
-//       <div>Balance (₹)</div>
-//       <div class="col-span-1 ml-auto mr-5 md:mx-auto md:col-span-1">Action</div>
-//     `;
-//     monthContainer.appendChild(tableHeader);
-
-//     years[yr].forEach((m, idx) => {
-//       const monthRow = document.createElement('div');
-//       monthRow.className = 'grid grid-cols-6 gap-2 text-sm py-1 border-b hover:bg-gray-50 text-left';
-
-//       const monthName = new Date(m.year, m.month - 1).toLocaleString('default', { month: 'short' });
-
-//       // Decide if this button should be disabled:
-//       let actionHTML = '';
-//       if (m.serial === lastSerial) {
-//         actionHTML = `
-//           <button 
-//             class="col-span-1 ml-auto md:mx-auto md:col-span-1 
-//                    bg-gray-400 text-white px-2 py-1 rounded text-xs cursor-not-allowed"
-//             disabled
-//             title="Part payment not allowed on final installment"
-//           >
-//             N/A
-//           </button>
-//         `;
-//       } else if (maxPaidYear !== null && Number(m.year) <= Number(maxPaidYear)) {
-//         // Disabled because a part payment has already happened in this or earlier year
-//         actionHTML = `
-//           <button 
-//             class="col-span-1 ml-auto md:mx-auto md:col-span-1 
-//                    bg-gray-400 text-white px-2 py-1 rounded text-xs cursor-not-allowed"
-//             disabled
-//             title="Part payments disabled up to year ${maxPaidYear}"
-//           >
-//             N/A
-//           </button>
-//         `;
-//       } else {
-//         // Active button
-//         actionHTML = `
-//           <button 
-//             class="part-payment-btn col-span-1 ml-auto md:mx-auto md:col-span-1 
-//                    bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 text-xs" 
-//             data-month="${m.serial}" 
-//             data-year="${m.year}" 
-//             data-balance="${Math.round(m.balance)}"
-//             data-emi="${Math.round(m.emi)}"
-//           >
-//             Part Pay
-//           </button>
-//         `;
-//       }
-
-//       monthRow.innerHTML = `
-        
-//         <div>${m.serial}. ${monthName}</div>
-//         <div>₹${Math.round(m.emi).toLocaleString('en-IN')}</div>
-//         <div>₹${Math.round(m.interest).toLocaleString('en-IN')}</div>
-//         <div>₹${Math.round(m.principal).toLocaleString('en-IN')}</div>
-//         <div>₹${Math.round(m.balance).toLocaleString('en-IN')}</div>
-//         ${actionHTML}
-//       `;
-
-//       monthContainer.appendChild(monthRow);
-
-//       // Insert note row if exists on the schedule item
-//       if (m.note) {
-//         const noteRow = document.createElement('div');
-//         noteRow.className = 'col-span-6 text-center font-bold mx-auto text-sm italic text-blue-700 bg-blue-100 p-2 rounded md:w-1/2';
-//         noteRow.textContent = m.note;
-//         monthContainer.appendChild(noteRow);
-//       }
-//     });
-
-//       header.addEventListener('click', () => {
-//         if (monthContainer.style.maxHeight && monthContainer.style.maxHeight !== "0px") {
-//           // Closing
-//           monthContainer.style.maxHeight = "0px";
-//           header.querySelector('span').textContent = "+";
-//         } else {
-//           // Opening
-//           monthContainer.style.maxHeight = monthContainer.scrollHeight + "px";
-//           header.querySelector('span').textContent = "−";
-//         }
-//       });
-
-
-//     yearDiv.appendChild(header);
-//     yearDiv.appendChild(monthContainer);
-//     container.appendChild(yearDiv);
-//   }
-// }
-
 // Render amortization schedule accordion with part-payment button
 function renderAmortization(schedule) {
   const container = document.getElementById('amortizationAccordion');
@@ -623,7 +486,7 @@ function renderAmortization(schedule) {
     // Add table header row
     const tableHeader = document.createElement('div');
     tableHeader.className =
-      'grid grid-cols-6 gap-2 font-semibold text-sm border-b pb-1 text-left';
+      'grid grid-cols-6 gap-2 font-semibold text-xs border-b pb-1 text-left sm:text-sm';
     tableHeader.innerHTML = `
       <div>Month</div>
       <div>EMI (₹)</div>
@@ -637,7 +500,7 @@ function renderAmortization(schedule) {
     years[yr].forEach((m, idx) => {
       const monthRow = document.createElement('div');
       monthRow.className =
-        'grid grid-cols-6 gap-2 text-sm py-1 border-b hover:bg-gray-50 text-left';
+        'grid grid-cols-6 gap-2 text-xs py-1 border-b hover:bg-gray-50 text-left sm:text-sm';
 
       const monthName = new Date(m.year, m.month - 1).toLocaleString(
         'default',
