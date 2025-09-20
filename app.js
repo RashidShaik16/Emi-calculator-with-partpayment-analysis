@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
       labels: ['Principal', 'Interest'],
       datasets: [{
         data: [0, 0],
-        backgroundColor: ['#3b82f6', '#f59e0b'],
+        backgroundColor: ['blue', '#f59e0b'],
       }]
     },
     options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         labels: ['Principal', 'Interest'],
         datasets: [{
           data: [0, 0],
-          backgroundColor: ['#3b82f6', '#f59e0b'],
+          backgroundColor: ['blue', '#f59e0b'],
         }]
       },
       options: { 
