@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
     <head>
     <!-- Basic Meta -->
     <meta charset="UTF-8" />
@@ -31,7 +31,7 @@
     <meta name="twitter:image" content="https://www.yourdomain.com/og-image.jpg" />
 
     <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.icon" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Stylesheets -->
@@ -56,9 +56,37 @@
     }
     </script>
     </head>
-    <body class="bg-gray-50 text-gray-800">
-        <div class="max-w-7xl mx-auto px-4 py-10">
-            <h1 class="text-3xl font-bold text-center mb-10">Know Your EMI</h1>
+    <body class="bg-gray-50 text-gray-800 scroll-smooth">
+        <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+                <!-- Logo / Title -->
+                <a href="#calculator" class="text-xl font-bold">Know Your EMI</a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                <a href="#calculator" class="hover:text-yellow-300">Calculator</a>
+                <a href="#why" class="hover:text-yellow-300">Why Use</a>
+                <a href="#faq-section" class="hover:text-yellow-300">FAQs</a>
+                <a href="#feedback-section" class="hover:text-yellow-300">Feedback</a>
+                </div>
+
+                <!-- Hamburger Button -->
+                <button id="menu-toggle" class="md:hidden text-white focus:outline-none text-2xl">
+                ☰
+                </button>
+            </div>
+
+            <!-- Mobile Menu (hidden by default) -->
+            <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-gradient-to-r from-blue-600 to-indigo-600">
+                <a href="#calculator" class="hover:text-yellow-300">Calculator</a>
+                <a href="#why" class="hover:text-yellow-300">Why Use</a>
+                <a href="#faq-section" class="hover:text-yellow-300">FAQs</a>
+                <a href="#feedback-section" class="hover:text-yellow-300">Feedback</a>
+            </div>
+        </nav>
+
+
+        <main class="max-w-7xl mx-auto px-4 py-10">
 
             <!-- Main layout: form + results side by side -->
             <div class="grid lg:grid-cols-2 gap-8">
@@ -235,7 +263,7 @@
             </section>
 
             <!-- FAQ Section -->
-            <section class="bg-white shadow-lg rounded-2xl py-10 px-6 mt-10">
+            <section id="faq-section" class="bg-white shadow-lg rounded-2xl py-10 px-6 mt-10">
                 <h2 class="text-2xl font-bold text-center mb-8">Loan & Credit FAQs – Things You Should Know</h2>
                 <div id="faqAccordion" class="space-y-4">
 
@@ -326,7 +354,7 @@
 
 
                     <!-- FAQ Item -->
-                    <div class="border rounded-lg overflow-hidden">
+                    <div id="faq" class="border rounded-lg overflow-hidden">
                         <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
                             <span>What is a soft enquiry and a hard enquiry?</span>
                             <span class="text-xl">+</span>
@@ -429,7 +457,7 @@
             </section>
 
             <!-- Feedback Section -->
-            <section class="bg-gradient-to-r from-blue-100 to-indigo-100 shadow-lg rounded-2xl p-8 mt-12 w-full max-w-4xl mx-auto">
+            <section id="feedback-section" class="bg-gradient-to-r from-blue-100 to-indigo-100 shadow-lg rounded-2xl p-8 mt-12 w-full max-w-4xl mx-auto">
             <h2 class="text-2xl font-bold text-gray-800 mb-2">We Value Your Feedback</h2>
             <p class="text-sm text-gray-600 mb-6">Tell us what you think about our EMI Calculator. Your feedback helps us improve!</p>
 
@@ -471,8 +499,54 @@
             <p id="feedbackStatus" class="mt-4 text-center text-sm font-semibold"></p>
             </section>
 
-      
-        </div>
+        </main>
+
+       
+
+        <!-- Footer -->
+        <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
+            <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- About -->
+                <div>
+                <h3 class="text-lg font-semibold mb-3">About This Tool</h3>
+                <p class="text-sm text-gray-200 leading-relaxed">
+                    This EMI Calculator with Part Payment Analysis helps you plan loans smarter. 
+                    See how part payments save you interest and reduce tenure, all with clear visuals 
+                    and an interactive schedule.
+                </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#calculator" class="hover:underline">EMI Calculator</a></li>
+                    <li><a href="#savingsSection" class="hover:underline">Savings</a></li>
+                    <li><a href="#faq-section" class="hover:underline">FAQs</a></li>
+                    <li><a href="#feedback-section" class="hover:underline">Feedback</a></li>
+                </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                <h3 class="text-lg font-semibold mb-3">Contact</h3>
+                <p class="text-sm text-gray-200 mb-2">📧 Email: 
+                    <a href="mailto:rashidshaik.dev16@gmail.com" class="underline hover:text-gray-100">
+                    rashidshaik.dev16@gmail.com
+                    </a>
+                </p>
+                <p class="text-sm text-gray-200">🌐 More features coming soon!</p>
+                </div>
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="bg-blue-900 text-center py-3 text-xs text-gray-300">
+                © <span id="year"></span> knowyouremi.net All rights reserved.
+            </div>
+        </footer>
+
+
 
 <!-- Part Payment Modal -->
 <section id="partPaymentModal" 
@@ -540,7 +614,7 @@
 
       <!-- Buttons -->
       <div class="flex justify-end gap-3 mt-4">
-        <button id="confirmPartPayment" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow hover:from-blue-600 hover:to-blue-700 transition">
+        <button id="confirmPartPayment" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow hover:from-blue-600 hover:to-blue-700">
             Confirm
         </button>
       </div>
@@ -553,6 +627,10 @@
 
 
   <!-- Script -->
+    <script>
+        // Auto-update year
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
