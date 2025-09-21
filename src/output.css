@@ -13,9 +13,13 @@
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-red-600: oklch(57.7% 0.245 27.325);
     --color-red-700: oklch(50.5% 0.213 27.518);
+    --color-orange-400: oklch(75% 0.183 55.934);
+    --color-orange-600: oklch(64.6% 0.222 41.116);
+    --color-amber-400: oklch(82.8% 0.189 84.429);
     --color-yellow-50: oklch(98.7% 0.026 102.212);
     --color-yellow-100: oklch(97.3% 0.071 103.193);
     --color-yellow-300: oklch(90.5% 0.182 98.111);
+    --color-yellow-400: oklch(85.2% 0.199 91.936);
     --color-yellow-700: oklch(55.4% 0.135 66.442);
     --color-yellow-800: oklch(47.6% 0.114 61.907);
     --color-green-50: oklch(98.2% 0.018 155.826);
@@ -54,8 +58,6 @@
     --color-white: #fff;
     --spacing: 0.25rem;
     --container-md: 28rem;
-    --container-xl: 36rem;
-    --container-2xl: 42rem;
     --container-4xl: 56rem;
     --container-6xl: 72rem;
     --container-7xl: 80rem;
@@ -79,7 +81,6 @@
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --font-weight-extrabold: 800;
-    --tracking-wide: 0.025em;
     --leading-relaxed: 1.625;
     --radius-lg: 0.5rem;
     --radius-xl: 0.75rem;
@@ -302,6 +303,9 @@
   .my-0 {
     margin-block: calc(var(--spacing) * 0);
   }
+  .my-5 {
+    margin-block: calc(var(--spacing) * 5);
+  }
   .mt-0 {
     margin-top: calc(var(--spacing) * 0);
   }
@@ -386,9 +390,6 @@
   .max-h-0 {
     max-height: calc(var(--spacing) * 0);
   }
-  .w-2xl {
-    width: var(--container-2xl);
-  }
   .w-3 {
     width: calc(var(--spacing) * 3);
   }
@@ -398,9 +399,6 @@
   .w-5 {
     width: calc(var(--spacing) * 5);
   }
-  .w-10 {
-    width: calc(var(--spacing) * 10);
-  }
   .w-11 {
     width: calc(var(--spacing) * 11);
   }
@@ -409,9 +407,6 @@
   }
   .w-20 {
     width: calc(var(--spacing) * 20);
-  }
-  .w-25 {
-    width: calc(var(--spacing) * 25);
   }
   .w-28 {
     width: calc(var(--spacing) * 28);
@@ -425,23 +420,8 @@
   .w-72 {
     width: calc(var(--spacing) * 72);
   }
-  .w-\[10px\] {
-    width: 10px;
-  }
-  .w-\[20px\] {
-    width: 20px;
-  }
-  .w-\[30px\] {
-    width: 30px;
-  }
   .w-full {
     width: 100%;
-  }
-  .w-md {
-    width: var(--container-md);
-  }
-  .w-xl {
-    width: var(--container-xl);
   }
   .max-w-4xl {
     max-width: var(--container-4xl);
@@ -629,9 +609,20 @@
     border-style: var(--tw-border-style);
     border-width: 2px;
   }
+  .border-5 {
+    border-style: var(--tw-border-style);
+    border-width: 5px;
+  }
+  .border-10 {
+    border-style: var(--tw-border-style);
+    border-width: 10px;
+  }
   .border-b {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
+  }
+  .border-black {
+    border-color: var(--color-black);
   }
   .border-blue-200 {
     border-color: var(--color-blue-200);
@@ -669,6 +660,12 @@
   .bg-green-50 {
     background-color: var(--color-green-50);
   }
+  .bg-indigo-600 {
+    background-color: var(--color-indigo-600);
+  }
+  .bg-orange-600 {
+    background-color: var(--color-orange-600);
+  }
   .bg-purple-50 {
     background-color: var(--color-purple-50);
   }
@@ -683,6 +680,9 @@
   }
   .bg-white {
     background-color: var(--color-white);
+  }
+  .bg-yellow-400 {
+    background-color: var(--color-yellow-400);
   }
   .bg-gradient-to-r {
     --tw-gradient-position: to right in oklab;
@@ -766,6 +766,9 @@
   }
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
+  }
+  .px-5 {
+    padding-inline: calc(var(--spacing) * 5);
   }
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
@@ -867,6 +870,12 @@
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
   }
+  .text-amber-400 {
+    color: var(--color-amber-400);
+  }
+  .text-black {
+    color: var(--color-black);
+  }
   .text-blue-500 {
     color: var(--color-blue-500);
   }
@@ -899,6 +908,9 @@
   }
   .text-green-600 {
     color: var(--color-green-600);
+  }
+  .text-orange-400 {
+    color: var(--color-orange-400);
   }
   .text-purple-600 {
     color: var(--color-purple-600);
@@ -1017,6 +1029,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-blue-600);
+      }
+    }
+  }
+  .hover\:bg-blue-800 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-blue-800);
       }
     }
   }

@@ -1,4 +1,3 @@
-// import {generatePDF} from ("./pdfGenerator.js")
 
 // Modal elements
 const input = document.getElementById("partPaymentInput");
@@ -7,14 +6,15 @@ const confirmBtn = document.getElementById("confirmPartPayment");
 const modal = document.getElementById('partPaymentModal');
 const modalBox = document.getElementById('partPaymentBox');
 const cancelBtn = document.getElementById('cancelPartPayment');
+const downloadPdfBtn = document.getElementById("downloadPdfBtn")
 
 let selectedMonthSerial = null;
 let selectedMaxAmount = 0;
 let selectedYear = null;
 let selectedEmi = null;
 
-
 let partPayments = [];
+let dataForPdf = null;
 
 
 // app.js - EMI Calculator logic
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
       labels: ['Principal', 'Interest'],
       datasets: [{
         data: [0, 0],
-        backgroundColor: ['blue', '#f59e0b'],
+        backgroundColor: ['#1E40AF', '#f59e0b'],
       }]
     },
     options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         labels: ['Principal', 'Interest'],
         datasets: [{
           data: [0, 0],
-          backgroundColor: ['blue', '#f59e0b'],
+          backgroundColor: ['#1E40AF', '#f59e0b'], 
         }]
       },
       options: { 
@@ -102,6 +102,35 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
+
+const downloadBtn = document.getElementById("downloadPdfBtn");
+if (downloadBtn) {
+  downloadBtn.addEventListener("click", () => {
+    // basic validation / guard
+    if (!dataForPdf || !Array.isArray(dataForPdf) || dataForPdf.length === 0) {
+      alert("No amortization data available to generate PDF.");
+      return;
+    }
+
+    // read current loan inputs (these vars exist inside DOMContentLoaded)
+    const loanAmount = Number(loanInput.value);
+    const interestRate = Number(rateInput.value);
+    const tenure = Number(tenureInput.value);
+
+    // compute EMI from the same function you already have to keep values consistent
+    const emiValue = Math.round(calculateEMI(loanAmount, interestRate, tenure));
+
+    // prepare loan info object to pass into pdfGenerator
+    const loanInfo = {
+      amount: loanAmount,
+      interestRate: interestRate,
+      tenure: tenure,
+      emi: emiValue,
+    };
+
+    pdfGenerator(dataForPdf, partPayments, loanInfo);
+  });
+}
 
   // Confirm button
 confirmBtn.addEventListener("click", () => {
@@ -221,7 +250,6 @@ function updateResults() {
 
   // --- Savings Section (with chart + note) ---
   const savingsSection = document.getElementById('savingsSection'); // chart container
-  // const savingsNote = document.getElementById('savingsNote');       // old note text
   const savingsHighlight = document.getElementById("savingsHighlight"); // new fancy box
   const savingsAmountEl = document.getElementById("savingsAmount");
   const savingsDetailEl = document.getElementById("savingsDetail");
@@ -325,7 +353,7 @@ if (feedbackForm) {
       })
       .finally(() => {
         feedbackBtn.disabled = false;
-        feedbackBtn.textContent = "🚀 Send Feedback";
+        feedbackBtn.textContent = "Send Feedback";
       });
   });
 }
@@ -436,6 +464,7 @@ function generateAmortization(P, annualRate, N, partPayments = []) {
     }
   }
 
+  dataForPdf = schedule
   return schedule;
 }
 
@@ -648,4 +677,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
 
