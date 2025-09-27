@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+User-agent: facebookexternalhit
+Allow: /
+
 Sitemap: https://www.knowyouremi.in/sitemap.xml
+
