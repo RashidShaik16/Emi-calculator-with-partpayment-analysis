@@ -564,13 +564,13 @@ function renderAmortization(schedule) {
         actionHTML = `
           <button 
             class="part-payment-btn col-span-1 ml-auto md:mx-auto md:col-span-1 
-                   bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 text-xs" 
+                   bg-blue-500 text-white px-1 py-1 rounded hover:bg-blue-600 text-xs" 
             data-month="${m.serial}" 
             data-year="${m.year}" 
             data-balance="${Math.round(m.balance)}"
             data-emi="${Math.round(m.emi)}"
           >
-            Part Pay
+            Pre Pay
           </button>
         `;
       }
