@@ -129,8 +129,19 @@ if (downloadBtn) {
     };
 
     pdfGenerator(dataForPdf, partPayments, loanInfo);
+
+    // Fire GA4 event for PDF download
+    if (typeof gtag === "function") {
+      gtag("event", "pdf_download", {
+        event_category: "engagement",
+        event_label: "amortization_pdf",
+        value: loanAmount,
+      });
+    }
+    
   });
 }
+
 
   // Confirm button
 confirmBtn.addEventListener("click", () => {
@@ -345,6 +356,14 @@ if (feedbackForm) {
         feedbackStatus.className = "mt-4 text-green-600 font-semibold";
         feedbackForm.reset();
         grecaptcha.reset();
+
+        // Fire GA4 event for feedback form submit
+          if (typeof gtag === "function") {
+            gtag("event", "feedback_submit", {
+              event_category: "engagement",
+              event_label: "feedback_form",
+            });
+          }
       })
       .catch((error) => {
         console.error("❌ EmailJS error:", error.text || error);
