@@ -512,122 +512,128 @@ function renderAmortization(schedule) {
     maxPaidYear = Math.max(...partPayments.map(pp => Number(pp.year)));
   }
 
-  for (const yr in years) {
-    const yearDiv = document.createElement('div');
-    yearDiv.className = 'border rounded-lg text-blue-500';
+    for (const yr in years) {
+      const yearDiv = document.createElement('div');
+      yearDiv.className = 'border rounded-lg text-blue-500';
 
-    const header = document.createElement('button');
-    header.className =
-      'w-full text-left p-3 font-semibold bg-blue-100 rounded-t-lg flex justify-between items-center focus:outline-none';
-    header.innerHTML = `${yr} <span>+</span>`;
+      const header = document.createElement('button');
+      header.className =
+        'w-full text-left p-3 font-semibold bg-blue-100 rounded-t-lg flex justify-between items-center focus:outline-none';
+      header.innerHTML = `${yr} <span>+</span>`;
 
-    // Outer collapsible container (no padding)
-    const monthContainer = document.createElement('div');
-    monthContainer.className =
-      'max-h-0 overflow-hidden transition-all duration-500 ease-in-out';
+      // Outer collapsible container (no padding)
+      const monthContainer = document.createElement('div');
+      monthContainer.className =
+        'max-h-0 overflow-hidden transition-all duration-500 ease-in-out';
 
-    // Inner wrapper (with padding + spacing)
-    const innerWrapper = document.createElement('div');
-    innerWrapper.className = 'p-3 space-y-1';
-    monthContainer.appendChild(innerWrapper);
+      // Inner wrapper (with padding + spacing)
+      const innerWrapper = document.createElement('div');
+      innerWrapper.className = 'p-3 space-y-1';
+      monthContainer.appendChild(innerWrapper);
 
-    // Add table header row
-    const tableHeader = document.createElement('div');
-    tableHeader.className =
-      'grid grid-cols-6 gap-2 font-semibold text-xs border-b pb-1 text-left sm:text-sm';
-    tableHeader.innerHTML = `
-      <div>Month</div>
-      <div>EMI (₹)</div>
-      <div>Interest (₹)</div>
-      <div>Principal (₹)</div>
-      <div>Balance (₹)</div>
-      <div class="col-span-1 ml-auto mr-5 md:mx-auto md:col-span-1">Action</div>
-    `;
-    innerWrapper.appendChild(tableHeader);
-
-    years[yr].forEach((m, idx) => {
-      const monthRow = document.createElement('div');
-      monthRow.className =
-        'grid grid-cols-6 gap-2 text-xs py-1 border-b hover:bg-gray-50 text-left sm:text-sm';
-
-      const monthName = new Date(m.year, m.month - 1).toLocaleString(
-        'default',
-        { month: 'short' }
-      );
-
-      // Decide if this button should be disabled:
-      let actionHTML = '';
-      if (m.serial === lastSerial) {
-        actionHTML = `
-          <button 
-            class="col-span-1 ml-auto md:mx-auto md:col-span-1 
-                   bg-gray-400 text-white px-2 py-1 rounded text-xs cursor-not-allowed"
-            disabled
-            title="Part payment not allowed on final installment"
-          >
-            N/A
-          </button>
-        `;
-      } else if (maxPaidYear !== null && Number(m.year) <= Number(maxPaidYear)) {
-        actionHTML = `
-          <button 
-            class="col-span-1 ml-auto md:mx-auto md:col-span-1 
-                   bg-gray-400 text-white px-2 py-1 rounded text-xs cursor-not-allowed"
-            disabled
-            title="Part payments disabled up to year ${maxPaidYear}"
-          >
-            N/A
-          </button>
-        `;
-      } else {
-        actionHTML = `
-          <button 
-            class="part-payment-btn col-span-1 ml-auto md:mx-auto md:col-span-1 
-                   bg-blue-500 text-white px-1 py-1 rounded hover:bg-blue-600 text-xs" 
-            data-month="${m.serial}" 
-            data-year="${m.year}" 
-            data-balance="${Math.round(m.balance)}"
-            data-emi="${Math.round(m.emi)}"
-          >
-            Pre Pay
-          </button>
-        `;
-      }
-
-      monthRow.innerHTML = `
-        <div>${m.serial}. ${monthName}</div>
-        <div>₹${Math.round(m.emi).toLocaleString('en-IN')}</div>
-        <div>₹${Math.round(m.interest).toLocaleString('en-IN')}</div>
-        <div>₹${Math.round(m.principal).toLocaleString('en-IN')}</div>
-        <div>₹${Math.round(m.balance).toLocaleString('en-IN')}</div>
-        ${actionHTML}
+      // Add table header row
+      const tableHeader = document.createElement('div');
+      tableHeader.className =
+        'grid grid-cols-6 gap-2 font-semibold text-xs border-b pb-1 text-left sm:text-sm';
+      tableHeader.innerHTML = `
+        <div>Month</div>
+        <div>EMI (₹)</div>
+        <div>Interest (₹)</div>
+        <div>Principal (₹)</div>
+        <div>Balance (₹)</div>
+        <div class="col-span-1 ml-auto mr-5 md:mx-auto md:col-span-1">Action</div>
       `;
+      innerWrapper.appendChild(tableHeader);
 
-      innerWrapper.appendChild(monthRow);
+      years[yr].forEach((m, idx) => {
+        const monthRow = document.createElement('div');
+        monthRow.className =
+          'grid grid-cols-6 gap-2 text-xs py-1 border-b hover:bg-gray-50 text-left sm:text-sm';
 
-      if (m.note) {
-        const noteRow = document.createElement('div');
-        noteRow.className =
-          'col-span-6 text-center font-bold mx-auto text-sm italic text-blue-700 bg-blue-100 p-2 rounded md:w-1/2';
-        noteRow.textContent = m.note;
-        innerWrapper.appendChild(noteRow);
-      }
-    });
+        const monthName = new Date(m.year, m.month - 1).toLocaleString(
+          'default',
+          { month: 'short' }
+        );
 
-    header.addEventListener('click', () => {
-      if (monthContainer.style.maxHeight && monthContainer.style.maxHeight !== '0px') {
-        monthContainer.style.maxHeight = '0px';
-        header.querySelector('span').textContent = '+';
-      } else {
+        // Decide if this button should be disabled:
+        let actionHTML = '';
+        if (m.serial === lastSerial) {
+          actionHTML = `
+            <button 
+              class="col-span-1 ml-auto md:mx-auto md:col-span-1 
+                    bg-gray-400 text-white px-2 py-1 rounded text-xs cursor-not-allowed"
+              disabled
+              title="Part payment not allowed on final installment"
+            >
+              N/A
+            </button>
+          `;
+        } else if (maxPaidYear !== null && Number(m.year) <= Number(maxPaidYear)) {
+          actionHTML = `
+            <button 
+              class="col-span-1 ml-auto md:mx-auto md:col-span-1 
+                    bg-gray-400 text-white px-2 py-1 rounded text-xs cursor-not-allowed"
+              disabled
+              title="Part payments disabled up to year ${maxPaidYear}"
+            >
+              N/A
+            </button>
+          `;
+        } else {
+          actionHTML = `
+            <button 
+              class="part-payment-btn col-span-1 ml-auto md:mx-auto md:col-span-1 
+                    bg-blue-500 text-white px-1 py-1 rounded hover:bg-blue-600 text-xs" 
+              data-month="${m.serial}" 
+              data-year="${m.year}" 
+              data-balance="${Math.round(m.balance)}"
+              data-emi="${Math.round(m.emi)}"
+            >
+              Pre Pay
+            </button>
+          `;
+        }
+
+        monthRow.innerHTML = `
+          <div>${m.serial}. ${monthName}</div>
+          <div>₹${Math.round(m.emi).toLocaleString('en-IN')}</div>
+          <div>₹${Math.round(m.interest).toLocaleString('en-IN')}</div>
+          <div>₹${Math.round(m.principal).toLocaleString('en-IN')}</div>
+          <div>₹${Math.round(m.balance).toLocaleString('en-IN')}</div>
+          ${actionHTML}
+        `;
+
+        innerWrapper.appendChild(monthRow);
+
+        if (m.note) {
+          const noteRow = document.createElement('div');
+          noteRow.className =
+            'col-span-6 text-center font-bold mx-auto text-sm italic text-blue-700 bg-blue-100 p-2 rounded md:w-1/2';
+          noteRow.textContent = m.note;
+          innerWrapper.appendChild(noteRow);
+        }
+      });
+
+      header.addEventListener('click', () => {
+        if (monthContainer.style.maxHeight && monthContainer.style.maxHeight !== '0px') {
+          monthContainer.style.maxHeight = '0px';
+          header.querySelector('span').textContent = '+';
+        } else {
+          monthContainer.style.maxHeight = monthContainer.scrollHeight + 'px';
+          header.querySelector('span').textContent = '−';
+        }
+      });
+
+      yearDiv.appendChild(header);
+      yearDiv.appendChild(monthContainer);
+      container.appendChild(yearDiv);
+      // ✅ Open the first accordion by default
+      if (Object.keys(years)[0] === yr) {
         monthContainer.style.maxHeight = monthContainer.scrollHeight + 'px';
         header.querySelector('span').textContent = '−';
       }
-    });
 
-    yearDiv.appendChild(header);
-    yearDiv.appendChild(monthContainer);
-    container.appendChild(yearDiv);
-  }
+    }
 }
 
 
