@@ -39,6 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const totalInterestEl = document.getElementById('totalInterest');
   const totalPaymentEl = document.getElementById('totalPayment');
 
+  const procFeeInput = document.getElementById('processingFeeInput');
+  const gstInput = document.getElementById('gstInput');
+
+
 
   function bindInputWithSlider(inputEl, sliderEl, updateFn) {
   // While typing, only sync slider (don't enforce min/max yet)
@@ -308,11 +312,66 @@ function updateResults() {
     savingsSection.classList.add('hidden');
     savingsHighlight.classList.add("hidden");
   }
+
+  updateDisbursal();
+
 }
+
+
+function updateDisbursal() {
+  const loanAmount = Number(loanInput.value);
+  const procFeeRate = Number(procFeeInput.value);
+  const gstRate = Number(gstInput.value);
+
+  if (!loanAmount || isNaN(procFeeRate) || isNaN(gstRate)) return;
+
+  let procFeeValue = (loanAmount * procFeeRate) / 100;
+  if (procFeeValue > 25000) {
+    procFeeValue = 25000;
+    document.getElementById("procFeeNote").textContent = "(Capped at ₹25,000)";
+  } else {
+    document.getElementById("procFeeNote").textContent = "";
+  }
+  const gstValue = (procFeeValue * gstRate) / 100;
+  const disbursalAmount = loanAmount - (procFeeValue + gstValue);
+
+  document.getElementById("procFeeVal").textContent = Math.round(procFeeValue).toLocaleString('en-IN');
+  document.getElementById("gstVal").textContent = Math.round(gstValue).toLocaleString('en-IN');
+  document.getElementById("disbursalValue").textContent = Math.round(disbursalAmount).toLocaleString('en-IN');
+
+  document.getElementById("disbursalSummary").classList.remove("hidden");
+}
+
+
+
 
 bindInputWithSlider(loanInput, loanRange, updateResults);
 bindInputWithSlider(rateInput, rateRange, updateResults);
 bindInputWithSlider(tenureInput, tenureRange, updateResults);
+
+procFeeInput.addEventListener("input", updateDisbursal);
+gstInput.addEventListener("input", updateDisbursal);
+
+
+// ✅ Enforce max limits on Processing Fee and GST
+procFeeInput.addEventListener("input", () => {
+  if (procFeeInput.value > 5) {
+    procFeeInput.value = 5;
+  } else if (procFeeInput.value < 0) {
+    procFeeInput.value = 0;
+  }
+  updateDisbursal();
+});
+
+gstInput.addEventListener("input", () => {
+  if (gstInput.value > 22) {
+    gstInput.value = 22;
+  } else if (gstInput.value < 0) {
+    gstInput.value = 0;
+  }
+  updateDisbursal();
+});
+
 
 
   // Initial update on page load
