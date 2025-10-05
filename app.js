@@ -333,10 +333,12 @@ function updateDisbursal() {
     document.getElementById("procFeeNote").textContent = "";
   }
   const gstValue = (procFeeValue * gstRate) / 100;
+  const totalCharges = procFeeValue + gstValue
   const disbursalAmount = loanAmount - (procFeeValue + gstValue);
 
   document.getElementById("procFeeVal").textContent = Math.round(procFeeValue).toLocaleString('en-IN');
   document.getElementById("gstVal").textContent = Math.round(gstValue).toLocaleString('en-IN');
+  document.getElementById("totalCharges").textContent = Math.round(totalCharges).toLocaleString('en-IN');
   document.getElementById("disbursalValue").textContent = Math.round(disbursalAmount).toLocaleString('en-IN');
 
   document.getElementById("disbursalSummary").classList.remove("hidden");
