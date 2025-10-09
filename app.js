@@ -624,7 +624,7 @@ function renderAmortization(schedule) {
         <div>Interest</div>
         <div>Principal</div>
         <div>Balance</div>
-        <div class="col-span-1 ml-auto md:mx-auto md:col-span-1">Action  </div>
+        <div class="col-span-1 ml-auto sm:mx-auto md:mx-auto md:col-span-1">Action  </div>
       `;
       innerWrapper.appendChild(tableHeader);
 
