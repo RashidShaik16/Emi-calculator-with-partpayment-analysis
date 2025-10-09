@@ -665,7 +665,7 @@ function renderAmortization(schedule) {
         } else {
           actionHTML = `
             <button 
-              class="part-payment-btn col-span-1 auto md:mx-auto md:col-span-1 md:px-4
+              class="part-payment-btn col-span-1 ml-auto md:mx-auto md:col-span-1 md:px-4 md:auto
                     bg-blue-500 text-white px-1 py-1 rounded hover:bg-blue-600 text-xs" 
               data-month="${m.serial}" 
               data-year="${m.year}" 
