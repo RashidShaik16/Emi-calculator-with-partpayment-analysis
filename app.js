@@ -624,7 +624,7 @@ function renderAmortization(schedule) {
         <div>Interest</div>
         <div>Principal</div>
         <div>Balance</div>
-        <div class="col-span-1 ml-auto mr-5 md:mx-auto md:col-span-1">Action  </div>
+        <div class="col-span-1 ml-auto md:mx-auto md:col-span-1">Action  </div>
       `;
       innerWrapper.appendChild(tableHeader);
 
@@ -666,7 +666,7 @@ function renderAmortization(schedule) {
           actionHTML = `
             <button 
               class="part-payment-btn col-span-1 ml-auto sm:mx-auto md:mx-auto md:col-span-1 md:px-4
-                    bg-blue-500 text-white px-1 py-1 rounded hover:bg-blue-600 text-xs" 
+                    bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 text-xs" 
               data-month="${m.serial}" 
               data-year="${m.year}" 
               data-balance="${Math.round(m.balance)}"
