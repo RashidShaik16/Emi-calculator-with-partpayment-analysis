@@ -15,6 +15,8 @@ let selectedEmi = null;
 
 let partPayments = [];
 let dataForPdf = null;
+let originalTotalInterest = 0
+let newTotalInterest = 0
 
 
 // app.js - EMI Calculator logic
@@ -124,13 +126,33 @@ if (downloadBtn) {
     // compute EMI from the same function you already have to keep values consistent
     const emiValue = Math.round(calculateEMI(loanAmount, interestRate, tenure));
 
-    // prepare loan info object to pass into pdfGenerator
+    // 🧾 Gather data directly from on-screen values (ensures perfect match)
+    const totalInterestText = document.getElementById("totalInterest").textContent.replace(/[₹,]/g, "");
+    const totalPaymentText = document.getElementById("totalPayment").textContent.replace(/[₹,]/g, "");
+
+    const totalInterest = Number(totalInterestText);
+    const totalPayment = Number(totalPaymentText);
+
+    // ✅ Get disbursal-related values
+    const procFeeValue = Number(document.getElementById("procFeeVal")?.textContent?.replace(/,/g, "") || 0);
+    const gstValue = Number(document.getElementById("gstVal")?.textContent?.replace(/,/g, "") || 0);
+    const disbursalValue = Number(document.getElementById("disbursalValue")?.textContent?.replace(/,/g, "") || 0);
+
     const loanInfo = {
       amount: loanAmount,
       interestRate: interestRate,
       tenure: tenure,
       emi: emiValue,
+      totalInterest: totalInterest,
+      totalPayment: totalPayment,
+      procFeeValue: procFeeValue,
+      gstValue: gstValue,
+      disbursalValue: disbursalValue,
+      originalInterest: originalTotalInterest,
+      newInterest: newTotalInterest,
+
     };
+
 
     pdfGenerator(dataForPdf, partPayments, loanInfo);
 
@@ -240,13 +262,13 @@ function updateResults() {
   // --- Original loan (no part payments) ---
   const emi = calculateEMI(P, annualRate, N);
   const totalPayment = emi * N;
-  const originalTotalInterest = totalPayment - P;
+  originalTotalInterest = totalPayment - P;
 
   // --- With part payments (amortization schedule) ---
   const schedule = generateAmortization(P, annualRate, N, partPayments);
 
   // ✅ Just sum all interest portions from schedule
-  const newTotalInterest = schedule.reduce((sum, m) => sum + m.interest, 0);
+  newTotalInterest = schedule.reduce((sum, m) => sum + m.interest, 0);
 
   // --- Update Chart 1 (original) ---
   emiChart.data.datasets[0].data = [P, originalTotalInterest];

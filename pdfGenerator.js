@@ -7,9 +7,38 @@ function pdfGenerator(dataForPdf, partPayments, loanInfo = {}) {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF("p", "pt", "a4");
 
+  // Utility: draw a 2-column summary table with dashed line below each row
+function drawSummaryTable(doc, startX, startY, width, rows) {
+  const rowHeight = 20;
+  const borderColor = [30, 64, 175]; // dark blue
+  const labelX = startX + 20;
+  const valueX = startX + width - 180;
+
+  doc.setLineWidth(0.5);
+  doc.setDrawColor(...borderColor);
+
+  rows.forEach(([label, value]) => {
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(11);
+    doc.setTextColor(60);
+
+    doc.text(label, labelX, startY);
+    doc.text(value, valueX, startY);
+
+    startY += rowHeight;
+  });
+
+  // reset line dash
+  doc.setLineDash([]);
+  return startY;
+}
+
+
     // --- Title Section ---
     // --- Navbar Style Header ---
     const pageWidth = doc.internal.pageSize.getWidth();
+
+    let startY = 110;
 
     // Background bar
     doc.setFillColor(30, 64, 175); // solid blue (bg-blue-800)
@@ -25,89 +54,275 @@ function pdfGenerator(dataForPdf, partPayments, loanInfo = {}) {
     doc.text("EMI Calculator Report", pageWidth / 2, 25, { align: "center" });
 
 
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(12);
-  doc.text("Generated using Know Your EMI Calculator", doc.internal.pageSize.getWidth() / 2, 45, { align: "center" });
 
 
-  // --- Loan Summary ---
-    startY = 110;
+// --- Tagline Section ---
+const centerX = doc.internal.pageSize.getWidth() / 2;
+doc.setFont("helvetica", "normal");
+doc.setFontSize(11);
+
+// Split text so we can style parts differently
+const prefix = "Generated using Know Your EMI Calculator – ";
+const linkText = "knowyouremi.in";
+
+// Measure prefix width for positioning link
+const prefixWidth = doc.getTextWidth(prefix);
+const totalWidth = prefixWidth + doc.getTextWidth(linkText);
+const startX = centerX - totalWidth / 2;
+
+// Draw prefix text (white)
+doc.setTextColor(255, 255, 255);
+doc.text(prefix, startX - 5, 45);
+
+// Draw link text (blue + underline)
+const linkX = startX + prefixWidth;
+doc.setTextColor(251, 250, 77); // nice link blue
+doc.setFont("helvetica", "bold");
+doc.text(linkText, linkX, 45);
+
+// Underline link
+const linkWidth = doc.getTextWidth(linkText);
+doc.setDrawColor(251, 250, 77);
+doc.setLineWidth(0.5);
+doc.line(linkX, 47, linkX + linkWidth, 47);
+
+// Add clickable area for the link
+doc.link(linkX, 35, linkWidth, 15, {
+  url: "https://www.knowyouremi.in",
+});
+
+
+
+
+// --- Loan Summary Section ---
+doc.setFont("helvetica", "bold");
+doc.setFontSize(14);
+doc.setTextColor(30, 64, 175);
+doc.text("Loan Summary", 40, startY);
+
+startY += 20;
+doc.setDrawColor(140, 170, 220);
+doc.setFillColor(220, 235, 255);
+doc.roundedRect(40, startY, pageWidth - 80, 110, 6, 6, "FD");
+
+startY += 30;
+
+const loanSummaryRows = [
+  ["Loan Amount", `${loanInfo.amount?.toLocaleString("en-IN") || "-"}`],
+  ["Interest Rate", `${loanInfo.interestRate || "-"}%`],
+  ["Tenure", `${loanInfo.tenure || "-"} months`],
+  ["Monthly EMI", `${loanInfo.emi?.toLocaleString("en-IN") || "-"}`],
+];
+
+startY = drawSummaryTable(doc, 40, startY, pageWidth - 17, loanSummaryRows);
+startY += 30;
+
+
+
+
+// --- Disbursal Summary ---
+doc.setFont("helvetica", "bold");
+doc.setFontSize(14);
+doc.setTextColor(30, 64, 175);
+doc.text("Disbursal Summary", 40, startY);
+
+startY += 15;
+
+// Light blue box background (same as other summaries)
+doc.setDrawColor(140, 170, 220);
+doc.setFillColor(220, 235, 255);
+doc.roundedRect(40, startY, pageWidth - 80, 100, 6, 6, "FD");
+
+startY += 20;
+
+// Clean numeric values (prevent object references)
+const procFee = Number(loanInfo.procFeeValue) || 0;
+const gstFee = Number(loanInfo.gstValue) || 0;
+const totalCharges = Math.round(procFee + gstFee);
+const disbursal = Number(loanInfo.disbursalValue) || 0;
+
+// build rows
+const disbursalRows = [
+  ["Processing Fee", `${procFee.toLocaleString("en-IN")}`],
+  ["GST on Processing Fee", `${gstFee.toLocaleString("en-IN")}`],
+  ["Total Charges", `${totalCharges.toLocaleString("en-IN")}`],
+  ["Amount Credited to Bank", `${disbursal.toLocaleString("en-IN")}`],
+];
+
+// consistent font size and spacing
+doc.setFontSize(11);
+let rowGap = 22;
+
+disbursalRows.forEach(([label, value]) => {
+  // Apply styles
+  if (label === "Total Charges") {
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(220, 38, 38); // Tailwind red-600
+  } else if (label === "Amount Credited to Bank") {
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(30, 64, 175); // Tailwind blue-800
+  } else {
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(60);
+  }
+
+  doc.text(label, 60, startY);
+  doc.text(value, pageWidth - 150, startY);
+  startY += rowGap;
+});
+
+startY += 30; // padding below box
+
+
+
+
+
+
+// --- Repayment Summary ---
+doc.setFont("helvetica", "bold");
+doc.setFontSize(14);
+doc.setTextColor(30, 64, 175); // Blue heading
+doc.text("Repayment Summary", 40, startY);
+
+startY += 15;
+
+// Light blue box (same as Disbursal Summary)
+doc.setDrawColor(140, 170, 220);
+doc.setFillColor(220, 235, 255);
+doc.roundedRect(40, startY, pageWidth - 80, 80, 6, 6, "FD");
+
+startY += 30;
+
+// Clean numeric values
+const totalInterest = Math.round(Number(loanInfo.totalInterest) || 0);
+const totalPayment = Math.round(Number(loanInfo.totalPayment) || 0);
+
+// rows
+const repaymentRows = [
+  ["Total Interest", `${totalInterest.toLocaleString("en-IN")}`],
+  ["Total Payments", `${totalPayment.toLocaleString("en-IN")}`],
+];
+
+// Consistent font size and spacing
+doc.setFontSize(11);
+rowGap = 25;
+
+repaymentRows.forEach(([label, value]) => {
+  if (label === "Total Interest") {
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(220, 38, 38); // red for interest
+  } else {
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(60); // normal dark gray for total payment
+  }
+
+  doc.text(label, 60, startY);
+  doc.text(value, pageWidth - 150, startY);
+  startY += rowGap;
+});
+
+startY += 30; // bottom spacing
+
+
+
+
+
+// --- Part Payments Summary ---
+if (partPayments && partPayments.length > 0) {
+  // Heading outside the box
+  startY += 10;
   doc.setFont("helvetica", "bold");
   doc.setFontSize(14);
   doc.setTextColor(30, 64, 175);
-  doc.text("Loan Summary", 40, startY);
+  doc.text("Part Payments Summary", 40, startY);
 
+startY += 20;
+
+    // 🧾 Part payments list
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
   doc.setTextColor(60);
 
-  startY += 20;
-  const summary = [
-    `Loan Amount: ${loanInfo.amount ? loanInfo.amount.toLocaleString("en-IN") : "-"}`,
-    `Interest Rate: ${loanInfo.interestRate ? loanInfo.interestRate + "%" : "-"}`,
-    `Tenure: ${loanInfo.tenure ? loanInfo.tenure + " months" : "-"}`,
-    `Monthly EMI: ${loanInfo.emi ? loanInfo.emi.toLocaleString("en-IN") : "-"}`,
-  ];
-  summary.forEach((line) => {
-    doc.text(line, 60, startY);
+  partPayments.forEach((pp) => {
+    const monthName = new Date(pp.year, pp.month - 1).toLocaleString("default", {
+      month: "short",
+    });
+    const line = `• Part payment of ${pp.amount.toLocaleString(
+      "en-IN"
+    )} made in ${monthName} ${pp.year} (${pp.option === "reduceEmi" ? "Reduced EMI" : "Reduced Tenure"})`;
+    doc.text(line, 55, startY);
     startY += 18;
   });
 
-  startY += 10;
+  // Define box metrics
+  const boxTopY = startY + 15;
+  const boxLeftX = 35;
+  const boxWidth = pageWidth - 70;
+  const boxHeight = 100; // auto adjusted later if needed
 
-  // --- Part Payments Summary ---
-  if (partPayments && partPayments.length > 0) {
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(14);
-    doc.setTextColor(30, 64, 175);
-    doc.text("Part Payments Summary", 40, startY);
+  // ✅ Box styling: soft blue fill, rounded corners
+  doc.setDrawColor(140, 170, 220);
+  doc.setFillColor(220, 235, 255);
+  doc.roundedRect(boxLeftX, boxTopY, boxWidth, boxHeight, 8, 8, "FD");
 
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(11);
-    doc.setTextColor(60);
+  startY = boxTopY + 10;
+
+
+  // 🔹 Repayment Summary inside the same box
+  startY += 15;
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(12);
+  doc.setTextColor(30, 64, 175);
+  doc.text("Interest Comparision", 50, startY);
+  startY += 20;
+
+  // Data points
+  const repaymentData = [
+    {
+      label: "Total Interest (Original)",
+      value: `${Math.round(loanInfo.originalInterest || 0).toLocaleString("en-IN")}`,
+      color: [30, 64, 175],
+    },
+    {
+      label: "Total Interest (After Part Payments)",
+      value: `${Math.round(loanInfo.newInterest || 0).toLocaleString("en-IN")}`,
+      color: [30, 64, 175],
+    },
+    {
+      label: "Total Savings",
+      value: `${Math.round(
+        (loanInfo.originalInterest || 0) - (loanInfo.newInterest || 0)
+      ).toLocaleString("en-IN")}`,
+      color: [0, 128, 0], // ✅ clean green text
+      highlight: true,
+    },
+  ];
+
+  repaymentData.forEach((item) => {
+    doc.setFont("helvetica", item.highlight ? "bold" : "normal");
+    doc.setFontSize(item.highlight ? 12 : 11);
+    doc.setTextColor(item.color[0], item.color[1], item.color[2]);
+
+    doc.text(item.label, 60, startY);
+    doc.text(item.value, pageWidth - 100, startY, { align: "right" });
 
     startY += 20;
-    partPayments.forEach((pp) => {
-      const monthName = new Date(pp.year, pp.month - 1).toLocaleString("default", { month: "short" });
-      const line = `• ${pp.amount.toLocaleString("en-IN")} paid in ${monthName} ${pp.year} (${pp.option === "reduceEmi" ? "Reduced EMI" : "Reduced Tenure"})`;
-      doc.text(line, 60, startY);
-      startY += 18;
-    });
+  });
 
-    startY += 20;
-  }
+  startY += 20;
+}
+startY += 30; // bottom spacing
 
 
-    // --- Savings Summary (only if part payments exist) ---
-  // if (partPayments && partPayments.length > 0 && loanInfo.originalInterest && loanInfo.newInterest) {
-  //   const savingsX = pageWidth - 250; // right side margin
-  //   let savingsY = 110; // same level as loan summary
 
-  //   const interestSaved = loanInfo.originalInterest - loanInfo.newInterest;
-  //   const tenureReduced = loanInfo.originalTenure - loanInfo.newTenure;
+// --- Amortizations schedule ---
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(14);
+  doc.setTextColor(30, 64, 175);
+ doc.text("Amortization Schedule", doc.internal.pageSize.getWidth() / 2, startY, { align: "center" });
 
-  //   // Heading
-  //   doc.setFont("helvetica", "bold");
-  //   doc.setFontSize(14);
-  //   doc.setTextColor(34, 139, 34); // green
-  //   doc.text("Your Savings", savingsX, savingsY);
 
-  //   // Fancy amount
-  //   savingsY += 30;
-  //   doc.setFont("helvetica", "bold");
-  //   doc.setFontSize(20);
-  //   doc.setTextColor(34, 139, 34); // green
-  //   doc.text(`₹${Math.round(interestSaved).toLocaleString("en-IN")}`, savingsX, savingsY);
-
-  //   // Subnote
-  //   savingsY += 25;
-  //   doc.setFont("helvetica", "normal");
-  //   doc.setFontSize(11);
-  //   doc.setTextColor(80);
-  //   const note = `By making part payments, you saved on interest${tenureReduced > 0 ? ` and closed your loan ${tenureReduced} months earlier.` : "."}`;
-  //   doc.text(note, savingsX, savingsY, { maxWidth: 200 });
-  // }
-
+  startY += 15;
 
   // --- Table Section ---
   const headers = ["S.No", "Month", "EMI", "Interest", "Principal", "Balance"];
