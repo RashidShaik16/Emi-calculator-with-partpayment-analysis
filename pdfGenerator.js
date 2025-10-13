@@ -103,11 +103,24 @@ doc.text("Loan Summary", 40, startY);
 startY += 20;
 doc.setDrawColor(140, 170, 220);
 doc.setFillColor(220, 235, 255);
-doc.roundedRect(40, startY, pageWidth - 80, 110, 6, 6, "FD");
+doc.roundedRect(40, startY, pageWidth - 80, 130, 6, 6, "FD");
 
 startY += 30;
 
+  let displayLoanTypeInPdf
+
+  if(loanInfo.loanType === "personal"){
+    displayLoanTypeInPdf = "Personal Loan"
+  } else if(loanInfo.loanType === "home"){
+    displayLoanTypeInPdf = "Home Loan"
+  } else if(loanInfo.loanType === "car"){
+    displayLoanTypeInPdf = "Car Loan"
+  } else {
+    displayLoanTypeInPdf = "Loan on Credit Card"
+  }
+
 const loanSummaryRows = [
+  ["Loan Type", `${displayLoanTypeInPdf}`],
   ["Loan Amount", `${loanInfo.amount?.toLocaleString("en-IN") || "-"}`],
   ["Interest Rate", `${loanInfo.interestRate || "-"}%`],
   ["Tenure", `${loanInfo.tenure || "-"} months`],
@@ -142,12 +155,21 @@ const totalCharges = Math.round(procFee + gstFee);
 const disbursal = Number(loanInfo.disbursalValue) || 0;
 
 // build rows
+let creditorName
+
+if(loanInfo.loanType === "car"){
+  creditorName = "Car Dealer"
+} else if(loanInfo.loanType === "home"){
+  creditorName = "Seller"
+} else {creditorName = "Bank"}
+
 const disbursalRows = [
   ["Processing Fee", `${procFee.toLocaleString("en-IN")}`],
   ["GST on Processing Fee", `${gstFee.toLocaleString("en-IN")}`],
   ["Total Charges", `${totalCharges.toLocaleString("en-IN")}`],
-  ["Amount Credited to Bank", `${disbursal.toLocaleString("en-IN")}`],
+  [`Amount Credited to ${creditorName}`, `${disbursal.toLocaleString("en-IN")}`],
 ];
+
 
 // consistent font size and spacing
 doc.setFontSize(11);
@@ -189,7 +211,12 @@ startY += 15;
 // Light blue box (same as Disbursal Summary)
 doc.setDrawColor(140, 170, 220);
 doc.setFillColor(220, 235, 255);
-doc.roundedRect(40, startY, pageWidth - 80, 80, 6, 6, "FD");
+if(loanInfo.loanType === "credit"){
+  doc.roundedRect(40, startY, pageWidth - 80, 100, 6, 6, "FD");
+} else{
+  doc.roundedRect(40, startY, pageWidth - 80, 80, 6, 6, "FD");
+}
+
 
 startY += 30;
 
@@ -198,17 +225,28 @@ const totalInterest = Math.round(Number(loanInfo.totalInterest) || 0);
 const totalPayment = Math.round(Number(loanInfo.totalPayment) || 0);
 
 // rows
-const repaymentRows = [
+  let repaymentRows
+if(loanInfo.loanType === "credit"){
+  const gstOnInt = (loanInfo.originalInterest * 18) / 100
+  repaymentRows = [
+  ["Total Interest", `${totalInterest.toLocaleString("en-IN")}`],
+  ["GST on Interest (Credit Card Loans Only)", `${Math.round(gstOnInt).toLocaleString("en-IN")}`],
+  ["Total Payments", `${Math.round(totalPayment + gstOnInt).toLocaleString("en-IN")}`],
+];
+} else {
+    repaymentRows = [
   ["Total Interest", `${totalInterest.toLocaleString("en-IN")}`],
   ["Total Payments", `${totalPayment.toLocaleString("en-IN")}`],
 ];
+}
+
 
 // Consistent font size and spacing
 doc.setFontSize(11);
 rowGap = 25;
 
 repaymentRows.forEach(([label, value]) => {
-  if (label === "Total Interest") {
+  if (label === "Total Interest" || label === "GST on Interest") {
     doc.setFont("helvetica", "bold");
     doc.setTextColor(220, 38, 38); // red for interest
   } else {
@@ -273,7 +311,7 @@ startY += 20;
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12);
   doc.setTextColor(30, 64, 175);
-  doc.text("Interest Comparision", 50, startY);
+  doc.text("Interest Comparison", 50, startY);
   startY += 20;
 
   // Data points

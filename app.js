@@ -17,6 +17,7 @@ let partPayments = [];
 let dataForPdf = null;
 let originalTotalInterest = 0
 let newTotalInterest = 0
+let currentLoanType = ""
 
 
 // app.js - EMI Calculator logic
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
   emailjs.init("vGkMgPqy7msXERp1n");
   console.log("EmailJS initialized:", emailjs);
   const locale = 'en-IN';
-  const formatNumber = (v) => Number(v).toLocaleString(locale);
+  // const formatNumber = (v) => Number(v).toLocaleString(locale);
 
   // Elements
   const loanRange = document.getElementById('loanAmountRange');
@@ -44,6 +45,89 @@ document.addEventListener('DOMContentLoaded', function() {
   const procFeeInput = document.getElementById('processingFeeInput');
   const gstInput = document.getElementById('gstInput');
 
+
+const loanTypeButtons = document.querySelectorAll(".loan-type-btn");
+currentLoanType = "personal";
+const loanConfigs = {
+  personal: { maxAmount: 5000000, minAmount:10000, maxRate: 36, maxTenure: 60 },
+  home: { maxAmount: 9500000, minAmount:100000, maxRate: 15, maxTenure: 360 },
+  car: { maxAmount: 3000000, minAmount:50000, maxRate: 18, maxTenure: 84 },
+  credit: { maxAmount: 1000000, minAmount:10000, maxRate: 45, maxTenure: 48 },
+};
+
+
+// Helper to update limits
+function updateLoanLimits(type) {
+  const config = loanConfigs[type];
+  if (!config) return;
+
+  // Loan amount
+  loanAmountRange.max = config.maxAmount;
+  loanAmountRange.min = config.minAmount;
+  loanAmountInput.max = config.maxAmount;
+  loanAmountInput.min = config.minAmount;
+
+  // Interest rate
+  interestRateRange.max = config.maxRate;
+  interestRateInput.max = config.maxRate;
+
+  // Tenure
+  tenureRange.max = config.maxTenure;
+  tenureInput.max = config.maxTenure;
+
+  // Adjust display text (optional)
+  document.querySelector("#loanAmountRange + .flex span:last-child").textContent = `₹${(config.maxAmount).toLocaleString('en-IN')}`;
+  document.querySelector("#loanAmountRange + .flex span:first-child").textContent = `₹${(config.minAmount).toLocaleString('en-IN')}`;
+  document.querySelector("#loanAmountInput").value = 100000;
+  document.querySelector("#loanAmountRange").value = 100000;
+  document.querySelector("#interestRateRange + .flex span:last-child").textContent = `${config.maxRate}%`;
+  document.querySelector("#tenureRange + .flex span:last-child").textContent = `${config.maxTenure}`;
+
+  // Reset inputs if they exceed limits
+  if (Number(loanAmountInput.value) > config.maxAmount) loanAmountInput.value = config.maxAmount;
+  if (Number(interestRateInput.value) > config.maxRate) interestRateInput.value = config.maxRate;
+  if (Number(tenureInput.value) > config.maxTenure) tenureInput.value = config.maxTenure;
+
+  // Trigger recalculation
+  updateResults();
+}
+
+
+// Add event listeners
+loanTypeButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    // Remove active class from others
+    loanTypeButtons.forEach((b) => b.classList.remove("active", "bg-blue-600", "text-white"));
+    loanTypeButtons.forEach((b) => b.classList.add("bg-gray-100", "text-gray-800"));
+
+    // Add active class to this
+    btn.classList.remove("bg-gray-100", "text-gray-800");
+    btn.classList.add("active", "bg-blue-600", "text-white");
+
+    // Update global loan type
+    currentLoanType = btn.dataset.type;
+    document.getElementById("loanType").textContent = currentLoanType
+       if (currentLoanType === "credit") {
+        // Show note smoothly
+        loanTypeNote.classList.remove("opacity-0", "max-h-0");
+        loanTypeNote.classList.add("opacity-100", "max-h-24");
+        document.getElementById("gstValOnIntDiv").classList.remove("hidden")
+        document.getElementById("gstValOnIntDiv").classList.add("flex")
+      } else {
+        // Hide note smoothly
+        loanTypeNote.classList.add("opacity-0", "max-h-0");
+        loanTypeNote.classList.remove("opacity-100", "max-h-24");
+        document.getElementById("gstValOnIntDiv").classList.remove("flex")
+        document.getElementById("gstValOnIntDiv").classList.add("hidden")
+      }
+
+    // Update limits
+    updateLoanLimits(currentLoanType);
+    updateDisbursal()
+    partPayments = [];
+    updateResults()
+  });
+});
 
 
   function bindInputWithSlider(inputEl, sliderEl, updateFn) {
@@ -91,21 +175,21 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // second chart setup
-  const savingsCtx = document.getElementById('savingsChart');
-    let savingsChart = new Chart(savingsCtx, {
-      type: 'pie',
-      data: {
-        labels: ['Principal', 'Interest'],
-        datasets: [{
-          data: [0, 0],
-          backgroundColor: ['#1E40AF', '#f59e0b'], 
-        }]
-      },
-      options: { 
-        responsive: true, 
-        plugins: { legend: { position: 'bottom' } } 
-      }
-  });
+  // const savingsCtx = document.getElementById('savingsChart');
+  //   let savingsChart = new Chart(savingsCtx, {
+  //     type: 'pie',
+  //     data: {
+  //       labels: ['Principal', 'Interest'],
+  //       datasets: [{
+  //         data: [0, 0],
+  //         backgroundColor: ['#1E40AF', '#f59e0b'], 
+  //       }]
+  //     },
+  //     options: { 
+  //       responsive: true, 
+  //       plugins: { legend: { position: 'bottom' } } 
+  //     }
+  // });
 
 
 
@@ -150,6 +234,7 @@ if (downloadBtn) {
       disbursalValue: disbursalValue,
       originalInterest: originalTotalInterest,
       newInterest: newTotalInterest,
+      loanType: currentLoanType 
 
     };
 
@@ -221,6 +306,9 @@ confirmBtn.addEventListener("click", () => {
 
   // ✅ Close modal after saving
   closePartPaymentModal();
+   document.getElementById("partPaymentValueDisplay").classList.remove("hidden");
+   document.getElementById("partPaymentValueDisplay").classList.add("flex");
+   
 });
 
 
@@ -255,6 +343,8 @@ cancelBtn.addEventListener("click", closePartPaymentModal);
 
 
 function updateResults() {
+  document.getElementById("partPaymentValueDisplay").classList.remove("flex")
+  document.getElementById("partPaymentValueDisplay").classList.add("hidden")
   const P = Number(loanInput.value);
   const annualRate = parseFloat(rateInput.value);
   const N = parseInt(tenureInput.value, 10);
@@ -286,16 +376,16 @@ function updateResults() {
   renderAmortization(schedule);
 
   // --- Savings Section (with chart + note) ---
-  const savingsSection = document.getElementById('savingsSection'); // chart container
+  // const savingsSection = document.getElementById('savingsSection');
   const savingsHighlight = document.getElementById("savingsHighlight"); // new fancy box
   const savingsAmountEl = document.getElementById("savingsAmount");
   const savingsDetailEl = document.getElementById("savingsDetail");
 
   if (partPayments.length > 0) {
     // ✅ Chart 2 (after part payments) uses actual summed interest
-    savingsChart.data.datasets[0].data = [P, newTotalInterest];
-    savingsChart.update();
-    savingsSection.classList.remove('hidden');
+    // savingsChart.data.datasets[0].data = [P, newTotalInterest];
+    // savingsChart.update();
+    // savingsSection.classList.remove('hidden');
 
     // ✅ Savings = difference
     const interestSaved = originalTotalInterest - newTotalInterest;
@@ -331,7 +421,7 @@ function updateResults() {
       `if you make part payment(s) of ${ppDetails.join(', ')}${tenureReduced > 0 ? `\n.  You repay entire loan early by ${tenureReduced} months.` : ''}`;
 
   } else {
-    savingsSection.classList.add('hidden');
+    // savingsSection.classList.add('hidden');
     savingsHighlight.classList.add("hidden");
   }
 
@@ -355,15 +445,35 @@ function updateDisbursal() {
     document.getElementById("procFeeNote").textContent = "";
   }
   const gstValue = (procFeeValue * gstRate) / 100;
+  const gstValueOnInterest = currentLoanType === "credit" ? (originalTotalInterest * gstRate) / 100 : 0;
   const totalCharges = procFeeValue + gstValue
-  const disbursalAmount = loanAmount - (procFeeValue + gstValue);
+  const disbursalAmount = loanAmount - totalCharges;
 
+  let displayLoanType
+
+  if(currentLoanType === "personal"){
+    displayLoanType = "Personal Loan"
+  } else if(currentLoanType === "home"){
+    displayLoanType = "Home Loan"
+  } else if(currentLoanType === "car"){
+    displayLoanType = "Car Loan"
+  } else {
+    displayLoanType = "Loan on Credit Card"
+  }
+
+
+  document.getElementById("loanType").textContent = displayLoanType;
+  document.getElementById("loanVal").textContent = Math.round(loanAmount).toLocaleString('en-IN');
   document.getElementById("procFeeVal").textContent = Math.round(procFeeValue).toLocaleString('en-IN');
   document.getElementById("gstVal").textContent = Math.round(gstValue).toLocaleString('en-IN');
+  document.getElementById("gstValOnInt").textContent = Math.round(gstValueOnInterest).toLocaleString('en-IN');
   document.getElementById("totalCharges").textContent = Math.round(totalCharges).toLocaleString('en-IN');
   document.getElementById("disbursalValue").textContent = Math.round(disbursalAmount).toLocaleString('en-IN');
+  document.getElementById("payBackValue").textContent = Math.round(loanAmount + originalTotalInterest + gstValueOnInterest).toLocaleString('en-IN');
+  document.getElementById("afterPartPaymentValue").textContent = Math.round(loanAmount + newTotalInterest + gstValueOnInterest).toLocaleString('en-IN');
 
-  document.getElementById("disbursalSummary").classList.remove("hidden");
+  document.getElementById("loanSummary").classList.remove("hidden");
+ 
 }
 
 
@@ -651,7 +761,18 @@ function renderAmortization(schedule) {
               N/A
             </button>
           `;
-        } else if (maxPaidYear !== null && Number(m.year) <= Number(maxPaidYear)) {
+        } else if (currentLoanType === "credit") {
+            actionHTML = `
+              <button 
+                class="col-span-1 ml-auto md:mx-auto md:col-span-1 
+                      bg-gray-400 text-white px-2 py-1 rounded text-xs cursor-not-allowed"
+                disabled
+                title="Part payment not allowed for credit card loans"
+              >
+                N/A
+              </button>
+            `;
+          } else if (maxPaidYear !== null && Number(m.year) <= Number(maxPaidYear)) {
           actionHTML = `
             <button 
               class="col-span-1 ml-auto md:mx-auto md:col-span-1 

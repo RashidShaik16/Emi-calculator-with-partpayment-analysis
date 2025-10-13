@@ -121,8 +121,65 @@
             
                 <!-- Loan Input Form -->
                 <section class="bg-white shadow-lg rounded-2xl p-6">
-                    <h2 class="text-xl font-semibold mb-6">Loan Details</h2>
+                     
+                    <!-- Loan Type Selector -->
+                    <div id="loanTypeSection" class="mb-6">
+                    <h2 class="text-lg font-semibold mb-3 text-gray-800">Select Loan Type</h2>
+                        <div class="grid grid-cols-2 gap-3 text-base">
+                            
+                            <!-- Personal Loan -->
+                            <button type="button" data-type="personal"
+                            class="loan-type-btn active bg-blue-600 text-white rounded-xl py-2 font-medium flex flex-col items-center justify-center hover:scale-[1.02] transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0 6a9 9 0 100-18 9 9 0 000 18z" />
+                            </svg>
+                            Personal Loan
+                            </button>
 
+                            <!-- Home Loan -->
+                            <button type="button" data-type="home"
+                            class="loan-type-btn bg-gray-100 text-gray-800 rounded-xl py-2 font-medium flex flex-col items-center justify-center hover:scale-[1.02] transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l9-9 9 9M4 10v10h16V10" />
+                            </svg>
+                            Home Loan
+                            </button>
+
+                            <!-- Car Loan -->
+                            <button type="button" data-type="car"
+                            class="loan-type-btn bg-gray-100 text-gray-800 rounded-xl py-2 font-medium flex flex-col items-center justify-center hover:scale-[1.02] transition">
+                            <!-- 🚗 Side view car SVG -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="w-9 h-9 mb-1" fill="currentColor">
+                                <path d="M54 24H46l-4.2-7a3 3 0 0 0-2.6-1.5H16.8a3 3 0 0 0-2.7 1.7L10 24H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2a8 8 0 1 0 16 0h16a8 8 0 1 0 16 0h2a2 2 0 0 0 2-2V26a2 2 0 0 0-2-2ZM16 18h22.7L42 24H14ZM12 38a4 4 0 1 1 4-4 4 4 0 0 1-4 4Zm36 0a4 4 0 1 1 4-4 4 4 0 0 1-4 4Z"/>
+                            </svg>
+                            Car Loan
+                            </button>
+
+                            <!-- Credit Card Loan -->
+                            <button type="button" data-type="credit"
+                            class="loan-type-btn bg-gray-100 text-gray-800 rounded-xl py-2 font-medium flex flex-col items-center justify-center hover:scale-[1.02] transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2 7h20v10H2V7zm2 4h16M2 10h20M6 15h4" />
+                            </svg>
+                            Loan on Credit Card
+                            </button>
+
+                        </div>
+
+                        <!-- credit card Loan alert -->
+                        <div id="loanTypeNote"class="opacity-0 max-h-0 overflow-hidden transition-all duration-700 ease-in-out mt-3 px-3 py-2 border-l-4 border-red-600 bg-red-50 rounded-md">
+                            <p class="text-xs text-red-700 font-semibold leading-relaxed">
+                                ⚠️ Credit card EMIs incur <strong>18% GST</strong> on the interest component. <br>
+                                ⚠️ Part payments are <strong>not allowed</strong> in credit card loans.
+                            </p>
+                        </div>    
+                    </div>
+
+
+                    <h2 class="text-xl font-semibold mb-6">Loan Details</h2>
                     <form id="loanForm" class="space-y-6" onsubmit="event.preventDefault();">
                     <!-- Loan Amount -->
                     <div class="flex gap-4 items-center">
@@ -130,7 +187,7 @@
                             <div class="w-40">
                                     <div class="relative">
                                         <span class="absolute left-4 top-1/3 -translate-y-1/2 text-sm pointer-events-none">₹</span>
-                                        <input id="loanAmountInput" type="number" min="10000" max="9500000" step="5000" value="50000" class="pl-7 pr-2 w-3/4 h-10 border rounded-lg focus:ring focus:ring-blue-200"/>
+                                        <input id="loanAmountInput" type="number" min="10000" max="5000000" step="5000" value="100000" class="pl-7 pr-2 w-3/4 h-10 border rounded-lg focus:ring focus:ring-blue-200"/>
                                     </div>
                             </div>
                     </div>
@@ -138,11 +195,11 @@
                         <!-- <label class="block text-sm font-medium mb-2">Loan Amount</label> -->
                         <div class="flex flex-col md:flex-row gap-4 items-center justify-center">
                             <div class="flex-1 w-full">
-                                <input id="loanAmountRange" type="range" min="10000" max="9500000" step="5000" value="50000" class="w-full accent-blue-600"/>
+                                <input id="loanAmountRange" type="range" min="10000" max="5000000" step="5000" value="100000" class="w-full accent-blue-600"/>
                                 <div class="flex justify-between text-xs mt-2">
                                 <span class="text-md">₹10,000</span>
-                                <span id="loanAmountDisplay" class="font-semibold text-md">₹5,00,000</span>
-                                <span class="text-md">₹95,00,000</span>
+                                <span id="loanAmountDisplay" class="font-semibold text-md">₹,00,000</span>
+                                <span class="text-md">₹50,00,000</span>
                                 </div>
                             </div>
                         </div>
@@ -152,18 +209,18 @@
                     <div class="flex gap-4 items-center">
                             <p >Rate of Interest (Reducing): </p>
                             <div class="w-32">
-                                <input id="interestRateInput" type="number" step="0.01" min="5" max="30" value="12" class="pl-3 pr-3 w-3/4 h-10 border rounded-lg focus:ring focus:ring-green-200"/>
+                                <input id="interestRateInput" type="number" step="0.01" min="5" max="36" value="12" class="pl-3 pr-3 w-3/4 h-10 border rounded-lg focus:ring focus:ring-green-200"/>
                             </div>
                     </div>
                     <div>
                         <!-- <label class="block text-sm font-medium mb-2">Interest Rate (%)</label> -->
                         <div class="flex flex-col md:flex-row gap-4 items-center">
                             <div class="flex-1 w-full">
-                                <input id="interestRateRange" type="range" min="5" max="30" step="0.01" value="12" class="w-full accent-green-600"/>
+                                <input id="interestRateRange" type="range" min="5" max="36" step="0.01" value="12" class="w-full accent-green-600"/>
                                 <div class="flex justify-between text-xs mt-2">
                                     <span>5%</span>
                                     <span id="interestRateDisplay" class="font-semibold">12.00%</span>
-                                    <span>30%</span>
+                                    <span>36%</span>
                                 </div>
                             </div>
                         </div>
@@ -173,18 +230,18 @@
                     <div class="flex gap-4 items-center">
                             <p>Tenure (Months): </p>
                             <div class="w-28">
-                                <input id="tenureInput" type="number" min="6" max="360" step="1" value="24" class="pl-3 pr-3 w-3/4 h-10 border rounded-lg focus:ring focus:ring-purple-200"/>
+                                <input id="tenureInput" type="number" min="6" max="60" step="1" value="24" class="pl-3 pr-3 w-3/4 h-10 border rounded-lg focus:ring focus:ring-purple-200"/>
                             </div>
                     </div>
                     <div>
                         <!-- <label class="block text-sm font-medium mb-2">Tenure (Months)</label> -->
                         <div class="flex flex-col md:flex-row gap-4 items-center">
                             <div class="flex-1 w-full">
-                                <input id="tenureRange" type="range" min="6" max="360" step="1" value="24" class="w-full accent-purple-600"/>
+                                <input id="tenureRange" type="range" min="6" max="60" step="1" value="24" class="w-full accent-purple-600"/>
                                 <div class="flex justify-between text-xs mt-2">
                                 <span>6</span>
-                                <span id="tenureDisplay" class="font-semibold">60</span>
-                                <span>360</span>
+                                <span id="tenureDisplay" class="font-semibold">24</span>
+                                <span>60</span>
                                 </div>
                             </div>
                         
@@ -217,41 +274,7 @@
                             placeholder="e.g., 18" />
                     </div>
 
-                    <!-- Disbursal Summary -->
-                    <div id="disbursalSummary" class="hidden mt-6 bg-gradient-to-br from-blue-100 to-indigo-100 border border-blue-200 p-5 rounded-2xl shadow-md">
-                        <h3 class="text-lg font-semibold text-blue-700 mb-4 flex items-center">
-                            Disbursal Summary
-                        </h3>
-
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between border-b border-blue-500 border-dashed pb-3">
-                                <span class="text-gray-800">Processing Fee <span id="procFeeNote" class="text-xs text-green-600 mt-2 italic text-right font-semibold"></span></span>
-                                <span class="font-medium text-gray-800">
-                                    ₹<span id="procFeeVal">0</span>
-                                </span>
-                            </div>
-
-                            <div class="flex justify-between border-b border-blue-500 border-dashed pb-3">
-                                <span class="text-gray-800">GST on Processing Fee</span>
-                                <span class="font-medium text-gray-800">
-                                    ₹<span id="gstVal">0</span>
-                                </span>
-                            </div>
-
-                            <div class="flex justify-between border-b border-blue-500 border-dashed pb-3">
-                                <span class="text-gray-800">Total Charges</span>
-                                <span class="font-semibold text-red-600">
-                                    ₹<span id="totalCharges">0</span>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 flex justify-between items-center bg-blue-600 text-white rounded-xl px-4 py-2 shadow-sm">
-                            <span class="text-sm font-medium">Amount you get: </span>
-                            <span class="text-md font-bold tracking-wide sm:text-lg">₹<span id="disbursalValue">0</span></span>
-                        </div>
-
-                    </div>
+                   
 
                 </section>
 
@@ -260,10 +283,10 @@
                     <h2 class="text-xl font-semibold mb-6">Results</h2>
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mb-6">
-                    <div class="p-4 bg-blue-100 rounded-lg">
-                        <p class="text-sm text-gray-500">Monthly EMI</p>
-                        <p id="monthlyEmi" class="text-lg font-bold text-blue-700">₹0</p>
-                    </div>
+                        <div class="p-4 bg-blue-100 rounded-lg">
+                            <p class="text-sm text-gray-500">Monthly EMI</p>
+                            <p id="monthlyEmi" class="text-lg font-bold text-blue-700">₹0</p>
+                        </div>
                     <div class="p-4 bg-red-100 rounded-lg">
                         <p class="text-sm text-gray-500">Total Interest</p>
                         <p id="totalInterest" class="text-lg font-bold text-red-700">₹0</p>
@@ -278,13 +301,78 @@
                         <canvas id="emiChart"></canvas>
                     </div>
 
-                    <div id="savingsSection" class="hidden mt-8">
+                    <!-- <div id="savingsSection" class="hidden mt-8">
                         <h2 class="text-lg font-semibold text-center mb-4">Impact of Part Payments</h2>
                         <div class="w-72 h-72 mx-auto">
                             <canvas id="savingsChart"></canvas>
                         </div>
-                    </div>
+                    </div> -->
                     
+                     <!-- Disbursal Summary -->
+                    <div id="loanSummary" class="hidden mt-10 bg-gradient-to-br from-blue-100 to-indigo-100 border border-blue-200 p-5 rounded-2xl shadow-md">
+                        <h3 class="text-lg font-semibold text-blue-700 mb-4 flex items-center">
+                            Loan Details
+                        </h3>
+
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between border-b border-blue-500 border-dashed pb-3">
+                                <span class="text-gray-800">Loan Type</span>
+                                <span class="font-medium text-gray-800">
+                                    <span id="loanType"></span>
+                                </span>
+                            </div>
+                            <div class="flex justify-between border-b border-blue-500 border-dashed pb-3">
+                                <span class="text-gray-800">Loan Amount</span>
+                                <span class="font-medium text-gray-800">
+                                    ₹<span id="loanVal">0</span>
+                                </span>
+                            </div>
+                            <div class="flex justify-between border-b border-blue-500 border-dashed pb-3">
+                                <span class="text-gray-800">Processing Fee <span id="procFeeNote" class="text-xs text-green-600 mt-2 italic text-right font-semibold"></span></span>
+                                <span class="font-medium text-gray-800">
+                                    ₹<span id="procFeeVal">0</span>
+                                </span>
+                            </div>
+
+                            <div class="flex justify-between border-b border-blue-500 border-dashed pb-3">
+                                <span class="text-gray-800">GST on Processing Fee</span>
+                                <span class="font-medium text-gray-800">
+                                    ₹<span id="gstVal">0</span>
+                                </span>
+                            </div>
+
+                             <div id="gstValOnIntDiv" class="hidden justify-between border-b border-blue-500 border-dashed pb-3">
+                                <span class="text-gray-800">GST on Interest</span>
+                                <span class="font-medium text-gray-800">
+                                    ₹<span id="gstValOnInt">0</span>
+                                </span>
+                            </div>
+
+                            <div class="flex justify-between border-b border-blue-500 border-dashed pb-3">
+                                <span class="text-gray-800">Total Charges</span>
+                                <span class="font-semibold text-red-600">
+                                    ₹<span id="totalCharges">0</span>
+                                </span>
+                            </div>
+                        </div>
+                        <h4 class="text-md font-semibold text-blue-700 mt-6 mb-2">Credits and Debits</h4>
+                        <div class="mt-4 flex justify-between items-center bg-blue-600 text-white rounded-xl px-4 py-2 shadow-sm">
+                            <span class="text-sm font-medium md:font-md">Total Credit: </span>
+                            <span class="text-md font-bold tracking-wide sm:text-lg">₹<span id="disbursalValue">0</span></span>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center bg-red-500 text-white rounded-xl px-4 py-2 shadow-sm">
+                            <span class="text-sm font-medium md:font-md">Total Debits: </span>
+                            <span class="text-md font-bold tracking-wide sm:text-lg">₹<span id="payBackValue">0</span></span>
+                        </div>
+                        <div id="partPaymentValueDisplay" class="mt-4 hidden justify-between items-center bg-green-500 text-white rounded-xl px-4 py-2 shadow-sm">
+                            <span class="text-sm font-medium md:font-md">Total Debits (With Part Payments): </span>
+                            <span class="text-md font-bold tracking-wide sm:text-lg">₹<span id="afterPartPaymentValue">0</span></span>
+                        </div>
+                       <p class="mt-4 text-sm text-gray-600 text-left">
+                        For a detailed report, please click on the <span class="font-bold">Download PDF</span> below
+                        </p>
+
+                    </div>
 
                 </section>
             </div>
@@ -305,7 +393,14 @@
                     <!-- Year-wise EMI list will be injected here -->
                 </div>
                 <div class="flex mt-5">
-                    <button id="downloadPdfBtn" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-800 ml-auto">Download PDF</button>
+                    <button id="downloadPdfBtn" class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition font-semibold ml-auto"><span>Download PDF</span>
+                     <svg xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" viewBox="0 0 24 24" 
+                        stroke-width="2" stroke="currentColor" 
+                        class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0l4-4m-4 4l-4-4M4 17h16" />
+                    </svg>
+                    </button>
                 </div>
             </section>
 
@@ -552,7 +647,15 @@
             <!-- Feedback Section -->
             <section id="feedback-section" class="bg-gradient-to-r from-blue-100 to-indigo-100 shadow-lg rounded-2xl p-8 mt-12 w-full max-w-4xl mx-auto">
             <h2 class="text-2xl font-bold text-gray-800 mb-2">We Value Your Feedback</h2>
-            <p class="text-sm text-gray-600 mb-6">Tell us what you think about our EMI Calculator. Your feedback helps us improve!</p>
+            <p class="text-sm text-gray-600 mb-1">Tell us what you think about our EMI Calculator. Your feedback helps us improve!</p>
+        
+              <div class="flex items-center gap-2 mb-6">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg> -->
+                <p class="text-sm text-yellow-700 font-bold">We never send spam emails. It’s our promise.</p>
+            </div>
+           
 
             <form id="feedbackForm" class="space-y-5">
                 <!-- Name -->
