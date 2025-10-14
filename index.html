@@ -341,18 +341,23 @@
                                 </span>
                             </div>
 
-                             <div id="gstValOnIntDiv" class="hidden justify-between border-b border-blue-500 border-dashed pb-3">
-                                <span class="text-gray-800">GST on Interest</span>
-                                <span class="font-medium text-gray-800">
-                                    ₹<span id="gstValOnInt">0</span>
-                                </span>
-                            </div>
-
                             <div class="flex justify-between border-b border-blue-500 border-dashed pb-3">
                                 <span class="text-gray-800">Total Charges</span>
                                 <span class="font-semibold text-red-600">
                                     ₹<span id="totalCharges">0</span>
                                 </span>
+                            </div>
+
+                            <div id="additional-charges-div" class="hidden mt-10">
+                                <h3 id="additional-charges" class="text-lg font-semibold text-blue-700 my-4 flex items-center">Additional Charges</h3>
+
+                                <div id="gstValOnIntDiv" class="flex justify-between border-b border-blue-500 border-dashed pb-3">
+                                    <span class="text-gray-800">18% GST on Interest</span>
+                                    <span class="font-medium text-gray-800">
+                                        ₹<span id="gstValOnInt">0</span>
+                                    </span>
+                                </div>
+                                <p id="gstOnIntNote" class="text-xs text-red-600 font-semibold mt-1">GST on interest will be charged to your monthly statement additional to your EMI</p>
                             </div>
                         </div>
                         <h4 class="text-md font-semibold text-blue-700 mt-6 mb-2">Credits and Debits</h4>

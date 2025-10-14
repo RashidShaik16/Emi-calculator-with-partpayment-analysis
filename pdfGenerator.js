@@ -246,10 +246,17 @@ doc.setFontSize(11);
 rowGap = 25;
 
 repaymentRows.forEach(([label, value]) => {
-  if (label === "Total Interest" || label === "GST on Interest") {
+  if (label === "Total Interest" || label === "GST on Interest (Credit Card Loans Only)") {
     doc.setFont("helvetica", "bold");
-    doc.setTextColor(220, 38, 38); // red for interest
-  } else {
+    doc.setTextColor(220, 38, 38);
+  }
+
+  else if (label === "Total Payments") {
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(30, 64, 175); 
+  }
+  
+  else {
     doc.setFont("helvetica", "bold");
     doc.setTextColor(60); // normal dark gray for total payment
   }

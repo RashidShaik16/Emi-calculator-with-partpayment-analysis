@@ -52,7 +52,7 @@ const loanConfigs = {
   personal: { maxAmount: 5000000, minAmount:10000, maxRate: 36, maxTenure: 60 },
   home: { maxAmount: 9500000, minAmount:100000, maxRate: 15, maxTenure: 360 },
   car: { maxAmount: 3000000, minAmount:50000, maxRate: 18, maxTenure: 84 },
-  credit: { maxAmount: 1000000, minAmount:10000, maxRate: 45, maxTenure: 48 },
+  credit: { maxAmount: 1000000, minAmount:10000, maxRate: 45, maxTenure: 60 },
 };
 
 
@@ -111,14 +111,12 @@ loanTypeButtons.forEach((btn) => {
         // Show note smoothly
         loanTypeNote.classList.remove("opacity-0", "max-h-0");
         loanTypeNote.classList.add("opacity-100", "max-h-24");
-        document.getElementById("gstValOnIntDiv").classList.remove("hidden")
-        document.getElementById("gstValOnIntDiv").classList.add("flex")
+        document.getElementById("additional-charges-div").classList.remove("hidden")
       } else {
         // Hide note smoothly
         loanTypeNote.classList.add("opacity-0", "max-h-0");
         loanTypeNote.classList.remove("opacity-100", "max-h-24");
-        document.getElementById("gstValOnIntDiv").classList.remove("flex")
-        document.getElementById("gstValOnIntDiv").classList.add("hidden")
+        document.getElementById("additional-charges-div").classList.add("hidden")
       }
 
     // Update limits
