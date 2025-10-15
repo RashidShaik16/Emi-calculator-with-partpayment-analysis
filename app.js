@@ -547,6 +547,7 @@ if (feedbackForm) {
         feedbackStatus.className = "mt-4 text-green-600 font-semibold";
         feedbackForm.reset();
         grecaptcha.reset();
+        
 
         // Fire GA4 event for feedback form submit
           if (typeof gtag === "function") {

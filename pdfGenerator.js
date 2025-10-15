@@ -180,7 +180,7 @@ disbursalRows.forEach(([label, value]) => {
   if (label === "Total Charges") {
     doc.setFont("helvetica", "bold");
     doc.setTextColor(220, 38, 38); // Tailwind red-600
-  } else if (label === "Amount Credited to Bank") {
+  } else if (label === `Amount Credited to ${creditorName}`) {
     doc.setFont("helvetica", "bold");
     doc.setTextColor(30, 64, 175); // Tailwind blue-800
   } else {
