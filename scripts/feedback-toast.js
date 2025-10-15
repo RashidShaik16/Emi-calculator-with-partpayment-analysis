@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Triggers ---
   // Show after 30 seconds
-const toastInterval = setInterval(showToast, 30000);
+const toastInterval = setInterval(showToast, 40000);
 
   // Show after scrolling 70%
   // window.addEventListener("scroll", () => {
