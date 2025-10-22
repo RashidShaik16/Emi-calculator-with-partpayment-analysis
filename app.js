@@ -172,23 +172,6 @@ loanTypeButtons.forEach((btn) => {
     options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
   });
 
-  // second chart setup
-  // const savingsCtx = document.getElementById('savingsChart');
-  //   let savingsChart = new Chart(savingsCtx, {
-  //     type: 'pie',
-  //     data: {
-  //       labels: ['Principal', 'Interest'],
-  //       datasets: [{
-  //         data: [0, 0],
-  //         backgroundColor: ['#1E40AF', '#f59e0b'], 
-  //       }]
-  //     },
-  //     options: { 
-  //       responsive: true, 
-  //       plugins: { legend: { position: 'bottom' } } 
-  //     }
-  // });
-
 
 
 const downloadBtn = document.getElementById("downloadPdfBtn");
@@ -572,7 +555,22 @@ if (feedbackForm) {
 });
 
 
+// 🔒 Restrict month inputs to whole numbers only
+  document.addEventListener("input", (e) => {
+    const el = e.target;
 
+    if (
+      el.id === "tenureInput"
+    ) {
+      // Remove any non-digit or decimal characters
+      el.value = el.value.replace(/[^\d]/g, "");
+
+      // Convert to integer (optional, to drop leading zeros)
+      if (el.value !== "") el.value = parseInt(el.value, 10);
+    }
+  });
+
+  
 
   // EMI calculation
   function calculateEMI(P, annualRate, N) {

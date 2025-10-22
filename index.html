@@ -71,16 +71,43 @@
     "url": "https://www.knowyouremi.in",
     "logo": "https://www.knowyouremi.in/logo-112x112.jpg"
     }
-    </script>
-
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EM8B59T3F5"></script>
+    
+    </script>     
+        <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-EM8B59T3F5"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-EM8B59T3F5');
+        gtag('config', 'G-EM8B59T3F5'); -->
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+        <script>
+        // ✅ Prevent GA4 tracking on local or dev environments
+        const isLocal =
+            location.hostname === "localhost" ||
+            location.hostname === "127.0.0.1" ||
+            location.hostname.includes("192.168.") || // optional for LAN testing
+            location.hostname.includes("dev.");       // optional for dev subdomains
+
+        if (!isLocal) {
+            // Load GA4 only if not local
+            const gtagScript = document.createElement("script");
+            gtagScript.async = true;
+            gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-EM8B59T3F5";
+            document.head.appendChild(gtagScript);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+            dataLayer.push(arguments);
+            }
+
+            gtag("js", new Date());
+            gtag("config", "G-EM8B59T3F5");
+        } else {
+            console.log("🧩 GA4 tracking disabled on localhost/development environment");
+        }
         </script>
         
         <style>
@@ -103,6 +130,7 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
+                    <a href="#balanceTransfer" class="hover:text-yellow-300">Balance Transfer Calculator</a>
                     <a href="#eligibilityCalculator" class="hover:text-yellow-300">Check Eligibility</a>
                     <a href="#why-use" class="hover:text-yellow-300">Why Use</a>
                     <a href="#faq-section" class="hover:text-yellow-300">FAQs</a>
@@ -473,6 +501,249 @@
             </section>
 
 
+            <!-- Balance Transfer Calculator -->
+            <section id="balanceTransfer" class="bg-gradient-to-b from-blue-200 to-green-100 shadow-lg rounded-2xl p-6 mt-10">
+                <div class="flex gap-2 items-center">
+                    <h2 class="text-xl font-semibold mb-1 text-gray-800">Loan Balance Transfer Calculator </h2>
+                    <img src="assets/new.gif" alt="New Release" class="w-14 h-14">
+                </div>
+                <p class="text-sm text-gray-600 mb-4">
+                    Compare your existing loans with a new lender’s offer and see if transferring will actually save you money.
+                </p>
+
+                <!-- Existing Loan Section Wrapper -->
+                <div id="existingLoansWrapper" class="space-y-8 mb-6">
+
+                    <!-- Existing Loan Block (First Loan - No Remove Button) -->
+                    <div class="existing-loan rounded-2xl px-2 py-5 relative">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Existing Loan 1</h3>
+                            <!-- No remove button for the first loan -->
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <!-- Inputs -->
+                            <div>
+                            <!-- <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Lender Name</label>
+                                <input type="text"
+                                    class="lenderName w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                                    placeholder="e.g., HDFC Bank">
+                            </div> -->
+
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Original Loan Amount (₹)</label>
+                                <input type="number"
+                                    class="oldLoanAmount w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                                    placeholder="e.g., 1500000">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Interest Rate (% p.a.)</label>
+                                <input type="number"
+                                        class="oldInterest w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                                        placeholder="e.g., 9.5" min="1" max="36" step="0.01">
+                                </div>
+                                <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tenure (Months)</label>
+                                <input type="number" class="oldTenureMonths w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" step="1" min="3" max="360" placeholder="e.g., 240">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">EMIs Paid</label>
+                                <input type="number" class="emisPaid w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none" min="0" placeholder="e.g., 60" step="1">
+                                </div>
+                                <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Foreclosure Charges (%)</label>
+                                <input type="number"
+                                        class="foreclosureRate w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                                        placeholder="e.g., 2" step="0.01">
+                                </div>
+                            </div>
+
+                            <button type="button"
+                                    class="calcExistingLoan bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition font-semibold w-full">
+                                Calculate Outstanding
+                            </button>
+                            </div>
+
+                            <!-- Results (always visible with placeholders) -->
+                            <div class="existingResults border-2 border-blue-200 p-5 rounded-2xl shadow-lg">
+                                <h4 class="text-base font-semibold text-blue-700 mb-2">Existing Loan Summary</h4>
+                                <div class="text-sm text-gray-700 space-y-1">
+
+                                    <div class="border-b border-blue-500 border-dashed pb-2 flex justify-between">
+                                        <p>Existing EMI:</p>
+                                        <span class="oldEmi font-medium text-gray-900">–</span>
+                                    </div>
+
+                                    <div class="border-b border-blue-500 border-dashed pb-2 flex justify-between">
+                                    <p>Principal Outstanding:</p>
+                                    <span class="outstanding font-medium text-gray-900">–</span>
+                                    </div>
+
+                                    <div class="border-b border-blue-500 border-dashed pb-2 flex justify-between">
+                                        <p>Remaining EMIs:</p>
+                                        <span class="remainingEmis font-medium text-gray-900">–</span>
+                                    </div>
+
+                                    <div class="border-b border-blue-500 border-dashed pb-2 flex justify-between">
+                                        <p class="text-blue-700 font-semibold">Remaining Payments:</p>
+                                        <span class="remainingTotal text-blue-700 font-semibold">–</span>
+                                    </div>
+
+                                    <div class="border-b border-blue-500 border-dashed pb-2 flex justify-between">
+                                        <p class="text-red-700 font-semibold">Foreclosure Fees: </p>
+                                        <span class="foreclosureFee font-semibold text-red-700">–</span>
+                                    </div>
+
+                                    <div class="border-b border-blue-500 border-dashed pb-2 flex justify-between">
+                                        <p class="text-red-700 font-semibold">GST (18%): </p>
+                                        <span class="foreclosureGst font-semibold text-red-700">–</span>
+                                    </div>
+                                    
+                                    <div class="flex justify-between">
+                                        <p class="mt-2 text-blue-700 font-semibold">Total Amount to close this loan:</p>
+                                        <span class="mt-2 totalForeclose font-semibold text-blue-700">–</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Existing Loan Block -->
+
+                </div>
+
+                <!-- Add Another Loan Button -->
+                <button id="addLoanBtn"
+                    class="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-lg font-medium transition mb-8 ml-2 hidden">
+                    + Add Another Existing Loan
+                </button>
+
+                <!-- Total Foreclosure Summary -->
+                <div id="totalForeclosureSection" class="hidden mb-8 rounded-2xl py-5">
+                    <h3 class="text-lg font-semibold text-blue-800 mb-2">Total Amount Required to Foreclose Your Existing Loans</h3>
+                    <p class="text-gray-700 text-sm">
+                        This is the total amount you’ll need to close all your current loans, which becomes the new loan amount from your new lender.
+                    </p>
+                    <p class="text-xl font-bold text-blue-700 mt-2">
+                        ₹<span id="totalForeclosureSum">0</span>
+                    </p>
+                </div>
+
+
+                <!-- New Lender Section -->
+                <div id="newLenderSection">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">New Lender Details</h3>
+
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <!-- Inputs -->
+                        <div>
+                            <!-- <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">New Lender Name</label>
+                            <input id="newLenderName" type="text" placeholder="e.g., Axis Bank"
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div> -->
+
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">New Interest Rate (% p.a.)</label>
+                                <input id="newInterest" type="number" placeholder="e.g., 8.5" min="1" max="36" step="0.01"
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">New Tenure (Months)</label>
+                                <input id="newTenureMonths" type="number" min="3" max="360" placeholder="e.g., 180"
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Processing Fee (%)</label>
+                                <input id="processingFeeRate" type="number" placeholder="e.g., 1.5" step="0.01"
+                                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-green-400 focus:outline-none">
+                            </div>
+
+
+                            <button id="compareTransfer"
+                                    class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition font-semibold w-full">
+                            Compare & Calculate Savings
+                            </button>
+                        </div>
+
+                        <!-- Results -->
+                        <div id="newResults" class="border-2 border-green-100 p-5 rounded-2xl shadow-lg">
+                            <h4 class="text-base font-semibold text-green-700 mb-2">New Loan Summary</h4>
+                            <div class="text-sm text-gray-700 space-y-1">
+                                <div class="border-b border-green-500 border-dashed pb-2 flex justify-between">
+                                    <p>New Loan Amount:</p>
+                                    <span id="newLoanAmount" class="font-medium text-gray-900">–</span>
+                                </div>
+
+                                <div class="border-b border-green-500 border-dashed pb-2 flex justify-between">
+                                    <p>New EMI: </p>
+                                    <span id="newEmi" class="font-medium text-gray-900">–</span>
+                                </div>
+
+                                <div class="border-b border-green-500 border-dashed pb-2 flex justify-between">
+                                    <p>New Tenure:</p>
+                                    <span id="newTenure" class="font-medium text-gray-900">–</span>
+                                </div>
+
+                                <div class="border-b border-green-500 border-dashed pb-2 flex justify-between">
+                                    <p class="text-red-700 font-semibold">Processing Fees:</p>
+                                    <span id="newProcFees" class="font-semibold text-red-700">–</span>
+                                </div>
+
+                                <div class="border-b border-green-500 border-dashed pb-2 flex justify-between">
+                                    <p class="text-red-700 font-semibold">18% GST:</p>
+                                    <span id="newGstFees" class="font-semibold text-red-700">–</span>
+                                </div>
+
+                                <div class="border-b border-green-500 border-dashed pb-2 flex justify-between">
+                                    <p class="font-semibold text-green-700">New Total Repayments:</p>
+                                    <span id="newTotal" class="font-semibold text-green-700 ">–</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decision Result Section -->
+                <div id="decisionBox" class="hidden mt-4 bg-gradient-to-br from-blue-50 via-teal-50 to-green-50 px-5 pb-5 rounded-2xl border-2 border-green-100 shadow-xl">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Results</h3>
+                    <div class="grid sm:grid-cols-2 gap-4 items-center">
+                        
+                        <!-- Left: Title + Emoji -->
+                        <div id="emoji-section" class="">
+                            <h4 id="decisionTitle" class="text-lg font-semibold text-green-700 mb-2">Good Decision</h4>
+                            <img id="decisionEmoji" src="assets/clap.gif" alt="Good Decision" class="mx-auto w-12 h-12">
+                        </div>
+
+                        <!-- Right: Savings/Cost Info -->
+                        <div id="savings-section" class="">
+                        <p id="decisionAmountLabel" class="text-sm text-gray-600 mb-1">You Save</p>
+                        <p id="decisionAmount" class="text-xl font-bold text-green-700"></p>
+                        </div>
+                    </div>
+
+                    <!-- Recommendation Section -->
+                    <div id="recommendationBox" class="">
+                        <p id="recommendationText" class="">
+                        Based on your savings, refinancing looks like a smart move!
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+
+
+
+
             <!-- Why Use Our Calculator -->
             <section id="why-use" class="bg-white shadow-lg rounded-2xl py-10 px-6 mt-10">
                 <h2 class="text-2xl font-bold text-center mb-8">Why Use Our Calculator?</h2>
@@ -786,7 +1057,7 @@
                 <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
                 <ul class="space-y-2 text-sm">
                     <li><a href="#calculator" class="hover:underline">EMI Calculator</a></li>
-                    <li><a href="#savingsSection" class="hover:underline">Savings</a></li>
+                    <li><a href="#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
                     <li><a href="#faq-section" class="hover:underline">FAQs</a></li>
                     <li><a href="#feedback-section" class="hover:underline">Feedback</a></li>
                 </ul>
@@ -923,6 +1194,7 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="scripts/feedback-toast.js"></script>
     <script src="scripts/eligibility.js"></script>
+    <script src="scripts/balanceTransfer.js"></script>
     <script src="app.js"></script>
  
     </body>
