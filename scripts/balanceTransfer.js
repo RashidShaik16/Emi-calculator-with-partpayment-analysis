@@ -407,11 +407,11 @@ if (savings > 0) {
 
   if (savings <= 10000) {
      emojiEl.src = "assets/is-it-worth.gif";
-    titleEl.textContent = "Nice offer, but not worth switching";
+    titleEl.textContent = "Nice offer, but worth ?";
     recoEl.textContent = `Surely you save some money but for ${savings.toFixed(0)}, is it worth going through all the process ? Taking new loan can also temporarily drops your credit score`;
   } else if (savings > 10000 && savings <= 20000) {
     emojiEl.src = "assets/clap.gif";
-    titleEl.textContent = "Decent savings — could be worth it";
+    titleEl.textContent = "Decent savings";
     recoEl.textContent = `Not a big savings but you can still consider it`;
   } else if (savings > 20000 && savings <= 50000) {
     emojiEl.src = "assets/star-eyes.gif";
@@ -419,7 +419,7 @@ if (savings > 0) {
     recoEl.textContent = `It's a good amount of savings. Go for it, if the offer is available`;
   } else {
     emojiEl.src = "assets/dollar-face.gif";
-    titleEl.textContent = "Jackpot savings! Don’t miss this";
+    titleEl.textContent = "Jackpot savings! Don’t miss it";
     recoEl.textContent = `Excellent offer — you’ll save big! Go ahead and lock this deal before rates change.`;
   }
 
