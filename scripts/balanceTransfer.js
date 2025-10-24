@@ -75,43 +75,86 @@ const observer = new MutationObserver((mutations) => {
 observer.observe(existingLoansWrapper, { childList: true });
 
 
+
 // 🔒 Restrict month inputs to whole numbers only
   document.addEventListener("input", (e) => {
     const el = e.target;
-// Tenure Restrictions (Months)
-    if (
-      el.classList.contains("oldTenureMonths") ||
-      el.id === "newTenureMonths"
-    ) {
-      // Remove any non-digit or decimal characters
-      el.value = el.value.replace(/[^\d]/g, "");
 
-      // Convert to integer (optional, to drop leading zeros)
-      if (el.value !== "") el.value = parseInt(el.value, 10);
+    // Tenure (months) — digits only while typing (no decimals)
+  if (
+    el.classList.contains("oldTenureMonths") ||
+    el.id === "newTenureMonths"
+  ) {
+    el.value = el.value.replace(/[^\d]/g, ""); // only digits
+    // (no min/max here; we enforce on blur)
+  }
 
-       // Enforce min/max range (3–360 months)
-      const minMonths = 3;
-      const maxMonths = 360;
-
-      if (el.value && el.value < minMonths) el.value = minMonths;
-      if (el.value && el.value > maxMonths) el.value = maxMonths;
-    }
-
-//  Interest Rate Restrictions (% p.a.)
+  // Interest rate — allow up to 2 decimals while typing
   if (
     el.classList.contains("oldInterest") ||
     el.id === "newInterest"
   ) {
-    const minRate = 1;
-    const maxRate = 36;
 
-    let val = parseFloat(el.value);
-    if (!isNaN(val)) {
-      if (val < minRate) val = minRate;
-      if (val > maxRate) val = maxRate;
-      el.value = val;
+    const parts = el.value.split(".");
+    if (parts.length > 2) {
+      // keep only the first dot
+      el.value = parts[0] + "." + parts[1];
     }
+    // Cap to 2 digits after decimal (if any)
+    if (parts.length === 2 && parts[1].length > 2) {
+      el.value = parts[0] + "." + parts[1].slice(0, 2);
+    }
+    // (no min/max here; we enforce on blur)
   }
+
+
+  // ✅ EMIs Paid Restriction — cannot exceed (Tenure - 6)
+  if (el.classList.contains("emisPaid")) {
+    const parent = el.closest(".existing-loan");
+    const tenureInput = parent.querySelector(".oldTenureMonths");
+
+    const tenureVal = parseInt(tenureInput?.value || 0);
+    const emisVal = parseInt(el.value || 0);
+
+    // If tenure is valid and EMIs paid exceed (tenure - 6), clamp it
+    if (tenureVal > 0 && emisVal > tenureVal - 6) {
+      const allowedMax = Math.max(tenureVal - 6, 0);
+      el.value = allowedMax > 0 ? allowedMax : "";
+    }
+
+    // Prevent negatives or non-numeric input
+    if (emisVal < 0) el.value = 0;
+  }
+
+
+// ✅ Foreclosure Charges (%) — allow up to 2 decimals naturally
+if (el.classList.contains("foreclosureRate")) {
+  const parts = el.value.split(".");
+  if (parts.length > 2) {
+    // keep only the first dot
+    el.value = parts[0] + "." + parts[1];
+  }
+  // Cap to 2 digits after decimal (if any)
+  if (parts.length === 2 && parts[1].length > 2) {
+    el.value = parts[0] + "." + parts[1].slice(0, 2);
+  }
+  // (no min/max here; we enforce on blur)
+}
+
+// ✅ Processing Fee (%) — allow up to 2 decimals naturally
+if (el.id === "processingFeeRate") {
+  const parts = el.value.split(".");
+  if (parts.length > 2) {
+    // keep only the first dot
+    el.value = parts[0] + "." + parts[1];
+  }
+  // Cap to 2 digits after decimal (if any)
+  if (parts.length === 2 && parts[1].length > 2) {
+    el.value = parts[0] + "." + parts[1].slice(0, 2);
+  }
+  // (no min/max here; we enforce on blur)
+}
+
 
 
     // When any existing loan input changes:
@@ -152,6 +195,71 @@ observer.observe(existingLoansWrapper, { childList: true });
   }
 
   });
+
+
+  document.addEventListener("blur",(e) => {
+    const el = e.target;
+
+    // Tenure clamp on blur: 3–360, integer
+    if (
+      el.classList.contains("oldTenureMonths") ||
+      el.id === "newTenureMonths"
+    ) {
+      if (el.value === "") return;
+      let v = parseInt(el.value, 10);
+      if (isNaN(v)) return;
+      const minMonths = 3;
+      const maxMonths = 360;
+      if (v < minMonths) v = minMonths;
+      if (v > maxMonths) v = maxMonths;
+      el.value = String(v);
+    }
+
+    // Interest clamp on blur: 1–36, formatted to 2 decimals
+    if (
+      el.classList.contains("oldInterest") ||
+      el.id === "newInterest"
+    ) {
+      if (el.value === "") return;
+      let v = parseFloat(el.value);
+      if (isNaN(v)) return;
+      const minRate = 1;
+      const maxRate = 36;
+      if (v < minRate) v = minRate;
+      if (v > maxRate) v = maxRate;
+      el.value = v.toFixed(2);
+    }
+
+    // ✅ Foreclosure Charges clamp and format (on blur)
+  if (el.classList.contains("foreclosureRate")) {
+    let val = parseFloat(el.value);
+    if (!isNaN(val)) {
+      const minFore = 0;
+      const maxFore = 7;
+      if (val < minFore) val = minFore;
+      if (val > maxFore) val = maxFore;
+      el.value = val.toFixed(2);
+    }
+  }
+
+  // ✅ Processing Fee clamp and format (on blur)
+  if (el.id === "processingFeeRate") {
+    let val = parseFloat(el.value);
+    if (!isNaN(val)) {
+      const minProc = 0;
+      const maxProc = 7;
+      if (val < minProc) val = minProc;
+      if (val > maxProc) val = maxProc;
+      el.value = val.toFixed(2);
+    }
+  }
+
+  },
+
+  true // use capture so blur is caught during event capturing phase
+);
+
+
 
 
   // ------------------------------

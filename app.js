@@ -289,6 +289,15 @@ confirmBtn.addEventListener("click", () => {
   closePartPaymentModal();
    document.getElementById("partPaymentValueDisplay").classList.remove("hidden");
    document.getElementById("partPaymentValueDisplay").classList.add("flex");
+
+  //  GA4 tracking for part payments
+    if (typeof gtag === "function") {
+    gtag("event", "part_payment_check", {
+      event_category: "EMI Calculator",
+      event_label: "Part Payment Confirmed",
+      value: 1
+    });
+  }
    
 });
 
