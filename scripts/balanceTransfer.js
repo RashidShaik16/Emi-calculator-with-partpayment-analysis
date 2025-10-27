@@ -31,20 +31,7 @@ function resetNewLoanResults() {
 
 const existingLoansWrapper = document.getElementById("existingLoansWrapper");
 
-// const observer = new MutationObserver(() => {
-//   // When loan is added/removed:
-//   // 1. Hide decision box (since user changed loan structure)
-//   const decisionBox = document.getElementById("decisionBox");
-//   if (decisionBox) decisionBox.classList.add("hidden");
 
-//   // 2. Recalculate total foreclosure properly
-//   updateTotalForeclosureSum();
-
-//   // 3. Reset new loan summary (optional — if you want to clear summary when loan count changes)
-//   resetNewLoanResults();
-// });
-
-// observer.observe(existingLoansWrapper, { childList: true });
 
 const observer = new MutationObserver((mutations) => {
   let loanAdded = false;
