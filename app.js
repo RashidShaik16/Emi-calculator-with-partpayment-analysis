@@ -914,3 +914,91 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(() => console.log('Service Worker registered'))
+    .catch((err) => console.log('Service Worker failed:', err));
+}
+
+// PWA installation setup
+
+let deferredPrompt;
+const popup = document.getElementById('installPopup');
+const addShortCutBtn = document.getElementById('addShortCutBtn');
+const closeShortCutBtn = document.getElementById('closeShortCutBtn');
+let popupTimer;
+let popupDelay = 30000; // initial 30 sec
+
+// Function to show popup with fade-in animation
+function showPopup() {
+  if (localStorage.getItem('pwaInstalled') === 'true') return;
+
+  popup.classList.remove('hidden');
+  popup.classList.add('opacity-0'); // start transparent
+
+  // Smooth fade-in using Tailwind transition classes
+  popup.classList.add('transition-opacity', 'duration-700');
+
+  setTimeout(() => {
+    popup.classList.remove('opacity-0');
+    popup.classList.add('opacity-100');
+  }, 50); // small delay to trigger transition
+}
+
+// Function to schedule popup with given delay
+function schedulePopup(delay) {
+  clearTimeout(popupTimer);
+  popupTimer = setTimeout(() => showPopup(), delay);
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // First show after 30 seconds
+  schedulePopup(popupDelay);
+});
+
+addShortCutBtn.addEventListener('click', async () => {
+  clearTimeout(popupTimer);
+  popup.classList.add('hidden');
+
+
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+
+    if (outcome === 'accepted') {
+      console.log('User accepted A2HS prompt');
+      // Remember that app was installed
+      localStorage.setItem('pwaInstalled', 'true');
+
+          // 🔹 GA4 event: track only successful PWA installation
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'app_installed', {
+          event_category: 'PWA',
+          event_label: 'User Installed App Successfully',
+          value: 1
+        });
+      }
+
+    } else {
+      console.log('User dismissed A2HS prompt');
+      // Change delay to 45s for next appearances
+      popupDelay = 45000;
+      schedulePopup(popupDelay);
+    }
+
+    deferredPrompt = null;
+  }
+});
+
+closeShortCutBtn.addEventListener('click', () => {
+  clearTimeout(popupTimer);
+  popup.classList.add('hidden');
+  // Change delay to 45s for next reappearance
+  popupDelay = 45000;
+  schedulePopup(popupDelay);
+});
+

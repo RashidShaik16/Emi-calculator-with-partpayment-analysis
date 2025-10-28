@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+    <!-- PWA setup -->
+     <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/manifest.json">
+
     <!-- SEO Title & Description -->
     <title>Free EMI & Balance Transfer Calculator with Part Payments | KnowYourEMI</title>
     <meta name="description" content="Calculate EMIs, explore balance transfer savings, with multiple part payment options. KnowYourEMI helps you manage your loans smarter — fast, free, and accurate." />
@@ -15,6 +22,7 @@
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.knowyouremi.in/"/>
+    
 
     <!-- Open Graph (for Facebook, LinkedIn, etc.) -->
     <meta property="og:title" content="Free EMI & Balance Transfer Calculator with Part Payments" />
@@ -1181,6 +1189,29 @@
         </div>
 
 
+        <div id="installPopup" class="fixed top-0 inset-x-0 bg-white shadow-lg border-b border-gray-200 p-4 z-50 hidden opacity-0 transition-opacity duration-700">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm text-gray-700">
+
+                <!-- Left side: Text -->
+                <div class="text-center sm:text-left leading-tight">
+                📱 <strong>Install KnowYourEMI</strong><br>
+                Add to your Home Screen for quick access.
+                </div>
+
+                <!-- Right side: Buttons -->
+                <div class="flex justify-center sm:justify-end gap-2">
+                <button id="addShortCutBtn"
+                    class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg">
+                    Add Shortcut
+                </button>
+                <button id="closeShortCutBtn"
+                    class="text-gray-500 hover:text-gray-700 text-xs px-3 py-1.5">
+                    Maybe Later
+                </button>
+                </div>
+
+            </div>
+        </div>
 
   <!-- Script -->
     <script>
