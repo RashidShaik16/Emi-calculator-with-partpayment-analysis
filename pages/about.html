@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About KnowYourEMI - Learn about our mission to simplify EMI and loan calculations for everyone.">
+  <meta name="theme-color" content="#2563eb">
+  <title>About KnowYourEMI | Free Financial Calculators</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script>
+    // Simple toggle for mobile nav
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    });
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-inter">
+
+  <!-- NAVIGATION BAR -->
+  <nav id="calculator" class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+      <!-- Logo / Title -->
+      <a href="../index.html#calculator" class="text-xl font-bold">
+        <img class="w-20 inline-block" src="../logo.png" alt="KnowYourEMI logo">
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-6">
+        <a href="../index.html#balanceTransfer" class="hover:text-yellow-300">Balance Transfer</a>
+        <a href="../index.html#eligibilityCalculator" class="hover:text-yellow-300">Check Eligibility</a>
+        <a href="../index.html#why-use" class="hover:text-yellow-300">Why Use</a>
+        <a href="../index.html#faq-section" class="hover:text-yellow-300">FAQs</a>
+        <a href="../index.html#feedback-section" class="hover:text-yellow-300">Feedback</a>
+      </div>
+
+      <!-- Hamburger Button -->
+      <button id="menu-toggle" class="md:hidden text-white focus:outline-none text-2xl">☰</button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-gradient-to-r from-blue-600 to-indigo-600">
+      <a href="../index.html#balanceTransfer" class="hover:text-yellow-300">Balance Transfer</a>
+      <a href="../index.html#eligibilityCalculator" class="hover:text-yellow-300">Check Eligibility</a>
+      <a href="../index.html#why-use" class="hover:text-yellow-300">Why Use</a>
+      <a href="../index.html#faq-section" class="hover:text-yellow-300">FAQs</a>
+      <a href="../index.html#feedback-section" class="hover:text-yellow-300">Feedback</a>
+    </div>
+  </nav>
+
+  <!-- PAGE CONTENT -->
+  <main class="max-w-3xl mx-auto px-6 py-12">
+    <h1 class="text-3xl font-bold text-blue-600 mb-4">About KnowYourEMI</h1>
+    <p class="mb-4">KnowYourEMI is a free, independent financial calculator platform that helps users make smarter loan decisions through easy, transparent tools.</p>
+
+    <p class="mb-4">We simplify complex loan and EMI calculations with interactive tools that give clear, instant results. Our tools include:</p>
+    <ul class="list-disc ml-6 space-y-1 mb-4">
+      <li><strong>EMI Calculator:</strong> Quickly calculate your loan’s monthly installments.</li>
+      <li><strong>Loan Eligibility Calculator:</strong> Estimate the loan amount you can qualify for.</li>
+      <li><strong>Balance Transfer Calculator:</strong> Compare and analyze potential savings with new lenders.</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold mt-6 mb-3">Our Mission</h2>
+    <p class="mb-4">To empower individuals to make confident, data-driven financial decisions using free, accurate, and transparent tools.</p>
+
+    <h2 class="text-2xl font-semibold mt-6 mb-3">Contact Us</h2>
+    <p>Email: <a href="mailto:hello@knowyouremi.in" class="text-blue-600 underline">hello@knowyouremi.in</a></p>
+    <p>Website: <a href="https://www.knowyouremi.in" class="text-blue-600 underline">www.knowyouremi.in</a></p>
+  </main>
+
+  
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- About -->
+      <div>
+        <h3 class="text-lg font-semibold mb-3">About KnowYourEMI</h3>
+        <p class="text-sm text-gray-200 leading-relaxed">
+          KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility, 
+          and evaluate balance transfers transparently — no sign-ups, no hidden conditions.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="../index.html#calculator" class="hover:underline">EMI Calculator</a></li>
+          <li><a href="../index.html#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
+          <li><a href="../index.html#eligibilityCalculator" class="hover:underline">Loan Eligibility</a></li>
+          <li><a href="../index.html#faq-section" class="hover:underline">FAQs</a></li>
+          <li><a href="../index.html#feedback-section" class="hover:underline">Feedback</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Contact</h3>
+        <p class="text-sm text-gray-200 mb-2">
+          📧 Email:
+          <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">
+            hello@knowyouremi.in
+          </a>
+        </p>
+        <p class="text-sm text-gray-200">🌐 More updates and tools coming soon!</p>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
+      <span>© <span id="year"></span> knowyouremi.in | All rights reserved.</span>
+      <a href="./about.html" class="underline hover:text-yellow-300">About</a> |
+      <a href="./privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
+      <a href="./terms-and-conditions.html" class="underline hover:text-yellow-300">Terms & Conditions</a>
+    </div>
+  </footer>
+
+<script>
+  // Auto update year
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+
+</body>
+</html>
