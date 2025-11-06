@@ -929,7 +929,7 @@ const popup = document.getElementById('installPopup');
 const addShortCutBtn = document.getElementById('addShortCutBtn');
 const closeShortCutBtn = document.getElementById('closeShortCutBtn');
 let popupTimer;
-let popupDelay = 30000; // initial 30 sec
+let popupDelay = 15000; // initial 15 sec
 
 // Function to show popup with fade-in animation
 function showPopup() {
@@ -956,7 +956,7 @@ function schedulePopup(delay) {
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  // First show after 30 seconds
+  // First show after 15 seconds
   schedulePopup(popupDelay);
 });
 
@@ -971,7 +971,7 @@ addShortCutBtn.addEventListener('click', async () => {
 
     if (outcome === 'accepted') {
       console.log('User accepted A2HS prompt');
-      // Remember that app was installed
+      // Remember if app was installed
       localStorage.setItem('pwaInstalled', 'true');
 
           // 🔹 GA4 event: track only successful PWA installation
@@ -985,8 +985,8 @@ addShortCutBtn.addEventListener('click', async () => {
 
     } else {
       console.log('User dismissed A2HS prompt');
-      // Change delay to 45s for next appearances
-      popupDelay = 45000;
+      // Change delay to 30s for next appearances
+      popupDelay = 30000;
       schedulePopup(popupDelay);
     }
 
@@ -998,7 +998,7 @@ closeShortCutBtn.addEventListener('click', () => {
   clearTimeout(popupTimer);
   popup.classList.add('hidden');
   // Change delay to 45s for next reappearance
-  popupDelay = 45000;
+  popupDelay = 30000;
   schedulePopup(popupDelay);
 });
 
