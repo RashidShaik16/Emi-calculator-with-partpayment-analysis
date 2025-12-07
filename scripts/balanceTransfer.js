@@ -555,7 +555,7 @@ if (savings > 0) {
   labelEl.textContent = "No Gain / No Loss";
   amountEl.textContent = "₹0";
   amountEl.className = "text-xl font-bold text-gray-700";
-  recoEl.textContent = "When the total cost is about the same — Then why to waste your time.";
+  recoEl.textContent = "When the total cost is about the same, Then why to waste your time.";
    emojiSection.className = "bg-gray-100 border border-gray-200 text-center rounded-2xl py-4";
   savingsSection.className = "bg-gray-100 border border-gray-200 text-center rounded-2xl py-4 sm:py-8";
   recommendationBox.className = "mt-4 bg-gray-100 border-l-8 border-gray-600 rounded-r-2xl p-4"
