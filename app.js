@@ -50,7 +50,7 @@ const loanTypeButtons = document.querySelectorAll(".loan-type-btn");
 currentLoanType = "personal";
 const loanConfigs = {
   personal: { maxAmount: 5000000, minAmount:10000, maxRate: 36, maxTenure: 60 },
-  home: { maxAmount: 9500000, minAmount:100000, maxRate: 15, maxTenure: 360 },
+  home: { maxAmount: 10000000, minAmount:100000, maxRate: 15, maxTenure: 360 },
   car: { maxAmount: 3000000, minAmount:50000, maxRate: 18, maxTenure: 84 },
   credit: { maxAmount: 1000000, minAmount:10000, maxRate: 45, maxTenure: 60 },
 };
@@ -733,21 +733,20 @@ function renderAmortization(schedule) {
       // Add table header row
       const tableHeader = document.createElement('div');
       tableHeader.className =
-        'grid grid-cols-6 gap-2 font-semibold text-xs border-b pb-1 text-left sm:text-sm';
+        'grid grid-cols-5 gap-2 font-semibold text-xs border-b pb-1 text-center sm:text-sm';
       tableHeader.innerHTML = `
         <div>Month</div>
         <div>EMI</div>
-        <div>Interest</div>
-        <div>Principal</div>
+        <div>Interest / Principal</div>
         <div>Balance</div>
-        <div class="col-span-1 ml-auto sm:mx-auto md:mx-auto md:col-span-1">Action  </div>
+        <div class="col-span-1 ml-auto sm:mx-auto md:mx-auto md:col-span-1">Part Payment</div>
       `;
       innerWrapper.appendChild(tableHeader);
 
       years[yr].forEach((m, idx) => {
         const monthRow = document.createElement('div');
         monthRow.className =
-          'grid grid-cols-6 gap-2 text-xs py-1 border-b hover:bg-gray-50 text-left sm:text-sm';
+          'grid grid-cols-5 gap-2 text-xs py-1 border-b hover:bg-gray-50 text-center sm:text-sm';
 
         const monthName = new Date(m.year, m.month - 1).toLocaleString(
           'default',
@@ -807,8 +806,7 @@ function renderAmortization(schedule) {
         monthRow.innerHTML = `
           <div>${m.serial}. ${monthName}</div>
           <div>₹${Math.round(m.emi).toLocaleString('en-IN')}</div>
-          <div>₹${Math.round(m.interest).toLocaleString('en-IN')}</div>
-          <div>₹${Math.round(m.principal).toLocaleString('en-IN')}</div>
+          <div>₹${Math.round(m.interest).toLocaleString('en-IN')} / ₹${Math.round(m.principal).toLocaleString('en-IN')}</div>
           <div>₹${Math.round(m.balance).toLocaleString('en-IN')}</div>
           ${actionHTML}
         `;
