@@ -463,7 +463,7 @@ document.getElementById("compareTransfer").addEventListener("click", () => {
   const newTotalRepayment = newEMI * newMonths + totalProcessingCost;
 
   // Calculate savings
-  const savings = totalOldPayment - newTotalRepayment;
+  let savings = totalOldPayment - newTotalRepayment;
 
   // Display Results
   document.getElementById("newLoanAmount").textContent = "₹" + Number(newLoanAmount.toFixed(2)).toLocaleString('en-IN');
@@ -488,11 +488,15 @@ const savingsSection = document.getElementById("savings-section");
 const recommendationBox = document.getElementById("recommendationBox");
 const recommendationText = document.getElementById("recommendationText");
 
+if(Math.abs(savings) < 1){
+  savings = 0
+}
+
 // Decide based on savings range
 if (savings > 0) {
   // ✅ Positive savings
   labelEl.textContent = "You Save";
-  amountEl.textContent = `₹${savings.toFixed(0)}`;
+  amountEl.textContent = `₹${Number(savings.toFixed(0)).toLocaleString('en-IN')}`;
   amountEl.className = "text-xl font-bold text-green-700";
   emojiSection.className = "bg-green-100 border border-green-200 text-center rounded-2xl py-4";
   savingsSection.className = "bg-green-100 border border-green-200 text-center rounded-2xl py-4 sm:py-8";
@@ -503,7 +507,7 @@ if (savings > 0) {
   if (savings <= 10000) {
      emojiEl.src = "assets/is-it-worth.gif";
     titleEl.textContent = "Nice offer, but worth ?";
-    recoEl.textContent = `Surely you save some money but for ${savings.toFixed(0)}, is it worth going through all the process ? Taking new loan can also temporarily drops your credit score`;
+    recoEl.textContent = `Surely you save some money, but for ₹${Number(savings.toFixed(0)).toLocaleString('en-IN')}, is it worth going through all the process ? Taking new loan can also temporarily drops your credit score`;
   } else if (savings > 10000 && savings <= 20000) {
     emojiEl.src = "assets/clap.gif";
     titleEl.textContent = "Decent savings";
@@ -522,7 +526,7 @@ if (savings > 0) {
 } else if (savings < 0) {
   // ❌ Negative savings (it costs more)
   labelEl.textContent = "It Costs You";
-  amountEl.textContent = `₹${Math.abs(savings).toFixed(0)}`;
+  amountEl.textContent = `₹${Number(Math.abs(savings).toFixed(0)).toLocaleString('en-IN')}`;
   amountEl.className = "text-xl font-bold text-red-700";
   emojiSection.className = "bg-red-100 border border-red-200 text-center rounded-2xl py-4";
   savingsSection.className = "bg-red-100 border border-red-200 text-center rounded-2xl py-4 sm:py-8";
@@ -543,7 +547,7 @@ if (savings > 0) {
   } else {
     emojiEl.src = "assets/dont-even-think.gif";
     titleEl.textContent = "Don't even think of doing that";
-    recoEl.textContent = `You’ll regret this — ₹${cost.toFixed(0)} is way too much to lose! Stay where you are.`;
+    recoEl.textContent = `You’ll regret this, ₹${Number(cost.toFixed(0)).toLocaleString('en-IN')} is way too much to lose! Stay where you are.`;
   }
 
 
