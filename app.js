@@ -739,7 +739,7 @@ function renderAmortization(schedule) {
         <div>EMI</div>
         <div>Interest / Principal</div>
         <div>Balance</div>
-        <div class="col-span-1 ml-auto sm:mx-auto md:mx-auto md:col-span-1">Part Payment</div>
+        <div class="col-span-1 ml-auto sm:mx-auto md:mx-auto md:col-span-1">Part Pay</div>
       `;
       innerWrapper.appendChild(tableHeader);
 
