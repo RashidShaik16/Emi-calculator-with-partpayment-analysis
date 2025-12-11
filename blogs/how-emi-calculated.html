@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How EMI Is Calculated | KnowYourEMI Blog</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- NAVBAR -->
+    <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+            <a href="/" class="text-xl font-bold">
+                <img class="w-20 inline-block" src="../logo.png" alt="logo">
+            </a>
+
+            <div class="hidden md:flex space-x-6">
+                <a href="/" class="hover:text-yellow-300">EMI Calculator</a>
+                <a href="/#balanceTransfer" class="hover:text-yellow-300">Balance Transfer</a>
+                <a href="/#eligibilityCalculator" class="hover:text-yellow-300">Check Eligibility</a>
+                <a href="/blog/index.html" class="hover:text-yellow-300 font-semibold">Blog</a>
+            </div>
+
+            <button id="menu-toggle" class="md:hidden text-white focus:outline-none text-2xl">☰</button>
+        </div>
+    </nav>
+
+
+    <!-- ARTICLE BODY -->
+    <main class="max-w-4xl mx-auto px-4 py-10">
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">How EMI Is Calculated (Explained Simply With Examples)</h1>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+            EMI, or Equated Monthly Instalment, is the fixed amount you pay every month to repay a loan.  
+            Although EMI calculators show results instantly, understanding how the EMI is actually calculated 
+            helps you make smarter financial decisions.
+        </p>
+
+        <!-- Visual: EMI overview -->
+        
+::contentReference[oaicite:0]{index=0}
+
+
+
+        <h2 class="text-xl font-semibold text-gray-800 mt-10 mb-3">1. Monthly Interest Rate — The First Step</h2>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+            Banks give you the <strong>annual</strong> interest rate, but EMI uses the <strong>monthly</strong> interest rate.
+        </p>
+
+        <p class="text-gray-700 leading-relaxed mb-4">
+            Example:  
+            Annual Interest Rate = <strong>12%</strong>  
+            Monthly Rate = <strong>12 ÷ 12 = 1% per month</strong>  
+            Decimal Form = <strong>0.01</strong>
+        </p>
+
+        <!-- Visual: Annual vs monthly -->
+        
+::contentReference[oaicite:1]{index=1}
+
+
+
+
+        <h2 class="text-xl font-semibold text-gray-800 mt-10 mb-3">2. EMI Formula (Explained Simply)</h2>
+
+        <p class="text-gray-700 leading-relaxed mb-4">
+            All Indian banks use the same standard EMI formula:
+        </p>
+
+        <pre class="bg-gray-200 p-4 rounded-lg text-gray-800 text-sm overflow-x-auto mb-6">
+EMI = [ P × R × (1 + R)^N ] ÷ [ (1 + R)^N – 1 ]
+        </pre>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+            Where:
+        </p>
+
+        <ul class="list-disc ml-6 text-gray-700 leading-relaxed mb-6">
+            <li><strong>P</strong> = Loan amount</li>
+            <li><strong>R</strong> = Monthly interest rate</li>
+            <li><strong>N</strong> = Number of months (tenure)</li>
+        </ul>
+
+        <!-- Visual: EMI structure -->
+        
+::contentReference[oaicite:2]{index=2}
+
+
+
+
+        <h2 class="text-xl font-semibold text-gray-800 mt-10 mb-3">3. Worked Example — Step-by-Step EMI Calculation</h2>
+
+        <p class="text-gray-700 leading-relaxed mb-4">
+            Let’s calculate EMI for:
+        </p>
+
+        <ul class="list-disc ml-6 text-gray-700 leading-relaxed mb-6">
+            <li>Loan Amount = ₹5,00,000</li>
+            <li>Annual Interest = 12% → Monthly Rate = 1% (0.01)</li>
+            <li>Tenure = 60 months</li>
+        </ul>
+
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">Step-by-step:</h3>
+
+        <ol class="list-decimal ml-6 text-gray-700 leading-relaxed mb-6">
+            <li>(1 + R)<sup>60</sup> = (1.01)<sup>60</sup> ≈ <strong>1.816</strong></li>
+            <li>Numerator = 500000 × 0.01 × 1.816 = <strong>9080</strong></li>
+            <li>Denominator = 1.816 – 1 = <strong>0.816</strong></li>
+            <li>EMI = 9080 ÷ 0.816 ≈ <strong>₹11,130</strong></li>
+        </ol>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+            So the EMI for a ₹5 lakh loan at 12% for 60 months is approximately  
+            <strong>₹11,130 per month</strong>.
+        </p>
+
+        <!-- Visual: EMI example illustration -->
+        
+::contentReference[oaicite:3]{index=3}
+
+
+
+
+        <h2 class="text-xl font-semibold text-gray-800 mt-10 mb-3">4. Why EMI Stays Constant but Interest Reduces Over Time</h2>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+            Although the EMI is the same every month, the interest you pay reduces gradually.  
+            This happens because interest is always calculated on the remaining principal.
+        </p>
+
+        <!-- Visual: declining loan balance -->
+        
+::contentReference[oaicite:4]{index=4}
+
+
+
+
+        <h2 class="text-xl font-semibold text-gray-800 mt-10 mb-3">5. Key Takeaways</h2>
+
+        <ul class="list-disc ml-6 text-gray-700 leading-relaxed mb-10">
+            <li>EMI is fixed, but interest reduces every month</li>
+            <li>Monthly interest rate is simply annual rate divided by 12</li>
+            <li>Early years = more interest, later years = more principal</li>
+            <li>Part payments early in the loan save the most interest</li>
+        </ul>
+
+        <p class="text-gray-700 text-sm">
+            To see how your EMI changes with different rates or tenures, try the EMI calculator on our homepage.
+        </p>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
+        <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <div>
+                <h3 class="text-lg font-semibold mb-3">About This Tool</h3>
+                <p class="text-sm text-gray-200 leading-relaxed">
+                    This EMI Calculator with Part Payment Analysis helps you plan loans smarter.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="hover:underline">EMI Calculator</a></li>
+                    <li><a href="/blog/index.html" class="hover:underline">Blog</a></li>
+                    <li><a href="/pages/privacy.html" class="hover:underline">Privacy Policy</a></li>
+                    <li><a href="/pages/terms.html" class="hover:underline">Terms & Conditions</a></li>
+                    <li><a href="/pages/about.html" class="hover:underline">About</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-3">Contact</h3>
+                <p class="text-sm text-gray-200 mb-2">
+                    Email:
+                    <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">hello@knowyouremi.in</a>
+                </p>
+                <p class="text-sm text-gray-200">More features coming soon!</p>
+            </div>
+
+        </div>
+
+        <div class="bg-blue-900 text-center py-3 text-xs text-gray-300">
+            © <span id="year"></span> knowyouremi.in | All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

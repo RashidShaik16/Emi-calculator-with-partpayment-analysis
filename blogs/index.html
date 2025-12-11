@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog & Articles | KnowYourEMI</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- NAVBAR -->
+    <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+            <a href="/" class="text-xl font-bold">
+                <img class="w-20 inline-block" src="../logo.png" alt="logo">
+            </a>
+
+            <div class="hidden md:flex space-x-6">
+                <a href="/" class="hover:text-yellow-300">EMI Calculator</a>
+                <a href="/#balanceTransfer" class="hover:text-yellow-300">Balance Transfer</a>
+                <a href="/#eligibilityCalculator" class="hover:text-yellow-300">Check Eligibility</a>
+                <a href="/#faq-section" class="hover:text-yellow-300">FAQs</a>
+                <a href="/blog/index.html" class="hover:text-yellow-300 font-semibold">Blog</a>
+            </div>
+
+            <button id="menu-toggle" class="md:hidden text-white focus:outline-none text-2xl">☰</button>
+        </div>
+    </nav>
+
+
+    <!-- BLOG HEADER -->
+    <header class="max-w-6xl mx-auto px-4 py-10">
+        <h1 class="text-3xl font-bold text-gray-800 mb-3">Blog & Articles</h1>
+        <p class="text-gray-600 text-sm">
+            Simple explanations. Practical examples. Real financial understanding.
+        </p>
+    </header>
+
+
+    <!-- BLOG GRID -->
+    <section class="max-w-6xl mx-auto px-4 pb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+        <!-- CARD 1 -->
+        <a href="/blog/how-emi-is-calculated.html" class="block bg-white shadow-md rounded-xl p-5 hover:shadow-xl transition">
+            <h2 class="text-lg font-semibold text-gray-800 mb-2">How EMI Is Calculated</h2>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                A clear, simple explanation of EMI with examples that anyone can understand,
+                even if you're not good with maths.
+            </p>
+            <span class="text-blue-700 font-medium mt-4 inline-block">Read More →</span>
+        </a>
+
+        <!-- CARD 2 -->
+        <a href="/blog/loan-balance-transfer-explained.html" class="block bg-white shadow-md rounded-xl p-5 hover:shadow-xl transition">
+            <h2 class="text-lg font-semibold text-gray-800 mb-2">Loan Balance Transfer: When Is It Really Worth It?</h2>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                A practical, emotion-aware guide to help you decide whether switching 
+                your loan actually helps your life or just increases your stress.
+            </p>
+            <span class="text-blue-700 font-medium mt-4 inline-block">Read More →</span>
+        </a>
+
+        <!-- CARD 3 -->
+        <a href="/blog/how-part-payment-saves-money.html" class="block bg-white shadow-md rounded-xl p-5 hover:shadow-xl transition">
+            <h2 class="text-lg font-semibold text-gray-800 mb-2">How Part Payment Reduces EMI or Tenure</h2>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                A relatable explanation of how even one small part payment can remove 
+                years of burden from your loan and bring real peace of mind.
+            </p>
+            <span class="text-blue-700 font-medium mt-4 inline-block">Read More →</span>
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
+        <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <div>
+                <h3 class="text-lg font-semibold mb-3">About This Tool</h3>
+                <p class="text-sm text-gray-200 leading-relaxed">
+                    This EMI Calculator with Part Payment Analysis helps you plan loans smarter.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="hover:underline">EMI Calculator</a></li>
+                    <li><a href="/#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
+                    <li><a href="/blog/index.html" class="hover:underline">Blog</a></li>
+                    <li><a href="/#faq-section" class="hover:underline">FAQs</a></li>
+                    <li><a href="/pages/privacy.html" class="hover:underline">Privacy Policy</a></li>
+                    <li><a href="/pages/terms.html" class="hover:underline">Terms & Conditions</a></li>
+                    <li><a href="/pages/about.html" class="hover:underline">About</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold mb-3">Contact</h3>
+                <p class="text-sm text-gray-200 mb-2">
+                    Email:  
+                    <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">
+                        hello@knowyouremi.in
+                    </a>
+                </p>
+                <p class="text-sm text-gray-200">More features coming soon!</p>
+            </div>
+        </div>
+
+        <div class="bg-blue-900 text-center py-3 text-xs text-gray-300">
+            © <span id="year"></span> knowyouremi.in | All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
