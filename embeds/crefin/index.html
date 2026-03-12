@@ -1016,11 +1016,19 @@
         try {
             const referrer = document.referrer;
 
-            if (!referrer) {
-            // If someone tries to open the embed URL directly
-            document.body.innerHTML = "";
-            return;
-            }
+          if (!referrer) {
+                const currentHost = window.location.hostname;
+
+                const isAllowed = allowedDomains.some(domain =>
+                    currentHost === domain || currentHost.endsWith("." + domain)
+                );
+
+                if (!isAllowed) {
+                    document.body.innerHTML = "";
+                }
+
+                return;
+                }
 
             const referrerHost = new URL(referrer).hostname;
 
