@@ -1002,7 +1002,40 @@
     <script src="/scripts/eligibility.js"></script>
     <script src="/scripts/balanceTransfer.js"></script>
     <script src="/app.js"></script>
-    
+    <!-- Domain protection -->
+     <script>
+        (function () {
+        // Allowed domains
+        const allowedDomains = [
+            "crefin.in",
+            "www.crefin.in"
+        ];
+
+        try {
+            const referrer = document.referrer;
+
+            if (!referrer) {
+            // If someone tries to open the embed URL directly
+            document.body.innerHTML = "";
+            return;
+            }
+
+            const referrerHost = new URL(referrer).hostname;
+
+            const isAllowed = allowedDomains.some(domain =>
+            referrerHost === domain || referrerHost.endsWith("." + domain)
+            );
+
+            if (!isAllowed) {
+            document.body.innerHTML = "";
+            }
+
+        } catch (e) {
+            document.body.innerHTML = "";
+        }
+        })();
+    </script>
+    <!-- Send height -->
     <script>
         function sendHeight() {
         const height = document.documentElement.scrollHeight;
@@ -1017,6 +1050,7 @@
 
         // In case calculators expand dynamically
         setInterval(sendHeight, 1000);
-        </script>
+    </script>
+    
     </body>
 </html>
