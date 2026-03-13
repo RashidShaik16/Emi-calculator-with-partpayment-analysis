@@ -947,14 +947,16 @@
     const currentHost = window.location.hostname;
 
     // Allow direct access only for debugging on your own domain
-    if (!referrer) {
+   if (!referrer) {
 
-      if (!isAllowed(currentHost)) {
-        document.body.innerHTML = "";
-      }
+  // allow testing on your domain
+  if (isAllowed(currentHost)) {
+    return;
+  }
 
-      return;
-    }
+  document.body.innerHTML = "";
+  return;
+}
 
     const referrerHost = new URL(referrer).hostname;
 
