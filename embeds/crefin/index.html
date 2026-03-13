@@ -975,20 +975,26 @@
 
     <!--Send height  -->
     <script>
+
+        let resizeTimeout;
+
         window.sendHeight = function () {
-        const height = document.documentElement.scrollHeight;
-        window.parent.postMessage(
+        clearTimeout(resizeTimeout);
+
+        resizeTimeout = setTimeout(() => {
+            const height = document.body.scrollHeight;
+
+            window.parent.postMessage(
             { type: "knowyour emi-resize", height: height },
             "*"
-        );
+            );
+        }, 100);
         };
 
-        window.addEventListener("load", sendHeight);
-        window.addEventListener("resize", sendHeight);
+        window.addEventListener("load", window.sendHeight);
+        window.addEventListener("resize", window.sendHeight);
 
-        // In case calculators expand dynamically
-        // setInterval(sendHeight, 1000);
-    </script>
+</script>
 
     <script>
         const modal = document.getElementById("partPaymentModal");
