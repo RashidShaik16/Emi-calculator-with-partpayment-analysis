@@ -225,7 +225,7 @@
                     <!-- Loan Type Selector -->
                     <div id="loanTypeSection" class="mb-6">
                     <h2 class="text-lg font-semibold mb-3 text-gray-800">Select Loan Type</h2>
-                        <div class="grid grid-cols-2 gap-3 text-base">
+                        <div class="grid grid-cols-1 gap-3 text-base mb-12 sm:grid-cols-3">
                             
                             <!-- Personal Loan -->
                             <button type="button" data-type="personal"
@@ -258,6 +258,7 @@
                             </button>
 
                             <!-- Credit Card Loan deleted here -->
+                             <div id="loanTypeNote" style="display:none;"></div>
                            
                         </div>
 
@@ -267,7 +268,7 @@
 
 
                     <h2 class="text-xl font-semibold mb-6">Loan Details</h2>
-                    <form id="loanForm" class="space-y-6" onsubmit="event.preventDefault();">
+                    <form id="loanForm" class="space-y-6 mb-12" onsubmit="event.preventDefault();">
                     <!-- Loan Amount -->
                     <div class="flex gap-4 items-center">
                             <p>Loan Amount: </p>
@@ -475,6 +476,7 @@
                     <p id="savingsDetail" class="text-sm text-gray-700 mt-2 font-bold"></p>
             </div>
 
+
             <!-- Amortization Section -->
             <section id="amortization" class="bg-white shadow-lg rounded-2xl py-6 px-1 mt-8 sm:px-2 md:px-6">
                 <h2 class="text-xl font-semibold mb-4">Amortization Schedule</h2>
@@ -491,6 +493,17 @@
                     </svg>
                     </button>
                 </div>
+                <!-- Powered by -->
+                 <hr class="my-4 border-gray-200">
+                <div class="flex justify-center items-center mt-6 mb-2 text-[11px] text-gray-500">
+                        <span class="mr-1">Powered by</span>
+                        <a href="https://www.knowyouremi.in/?ref=crefin" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 font-medium text-gray-600 hover:text-blue-600 transition">
+                        <img src="/logo-112x112.jpg"
+                            alt="KnowYourEMI"
+                            class="w-4 h-4 rounded-sm opacity-80">
+                        <span class="hover:underline">KnowYourEMI</span>
+                        </a>
+                </div>
             </section>
 
             <!-- Loan Eligibility Calculator -->
@@ -501,7 +514,7 @@
             </p>
 
             <!-- Loan Type Buttons -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
                 <button type="button" data-loantype="personal"
                 class="eligibility-type-btn active bg-blue-600 text-white rounded-xl py-2 font-medium">
                 Personal Loan
@@ -514,10 +527,7 @@
                 class="eligibility-type-btn bg-gray-100 text-gray-800 rounded-xl py-2 font-medium">
                 Car Loan
                 </button>
-                <button type="button" data-loantype="credit"
-                class="eligibility-type-btn bg-gray-100 text-gray-800 rounded-xl py-2 font-medium">
-                Credit Card
-                </button>
+             
             </div>
 
             <!-- Input Fields -->
@@ -789,6 +799,17 @@
 
             </section>
 
+           <!-- Powered by -->
+                 
+                <div class="flex justify-center items-center mt-6 mb-2 text-[11px] text-gray-500">
+                        <span class="mr-1">Powered by</span>
+                        <a href="https://www.knowyouremi.in/?ref=crefin" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 font-medium text-gray-600 hover:text-blue-600 transition">
+                        <img src="/logo-112x112.jpg"
+                            alt="KnowYourEMI"
+                            class="w-4 h-4 rounded-sm opacity-80">
+                        <span class="hover:underline">KnowYourEMI</span>
+                        </a>
+                </div>
 
             <!-- Why Use Our Calculator deleted here -->
            
@@ -880,12 +901,15 @@
       
         <!-- InstallPopup deleted here -->
 
-
+        <!-- dummy button -->
+         <button id="addShortCutBtn" style="display:none;"></button>
+         <button id="closeShortCutBtn" style="display:none;"></button>
   <!-- Script -->
-    <script>
-        // Auto-update year
-        document.getElementById("year").textContent = new Date().getFullYear();
+
+  <script>
+        window.KYE_CLIENT = "crefin";
     </script>
+
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
@@ -894,63 +918,60 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
     <!-- reCAPTCHA -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="/scripts/feedback-toast.js"></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
     <script src="/scripts/eligibility.js"></script>
     <script src="/scripts/balanceTransfer.js"></script>
     <script src="/app.js"></script>
+   
+   
     <!-- Domain protection -->
-
-    <!-- <script>
+    <script>
         (function () {
 
-        const allowedDomains = [
-            "crefin.in",
-            "www.crefin.in",
-            "knowyouremi.in",
-            "www.knowyouremi.in"
-        ];
+  const allowedDomains = [
+    "crefin.in",
+    "www.crefin.in",
+    "knowyouremi.in",
+    "www.knowyouremi.in"
+  ];
 
-        function isDomainAllowed(host) {
-            return allowedDomains.some(domain =>
-            host === domain || host.endsWith("." + domain)
-            );
-        }
+  function isAllowed(host) {
+    return allowedDomains.some(domain =>
+      host === domain || host.endsWith("." + domain)
+    );
+  }
 
-        try {
+  try {
 
-            const referrer = document.referrer;
-            const currentHost = window.location.hostname;
+    const referrer = document.referrer;
+    const currentHost = window.location.hostname;
 
-            // Case 1: Direct access
-            if (!referrer) {
+    // Allow direct access only for debugging on your own domain
+    if (!referrer) {
 
-            // Allow only your own domain for testing
-            if (!isDomainAllowed(currentHost)) {
-                document.body.innerHTML = "";
-            }
+      if (!isAllowed(currentHost)) {
+        document.body.innerHTML = "";
+      }
 
-            return;
-            }
+      return;
+    }
 
-            // Case 2: Embedded
-            const referrerHost = new URL(referrer).hostname;
+    const referrerHost = new URL(referrer).hostname;
 
-            // Must be inside iframe AND from allowed domain
-            if (window.self === window.top || !isDomainAllowed(referrerHost)) {
-            document.body.innerHTML = "";
-            return;
-            }
+    // Must be inside iframe AND from allowed domain
+    if (window.self === window.top || !isAllowed(referrerHost)) {
+      document.body.innerHTML = "";
+      return;
+    }
 
-        } catch (e) {
-            document.body.innerHTML = "";
-        }
+  } catch (e) {
+    document.body.innerHTML = "";
+  }
 
-        })();
-    </script> -->
+})();
+    </script>
 
-
-    
+    <!--Send height  -->
     <script>
         function sendHeight() {
         const height = document.documentElement.scrollHeight;
@@ -965,6 +986,18 @@
 
         // In case calculators expand dynamically
         setInterval(sendHeight, 1000);
+    </script>
+
+<!-- Ga4 analytics -->
+
+    <script>
+        if (typeof gtag !== "undefined") {
+        gtag("event", "embed_loaded", {
+            event_category: "embed",
+            event_label: "crefin",
+            client: window.KYE_CLIENT
+        });
+        }
     </script>
 
     </body>

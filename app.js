@@ -228,6 +228,7 @@ if (downloadBtn) {
         event_category: "engagement",
         event_label: "amortization_pdf",
         value: loanAmount,
+        client: window.KYE_CLIENT || "main"
       });
     }
     
@@ -295,7 +296,8 @@ confirmBtn.addEventListener("click", () => {
     gtag("event", "part_payment_check", {
       event_category: "EMI Calculator",
       event_label: "Part Payment Confirmed",
-      value: 1
+      value: 1,
+      client: window.KYE_CLIENT || "main"
     });
   }
    

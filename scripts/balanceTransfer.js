@@ -572,6 +572,7 @@ if (typeof gtag === "function") {
     event_category: "Loan Comparison",
     event_label: "Balance Transfer",
     value: totalForeclosureDisplayed.toFixed(0), // total foreclosure amount used
+    client: window.KYE_CLIENT || "main"
   });
 }
 
