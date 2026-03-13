@@ -975,13 +975,13 @@
 
     <!--Send height  -->
     <script>
-        function sendHeight() {
+        window.sendHeight = function () {
         const height = document.documentElement.scrollHeight;
         window.parent.postMessage(
             { type: "knowyour emi-resize", height: height },
             "*"
         );
-        }
+        };
 
         window.addEventListener("load", sendHeight);
         window.addEventListener("resize", sendHeight);
@@ -989,6 +989,21 @@
         // In case calculators expand dynamically
         // setInterval(sendHeight, 1000);
     </script>
+
+    <script>
+        const modal = document.getElementById("partPaymentModal");
+        if (modal) {
+        const observer = new MutationObserver(() => {
+            if (typeof window.sendHeight === "function") {
+            window.sendHeight();
+            }
+        });
+        observer.observe(modal, {
+            attributes: true,
+            attributeFilter: ["class"]
+        });
+        }
+</script>    
 
 <!-- Ga4 analytics -->
 
