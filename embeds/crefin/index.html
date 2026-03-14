@@ -985,14 +985,10 @@
 
         if (!partModal.classList.contains("hidden")) {
 
-        setTimeout(() => {
-
-            partModal.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-            });
-
-        }, 50);
+        window.parent.postMessage(
+            { type: "kye-scroll-to-iframe" },
+            "*"
+        );
 
         }
 
