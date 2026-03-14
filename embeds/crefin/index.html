@@ -975,7 +975,37 @@
 })();
     </script>
 
-    
+    <script>
+
+    const partModal = document.getElementById("partPaymentModal");
+
+    if (partModal) {
+
+    const observer = new MutationObserver(() => {
+
+        if (!partModal.classList.contains("hidden")) {
+
+        setTimeout(() => {
+
+            partModal.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+            });
+
+        }, 50);
+
+        }
+
+    });
+
+    observer.observe(partModal, {
+        attributes: true,
+        attributeFilter: ["class"]
+    });
+
+    }
+
+    </script>
 
 <!-- Ga4 analytics -->
 
