@@ -1,26 +1,19 @@
 <iframe
 id="knowyour-emi-calculator"
 src="/embeds/crefin/"
-style="width:100%; height:1600px; border:none;"
-loading="lazy">
+style="width:100%; border:none; display:block;"
+scrolling="no">
 </iframe>
 
-
 <script>
-
 window.addEventListener("message", function(event) {
 
-  if (event.data.type === "kye-scroll-to-iframe") {
+  if (event.data.type === "kye-resize") {
 
     const iframe = document.getElementById("knowyour-emi-calculator");
-
-    iframe.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
+    iframe.style.height = event.data.height + "px";
 
   }
 
 });
-
 </script>

@@ -977,29 +977,22 @@
 
     <script>
 
-    const partModal = document.getElementById("partPaymentModal");
+    function sendHeight() {
 
-    if (partModal) {
+    const height = document.documentElement.scrollHeight;
 
-    const observer = new MutationObserver(() => {
-
-        if (!partModal.classList.contains("hidden")) {
-
-        window.parent.postMessage(
-            { type: "kye-scroll-to-iframe" },
-            "*"
-        );
-
-        }
-
-    });
-
-    observer.observe(partModal, {
-        attributes: true,
-        attributeFilter: ["class"]
-    });
+    window.parent.postMessage(
+        { type: "kye-resize", height: height },
+        "*"
+    );
 
     }
+
+    window.addEventListener("load", sendHeight);
+    window.addEventListener("resize", sendHeight);
+
+    // catch dynamic content
+    setInterval(sendHeight, 1000);
 
     </script>
 
