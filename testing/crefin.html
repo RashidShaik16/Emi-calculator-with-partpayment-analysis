@@ -1,14 +1,6 @@
 <iframe
 id="knowyour-emi-calculator"
 src="/embeds/crefin/"
-style="width:100%; border:none; min-height:1800px;"
-scrolling="no">
+style="width:100%; height:1200px; border:none;"
+loading="lazy">
 </iframe>
-
-<script>
-window.addEventListener("message", function(event) {
-  if (event.data.type === "knowyour emi-resize") {
-    document.getElementById("knowyour-emi-calculator").style.height = event.data.height + "px";
-  }
-});
-</script>

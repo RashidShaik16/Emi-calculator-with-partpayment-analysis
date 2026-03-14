@@ -974,38 +974,6 @@
 })();
     </script>
 
-    <!--Send height  -->
-    <script>
-    let lastHeight = 0;
-
-    function sendHeight() {
-
-    const height = document.documentElement.scrollHeight;
-
-    if (Math.abs(height - lastHeight) > 50) {
-
-        lastHeight = height;
-
-        window.parent.postMessage(
-        { type: "knowyour emi-resize", height: height },
-        "*"
-        );
-    }
-
-    }
-
-    // initial page load
-    window.addEventListener("load", sendHeight);
-
-    // resize events
-    window.addEventListener("resize", sendHeight);
-
-    // after charts render
-    setTimeout(sendHeight, 400);
-    setTimeout(sendHeight, 1200);
-    setTimeout(sendHeight, 2500);
-
-    </script>
     
 
 <!-- Ga4 analytics -->
