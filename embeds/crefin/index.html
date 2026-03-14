@@ -205,6 +205,12 @@
             overflow-x: hidden;
             }
         </style>
+
+        <style>
+            body.modal-open {
+            overflow: hidden;
+            }
+            </style>
     </head>
 
     <body class="bg-gray-50 text-gray-800 overflow-x-hidden scroll-smooth">
@@ -990,6 +996,51 @@
 
         setTimeout(sendHeight, 500);
         setTimeout(sendHeight, 1500);
+</script>
+
+<script>
+document.addEventListener("click", function(e) {
+
+  // detect amortization accordion click
+  if (e.target.closest("#amortizationAccordion")) {
+
+    setTimeout(() => {
+      if (typeof sendHeight === "function") {
+        sendHeight();
+      }
+    }, 300);
+
+  }
+
+});
+</script>
+
+<!-- Detect modal -->
+<script>
+
+const modal = document.getElementById("partPaymentModal");
+
+if (modal) {
+
+  const observer = new MutationObserver(() => {
+
+    const isHidden = modal.classList.contains("hidden");
+
+    if (!isHidden) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+
+  });
+
+  observer.observe(modal, {
+    attributes: true,
+    attributeFilter: ["class"]
+  });
+
+}
+
 </script>
     
 
