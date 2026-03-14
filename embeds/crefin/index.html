@@ -976,72 +976,36 @@
 
     <!--Send height  -->
     <script>
-        let lastHeight = 0;
+    let lastHeight = 0;
 
-        function sendHeight() {
-        const height = document.documentElement.scrollHeight;
+    function sendHeight() {
 
-        if (Math.abs(height - lastHeight) > 20) {
-            lastHeight = height;
+    const height = document.documentElement.scrollHeight;
 
-            window.parent.postMessage(
-            { type: "knowyour emi-resize", height: height },
-            "*"
-            );
-        }
-        }
+    if (Math.abs(height - lastHeight) > 50) {
 
-        window.addEventListener("load", sendHeight);
-        window.addEventListener("resize", sendHeight);
+        lastHeight = height;
 
-        setTimeout(sendHeight, 500);
-        setTimeout(sendHeight, 1500);
-</script>
-
-<script>
-document.addEventListener("click", function(e) {
-
-  // detect amortization accordion click
-  if (e.target.closest("#amortizationAccordion")) {
-
-    setTimeout(() => {
-      if (typeof sendHeight === "function") {
-        sendHeight();
-      }
-    }, 300);
-
-  }
-
-});
-</script>
-
-<!-- Detect modal -->
-<script>
-
-const modal = document.getElementById("partPaymentModal");
-
-if (modal) {
-
-  const observer = new MutationObserver(() => {
-
-    const isHidden = modal.classList.contains("hidden");
-
-    if (!isHidden) {
-      document.body.classList.add("modal-open");
-    } else {
-      document.body.classList.remove("modal-open");
+        window.parent.postMessage(
+        { type: "knowyour emi-resize", height: height },
+        "*"
+        );
     }
 
-  });
+    }
 
-  observer.observe(modal, {
-    attributes: true,
-    attributeFilter: ["class"]
-  });
+    // initial page load
+    window.addEventListener("load", sendHeight);
 
-}
+    // resize events
+    window.addEventListener("resize", sendHeight);
 
-</script>
+    // after charts render
+    setTimeout(sendHeight, 400);
+    setTimeout(sendHeight, 1200);
+    setTimeout(sendHeight, 2500);
+
+    </script>
     
 
 <!-- Ga4 analytics -->
