@@ -213,7 +213,7 @@
             </style>
     </head>
 
-    <body class="bg-gray-50 text-gray-800 overflow-x-hidden scroll-smooth">
+    <body class="bg-gray-50 relative text-gray-800 overflow-x-hidden scroll-smooth">
         <!-- Nav deleted here -->
         <main class="max-w-7xl w-full mx-auto px-1 py-10 overflow-x-hidden sm:px-4">
             <h1 class="text-2xl text-center font-semibold mb-3 text-gray-800">Loan Calculator Suite</h1>
@@ -826,7 +826,7 @@
 
         <!-- Part Payment Modal -->
         <section id="partPaymentModal" 
-        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50 hidden overflow-y-auto p-4">
+        class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50 hidden overflow-y-auto p-4">
 
         <!-- Modal box -->
         <div id="partPaymentBox"
@@ -934,7 +934,6 @@
     "www.crefin.in",
     "knowyouremi.in",
     "www.knowyouremi.in",
-    "127.0.0.1:5500",
   ];
 
   function isAllowed(host) {
@@ -976,26 +975,42 @@
     </script>
 
     <script>
-
+    // ── 1. Dynamic Height ──────────────────────────────────────────────
     function sendHeight() {
-
-    const height = document.documentElement.scrollHeight;
-
-    window.parent.postMessage(
-        { type: "kye-resize", height: height },
-        "*"
-    );
-
+        const height = document.documentElement.offsetHeight;
+        window.parent.postMessage({ type: "kye-resize", height: height }, "*");
     }
 
-    window.addEventListener("load", sendHeight);
-    window.addEventListener("resize", sendHeight);
+    const kyeResizeObserver = new ResizeObserver(() => sendHeight());
+    kyeResizeObserver.observe(document.body);
 
-    // catch dynamic content
-    setInterval(sendHeight, 1000);
+    window.addEventListener("load", () => {
+        sendHeight();
+        setTimeout(sendHeight, 500);
+        setTimeout(sendHeight, 1200);
+    });
 
+    // ── 2. Modal open/close signals ────────────────────────────────────
+    const kyeModal = document.getElementById("partPaymentModal");
+
+    const kyeModalObserver = new MutationObserver(() => {
+        const isOpen = !kyeModal.classList.contains("hidden");
+        if (isOpen) {
+        window.parent.postMessage({
+            type: "kye-modal-open",
+            iframeScrollY: window.scrollY,
+            iframeHeight: document.documentElement.offsetHeight
+        }, "*");
+        } else {
+        window.parent.postMessage({ type: "kye-modal-close" }, "*");
+        }
+    });
+
+    kyeModalObserver.observe(kyeModal, {
+        attributes: true,
+        attributeFilter: ["class"]
+    });
     </script>
-
 <!-- Ga4 analytics -->
 
     <script>
@@ -1009,4 +1024,4 @@
     </script>
 
     </body>
-</html>
+</html> 
