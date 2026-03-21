@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crefin Embed Testing</title>
+</head>
+<body>
+    <div style="width:100%; overflow:hidden;">
+    <iframe
+        id="knowyour-emi-calculator"
+        src="/embeds/crefin/eligibility.html"
+        style="width:100%; border:none; display:block; min-height: 600px;"
+        scrolling="no">
+    </iframe>
+    </div>
+
+    <script>
+    const iframe = document.getElementById("knowyour-emi-calculator");
+    let lastHeight = 0;
+    let savedScrollY = 0;
+
+    window.addEventListener("message", function(event) {
+
+        // ── 1. Resize iframe
+        if (event.data.type === "kye-resize") {
+        const newHeight = event.data.height;
+        if (newHeight !== lastHeight && newHeight > 100) {
+            lastHeight = newHeight;
+            iframe.style.height = newHeight + "px";
+        }
+        }
+
+        // ── 2. Modal opened — scroll parent to center modal in viewport
+        if (event.data.type === "kye-modal-open") {
+        savedScrollY = window.scrollY;
+
+        const iframeTop = iframe.getBoundingClientRect().top + window.scrollY;
+        const iframeHeight = event.data.iframeHeight;
+
+        // Modal is absolute centered in the full iframe page
+        // So modal center is at: iframeTop + (iframeHeight / 2)
+        const modalCenterOnPage = iframeTop + (iframeHeight / 2);
+
+        // Scroll so that modal center aligns with viewport center
+        const scrollTarget = modalCenterOnPage - (window.innerHeight / 2);
+
+        window.scrollTo({ top: Math.max(0, scrollTarget), behavior: "smooth" });
+        }
+
+
+    });
+    </script>
+</body>
+</html>
+
