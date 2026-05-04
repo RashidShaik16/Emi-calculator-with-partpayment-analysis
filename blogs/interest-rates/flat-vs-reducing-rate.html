@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <!-- Primary SEO -->
+  <title>Flat Rate vs Reducing Rate of Interest: Which Loan Actually Costs More | KnowYourEMI</title>
+  <meta name="description" content="Two loans with the same interest rate on paper can cost very differently. Flat rate vs reducing balance rate explained with real numbers so you know exactly what you are paying before you sign." />
+  <meta name="keywords" content="flat rate vs reducing rate of interest, flat rate vs reducing balance rate India, which is better flat or reducing rate, flat interest rate loan, reducing balance method loan, diminishing balance rate, how flat rate interest is calculated, how reducing rate interest is calculated, flat rate 10 percent vs reducing rate, loan interest rate comparison India, flat rate loan hidden cost, reducing balance EMI calculation, personal loan flat vs reducing rate, what is reducing balance interest, loan interest type India, flat vs diminishing interest rate, effective interest rate flat loan" />
+  <link rel="canonical" href="https://knowyouremi.in/blogs/interest-rates/flat-vs-reducing-rate.html" />
+  <link rel="icon" type="image/png" href="../../favicon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Flat Rate vs Reducing Rate of Interest: Which Loan Actually Costs More" />
+  <meta property="og:description" content="Two loans with the same interest rate on paper can cost very differently. Flat rate vs reducing balance explained with real numbers so you know what you are paying before you sign." />
+  <meta property="og:url" content="https://knowyouremi.in/blogs/interest-rates/flat-vs-reducing-rate.html" />
+  <meta property="og:site_name" content="KnowYourEMI" />
+
+  <!-- Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Flat Rate vs Reducing Rate of Interest: Which Loan Actually Costs More",
+    "description": "Two loans with the same interest rate on paper can cost very differently. Flat rate vs reducing balance rate explained with real numbers so you know exactly what you are paying before you sign.",
+    "author": { "@type": "Person", "name": "Rashid Shaik" },
+    "publisher": { "@type": "Organization", "name": "KnowYourEMI", "url": "https://knowyouremi.in" },
+    "datePublished": "2026-05-01",
+    "url": "https://knowyouremi.in/blogs/interest-rates/flat-vs-reducing-rate.html"
+  }
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; color: #1f2937; }
+    .blog-title-font { font-family: 'Lora', Georgia, serif; }
+
+    .article-body h2 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-top: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .article-body h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #374151;
+      margin-top: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .article-body p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: #374151;
+      margin-bottom: 1.25rem;
+    }
+    .article-body strong { color: #111827; font-weight: 600; }
+
+    .formula-box {
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin: 32px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: #93c5fd;
+      line-height: 2;
+      position: relative;
+      overflow: hidden;
+    }
+    .formula-box::before {
+      content: 'FORMULA';
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 0.6rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #334155;
+    }
+    .formula-box .formula-main {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .example-box {
+      border-radius: 12px;
+      padding: 0;
+      margin: 32px 0;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    }
+    .example-box .example-label {
+      background: #1e3a8a;
+      color: #bfdbfe;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      display: block;
+    }
+    .example-box .example-body {
+      padding: 20px 24px;
+      background: white;
+    }
+    .example-box p {
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+      color: #374151;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 32px 0;
+    }
+    .compare-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    }
+    .compare-card .cc-header {
+      padding: 10px 18px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .compare-card.flat .cc-header { background: #fef3c7; color: #92400e; }
+    .compare-card.reducing .cc-header { background: #d1fae5; color: #065f46; }
+    .compare-card .cc-body {
+      padding: 16px 18px;
+      background: white;
+      font-size: 0.88rem;
+      color: #374151;
+      line-height: 1.8;
+    }
+    .compare-card .cc-body .highlight {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 10px;
+      display: block;
+    }
+    .compare-card.flat .cc-body .highlight { color: #b45309; }
+    .compare-card.reducing .cc-body .highlight { color: #15803d; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      font-size: 0.88rem;
+    }
+    .data-table th {
+      background: #1e3a8a;
+      color: white;
+      padding: 11px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.82rem;
+    }
+    .data-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #374151;
+    }
+    .data-table tr:nth-child(even) td { background: #f9fafb; }
+    .data-table tr:last-child td { border-bottom: none; font-weight: 600; }
+
+    .callout {
+      background: #fffbeb;
+      border-radius: 10px;
+      padding: 18px 22px 18px 50px;
+      margin: 28px 0;
+      font-size: 0.95rem;
+      color: #78350f;
+      line-height: 1.8;
+      border: 1px solid #fde68a;
+      position: relative;
+    }
+    .callout::before {
+      content: '💡';
+      position: absolute;
+      left: 16px;
+      top: 17px;
+      font-size: 1.1rem;
+    }
+
+    .callout.alert {
+      background: #fff1f2;
+      border-color: #fecdd3;
+      color: #881337;
+    }
+    .callout.alert::before { content: '⚠️'; }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 10px;
+      border-radius: 4px;
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-top: 48px;
+      text-align: center;
+      color: white;
+    }
+    .cta-box a {
+      display: inline-block;
+      margin-top: 16px;
+      background: #facc15;
+      color: #1e3a8a;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .cta-box a:hover { background: #fde047; }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #2563eb, #818cf8);
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px rgba(37, 99, 235, 0.6);
+    }
+
+    @media (max-width: 540px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EM8B59T3F5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-EM8B59T3F5');
+
+    window.addEventListener('load', function() {
+      gtag('event', 'article_opened', {
+        event_category: 'blog',
+        event_label: 'Flat vs Reducing Rate of Interest'
+      });
+    });
+  </script>
+</head>
+
+<body class="bg-gray-50">
+
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- NAVBAR -->
+  <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+      <a href="../../index.html" class="text-xl font-bold">
+        <img class="w-20 inline-block" src="../../logo.png" alt="KnowYourEMI logo">
+      </a>
+      <div class="hidden md:flex space-x-6 text-sm">
+        <a href="../../index.html" class="hover:text-yellow-300">EMI Calculator</a>
+        <a href="../../index.html#balanceTransfer" class="hover:text-yellow-300">Balance Transfer</a>
+        <a href="../../calculators/eligibility/" class="hover:text-yellow-300">Check Eligibility</a>
+        <a href="../../index.html#faq-section" class="hover:text-yellow-300">FAQs</a>
+        <a href="../index.html" class="hover:text-yellow-300">Blog</a>
+      </div>
+      <button id="menu-toggle" class="md:hidden text-white focus:outline-none text-2xl">☰</button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-3 px-4 pb-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-sm">
+      <a href="../../index.html" class="hover:text-yellow-300">EMI Calculator</a>
+      <a href="../../index.html#balanceTransfer" class="hover:text-yellow-300">Balance Transfer</a>
+      <a href="../../calculators/eligibility/" class="hover:text-yellow-300">Check Eligibility</a>
+      <a href="../../index.html#faq-section" class="hover:text-yellow-300">FAQs</a>
+      <a href="../index.html" class="hover:text-yellow-300">Blog</a>
+    </div>
+  </nav>
+
+  <!-- ARTICLE -->
+  <main class="max-w-2xl mx-auto px-4 py-12">
+
+    <p class="text-xs text-gray-400 mb-6">
+      <a href="../../index.html" class="hover:text-blue-600">Home</a>
+      &nbsp;/&nbsp;
+      <a href="../index.html" class="hover:text-blue-600">Blog</a>
+      &nbsp;/&nbsp;
+      <span class="text-gray-500">Flat vs Reducing Rate</span>
+    </p>
+
+    <article>
+
+      <header>
+        <span class="tag">Interest Rates</span>
+        <h1 class="blog-title-font text-3xl md:text-4xl font-bold text-gray-900 mt-3 mb-4 leading-snug">
+          Flat vs Reducing Rate of Interest
+        </h1>
+        <p class="text-sm text-gray-400 mb-10">
+          By <strong class="text-gray-600">Rashid Shaik</strong> &nbsp;|&nbsp; 6 min read &nbsp;|&nbsp; May 2026
+        </p>
+      </header>
+
+      <section class="article-body">
+
+        <p>
+          Two loan offers are sitting in front of you. Both say 10% interest rate. Same loan amount, same tenure. You would assume the cost is identical.
+        </p>
+
+        <p>
+          It is not. One of them can cost you significantly more depending on which method the lender uses to calculate interest. Understanding the difference between flat rate and reducing rate is one of the most practically useful things you can know before signing a loan agreement.
+        </p>
+
+        <h2>The Flat Rate Method</h2>
+
+        <p>
+          In the flat rate method, interest is calculated on the full original loan amount for the entire tenure. It does not matter how much you have already repaid. Every month, the interest component is calculated on the same starting principal.
+        </p>
+
+        <div class="formula-box">
+          <div class="formula-main">Total Interest = Principal x Rate x Tenure (in years)</div>
+          <div>Monthly EMI = (Principal + Total Interest) / Total months</div>
+        </div>
+
+        <p>
+          The math is straightforward. If you borrow Rs. 1,00,000 at 10% flat for 2 years, the total interest is Rs. 1,00,000 x 10% x 2 = Rs. 20,000. Your total repayment is Rs. 1,20,000 and your monthly EMI is Rs. 1,20,000 divided by 24, which is Rs. 5,000.
+        </p>
+
+        <p>
+          Simple to calculate. But here is the problem. By month 12, you have already repaid a large portion of the principal. Yet the bank is still charging interest on the full Rs. 1,00,000 as if you owe the same amount you started with. That is not an accurate reflection of what you actually owe.
+        </p>
+
+        <h2>The Reducing Balance Method</h2>
+
+        <p>
+          In the reducing balance method, interest is calculated only on the outstanding principal at the start of each month. As you repay, your principal reduces and so does the interest charged on it. This is also called the diminishing balance method.
+        </p>
+
+        <div class="formula-box">
+          <div class="formula-main">Monthly Interest = Outstanding Principal x (Annual Rate / 12 / 100)</div>
+          <div>Principal paid = EMI minus Monthly Interest</div>
+          <div>Next month outstanding = Previous outstanding minus Principal paid</div>
+        </div>
+
+        <p>
+          The EMI is calculated using the standard compound interest formula and stays fixed throughout the tenure. But inside each EMI, the split between interest and principal shifts every single month. Early on, more goes to interest. Later, more goes to principal.
+        </p>
+
+        <p>
+          This is the method used for home loans, personal loans from banks, and most formal lending in India. It is the more accurate and borrower-friendly of the two.
+        </p>
+
+        <h2>Side by Side with Real Numbers</h2>
+
+        <p>
+          Same loan. Same rate on paper. Very different outcomes.
+        </p>
+
+        <div class="example-box">
+          <span class="example-label">The Setup</span>
+          <div class="example-body">
+            <p><strong>Loan amount:</strong> Rs. 3,00,000</p>
+            <p><strong>Stated interest rate:</strong> 10% per year</p>
+            <p><strong>Tenure:</strong> 2 years (24 months)</p>
+          </div>
+        </div>
+
+        <div class="compare-grid">
+          <div class="compare-card flat">
+            <div class="cc-header">Flat Rate</div>
+            <div class="cc-body">
+              <div>Total Interest</div>
+              <div>Rs. 3,00,000 x 10% x 2</div>
+              <div style="font-weight:600; margin-bottom:8px;">= Rs. 60,000</div>
+              <div>Monthly EMI</div>
+              <div>Rs. 3,60,000 / 24</div>
+              <span class="highlight">Rs. 15,000 / month</span>
+              <div style="margin-top:8px; font-size:0.82rem; color:#92400e;">Total paid: Rs. 3,60,000</div>
+            </div>
+          </div>
+          <div class="compare-card reducing">
+            <div class="cc-header">Reducing Balance</div>
+            <div class="cc-body">
+              <div>Interest charged only on</div>
+              <div>outstanding principal</div>
+              <div style="font-weight:600; margin-bottom:8px;">each month</div>
+              <div>Monthly EMI</div>
+              <div>Standard formula</div>
+              <span class="highlight">Rs. 13,845 / month</span>
+              <div style="margin-top:8px; font-size:0.82rem; color:#065f46;">Total paid: Rs. 3,32,280</div>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Same loan, same 10% rate, same 24 months. Flat rate costs you Rs. 60,000 in interest. Reducing balance costs you Rs. 32,280. That is a difference of Rs. 27,720 on a 3 lakh loan over just 2 years.
+        </p>
+
+        <h2>How the Reducing Balance Schedule Works Month by Month</h2>
+
+        <p>
+          Here is a partial view of how the numbers move in the reducing balance method for the same Rs. 3,00,000 loan at 10% for 24 months.
+        </p>
+
+        <table class="data-table">
+          <tr>
+            <th>Month</th>
+            <th>Opening Balance</th>
+            <th>Interest</th>
+            <th>Principal</th>
+            <th>Closing Balance</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>3,00,000</td>
+            <td>2,500</td>
+            <td>11,345</td>
+            <td>2,88,655</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>2,88,655</td>
+            <td>2,405</td>
+            <td>11,440</td>
+            <td>2,77,215</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>2,77,215</td>
+            <td>2,310</td>
+            <td>11,535</td>
+            <td>2,65,680</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>1,63,220</td>
+            <td>1,360</td>
+            <td>12,485</td>
+            <td>1,50,735</td>
+          </tr>
+          <tr>
+            <td>24</td>
+            <td>13,731</td>
+            <td>114</td>
+            <td>13,731</td>
+            <td>0</td>
+          </tr>
+        </table>
+
+        <p>
+          Notice how in month 1, Rs. 2,500 goes to interest and Rs. 11,345 to principal. By month 24, only Rs. 114 is interest and the rest closes the loan. The interest keeps shrinking because the outstanding balance keeps shrinking.
+        </p>
+
+        <p>
+          In the flat rate method, the interest component in every single month would be Rs. 2,500 regardless of how much you have already repaid. That is the core difference.
+        </p>
+
+        <h2>What Is the Effective Rate on a Flat Rate Loan</h2>
+
+        <p>
+          When a lender quotes a flat rate, the actual interest you are paying is much higher than that number suggests. The effective annual rate on a flat rate loan is roughly 1.8 to 2 times the stated flat rate.
+        </p>
+
+        <p>
+          So a loan quoted at 10% flat is effectively costing you somewhere around 17 to 18% on a reducing balance basis. This is why the two cannot be directly compared using the stated rate alone.
+        </p>
+
+        <div class="example-box">
+          <span class="example-label">Converting Flat to Effective Rate</span>
+          <div class="example-body">
+            <p>A rough formula to estimate effective rate from flat rate:</p>
+            <p style="font-weight:600; color:#1e3a8a; font-size:1rem; margin-top:8px;">Effective Rate = Flat Rate x 1.8 (approximate)</p>
+            <p style="margin-top:8px;">10% flat is approximately 18% effective reducing balance rate.</p>
+            <p>12% flat is approximately 21.5% effective reducing balance rate.</p>
+            <p style="margin-top:8px; color:#6b7280; font-size:0.85rem;">This is an approximation. The exact effective rate depends on the tenure and loan amount.</p>
+          </div>
+        </div>
+
+        <div class="callout alert">
+          When comparing two loan offers, never compare a flat rate directly with a reducing balance rate. Always convert both to the same basis before deciding. A 12% reducing balance loan is cheaper than a 9% flat rate loan on most tenures.
+        </div>
+
+        <h2>Where Each Method Is Typically Used</h2>
+
+        <h3>Flat rate</h3>
+        <p>
+          Mostly used by vehicle dealers, small finance companies, NBFCs, and some cooperative banks. Also common in consumer durable loans offered at point of sale. You will often hear "zero percent EMI" offers which typically embed the interest cost into the product price rather than charging it separately.
+        </p>
+
+        <h3>Reducing balance</h3>
+        <p>
+          Used by almost all scheduled commercial banks for home loans, personal loans, car loans, and education loans. This is the standard method mandated for transparent lending and is regulated by RBI guidelines for bank borrowers.
+        </p>
+
+        <div class="callout">
+          Before signing any loan agreement, ask the lender directly whether the rate is flat or reducing balance. If they quote a flat rate, use the 1.8x approximation to compare it fairly against bank loan offers on reducing balance.
+        </div>
+
+        <h2>Which One Should You Choose</h2>
+
+        <p>
+          Always prefer the reducing balance method. It charges interest on what you actually owe rather than what you started with. For the same stated rate, reducing balance will always cost you less.
+        </p>
+
+        <p>
+          If you are only offered a flat rate loan, calculate the effective reducing balance equivalent before accepting. In many cases a bank personal loan at a higher stated rate ends up being cheaper than an NBFC loan at a lower flat rate.
+        </p>
+
+        <p>
+          The stated interest rate alone is not enough information to evaluate a loan. The method of calculation matters just as much.
+        </p>
+
+      </section>
+
+      <!-- CTA -->
+      <div class="cta-box">
+        <p class="text-lg font-semibold blog-title-font">Calculate your actual loan cost</p>
+        <p class="text-sm text-indigo-200 mt-2">Our EMI calculator uses the reducing balance method. Enter your loan details and see the full amortization schedule with the exact interest and principal split every month.</p>
+        <a href="../../index.html">Try our EMI Calculator</a>
+      </div>
+
+      <p class="text-center mt-10 text-sm">
+        <a href="../index.html" class="text-blue-600 hover:underline">Back to all articles</a>
+      </p>
+
+    </article>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-16">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-lg font-semibold mb-3">About KnowYourEMI</h3>
+        <p class="text-sm text-gray-200 leading-relaxed">KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility, and evaluate balance transfers transparently. No sign-ups, no hidden conditions.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="../../index.html" class="hover:underline">EMI Calculator</a></li>
+          <li><a href="../../index.html#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
+          <li><a href="../../index.html#eligibilityCalculator" class="hover:underline">Loan Eligibility</a></li>
+          <li><a href="../../index.html#faq-section" class="hover:underline">FAQs</a></li>
+          <li><a href="../index.html" class="hover:underline">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Contact</h3>
+        <p class="text-sm text-gray-200 mb-2">📧 <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">hello@knowyouremi.in</a></p>
+        <p class="text-sm text-gray-200">More tools and articles coming soon.</p>
+      </div>
+    </div>
+    <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
+      <span>© <span id="year"></span> knowyouremi.in | All rights reserved.</span>
+      <a href="../../pages/about.html" class="underline hover:text-yellow-300">About</a> |
+      <a href="../../pages/privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
+      <a href="../../pages/terms-and-conditions.html" class="underline hover:text-yellow-300">Terms & Conditions</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      document.getElementById('progressBar').style.width = (scrollTop / docHeight * 100) + '%';
+    });
+
+    let articleReadFired = false;
+    window.addEventListener('scroll', () => {
+      if (articleReadFired) return;
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      if ((scrollTop / docHeight) >= 0.8) {
+        articleReadFired = true;
+        if (typeof gtag === 'function') {
+          gtag('event', 'article_read', {
+            event_category: 'blog',
+            event_label: 'Flat vs Reducing Rate of Interest'
+          });
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

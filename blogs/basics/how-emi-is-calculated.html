@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <!-- Primary SEO -->
+  <title>How EMI Is Calculated: Formula, Example and What Affects Your EMI | KnowYourEMI</title>
+  <meta name="description" content="How EMI is calculated explained simply with the actual formula and a real example. Understand what principal and interest mean inside each payment and why even a 0.5 percent rate difference costs you lakhs over time." />
+  <meta name="keywords" content="how EMI is calculated, EMI formula, EMI calculation India, EMI formula with example, what is EMI, how to calculate loan EMI, personal loan EMI calculation, home loan EMI formula, car loan EMI calculation, reduce EMI, EMI vs tenure, principal and interest in EMI, monthly EMI calculator, loan repayment calculation, equated monthly instalment formula" />
+  <link rel="canonical" href="https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html" />
+  <link rel="icon" type="image/png" href="../../favicon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How EMI Is Calculated: Formula, Example and What Affects Your EMI" />
+  <meta property="og:description" content="The actual EMI formula with a real example. What principal and interest mean inside each payment and why a small rate difference costs you lakhs over the loan tenure." />
+  <meta property="og:url" content="https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html" />
+  <meta property="og:site_name" content="KnowYourEMI" />
+
+  <!-- Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How EMI Is Calculated: Formula, Example and What Affects Your EMI",
+    "description": "How EMI is calculated explained simply with the actual formula and a real example. Understand what principal and interest mean inside each payment and why even a 0.5 percent rate difference costs you lakhs over time.",
+    "author": { "@type": "Person", "name": "Rashid Shaik" },
+    "publisher": { "@type": "Organization", "name": "KnowYourEMI", "url": "https://knowyouremi.in" },
+    "datePublished": "2026-05-01",
+    "url": "https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html"
+  }
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; color: #1f2937; }
+    .blog-title-font { font-family: 'Lora', Georgia, serif; }
+
+    .article-body h2 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-top: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .article-body h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #374151;
+      margin-top: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .article-body p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: #374151;
+      margin-bottom: 1.25rem;
+    }
+    .article-body strong {
+      color: #111827;
+      font-weight: 600;
+    }
+
+    .formula-box {
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin: 32px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: #93c5fd;
+      line-height: 2;
+      position: relative;
+      overflow: hidden;
+    }
+    .formula-box::before {
+      content: 'FORMULA';
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 0.6rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #334155;
+    }
+    .formula-box .formula-main {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .example-box {
+      border-radius: 12px;
+      padding: 0;
+      margin: 32px 0;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    }
+    .example-box .example-label {
+      background: #1e3a8a;
+      color: #bfdbfe;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      display: block;
+    }
+    .example-box .example-body {
+      padding: 20px 24px;
+      background: white;
+    }
+    .example-box p {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: #374151;
+    }
+
+    .callout {
+      background: #fffbeb;
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 28px 0;
+      font-size: 0.95rem;
+      color: #78350f;
+      line-height: 1.8;
+      border: 1px solid #fde68a;
+      position: relative;
+      padding-left: 50px;
+    }
+    .callout::before {
+      content: '💡';
+      position: absolute;
+      left: 16px;
+      top: 17px;
+      font-size: 1.1rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 10px;
+      border-radius: 4px;
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-top: 48px;
+      text-align: center;
+      color: white;
+    }
+    .cta-box a {
+      display: inline-block;
+      margin-top: 16px;
+      background: #facc15;
+      color: #1e3a8a;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .cta-box a:hover { background: #fde047; }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #2563eb, #818cf8);
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px rgba(37, 99, 235, 0.6);
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EM8B59T3F5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-EM8B59T3F5');
+
+    window.addEventListener('load', function() {
+      gtag('event', 'article_opened', {
+        event_category: 'blog',
+        event_label: 'How EMI Is Calculated'
+      });
+    });
+  </script>
+</head>
+
+<body class="bg-gray-50">
+
+  <!-- Read progress bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- NAVBAR -->
+  <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
+      <a href="../../index.html" class="text-xl font-bold">
+        <img class="w-20 inline-block" src="../../logo.png" alt="KnowYourEMI logo">
+      </a>
+      <div class="hidden md:flex space-x-6 text-sm">
+        <a href="../../index.html" class="hover:text-yellow-300">EMI Calculator</a>
+        <a href="../../index.html#balanceTransfer" class="hover:text-yellow-300">Balance Transfer</a>
+        <a href="../../calculators/eligibility/" class="hover:text-yellow-300">Check Eligibility</a>
+        <a href="../../index.html#faq-section" class="hover:text-yellow-300">FAQs</a>
+        <a href="../index.html" class="hover:text-yellow-300">Blog</a>
+      </div>
+      <button id="menu-toggle" class="md:hidden text-white focus:outline-none text-2xl">☰</button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-3 px-4 pb-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-sm">
+      <a href="../../index.html" class="hover:text-yellow-300">EMI Calculator</a>
+      <a href="../../index.html#balanceTransfer" class="hover:text-yellow-300">Balance Transfer</a>
+      <a href="../../calculators/eligibility/" class="hover:text-yellow-300">Check Eligibility</a>
+      <a href="../../index.html#faq-section" class="hover:text-yellow-300">FAQs</a>
+      <a href="../index.html" class="hover:text-yellow-300">Blog</a>
+    </div>
+  </nav>
+
+
+  <!-- ARTICLE -->
+  <main class="max-w-2xl mx-auto px-4 py-12">
+
+    <!-- Breadcrumb -->
+    <p class="text-xs text-gray-400 mb-6">
+      <a href="../../index.html" class="hover:text-blue-600">Home</a>
+      &nbsp;/&nbsp;
+      <a href="../index.html" class="hover:text-blue-600">Blog</a>
+      &nbsp;/&nbsp;
+      <span class="text-gray-500">How EMI Is Calculated</span>
+    </p>
+
+    <article>
+
+    <header>
+      <span class="tag">Basics</span>
+      <h1 class="blog-title-font text-3xl md:text-4xl font-bold text-gray-900 mt-3 mb-4 leading-snug">
+        How EMI Is Calculated
+      </h1>
+      <p class="text-sm text-gray-400 mb-10">
+        By <strong class="text-gray-600">Rashid Shaik</strong> &nbsp;|&nbsp; 5 min read &nbsp;|&nbsp; May 2026
+      </p>
+    </header>
+
+    <!-- Article content -->
+    <section class="article-body">
+
+      <p>
+        Every month, money leaves your account automatically. The bank calls it your EMI. You know the amount. You probably set a reminder for it. But very few people actually know where that number comes from.
+      </p>
+
+      <p>
+        It is not random. It is not something the bank decides on a whim. There is a specific formula behind it, and once you understand it, you will look at your loan very differently.
+      </p>
+
+      <h2>What EMI Actually Means</h2>
+
+      <p>
+        EMI stands for Equated Monthly Installment. The word "equated" is the important one here. It means every installment you pay is the same amount throughout the loan. Month 1 and month 36 have the same EMI.
+      </p>
+
+      <p>
+        But here is what most people do not realize. Even though the EMI stays the same, what is inside it keeps changing every single month. In the early months, a bigger chunk of your EMI goes towards paying interest. In the later months, more of it goes towards the actual loan amount you borrowed.
+      </p>
+
+      <p>
+        This is called an amortizing loan. And it matters more than people think.
+      </p>
+
+      <h2>The Formula</h2>
+
+      <p>
+        The formula used to calculate EMI is based on compound interest. Here it is:
+      </p>
+
+      <div class="formula-box">
+        <div class="formula-main">EMI = P x r x (1 + r)^n / ((1 + r)^n - 1)</div>
+        <div>P = Principal (the loan amount you borrowed)</div>
+        <div>r = Monthly interest rate (annual rate divided by 12, divided by 100)</div>
+        <div>n = Total number of monthly installments (tenure in months)</div>
+      </div>
+
+      <p>
+        If you have a loan at 12% annual interest, your monthly rate is 12 divided by 12 divided by 100, which is 0.01. That 0.01 goes into the formula as r.
+      </p>
+
+      <p>
+        You do not need to calculate this by hand. But knowing the formula helps you understand why your EMI is what it is, and more importantly, what happens when any of these three values change.
+      </p>
+
+      <h2>A Real Calculation</h2>
+
+      <div class="example-box">
+        <span class="example-label">Example</span>
+        <div class="example-body">
+          <p><strong>Loan amount:</strong> Rs. 5,00,000</p>
+          <p><strong>Interest rate:</strong> 12% per year</p>
+          <p><strong>Tenure:</strong> 24 months</p>
+          <p style="margin-top:12px;"><strong>Monthly rate (r):</strong> 12 / 12 / 100 = 0.01</p>
+          <p><strong>EMI = 5,00,000 x 0.01 x (1.01)^24 / ((1.01)^24 - 1)</strong></p>
+          <p style="margin-top:12px; font-size:1rem; font-weight:600; color:#15803d;">Monthly EMI = Rs. 23,537</p>
+          <p style="color:#6b7280; font-size:0.85rem;">Total amount paid = Rs. 5,64,888 &nbsp;|&nbsp; Total interest = Rs. 64,888</p>
+        </div>
+      </div>
+
+      <p>
+        So on a 5 lakh loan, you end up paying nearly 65,000 extra as interest over 2 years. That is the cost of borrowing.
+      </p>
+
+      <h2>What Happens Inside Each EMI</h2>
+
+      <p>
+        This is the part people find surprising. Take the first month of the example above.
+      </p>
+
+      <p>
+        Your outstanding balance is Rs. 5,00,000. The bank charges 1% interest on that, which is Rs. 5,000. Your total EMI is Rs. 23,537. So the principal being paid in month 1 is Rs. 23,537 minus Rs. 5,000, which is Rs. 18,537.
+      </p>
+
+      <p>
+        In month 2, your outstanding balance has dropped to Rs. 4,81,463. So the interest this month is only Rs. 4,815. More of your EMI now goes towards the principal. And this keeps shifting every single month.
+      </p>
+
+      <p>
+        By the last few months, almost your entire EMI is principal repayment and barely any interest.
+      </p>
+
+      <div class="callout">
+        This is why making a part payment in the early months of your loan saves you far more money than making the same payment in the later months. In the early months, you still have a large outstanding balance, so the interest impact is much bigger.
+      </div>
+
+      <h2>The Three Things That Control Your EMI</h2>
+
+      <h3>1. The Loan Amount</h3>
+      <p>
+        Higher the amount, higher the EMI. This one is straightforward. But what people often miss is that a slightly smaller loan can make a noticeable difference to the monthly outflow. Borrowing Rs. 4,50,000 instead of Rs. 5,00,000 at the same rate and tenure brings the EMI down by over Rs. 2,100 every month.
+      </p>
+
+      <h3>2. The Interest Rate</h3>
+      <p>
+        Even a 1% difference in rate can add up to a meaningful amount over a long tenure. On a 30 lakh home loan for 20 years, moving from 8.5% to 9.5% increases your total interest outgo by over Rs. 4 lakhs. This is why negotiating your interest rate before signing matters.
+      </p>
+
+      <h3>3. The Tenure</h3>
+      <p>
+        Longer tenure means lower EMI, but higher total interest paid. Shorter tenure means higher EMI but you get out of debt faster and pay less overall. There is no universally right answer here. It depends on what your monthly cash flow can handle.
+      </p>
+
+      <h2>Fixed vs Floating Rate and Your EMI</h2>
+
+      <p>
+        For fixed rate loans, your EMI never changes. The formula runs once and that is your number for the entire duration.
+      </p>
+
+      <p>
+        For floating rate loans, the rate can go up or down based on RBI policy changes. When the rate changes, banks typically either adjust your EMI amount or keep the EMI the same and extend or reduce your tenure. Both situations change the total cost of your loan.
+      </p>
+
+      <p>
+        Most home loans in India are floating rate. Which means the EMI you start with is not always the EMI you end with.
+      </p>
+
+      <h2>One Thing Worth Knowing</h2>
+
+      <p>
+        The EMI formula assumes you will make every payment on time, every month, for the entire tenure. If you miss a payment or pay late, the bank charges a penalty and that unpaid amount gets added to your outstanding principal. Your next EMI then has interest calculated on a higher balance.
+      </p>
+
+      <p>
+        One missed payment can quietly increase your total interest burden by more than you expect.
+      </p>
+
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <p class="text-lg font-semibold blog-title-font">See your own EMI breakdown</p>
+      <p class="text-sm text-indigo-200 mt-2">Put in your loan amount, rate, and tenure. See exactly how much goes to interest and how part payments can change that.</p>
+      <a href="../../index.html">Try the EMI Calculator</a>
+    </div>
+
+    <!-- Back to blog -->
+    <p class="text-center mt-10 text-sm">
+      <a href="../index.html" class="text-blue-600 hover:underline">Back to all articles</a>
+    </p>
+
+    </article>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-16">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-lg font-semibold mb-3">About KnowYourEMI</h3>
+        <p class="text-sm text-gray-200 leading-relaxed">
+          KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility,
+          and evaluate balance transfers transparently. No sign-ups, no hidden conditions.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="../../index.html" class="hover:underline">EMI Calculator</a></li>
+          <li><a href="../../index.html#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
+          <li><a href="../../index.html#eligibilityCalculator" class="hover:underline">Loan Eligibility</a></li>
+          <li><a href="../../index.html#faq-section" class="hover:underline">FAQs</a></li>
+          <li><a href="../index.html" class="hover:underline">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Contact</h3>
+        <p class="text-sm text-gray-200 mb-2">
+          📧 <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">hello@knowyouremi.in</a>
+        </p>
+        <p class="text-sm text-gray-200">More tools and articles coming soon.</p>
+      </div>
+    </div>
+    <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
+      <span>© <span id="year"></span> knowyouremi.in | All rights reserved.</span>
+      <a href="../../pages/about.html" class="underline hover:text-yellow-300">About</a> |
+      <a href="../../pages/privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
+      <a href="../../pages/terms-and-conditions.html" class="underline hover:text-yellow-300">Terms & Conditions</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    });
+
+    // GA4: article_read fires when user scrolls past 80%
+    let articleReadFired = false;
+    window.addEventListener('scroll', () => {
+      if (articleReadFired) return;
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      if ((scrollTop / docHeight) >= 0.8) {
+        articleReadFired = true;
+        if (typeof gtag === 'function') {
+          gtag('event', 'article_read', {
+            event_category: 'blog',
+            event_label: 'How EMI Is Calculated'
+          });
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

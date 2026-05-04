@@ -225,10 +225,10 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
                     <a href="#balanceTransfer" class="hover:text-yellow-300">Balance Transfer Calculator</a>
-                    <a href="#eligibilityCalculator" class="hover:text-yellow-300">Check Eligibility</a>
-                    <a href="#why-use" class="hover:text-yellow-300">Why Use</a>
+                    <a href="./calculators/eligibility/" class="hover:text-yellow-300">Check Eligibility</a>
                     <a href="#faq-section" class="hover:text-yellow-300">FAQs</a>
                     <a href="#feedback-section" class="hover:text-yellow-300">Feedback</a>
+                    <a href="./blogs/" class="hover:text-yellow-300">Blogs</a>
                 </div>
 
                 <!-- Hamburger Button -->
@@ -240,10 +240,10 @@
             <!-- Mobile Menu (hidden by default) -->
             <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-gradient-to-r from-blue-600 to-indigo-600">
                 <a href="#balanceTransfer" class="hover:text-yellow-300">Balance Transfer Calculator</a>
-                <a href="#eligibilityCalculator" class="hover:text-yellow-300">Check Eligibility</a>
-                <a href="#why-use" class="hover:text-yellow-300">Why Use</a>
+                <a href="./calculators/eligibility/" class="hover:text-yellow-300">Check Eligibility</a>
                 <a href="#faq-section" class="hover:text-yellow-300">FAQs</a>
                 <a href="#feedback-section" class="hover:text-yellow-300">Feedback</a>
+                <a href="./blogs/" class="hover:text-yellow-300">Blogs</a>
             </div>
         </nav>
 
@@ -539,15 +539,15 @@
                 </div>
             </section>
 
-            <!-- Loan Eligibility Calculator -->
-            <section id="eligibilityCalculator" class="bg-white shadow-lg rounded-2xl p-6 mt-10">
-            <h2 class="text-xl font-semibold mb-3 text-gray-800">Loan Eligibility Calculator</h2>
+            <!--Old Loan Eligibility Calculator -->
+            <!-- <section id="eligibilityCalculator" class="bg-white shadow-lg rounded-2xl p-6 mt-10"> -->
+            <!-- <h2 class="text-xl font-semibold mb-3 text-gray-800">Loan Eligibility Calculator</h2>
             <p class="text-sm text-gray-600 mb-6">
                 Estimate how much loan you may be eligible for based on your monthly income and current obligations.
-            </p>
+            </p> -->
 
             <!-- Loan Type Buttons -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+            <!-- <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
                 <button type="button" data-loantype="personal"
                 class="eligibility-type-btn active bg-blue-600 text-white rounded-xl py-2 font-medium">
                 Personal Loan
@@ -564,10 +564,10 @@
                 class="eligibility-type-btn bg-gray-100 text-gray-800 rounded-xl py-2 font-medium">
                 Credit Card
                 </button>
-            </div>
+            </div> -->
 
             <!-- Input Fields -->
-            <div class="grid sm:grid-cols-2 gap-4 mb-6">
+            <!-- <div class="grid sm:grid-cols-2 gap-4 mb-6">
                 <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Monthly Income (₹)</label>
                 <input id="eligIncome" type="number" placeholder="e.g., 75000"
@@ -578,21 +578,33 @@
                 <input id="eligObligations" type="number" placeholder="e.g., 10000"
                     class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
                 </div>
-            </div>
+            </div> -->
 
             <!-- Button -->
-            <button id="checkEligibilityBtn"
+            <!-- <button id="checkEligibilityBtn"
                 class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition font-semibold">
                 Check Eligibility
-            </button>
+            </button> -->
 
             <!-- Result Box -->
-            <div id="eligibilityResult" class="hidden mt-6 bg-gradient-to-br from-blue-100 to-indigo-100 border border-blue-200 p-5 rounded-2xl shadow-md">
+            <!-- <div id="eligibilityResult" class="hidden mt-6 bg-gradient-to-br from-blue-100 to-indigo-100 border border-blue-200 p-5 rounded-2xl shadow-md">
                 <h3 class="text-lg font-semibold text-blue-700 mb-2">Estimated Loan Eligibility</h3>
                 <p id="eligibilityOutput" class="text-gray-800 font-medium text-sm"></p>
                 <p id="eligibilityNote" class="text-xs text-gray-500 mt-2 italic"></p>
+            </div> -->
+            <!-- </section> -->
+
+            <!-- Eligibility nudge -->
+            <div class="bg-gradient-to-r from-blue-800 to-indigo-900" style="margin: 24px auto; max-width: 640px; border-radius: 14px; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+            <div>
+                <p style="font-size: 0.95rem; font-weight: 600; color: white; margin-bottom: 4px;">Loan Eligibility Check</p>
+                <p style="font-size: 0.78rem; color: #c7d2fe; line-height: 1.5;">See how much amount you may be eligible for with our Eligibility Calculator</p>
             </div>
-            </section>
+            <a href="./calculators/eligibility/index.html"
+                style="flex-shrink: 0; background: #facc15; color: #1e3a8a; font-size: 0.82rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; text-decoration: none; white-space: nowrap;">
+                Try it &rarr;
+            </a>
+            </div>
 
 
             <!-- Balance Transfer Calculator -->
@@ -1154,6 +1166,7 @@
                     <li><a href="#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
                     <li><a href="#faq-section" class="hover:underline">FAQs</a></li>
                     <li><a href="#feedback-section" class="hover:underline">Feedback</a></li>
+                    <li><a href="./blogs/" class="hover:underline">Blogs</a></li>
                 </ul>
                 </div>
 
@@ -1252,8 +1265,6 @@
             </div>
         </div>
         </section>
-
-
 
         <!-- Feedback Toast -->
         <div id="feedbackToast" 
