@@ -1,0 +1,43 @@
+# KnowYourEMI
+> A free financial calculator and education platform for Indian borrowers and investors. Built by Rashid Shaik to help people understand EMIs, loans, credit cards, and investments without jargon or hidden agendas.
+
+## About
+KnowYourEMI (https://knowyouremi.in) offers free calculators for EMI, loan eligibility, and balance transfer, along with a blog covering practical personal finance topics written for salaried individuals in India. No sign-ups, no ads, no hidden conditions.
+
+## Calculators
+- EMI Calculator: https://knowyouremi.in/ — Calculate monthly EMI for personal, home, car, and credit card loans. Includes part payment analysis and amortization schedule with PDF download.
+- Loan Eligibility Calculator: https://knowyouremi.in/#eligibilityCalculator — Check how much loan you are eligible for based on your income and expenses.
+- Balance Transfer Calculator: https://knowyouremi.in/#balanceTransfer — Compare your current loan with a new lender to see if switching saves you money after accounting for processing fees.
+
+## Blog
+All articles: https://knowyouremi.in/blogs/index.html
+
+### Basics
+- How EMI Is Calculated: https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html — The EMI formula explained with real examples. What principal and interest mean inside each payment and why a small rate difference costs lakhs over time.
+- Why Your Credit Score Matters When Taking a Loan: https://knowyouremi.in/blogs/basics/why-credit-score-matters.html — How CIBIL score affects loan approval and interest rate, what a good score looks like, and how to improve it.
+
+### Interest Rates
+- Flat Rate vs Reducing Rate of Interest: https://knowyouremi.in/blogs/interest-rates/flat-vs-reducing-rate.html — Two loans with the same rate on paper can cost very differently. How flat rate and reducing balance rate work with real number comparisons.
+
+### Strategy
+- Benefits of Part Payment on Your Loan: https://knowyouremi.in/blogs/strategy/benefits-of-part-payment.html — What actually happens when you make a part payment. How much interest it saves and how many months it removes from your tenure.
+- When to Make a Part Payment and When Not To: https://knowyouremi.in/blogs/strategy/when-to-make-part-payment.html — Part payment is not always the right move. When prepaying saves money and when your money works harder elsewhere.
+
+### Credit Cards
+- What Are Credit Cards and How Do They Actually Work: https://knowyouremi.in/blogs/credit-cards/how-credit-cards-work.html — How credit cards work, how banks make money from them, what the billing cycle means, and why the minimum due trap is so costly.
+- How a Credit Card Slowly Becomes a Debt Trap: https://knowyouremi.in/blogs/credit-cards/credit-card-debt-trap.html — A real personal account of how one credit card became five, then consumer loans, then personal loans. How the debt trap builds step by step without you realising it.
+
+### Home Loan
+- What Is Floating Rate of Interest in Home Loans: https://knowyouremi.in/blogs/home-loan/floating-rate-home-loans.html — How floating rate home loans work, what repo rate means for your EMI, the difference between MCLR and repo-linked rates, and what to watch every year.
+
+### Investments
+- What Is SIP in Mutual Funds and How Does It Work: https://knowyouremi.in/blogs/investments/what-is-sip.html — SIP explained simply. What rupee cost averaging means, how compounding works over time, and the one mistake most beginners make.
+- Why SIP Is One of the Best Investment Decisions for Long Term Growth: https://knowyouremi.in/blogs/investments/why-sip-is-best-for-long-term.html — Why SIP consistently outperforms most investment habits for salaried people in India. The compounding math and why stopping during a market fall is the costliest mistake.
+- What Is FD and RD and Which One Should You Pick: https://knowyouremi.in/blogs/investments/what-is-fd-and-rd.html — Fixed Deposit and Recurring Deposit explained clearly. How interest is calculated on each, where they differ, and which one suits your situation.
+- SIP vs Fixed Deposit: Where Should Your Money Go: https://knowyouremi.in/blogs/investments/sip-vs-fixed-deposit.html — SIP vs FD compared with real numbers. Not which sounds better but which one fits your goal, timeline, and risk comfort.
+
+## Author
+Rashid Shaik — founder of KnowYourEMI. Over 10 years of personal experience with loans, credit cards, and investments. Writes from real experience, not textbooks.
+
+## Contact
+Email: hello@knowyouremi.in
