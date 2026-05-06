@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>Floating Rate Home Loan Simulator | KnowYourEMI</title>
+  <meta name="description" content="Simulate how changes in interest rate and part payments affect your home loan EMI and tenure. Free floating rate home loan calculator by KnowYourEMI." />
+
+  <link rel="canonical" href="https://knowyouremi.in/calculators/float-rate-home-loan/" />
+  <link rel="icon" href="../../favicon.png" type="image/x-icon" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Floating Rate Home Loan Simulator | KnowYourEMI" />
+  <meta property="og:description" content="Simulate EMI changes when your home loan interest rate changes or you make part payments." />
+  <meta property="og:url" content="https://knowyouremi.in/calculators/float-rate-home-loan/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="KnowYourEMI" />
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <style>
+    /* ---- Reading progress bar ---- */
+    #progressBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #6366f1);
+      box-shadow: 0 0 8px rgba(99,102,241,0.6);
+      z-index: 9999;
+      transition: width 0.1s;
+    }
+
+    /* ---- Input range thumb ---- */
+    input[type=range] { -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #dbeafe; outline: none; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #2563eb; cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+    input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #2563eb; cursor: pointer; border: 2px solid #fff; }
+
+    /* ---- Modal animation ---- */
+    .modal-enter { transform: scale(0.95); opacity: 0; transition: all 0.2s ease; }
+    .modal-active { transform: scale(1); opacity: 1; }
+
+    /* ---- Event badge tag ---- */
+    .event-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 1px 6px; border-radius: 999px; letter-spacing: 0.04em; text-transform: uppercase; }
+
+    /* ---- Accordion smooth ---- */
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.45s ease-in-out; }
+
+    /* ---- Savings highlight pulse ---- */
+    @keyframes pulse-savings {
+      0%,100% { box-shadow: 0 0 0 0 rgba(37,99,235,0.3); }
+      50%      { box-shadow: 0 0 0 8px rgba(37,99,235,0); }
+    }
+    .pulse-savings { animation: pulse-savings 2s infinite; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+<div id="progressBar"></div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <a href="../../index.html">
+      <img class="w-20 inline-block" src="../../logo.png" alt="KnowYourEMI logo" />
+    </a>
+    <div class="hidden md:flex space-x-6 text-sm font-medium">
+      <a href="../../index.html" class="hover:text-yellow-300 transition">EMI Calculator</a>
+      <a href="../../index.html#balance-transfer" class="hover:text-yellow-300 transition">Balance Transfer</a>
+      <a href="../eligibility/index.html" class="hover:text-yellow-300 transition">Check Eligibility</a>
+      <a href="../../index.html#faq" class="hover:text-yellow-300 transition">FAQs</a>
+      <a href="../../blogs/index.html" class="hover:text-yellow-300 transition">Blog</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-indigo-900 px-4 pb-4 space-y-2 text-sm">
+    <a href="../../index.html" class="block py-2 hover:text-yellow-300">EMI Calculator</a>
+    <a href="../../index.html#balance-transfer" class="block py-2 hover:text-yellow-300">Balance Transfer</a>
+    <a href="../eligibility/" class="block py-2 hover:text-yellow-300">Check Eligibility</a>
+    <a href="../../index.html#faq" class="block py-2 hover:text-yellow-300">FAQs</a>
+    <a href="../../blogs/index.html" class="block py-2 hover:text-yellow-300">Blog</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="py-10 px-4 text-center">
+  <h1 class="text-2xl font-extrabold">Floating Rate Home Loan Simulator</h1>
+  <p class="mt-2 text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
+    See how interest rate changes and part payments affect your home loan. Simulate multiple events over the loan life.
+  </p>
+  <div class="mt-3 flex justify-center gap-4 text-xs text-blue-700 flex-wrap">
+    <span>&#10003; Rate change events</span>
+    <span>&#10003; Part payments</span>
+    <span>&#10003; Reduce EMI or Tenure</span>
+    <span>&#10003; PDF Download</span>
+  </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+  <!-- ===== INPUT CARD ===== -->
+  <section class="bg-white rounded-2xl shadow-md p-6 space-y-6">
+    <h2 class="text-lg font-bold text-blue-800 border-b pb-2">Loan Details</h2>
+
+    <!-- Loan Amount -->
+    <div>
+      <div class="flex justify-between items-center mb-1">
+        <label class="text-sm font-semibold text-gray-700">Loan Amount</label>
+        <div class="flex items-center gap-1">
+          <span class="text-sm text-gray-500">&#8377;</span>
+          <input id="loanAmountInput" type="number" min="100000" max="10000000" value="5000000"
+            class="w-32 text-right border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+        </div>
+      </div>
+      <input id="loanAmountRange" type="range" min="100000" max="10000000" step="50000" value="5000000" class="w-full" />
+      <div class="flex justify-between text-xs text-gray-400 mt-1">
+        <span>&#8377;1,00,000</span><span id="loanAmountDisplay" class="font-semibold text-blue-700">&#8377;50,00,000</span><span>&#8377;1,00,00,000</span>
+      </div>
+    </div>
+
+    <!-- Interest Rate -->
+    <div>
+      <div class="flex justify-between items-center mb-1">
+        <label class="text-sm font-semibold text-gray-700">Interest Rate (% p.a.)</label>
+        <input id="interestRateInput" type="number" min="5" max="15" step="0.1" value="8.5"
+          class="w-24 text-right border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+      </div>
+      <input id="interestRateRange" type="range" min="5" max="15" step="0.1" value="8.5" class="w-full" />
+      <div class="flex justify-between text-xs text-gray-400 mt-1">
+        <span>5%</span><span id="interestRateDisplay" class="font-semibold text-blue-700">8.5%</span><span>15%</span>
+      </div>
+    </div>
+
+    <!-- Tenure -->
+    <div>
+      <div class="flex justify-between items-center mb-1">
+        <label class="text-sm font-semibold text-gray-700">Tenure (Months)</label>
+        <input id="tenureInput" type="number" min="12" max="360" step="1" value="120"
+          class="w-24 text-right border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+      </div>
+      <input id="tenureRange" type="range" min="12" max="360" step="1" value="120" class="w-full" />
+      <div class="flex justify-between text-xs text-gray-400 mt-1">
+        <span>12 mo</span><span id="tenureDisplay" class="font-semibold text-blue-700">120 mo (10 yr)</span><span>360 mo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RESULTS CARD ===== -->
+  <section id="resultsSection" class="bg-white rounded-2xl shadow-md p-6">
+    <h2 class="text-lg font-bold text-blue-800 border-b pb-2 mb-4">Loan Summary</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+      <div class="bg-blue-50 rounded-xl p-4">
+        <p class="text-xs text-gray-500 font-medium">Monthly EMI</p>
+        <p id="monthlyEmi" class="text-xl font-extrabold text-blue-700 mt-1">&#8377;-</p>
+      </div>
+      <div class="bg-indigo-50 rounded-xl p-4">
+        <p class="text-xs text-gray-500 font-medium">Total Interest</p>
+        <p id="totalInterest" class="text-xl font-extrabold text-indigo-700 mt-1">&#8377;-</p>
+      </div>
+      <div class="bg-purple-50 rounded-xl p-4">
+        <p class="text-xs text-gray-500 font-medium">Total Payment</p>
+        <p id="totalPayment" class="text-xl font-extrabold text-purple-700 mt-1">&#8377;-</p>
+      </div>
+      <div class="bg-green-50 rounded-xl p-4">
+        <p class="text-xs text-gray-500 font-medium">Loan Amount</p>
+        <p id="loanAmountSummary" class="text-xl font-extrabold text-green-700 mt-1">&#8377;-</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SAVINGS HIGHLIGHT (hidden until events exist) ===== -->
+  <section id="savingsHighlight" class="hidden bg-gradient-to-r from-blue-700 to-indigo-700 text-white rounded-2xl shadow-lg p-6">
+    <div class="text-center">
+      <p class="text-sm font-medium text-blue-200 uppercase tracking-widest">Total Interest Saved</p>
+      <p id="savingsAmount" class="text-4xl font-extrabold mt-2">&#8377;0</p>
+      <p id="savingsDetail" class="mt-2 text-sm text-blue-200 whitespace-pre-line"></p>
+    </div>
+  </section>
+
+  <!-- ===== DOWNLOAD BUTTON ===== -->
+  <div class="flex justify-center">
+    <button id="downloadPdfBtn"
+      class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-6 py-3 rounded-xl shadow hover:from-blue-700 hover:to-indigo-700 transition flex items-center gap-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17v3a1 1 0 001 1h16a1 1 0 001-1v-3"/>
+      </svg>
+      Download PDF Report
+    </button>
+  </div>
+
+  <!-- ===== AMORTIZATION ===== -->
+  <section class="bg-white rounded-2xl shadow-md p-4 sm:p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-bold text-blue-800">Amortization Schedule</h2>
+      <!-- <span class="text-xs text-gray-400 italic">Click any year to expand. One event allowed per year.</span> -->
+    </div>
+    <div id="amortizationAccordion" class="space-y-2"></div>
+  </section>
+
+  <!-- ===== INFO CARD ===== -->
+  <section class="bg-blue-50 border border-blue-200 rounded-2xl p-5 text-sm text-blue-800 space-y-2">
+    <p class="font-bold text-base">How This Simulator Works</p>
+    <p>Each year you can do <strong>one action</strong> - either a part payment, a rate change, or both together. Click the <strong>Alter</strong> button on any month row to open the event modal.</p>
+    <p>Once an event is set for a year, all other months in that year are locked. The last 3 months of the loan are always disabled.</p>
+    <p class="text-xs text-blue-600 italic">Note: This is an illustration tool. Actual bank charges, prepayment fees and GST are not modelled.</p>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<!-- <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12 py-10 px-4">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div>
+      <img src="../../logo.png" alt="KnowYourEMI" class="w-20 mb-3" />
+      <p class="text-sm text-blue-200">A free tool to calculate and plan your loan repayments smarter.</p>
+    </div>
+    <div>
+      <p class="font-bold mb-3">Quick Links</p>
+      <ul class="space-y-1 text-sm text-blue-200">
+        <li><a href="../../index.html" class="hover:text-yellow-300">EMI Calculator</a></li>
+        <li><a href="../../eligibility/index.html" class="hover:text-yellow-300">Loan Eligibility</a></li>
+        <li><a href="../../blogs/index.html" class="hover:text-yellow-300">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="font-bold mb-3">Contact</p>
+      <p class="text-sm text-blue-200">hello@knowyouremi.in</p>
+    </div>
+  </div>
+  <div class="bg-blue-900 text-center py-3 mt-8 text-xs text-gray-300 space-x-3 rounded-lg">
+    <span>&#169; <span id="year"></span> knowyouremi.in | All rights reserved.</span>
+    <a href="../../pages/about.html" class="underline hover:text-yellow-300">About</a> |
+    <a href="../../pages/privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
+    <a href="../../pages/terms-and-conditions.html" class="underline hover:text-yellow-300">Terms &amp; Conditions</a>
+  </div>
+</footer> -->
+
+  <!-- FOOTER -->
+  <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-lg font-semibold mb-3">About KnowYourEMI</h3>
+        <p class="text-sm text-gray-200 leading-relaxed">KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility, and evaluate balance transfers transparently. No sign-ups, no hidden conditions.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="../../index.html" class="hover:underline">EMI Calculator</a></li>
+          <li><a href="../../index.html#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
+          <li><a href="../eligibility/" class="hover:underline">Loan Eligibility</a></li>
+          <li><a href="../../index.html#faq-section" class="hover:underline">FAQs</a></li>
+          <li><a href="../../index.html#feedback-section" class="hover:underline">Feedback</a></li>
+          <li><a href="../../blogs/index.html" class="hover:underline">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Contact</h3>
+        <p class="text-sm text-gray-200 mb-2">📧 <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">hello@knowyouremi.in</a></p>
+        <p class="text-sm text-gray-200">More tools and articles coming soon.</p>
+      </div>
+    </div>
+    <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
+      <span>© <span id="year"></span> knowyouremi.in | All rights reserved.</span>
+      <a href="../../pages/about.html" class="underline hover:text-yellow-300">About</a> |
+      <a href="../../pages/privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
+      <a href="../../pages/terms-and-conditions.html" class="underline hover:text-yellow-300">Terms & Conditions</a>
+    </div>
+  </footer>
+<!-- ===================================================== -->
+<!-- ===== MODAL: ALTER EVENT ===== -->
+<!-- ===================================================== -->
+<section id="alterModal"
+  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50 hidden">
+  <div id="alterModalBox"
+    class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-6 transform transition-all duration-300 scale-95 opacity-0">
+
+    <button id="cancelAlterModal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-xl">&times;</button>
+
+    <h3 class="text-xl font-bold text-gray-800 mb-1 border-b pb-2">Set Event for This Month</h3>
+    <p id="modalMonthLabel" class="text-sm text-blue-600 font-semibold mb-3"></p>
+
+    <!-- Info note -->
+    <div class="flex items-start gap-2 p-3 mb-4 text-sm rounded-lg bg-blue-50 text-blue-700 border border-blue-200">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-0.5 flex-shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <p>You can change the ROI, make a part payment, or do both. At least one must be filled. Only one event is allowed per year.</p>
+    </div>
+
+    <!-- Warning -->
+    <div class="flex items-start gap-2 p-3 mb-4 text-sm rounded-lg bg-red-50 text-red-700 border border-red-200">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-0.5 flex-shrink-0 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M12 5a7 7 0 00-7 7v5a7 7 0 0014 0v-5a7 7 0 00-7-7z" />
+      </svg>
+      <p>Bank charges, prepayment fees, and GST are not included. Use this for illustration only.</p>
+    </div>
+
+    <!-- ---- New ROI (optional) ---- -->
+    <div class="mb-4">
+      <label class="block text-sm font-semibold text-gray-700 mb-1">
+        New Interest Rate (% p.a.) <span class="text-gray-400 font-normal text-xs">- leave blank to keep current rate</span>
+      </label>
+      <input id="modalRoiInput" type="number" step="0.1" min="1" max="25"
+        placeholder="e.g. 7.5"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+      <p id="currentRoiHint" class="text-xs text-gray-400 mt-1">Current rate: -</p>
+    </div>
+
+    <!-- ---- Part Payment Amount (optional) ---- -->
+    <div class="mb-4">
+      <label class="block text-sm font-semibold text-gray-700 mb-1">
+        Part Payment Amount <span class="text-gray-400 font-normal text-xs">- leave blank for no payment</span>
+      </label>
+      <input id="modalPartPayInput" type="number" min="1"
+        placeholder="e.g. 200000"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+      <p id="maxAmountHint" class="text-xs text-gray-400 mt-1">Max allowed: &#8377;-</p>
+    </div>
+
+    <!-- ---- Option ---- -->
+    <div class="mb-5">
+      <p class="text-sm font-semibold text-gray-700 mb-2">After this event, apply to:</p>
+      <label class="flex items-center gap-2 p-2 border rounded-lg cursor-pointer hover:bg-gray-50 mb-2">
+        <input type="radio" name="alterOption" value="reduceTenure" checked class="text-blue-600" />
+        <span class="text-sm">&#128197; Reduce Tenure (EMI stays the same, loan ends earlier)</span>
+      </label>
+      <label class="flex items-center gap-2 p-2 border rounded-lg cursor-pointer hover:bg-gray-50">
+        <input type="radio" name="alterOption" value="reduceEmi" class="text-blue-600" />
+        <span class="text-sm">&#128176; Reduce EMI (Tenure stays, EMI recalculated fresh)</span>
+      </label>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-end gap-3">
+      <button id="cancelAlterModal2" class="px-4 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 text-sm">Cancel</button>
+      <button id="confirmAlterModal"
+        class="px-5 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow hover:from-blue-600 hover:to-blue-700 text-sm font-semibold">
+        Confirm
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Mobile menu toggle
+  const toggleBtn = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  if (toggleBtn && mobileMenu) {
+    toggleBtn.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+  }
+
+  // Progress bar
+  window.addEventListener("scroll", () => {
+    const scrolled = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const pct = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
+    document.getElementById("progressBar").style.width = pct + "%";
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+<script src="./pdfGenerator.js"></script>
+<script src="./script.js"></script>
+
+</body>
+</html>
