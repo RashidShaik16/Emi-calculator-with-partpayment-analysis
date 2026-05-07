@@ -28,7 +28,7 @@ All articles: https://knowyouremi.in/blogs/index.html
 - How a Credit Card Slowly Becomes a Debt Trap: https://knowyouremi.in/blogs/credit-cards/credit-card-debt-trap.html — A real personal account of how one credit card became five, then consumer loans, then personal loans. How the debt trap builds step by step without you realising it.
 
 ### Home Loan
-- What Is Floating Rate of Interest in Home Loans: https://knowyouremi.in/blogs/home-loan/floating-rate-home-loans.html — How floating rate home loans work, what repo rate means for your EMI, the difference between MCLR and repo-linked rates, and what to watch every year.
+- What Is Floating Rate of Interest in Home Loans: https://knowyouremi.in/blogs/home-loans/floating-rate-home-loans.html — How floating rate home loans work, what repo rate means for your EMI, the difference between MCLR and repo-linked rates, and what to watch every year.
 
 ### Investments
 - What Is SIP in Mutual Funds and How Does It Work: https://knowyouremi.in/blogs/investments/what-is-sip.html — SIP explained simply. What rupee cost averaging means, how compounding works over time, and the one mistake most beginners make.
