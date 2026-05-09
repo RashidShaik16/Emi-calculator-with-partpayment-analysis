@@ -10,6 +10,7 @@
 
   <link rel="canonical" href="https://knowyouremi.in/calculators/float-rate-home-loan/" />
   <link rel="icon" href="../../favicon.png" type="image/x-icon" />
+  <link rel="manifest" href="/manifest.json" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Floating Rate Home Loan Simulator | KnowYourEMI" />
@@ -19,6 +20,7 @@
   <meta property="og:site_name" content="KnowYourEMI" />
 
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     /* ---- Reading progress bar ---- */
@@ -49,17 +51,53 @@
     /* ---- Accordion smooth ---- */
     .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.45s ease-in-out; }
 
-    /* ---- Savings highlight pulse ---- */
-    @keyframes pulse-savings {
-      0%,100% { box-shadow: 0 0 0 0 rgba(37,99,235,0.3); }
-      50%      { box-shadow: 0 0 0 8px rgba(37,99,235,0); }
+    /* ---- How it works step card ---- */
+    body { font-family: 'Inter', sans-serif; }
+    .blog-title-font { font-family: 'Lora', Georgia, serif; }
+
+    .how-step {
+      position: relative;
+      background: #fff;
+      border: 1px solid #e0e7ff;
+      border-radius: 1rem;
+      padding: 1.25rem 1rem 1rem 1rem;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.07);
     }
-    .pulse-savings { animation: pulse-savings 2s infinite; }
+    .how-step-num {
+      position: absolute;
+      top: -14px;
+      left: 16px;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #2563eb, #6366f1);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(37,99,235,0.3);
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
 <div id="progressBar"></div>
+
+<!-- ===== PWA INSTALL BANNER ===== -->
+<div id="installPopup" class="fixed top-0 inset-x-0 bg-white shadow-lg border-b border-gray-200 p-4 z-50 hidden opacity-0 transition-opacity duration-700">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm text-gray-700">
+    <div class="text-center sm:text-left leading-tight">
+      &#128241; <strong>Install KnowYourEMI</strong><br>
+      Add to your Home Screen for quick access.
+    </div>
+    <div class="flex justify-center sm:justify-end gap-2">
+      <button id="addShortCutBtn" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg">Add Shortcut</button>
+      <button id="closeShortCutBtn" class="text-gray-500 hover:text-gray-700 text-xs px-3 py-1.5">Maybe Later</button>
+    </div>
+  </div>
+</div>
 
 <!-- ===== NAVBAR ===== -->
 <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-50">
@@ -104,176 +142,361 @@
 </div>
 
 <!-- ===== MAIN CONTENT ===== -->
-<main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+<main class="max-w-6xl mx-auto px-4 pb-8 space-y-8">
 
-  <!-- ===== INPUT CARD ===== -->
-  <section class="bg-white rounded-2xl shadow-md p-6 space-y-6">
-    <h2 class="text-lg font-bold text-blue-800 border-b pb-2">Loan Details</h2>
+  <!-- ===== TOP ROW: INPUTS (left) + SUMMARY CARD (right) ===== -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-    <!-- Loan Amount -->
-    <div>
-      <div class="flex justify-between items-center mb-1">
-        <label class="text-sm font-semibold text-gray-700">Loan Amount</label>
-        <div class="flex items-center gap-1">
-          <span class="text-sm text-gray-500">&#8377;</span>
-          <input id="loanAmountInput" type="number" min="100000" max="10000000" value="5000000"
-            class="w-32 text-right border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+    <!-- LEFT: Input sliders -->
+    <section class="bg-white rounded-2xl shadow-md p-6 space-y-10">
+      <h2 class="text-lg font-bold text-blue-800 border-b pb-2">Loan Details</h2>
+
+      <!-- Loan Amount -->
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <label class="text-sm font-semibold text-gray-700">Loan Amount</label>
+          <div class="flex items-center gap-1">
+            <span class="text-sm text-gray-500">&#8377;</span>
+            <input id="loanAmountInput" type="number" min="100000" max="10000000" value="5000000"
+              class="w-32 text-right border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+          </div>
+        </div>
+        <input id="loanAmountRange" type="range" min="100000" max="10000000" step="50000" value="5000000" class="w-full" />
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>&#8377;1,00,000</span>
+          <span id="loanAmountDisplay" class="font-semibold text-blue-700">&#8377;50,00,000</span>
+          <span>&#8377;1,00,00,000</span>
         </div>
       </div>
-      <input id="loanAmountRange" type="range" min="100000" max="10000000" step="50000" value="5000000" class="w-full" />
-      <div class="flex justify-between text-xs text-gray-400 mt-1">
-        <span>&#8377;1,00,000</span><span id="loanAmountDisplay" class="font-semibold text-blue-700">&#8377;50,00,000</span><span>&#8377;1,00,00,000</span>
-      </div>
-    </div>
 
-    <!-- Interest Rate -->
-    <div>
-      <div class="flex justify-between items-center mb-1">
-        <label class="text-sm font-semibold text-gray-700">Interest Rate (% p.a.)</label>
-        <input id="interestRateInput" type="number" min="5" max="15" step="0.1" value="8.5"
-          class="w-24 text-right border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+      <!-- Interest Rate -->
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <label class="text-sm font-semibold text-gray-700">Interest Rate (% p.a.)</label>
+          <input id="interestRateInput" type="number" min="5" max="15" step="0.1" value="8.5"
+            class="w-24 text-right border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+        </div>
+        <input id="interestRateRange" type="range" min="5" max="15" step="0.1" value="8.5" class="w-full" />
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>5%</span>
+          <span id="interestRateDisplay" class="font-semibold text-blue-700">8.5%</span>
+          <span>15%</span>
+        </div>
       </div>
-      <input id="interestRateRange" type="range" min="5" max="15" step="0.1" value="8.5" class="w-full" />
-      <div class="flex justify-between text-xs text-gray-400 mt-1">
-        <span>5%</span><span id="interestRateDisplay" class="font-semibold text-blue-700">8.5%</span><span>15%</span>
-      </div>
-    </div>
 
-    <!-- Tenure -->
-    <div>
-      <div class="flex justify-between items-center mb-1">
-        <label class="text-sm font-semibold text-gray-700">Tenure (Months)</label>
-        <input id="tenureInput" type="number" min="12" max="360" step="1" value="120"
-          class="w-24 text-right border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+      <!-- Tenure -->
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <label class="text-sm font-semibold text-gray-700">Tenure (Months)</label>
+          <input id="tenureInput" type="number" min="12" max="360" step="1" value="120"
+            class="w-24 text-right border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+        </div>
+        <input id="tenureRange" type="range" min="12" max="360" step="1" value="120" class="w-full" />
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>12 mo</span>
+          <span id="tenureDisplay" class="font-semibold text-blue-700">120 mo (10 yr)</span>
+          <span>360 mo</span>
+        </div>
       </div>
-      <input id="tenureRange" type="range" min="12" max="360" step="1" value="120" class="w-full" />
-      <div class="flex justify-between text-xs text-gray-400 mt-1">
-        <span>12 mo</span><span id="tenureDisplay" class="font-semibold text-blue-700">120 mo (10 yr)</span><span>360 mo</span>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== RESULTS CARD ===== -->
-  <section id="resultsSection" class="bg-white rounded-2xl shadow-md p-6">
-    <h2 class="text-lg font-bold text-blue-800 border-b pb-2 mb-4">Loan Summary</h2>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-      <div class="bg-blue-50 rounded-xl p-4">
-        <p class="text-xs text-gray-500 font-medium">Monthly EMI</p>
-        <p id="monthlyEmi" class="text-xl font-extrabold text-blue-700 mt-1">&#8377;-</p>
+    <!-- RIGHT: Summary card -->
+    <section class="bg-white rounded-2xl shadow-md p-6 flex flex-col justify-between">
+      <div>
+        <h2 class="text-lg font-bold text-blue-800 border-b pb-2 mb-4">Loan Summary</h2>
+
+        <!-- Loan detail rows -->
+        <div class="divide-y divide-gray-100 text-sm mb-5">
+          <div class="flex justify-between py-2">
+            <span class="text-gray-500">Loan Type</span>
+            <span class="font-semibold text-gray-800">Home Loan</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span class="text-gray-500">Loan Amount</span>
+            <span id="summaryLoanAmount" class="font-semibold text-gray-800">&#8377;-</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span class="text-gray-500">Interest Rate</span>
+            <span id="summaryRate" class="font-semibold text-gray-800">-</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span class="text-gray-500">Tenure</span>
+            <span id="summaryTenure" class="font-semibold text-gray-800">-</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span class="text-gray-500">Monthly EMI</span>
+            <span id="monthlyEmi" class="font-semibold text-blue-700">&#8377;-</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span class="text-gray-500">Total Interest</span>
+            <span id="summaryTotalInterest" class="font-semibold text-red-500">&#8377;-</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span class="text-gray-500">Total Repayment</span>
+            <span id="summaryTotalRepayment" class="font-semibold text-gray-800">&#8377;-</span>
+          </div>
+        </div>
+
+        <h3 class="text-sm font-bold text-blue-800 mb-3">Credits and Debits</h3>
+
+        <!-- Total Credit -->
+        <div class="flex justify-between items-center px-3 py-2.5 rounded-xl bg-blue-50 border border-blue-100 mb-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+            <span class="text-sm font-medium text-gray-600">Total Credit</span>
+          </div>
+          <span id="summaryLoanAmountCredit" class="font-bold text-blue-700">&#8377;-</span>
+        </div>
+
+        <!-- Total Debits (original) -->
+        <div class="flex justify-between items-center px-3 py-2.5 rounded-xl bg-red-50 border border-red-100 mb-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-red-400 flex-shrink-0"></span>
+            <span class="text-sm font-medium text-gray-600">Total Debits</span>
+          </div>
+          <span id="totalPayment" class="font-bold text-red-600">&#8377;-</span>
+        </div>
+
+        <!-- Total Debits with events (hidden until events exist) -->
+        <div id="totalDebitsWithEvents" class="hidden justify-between items-center px-3 py-2.5 rounded-xl bg-green-50 border border-green-200 mb-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-500 flex-shrink-0"></span>
+            <span class="text-sm font-medium text-gray-600">Total Debits (With Events)</span>
+          </div>
+          <span id="totalPaymentWithEvents" class="font-bold text-green-700">&#8377;-</span>
+        </div>
       </div>
-      <div class="bg-indigo-50 rounded-xl p-4">
-        <p class="text-xs text-gray-500 font-medium">Total Interest</p>
-        <p id="totalInterest" class="text-xl font-extrabold text-indigo-700 mt-1">&#8377;-</p>
+
+      <!-- Download PDF button -->
+      <div class="mt-5">
+        <button id="downloadPdfBtn"
+          class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-6 py-3 rounded-xl shadow hover:from-blue-700 hover:to-indigo-700 transition flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17v3a1 1 0 001 1h16a1 1 0 001-1v-3"/>
+          </svg>
+          Download PDF Report
+        </button>
       </div>
-      <div class="bg-purple-50 rounded-xl p-4">
-        <p class="text-xs text-gray-500 font-medium">Total Payment</p>
-        <p id="totalPayment" class="text-xl font-extrabold text-purple-700 mt-1">&#8377;-</p>
-      </div>
-      <div class="bg-green-50 rounded-xl p-4">
-        <p class="text-xs text-gray-500 font-medium">Loan Amount</p>
-        <p id="loanAmountSummary" class="text-xl font-extrabold text-green-700 mt-1">&#8377;-</p>
-      </div>
-    </div>
-  </section>
+    </section>
+
+  </div><!-- end top row -->
 
   <!-- ===== SAVINGS HIGHLIGHT (hidden until events exist) ===== -->
-  <section id="savingsHighlight" class="hidden bg-gradient-to-r from-blue-700 to-indigo-700 text-white rounded-2xl shadow-lg p-6">
+  <section id="savingsHighlight" class="hidden bg-white border-2 border-indigo-200 rounded-2xl shadow-md p-6">
     <div class="text-center">
-      <p class="text-sm font-medium text-blue-200 uppercase tracking-widest">Total Interest Saved</p>
-      <p id="savingsAmount" class="text-4xl font-extrabold mt-2">&#8377;0</p>
-      <p id="savingsDetail" class="mt-2 text-sm text-blue-200 whitespace-pre-line"></p>
+      <p class="text-sm font-semibold text-gray-500 mb-1">You save</p>
+      <p id="savingsAmount" class="text-4xl font-extrabold text-indigo-700">&#8377;0</p>
+      <div id="savingsDetail" class="mt-3 flex flex-wrap justify-center gap-2"></div>
     </div>
   </section>
-
-  <!-- ===== DOWNLOAD BUTTON ===== -->
-  <div class="flex justify-center">
-    <button id="downloadPdfBtn"
-      class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-6 py-3 rounded-xl shadow hover:from-blue-700 hover:to-indigo-700 transition flex items-center gap-2">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17v3a1 1 0 001 1h16a1 1 0 001-1v-3"/>
-      </svg>
-      Download PDF Report
-    </button>
-  </div>
 
   <!-- ===== AMORTIZATION ===== -->
   <section class="bg-white rounded-2xl shadow-md p-4 sm:p-6">
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-bold text-blue-800">Amortization Schedule</h2>
-      <!-- <span class="text-xs text-gray-400 italic">Click any year to expand. One event allowed per year.</span> -->
     </div>
     <div id="amortizationAccordion" class="space-y-2"></div>
   </section>
 
-  <!-- ===== INFO CARD ===== -->
-  <section class="bg-blue-50 border border-blue-200 rounded-2xl p-5 text-sm text-blue-800 space-y-2">
-    <p class="font-bold text-base">How This Simulator Works</p>
-    <p>Each year you can do <strong>one action</strong> - either a part payment, a rate change, or both together. Click the <strong>Alter</strong> button on any month row to open the event modal.</p>
-    <p>Once an event is set for a year, all other months in that year are locked. The last 3 months of the loan are always disabled.</p>
-    <p class="text-xs text-blue-600 italic">Note: This is an illustration tool. Actual bank charges, prepayment fees and GST are not modelled.</p>
+<!-- ===== HOW TO USE THIS CALCULATOR ===== -->
+<div class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+
+  <section class="rounded-2xl overflow-hidden shadow-md">
+    <!-- Header band -->
+    <div class="bg-gradient-to-r from-blue-700 to-indigo-700 px-6 py-5">
+      <h2 class="text-white font-bold text-lg">How to Use This Calculator</h2>
+      <p class="text-blue-200 text-xs mt-1">A complete guide to every feature on this page</p>
+    </div>
+
+    <div class="bg-white px-6 py-8 space-y-8">
+
+      <!-- Step 1 -->
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-7 h-7 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">1</span>
+          <h3 class="text-base font-bold text-gray-800">Enter your loan details</h3>
+        </div>
+        <p class="text-base text-gray-600 leading-relaxed pl-10">
+          Start with three numbers: your <strong>loan amount</strong> (the principal your bank disburses to you), your <strong>starting interest rate</strong> (the rate on your sanction letter, which is floating and will change over time), and your <strong>tenure in months</strong>. The moment you enter these, the summary card on the right shows your monthly EMI, total credit (what you borrowed), and total debits (what you will repay if nothing changes). These are your baseline numbers. Everything else in this calculator is about improving them.
+        </p>
+      </div>
+
+      <hr class="border-gray-100" />
+
+      <!-- Step 2 -->
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-7 h-7 rounded-full bg-indigo-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">2</span>
+          <h3 class="text-base font-bold text-gray-800">Add events to simulate real life</h3>
+        </div>
+        <p class="text-base text-gray-600 leading-relaxed pl-10 mb-4">
+          Expand any year in the amortization table and click <strong class="text-blue-700">Pay</strong> on a month. That opens the event modal where you can simulate anything that could change your loan: a rate revision from your bank, a lump-sum part payment, or both together in the same month.
+        </p>
+
+        <!-- Event type comparison - two columns, left-border style -->
+        <div class="pl-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="border-l-4 border-indigo-400 pl-4 py-1">
+            <p class="text-sm font-bold text-gray-800 mb-1">Rate Change</p>
+            <p class="text-base text-gray-500 leading-relaxed">Enter the new rate your bank has reset your loan to. The simulator allows up to 3% change per event from the rate effective at that point. You can stack multiple rate changes across years and the cap shifts with each confirmed event.</p>
+          </div>
+          <div class="border-l-4 border-blue-400 pl-4 py-1">
+            <p class="text-sm font-bold text-gray-800 mb-1">Part Payment</p>
+            <p class="text-base text-gray-500 leading-relaxed">Enter a lump sum you plan to pay that month. The amount covers that month's EMI first and the remainder is credited against your outstanding principal. This is exactly how banks apply part payments. The maximum is your outstanding balance at that point.</p>
+          </div>
+        </div>
+
+        <p class="text-sm text-gray-500 mt-4 pl-10 leading-relaxed">
+          Only one event is allowed per year. Once you confirm a newer event, earlier ones lock automatically to keep the calculations consistent. You can always edit the most recent event until the next one is added.
+        </p>
+      </div>
+
+      <hr class="border-gray-100" />
+
+      <!-- Step 3 -->
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-7 h-7 rounded-full bg-green-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">3</span>
+          <h3 class="text-base font-bold text-gray-800">Choose: reduce EMI or reduce tenure</h3>
+        </div>
+        <p class="text-base text-gray-600 leading-relaxed pl-10 mb-4">
+          Every event asks what should happen after it is applied. This is the most consequential decision in a floating rate loan.
+        </p>
+
+        <!-- Reduce EMI vs Reduce Tenure - table-style comparison -->
+        <div class="pl-10">
+          <div class="rounded-xl overflow-hidden border border-gray-200">
+            <div class="grid grid-cols-2 bg-gray-50 border-b border-gray-200">
+              <div class="px-4 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider border-r border-gray-200">Reduce Tenure</div>
+              <div class="px-4 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider">Reduce EMI</div>
+            </div>
+            <div class="grid grid-cols-2 divide-x divide-gray-100">
+              <div class="px-4 py-4 space-y-2">
+                <p class="text-sm text-gray-700 leading-relaxed">EMI stays the same. The loan ends earlier. Less total interest paid.</p>
+                <p class="text-sm text-green-700 font-semibold">Best if your monthly budget is already comfortable.</p>
+              </div>
+              <div class="px-4 py-4 space-y-2">
+                <p class="text-sm text-gray-700 leading-relaxed">Tenure stays the same. EMI is recalculated lower. More total interest paid.</p>
+                <p class="text-sm text-amber-700 font-semibold">Best if a rate hike has stretched your monthly budget.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="border-gray-100" />
+
+      <!-- Step 4 -->
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-7 h-7 rounded-full bg-purple-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">4</span>
+          <h3 class="text-base font-bold text-gray-800">Read the results and download your report</h3>
+        </div>
+        <p class="text-base text-gray-600 leading-relaxed pl-10 mb-2">
+          After adding events, the summary card shows a green pill for total debits with events. Compare it against the red total debits figure to see exactly how much you are saving. The savings card below spells it out plainly: how much, from which payment, in which month.
+        </p>
+        <p class="text-base text-gray-600 leading-relaxed pl-10">
+          The amortization table shows every month with the interest and principal split, and a highlighted note on event months explaining what changed. Download the PDF to get a clean printable version of the full schedule. Useful when discussing options with your bank or comparing scenarios offline.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Article link band -->
+    <div class="bg-gray-900 px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div>
+        <p class="text-white text-sm font-semibold">Want to understand how floating rates actually work?</p>
+        <p class="text-gray-400 text-sm mt-0.5">Why your bank changes the rate, how RBI decisions affect your EMI, and when switching to fixed makes sense.</p>
+      </div>
+      <a href="../../blogs/home-loans/floating-rate-home-loans.html"
+        class="flex-shrink-0 bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold text-xs px-4 py-2 rounded-lg transition whitespace-nowrap">
+        Read the Article &#8594;
+      </a>
+    </div>
+
+    <!-- Disclaimer band -->
+    <div class="bg-amber-50 border-t border-amber-200 px-6 py-3 flex items-start gap-2">
+      <svg class="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+      </svg>
+      <p class="text-sm text-amber-700">This is an illustration tool. Actual bank charges, prepayment penalties, and GST are not modelled here. Use this for planning purposes only.</p>
+    </div>
   </section>
+
+  <!-- FEEDBACK FORM - matching blogs style exactly -->
+  <section id="feedback-section" style="margin-top: 60px;">
+    <div style="border-top: 1px solid #e5e7eb; padding-top: 40px;">
+      <p class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-4">Feedback</p>
+
+      <div style="background: white; border: 1px solid #e5e7eb; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <h2 class="blog-title-font text-xl font-bold text-gray-900 mb-1">Have something to say?</h2>
+        <p class="text-sm text-gray-500 mb-4">A suggestion, a feature request, or just a thought about this calculator. We read every message.</p>
+        <p class="text-xs font-semibold text-yellow-700 mb-6">We will not store or send spam emails. That is our promise.</p>
+
+        <form id="feedbackForm" class="space-y-5">
+          <div>
+            <label for="from_name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+            <input id="from_name" name="from_name" type="text" required
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm text-sm">
+          </div>
+          <div>
+            <label for="from_email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+            <input id="from_email" name="from_email" type="email" required
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm text-sm">
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+            <textarea id="message" name="message" rows="4" required
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm text-sm"></textarea>
+          </div>
+          <div class="flex justify-center">
+            <div class="g-recaptcha" data-sitekey="6LcFMc0rAAAAAO8qxEkn-AmuhqfOHrSVBGXAk3NS"></div>
+          </div>
+          <button id="feedbackSubmitBtn" type="submit"
+            class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:from-blue-700 hover:to-indigo-700 transition font-semibold text-sm">
+            Send Message
+          </button>
+        </form>
+        <p id="feedbackStatus" class="mt-4 text-center text-sm font-semibold"></p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end educational wrapper -->
 
 </main>
 
 <!-- ===== FOOTER ===== -->
-<!-- <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12 py-10 px-4">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+<footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
+  <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
     <div>
-      <img src="../../logo.png" alt="KnowYourEMI" class="w-20 mb-3" />
-      <p class="text-sm text-blue-200">A free tool to calculate and plan your loan repayments smarter.</p>
+      <h3 class="text-lg font-semibold mb-3">About KnowYourEMI</h3>
+      <p class="text-sm text-gray-200 leading-relaxed">KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility, and evaluate balance transfers transparently. No sign-ups, no hidden conditions.</p>
     </div>
     <div>
-      <p class="font-bold mb-3">Quick Links</p>
-      <ul class="space-y-1 text-sm text-blue-200">
-        <li><a href="../../index.html" class="hover:text-yellow-300">EMI Calculator</a></li>
-        <li><a href="../../eligibility/index.html" class="hover:text-yellow-300">Loan Eligibility</a></li>
-        <li><a href="../../blogs/index.html" class="hover:text-yellow-300">Blog</a></li>
+      <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="../../index.html" class="hover:underline">EMI Calculator</a></li>
+        <li><a href="../../index.html#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
+        <li><a href="../eligibility/" class="hover:underline">Loan Eligibility</a></li>
+        <li><a href="../../index.html#faq-section" class="hover:underline">FAQs</a></li>
+        <li><a href="../../index.html#feedback-section" class="hover:underline">Feedback</a></li>
+        <li><a href="../../blogs/index.html" class="hover:underline">Blog</a></li>
       </ul>
     </div>
     <div>
-      <p class="font-bold mb-3">Contact</p>
-      <p class="text-sm text-blue-200">hello@knowyouremi.in</p>
+      <h3 class="text-lg font-semibold mb-3">Contact</h3>
+      <p class="text-sm text-gray-200 mb-2">&#128231; <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">hello@knowyouremi.in</a></p>
+      <p class="text-sm text-gray-200">More tools and articles coming soon.</p>
     </div>
   </div>
-  <div class="bg-blue-900 text-center py-3 mt-8 text-xs text-gray-300 space-x-3 rounded-lg">
+  <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
     <span>&#169; <span id="year"></span> knowyouremi.in | All rights reserved.</span>
     <a href="../../pages/about.html" class="underline hover:text-yellow-300">About</a> |
     <a href="../../pages/privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
     <a href="../../pages/terms-and-conditions.html" class="underline hover:text-yellow-300">Terms &amp; Conditions</a>
   </div>
-</footer> -->
+</footer>
 
-  <!-- FOOTER -->
-  <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div>
-        <h3 class="text-lg font-semibold mb-3">About KnowYourEMI</h3>
-        <p class="text-sm text-gray-200 leading-relaxed">KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility, and evaluate balance transfers transparently. No sign-ups, no hidden conditions.</p>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="../../index.html" class="hover:underline">EMI Calculator</a></li>
-          <li><a href="../../index.html#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
-          <li><a href="../eligibility/" class="hover:underline">Loan Eligibility</a></li>
-          <li><a href="../../index.html#faq-section" class="hover:underline">FAQs</a></li>
-          <li><a href="../../index.html#feedback-section" class="hover:underline">Feedback</a></li>
-          <li><a href="../../blogs/index.html" class="hover:underline">Blog</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold mb-3">Contact</h3>
-        <p class="text-sm text-gray-200 mb-2">📧 <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">hello@knowyouremi.in</a></p>
-        <p class="text-sm text-gray-200">More tools and articles coming soon.</p>
-      </div>
-    </div>
-    <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
-      <span>© <span id="year"></span> knowyouremi.in | All rights reserved.</span>
-      <a href="../../pages/about.html" class="underline hover:text-yellow-300">About</a> |
-      <a href="../../pages/privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
-      <a href="../../pages/terms-and-conditions.html" class="underline hover:text-yellow-300">Terms & Conditions</a>
-    </div>
-  </footer>
 <!-- ===================================================== -->
 <!-- ===== MODAL: ALTER EVENT ===== -->
 <!-- ===================================================== -->
@@ -311,7 +534,7 @@
       <input id="modalRoiInput" type="number" step="0.1" min="1" max="25"
         placeholder="e.g. 7.5"
         class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
-      <p id="currentRoiHint" class="text-xs text-gray-400 mt-1">Current rate: -</p>
+      <p id="currentRoiHint" class="text-xs mt-1 leading-relaxed">-</p>
     </div>
 
     <!-- ---- Part Payment Amount (optional) ---- -->
@@ -349,6 +572,26 @@
   </div>
 </section>
 
+<!-- ===== FEEDBACK POPUP ===== -->
+<div id="feedbackPopup"
+  class="hidden fixed z-40 cursor-pointer"
+  style="bottom: 80px; right: 16px; max-width: 220px;"
+  onclick="document.getElementById('feedback-section').scrollIntoView({behavior:'smooth'}); document.getElementById('feedbackPopup').classList.add('hidden');">
+  <div class="bg-white border border-gray-200 rounded-2xl shadow-xl p-4 flex items-start gap-3" style="box-shadow: 0 8px 32px rgba(37,99,235,0.15);">
+    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+      </svg>
+    </div>
+    <div class="min-w-0">
+      <p class="text-sm font-bold text-gray-800 leading-tight">Share your feedback</p>
+      <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Help us improve this simulator</p>
+    </div>
+    <button onclick="event.stopPropagation(); document.getElementById('feedbackPopup').classList.add('hidden'); if(window.scheduleFeedbackPopup) window.scheduleFeedbackPopup(30000);"
+      class="text-gray-300 hover:text-gray-500 text-base leading-none flex-shrink-0 ml-1">&times;</button>
+  </div>
+</div>
+
 <!-- ===== SCRIPTS ===== -->
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
@@ -367,6 +610,40 @@
     const pct = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
     document.getElementById("progressBar").style.width = pct + "%";
   });
+
+  // ---- Feedback Popup ----
+  // Show after 30s, reappear every 30s after dismiss until user scrolls to form
+  const feedbackPopup = document.getElementById("feedbackPopup");
+  let feedbackPopupTimer;
+
+  window.showFeedbackPopup = function() {
+    const form = document.getElementById("feedback-section");
+    if (!form) return;
+    const rect = form.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 100) return;
+    feedbackPopup.classList.remove("hidden");
+    feedbackPopup.style.opacity = "0";
+    feedbackPopup.style.transition = "opacity 0.5s ease";
+    setTimeout(() => { feedbackPopup.style.opacity = "1"; }, 50);
+  };
+
+  window.scheduleFeedbackPopup = function(delay) {
+    clearTimeout(feedbackPopupTimer);
+    feedbackPopupTimer = setTimeout(window.showFeedbackPopup, delay);
+  };
+
+  window.scheduleFeedbackPopup(30000);
+
+  // Hide popup when user scrolls near feedback section
+  window.addEventListener("scroll", () => {
+    const form = document.getElementById("feedback-section");
+    if (!form) return;
+    const rect = form.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 100) {
+      feedbackPopup.classList.add("hidden");
+      clearTimeout(feedbackPopupTimer);
+    }
+  });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -374,6 +651,57 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 <script src="./pdfGenerator.js"></script>
 <script src="./script.js"></script>
+
+<!-- EmailJS + reCAPTCHA -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<script>
+  (function() { emailjs.init("vGkMgPqy7msXERp1n"); })();
+
+  const feedbackForm   = document.getElementById("feedbackForm");
+  const feedbackStatus = document.getElementById("feedbackStatus");
+  const feedbackBtn    = document.getElementById("feedbackSubmitBtn");
+
+  if (feedbackForm) {
+    feedbackForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const captchaResponse = grecaptcha.getResponse();
+      if (!captchaResponse) {
+        feedbackStatus.textContent = "Please verify the reCAPTCHA before submitting.";
+        feedbackStatus.className = "mt-4 text-red-600 font-semibold";
+        return;
+      }
+
+      feedbackBtn.disabled = true;
+      feedbackBtn.textContent = "Sending...";
+
+      const captchaField = document.createElement("input");
+      captchaField.type  = "hidden";
+      captchaField.name  = "g-recaptcha-response";
+      captchaField.value = captchaResponse;
+      feedbackForm.appendChild(captchaField);
+
+      emailjs.sendForm("service_e5o8v41", "template_gt38jdj", feedbackForm)
+        .then(() => {
+          feedbackStatus.textContent = "Thank you! Your feedback has been sent.";
+          feedbackStatus.className = "mt-4 text-green-600 font-semibold";
+          feedbackForm.reset();
+          grecaptcha.reset();
+          feedbackBtn.disabled = false;
+          feedbackBtn.textContent = "Send Feedback";
+        })
+        .catch((err) => {
+          console.error("EmailJS error:", err);
+          feedbackStatus.textContent = "Something went wrong. Please try again.";
+          feedbackStatus.className = "mt-4 text-red-600 font-semibold";
+          feedbackBtn.disabled = false;
+          feedbackBtn.textContent = "Send Feedback";
+        });
+    });
+  }
+</script>
 
 </body>
 </html>

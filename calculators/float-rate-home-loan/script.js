@@ -12,10 +12,16 @@ const tenureInput   = document.getElementById("tenureInput");
 const tenureRange   = document.getElementById("tenureRange");
 const tenureDisplay = document.getElementById("tenureDisplay");
 
-const monthlyEmiEl     = document.getElementById("monthlyEmi");
-const totalInterestEl  = document.getElementById("totalInterest");
-const totalPaymentEl   = document.getElementById("totalPayment");
-const loanAmountSumEl  = document.getElementById("loanAmountSummary");
+const monthlyEmiEl              = document.getElementById("monthlyEmi");
+const totalPaymentEl            = document.getElementById("totalPayment");
+const summaryLoanAmountEl       = document.getElementById("summaryLoanAmount");
+const summaryRateEl             = document.getElementById("summaryRate");
+const summaryTenureEl           = document.getElementById("summaryTenure");
+const summaryLoanAmountCreditEl = document.getElementById("summaryLoanAmountCredit");
+const totalDebitsWithEventsEl   = document.getElementById("totalDebitsWithEvents");
+const totalPaymentWithEventsEl  = document.getElementById("totalPaymentWithEvents");
+const summaryTotalInterestEl    = document.getElementById("summaryTotalInterest");
+const summaryTotalRepaymentEl   = document.getElementById("summaryTotalRepayment");
 
 const savingsHighlight = document.getElementById("savingsHighlight");
 const savingsAmount    = document.getElementById("savingsAmount");
@@ -44,6 +50,7 @@ let selectedMonthSerial = null;
 let selectedYear        = null;
 let selectedMaxAmount   = 0;
 let selectedCurrentRoi  = 0;
+let selectedOriginalRoi  = 0;  // always the slider ROI, never changes
 
 
 // ============================================================
@@ -121,6 +128,7 @@ function generateAmortization(P, annualRate, N, eventsArr) {
     balance -= principal;
 
     let note = "";
+    const rateBeforeEvent = currentRate;  // rate BEFORE any event this month changes it
 
     // ---- Check for event at this serial ----
     const ev = evMap.get(i);
@@ -179,7 +187,7 @@ function generateAmortization(P, annualRate, N, eventsArr) {
           emi = calculateEMI(balance, currentRate, remainingMonths);
           const roiPart  = roiChanged   ? ` Rate changed to ${currentRate}%.` : "";
           const partPart = partPaid ? ` Part payment of ₹${Number(ev.amount).toLocaleString("en-IN")}.` : "";
-          note = `${partPart}${roiPart} EMI reduced from ₹${Math.round(oldEmi).toLocaleString("en-IN")} to ₹${Math.round(emi).toLocaleString("en-IN")}.`;
+          note = `${partPart}${roiPart} EMI changed from ₹${Math.round(oldEmi).toLocaleString("en-IN")} to ₹${Math.round(emi).toLocaleString("en-IN")}.`;
         }
       } else {
         // reduceTenure: keep same EMI, recalculate how many months left
@@ -217,7 +225,8 @@ function generateAmortization(P, annualRate, N, eventsArr) {
       emi: emiForMonth, principal, interest,
       balance: balance < EPS ? 0 : balance,
       note,
-      currentRate  // carry rate for display reference
+      currentRate,        // rate AFTER this month (possibly changed by event)
+      rateBeforeEvent     // rate BEFORE event applied — cap anchor for Edit
     });
 
     month++;
@@ -248,10 +257,15 @@ function updateResults() {
   const basePay   = baseEmi * N;
   originalTotalInterest = basePay - P;
 
-  monthlyEmiEl.textContent    = "₹" + Math.round(baseEmi).toLocaleString("en-IN");
-  totalInterestEl.textContent = "₹" + Math.round(originalTotalInterest).toLocaleString("en-IN");
-  totalPaymentEl.textContent  = "₹" + Math.round(basePay).toLocaleString("en-IN");
-  loanAmountSumEl.textContent = "₹" + P.toLocaleString("en-IN");
+  // Summary card
+  monthlyEmiEl.textContent              = "₹" + Math.round(baseEmi).toLocaleString("en-IN");
+  summaryLoanAmountEl.textContent       = "₹" + P.toLocaleString("en-IN");
+  summaryRateEl.textContent             = rate.toFixed(2) + "% p.a.";
+  summaryTenureEl.textContent           = N + " months (" + (N / 12).toFixed(1) + " yrs)";
+  summaryLoanAmountCreditEl.textContent = "₹" + P.toLocaleString("en-IN");
+  totalPaymentEl.textContent            = "₹" + Math.round(basePay).toLocaleString("en-IN");
+  summaryTotalInterestEl.textContent    = "₹" + Math.round(originalTotalInterest).toLocaleString("en-IN");
+  summaryTotalRepaymentEl.textContent   = "₹" + Math.round(basePay).toLocaleString("en-IN");
 
   // Amortization with events
   const schedule = generateAmortization(P, rate, N, events);
@@ -259,7 +273,25 @@ function updateResults() {
 
   newTotalInterest = schedule.reduce((s, m) => s + m.interest, 0);
 
-  // Savings section
+  // ---- Total Debits with Events pill ----
+  if (events.length > 0) {
+    const newTotalPay   = schedule.reduce((s, m) => s + m.emi, 0);
+    const extraPaid     = events.reduce((s, ev) => {
+      if (!ev.amount || ev.amount <= 0) return s;
+      const match = schedule.find(m2 => m2.serial === ev.month);
+      const emiAmt = match ? match.emi : 0;
+      return s + Math.max(Number(ev.amount) - emiAmt, 0);
+    }, 0);
+    const totalWithEv = Math.round(newTotalPay + extraPaid);
+    totalDebitsWithEventsEl.classList.remove("hidden");
+    totalDebitsWithEventsEl.classList.add("flex");
+    totalPaymentWithEventsEl.textContent = "₹" + totalWithEv.toLocaleString("en-IN");
+  } else {
+    totalDebitsWithEventsEl.classList.add("hidden");
+    totalDebitsWithEventsEl.classList.remove("flex");
+  }
+
+  // ---- Savings section ----
   if (events.length > 0) {
     const saved = Math.round(originalTotalInterest - newTotalInterest);
     const tenureReduced = N - schedule.length;
@@ -278,20 +310,45 @@ function updateResults() {
     }
     requestAnimationFrame(animateCount);
 
-    // Build detail
-    const lines = events.map(ev => {
-      const match = schedule.find(m => m.serial === ev.month);
-      if (!match) return null;
-      const mName = new Date(match.year, match.month - 1).toLocaleString("default", { month: "short" });
-      const parts = [];
-      if (ev.amount && ev.amount > 0) parts.push(`₹${Number(ev.amount).toLocaleString("en-IN")} part payment`);
-      if (ev.newRoi !== null && ev.newRoi !== "") parts.push(`rate to ${ev.newRoi}%`);
-      return `${mName} ${match.year}: ${parts.join(" + ")}`;
-    }).filter(Boolean);
+    // Build detail — "if you make part payment(s) of ₹X in Month Year"
+    const partPayEvents = events.filter(ev => ev.amount && ev.amount > 0);
+    const roiEvents     = events.filter(ev => ev.newRoi !== null && ev.newRoi !== "");
 
-    let detail = lines.join("\n");
-    if (tenureReduced > 0) detail += `\nLoan closes ${tenureReduced} months earlier.`;
-    savingsDetail.textContent = detail;
+    // Build pill elements — one pill per event, one pill for tenure saved
+    savingsDetail.innerHTML = "";
+
+    // Part payment pills
+    partPayEvents.forEach(ev => {
+      const match = schedule.find(m => m.serial === ev.month);
+      if (!match) return;
+      const mLabel = new Date(match.year, match.month - 1)
+        .toLocaleString("default", { month: "short", year: "numeric" });
+      const pill = document.createElement("span");
+      pill.className = "inline-flex items-center gap-1.5 bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1.5 rounded-full";
+      pill.innerHTML = `<svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a1 1 0 100-2 1 1 0 000 2z"/></svg>Part payment &nbsp;<strong>&#8377;${Number(ev.amount).toLocaleString("en-IN")}</strong>&nbsp; in ${mLabel}`;
+      savingsDetail.appendChild(pill);
+    });
+
+    // ROI change pills
+    roiEvents.forEach(ev => {
+      const match = schedule.find(m => m.serial === ev.month);
+      if (!match) return;
+      const mLabel = new Date(match.year, match.month - 1)
+        .toLocaleString("default", { month: "short", year: "numeric" });
+      const prevRoi = match.rateBeforeEvent || Number(interestRateInput.value);
+      const pill = document.createElement("span");
+      pill.className = "inline-flex items-center gap-1.5 bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1.5 rounded-full";
+      pill.innerHTML = `<svg class="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"/></svg>Rate ${prevRoi}% to <strong>&nbsp;${ev.newRoi}%</strong>&nbsp; in ${mLabel}`;
+      savingsDetail.appendChild(pill);
+    });
+
+    // Tenure saved pill
+    if (tenureReduced > 0) {
+      const pill = document.createElement("span");
+      pill.className = "inline-flex items-center gap-1.5 bg-green-100 text-green-800 text-xs font-semibold px-3 py-1.5 rounded-full";
+      pill.innerHTML = `<svg class="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Loan closes <strong>&nbsp;${tenureReduced} months&nbsp;</strong> early`;
+      savingsDetail.appendChild(pill);
+    }
   } else {
     savingsHighlight.classList.add("hidden");
   }
@@ -362,23 +419,34 @@ function renderAmortization(schedule, originalN) {
       row.className = "grid grid-cols-5 gap-1 text-xs py-1 border-b hover:bg-gray-50 text-center items-center";
 
       // Determine button state
+      // Only the LAST event is editable. All prior event months are locked to N/A.
       let actionHTML = "";
-      const isLastThree = m.serial >= totalSerials - 2;
-      const yearHasEvent = eventYearSet.has(Number(yr));
-      const isLockedYear = maxEventYear !== null && Number(yr) <= maxEventYear && !yearHasEvent;
+      const isLastThree    = m.serial >= totalSerials - 2;
+      const yearHasEvent   = eventYearSet.has(Number(yr));
+      const isLockedYear   = maxEventYear !== null && Number(yr) <= maxEventYear && !yearHasEvent;
       const isPastEventMonth = yearHasEvent && !events.find(ev => ev.month === m.serial && ev.year === m.year);
 
+      // Find the last event by highest serial month number
+      const lastEventSerial = events.length > 0
+        ? Math.max(...events.map(ev => ev.month))
+        : null;
+      const isThisTheLastEvent = lastEventSerial !== null && m.serial === lastEventSerial;
+
       if (isLastThree) {
-        actionHTML = `<button disabled class="bg-gray-300 text-white px-2 py-1 rounded text-xs cursor-not-allowed col-span-1 mx-auto">N/A</button>`;
+        actionHTML = `<button disabled class="bg-gray-300 text-white px-2 py-1 rounded text-xs cursor-not-allowed mx-auto">N/A</button>`;
       } else if (isLockedYear || isPastEventMonth) {
-        actionHTML = `<button disabled class="bg-gray-300 text-white px-2 py-1 rounded text-xs cursor-not-allowed col-span-1 mx-auto" title="Only one event per year">N/A</button>`;
+        actionHTML = `<button disabled class="bg-gray-300 text-white px-2 py-1 rounded text-xs cursor-not-allowed mx-auto" title="Only one event per year">N/A</button>`;
       } else if (yearHasEvent && events.find(ev => ev.month === m.serial && ev.year === m.year)) {
-        // This month has the event - show edit
-        actionHTML = `<button class="alter-btn bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 text-xs col-span-1 mx-auto"
-          data-month="${m.serial}" data-year="${m.year}" data-balance="${Math.round(m.balance)}" data-roi="${m.currentRate || Number(interestRateInput.value)}">Edit</button>`;
+        // This month has an event — only show Edit if it is the last event
+        if (isThisTheLastEvent) {
+          actionHTML = `<button class="alter-btn bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 text-xs mx-auto"
+            data-month="${m.serial}" data-year="${m.year}" data-balance="${Math.round(m.balance)}" data-roi="${m.rateBeforeEvent || m.currentRate || Number(interestRateInput.value)}" data-original-roi="${Number(interestRateInput.value)}">Edit</button>`;
+        } else {
+          actionHTML = `<button disabled class="bg-gray-400 text-white px-2 py-1 rounded text-xs cursor-not-allowed mx-auto" title="Earlier events are locked">Locked</button>`;
+        }
       } else {
-        actionHTML = `<button class="alter-btn bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 text-xs col-span-1 mx-auto"
-          data-month="${m.serial}" data-year="${m.year}" data-balance="${Math.round(m.balance)}" data-roi="${m.currentRate || Number(interestRateInput.value)}">Pay</button>`;
+        actionHTML = `<button class="alter-btn bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 text-xs mx-auto"
+          data-month="${m.serial}" data-year="${m.year}" data-balance="${Math.round(m.balance)}" data-roi="${m.rateBeforeEvent || m.currentRate || Number(interestRateInput.value)}" data-original-roi="${Number(interestRateInput.value)}">Pay</button>`;
       }
 
       row.innerHTML = `
@@ -391,11 +459,13 @@ function renderAmortization(schedule, originalN) {
 
       inner.appendChild(row);
 
-      // Note row
+      // Note row — bold, blue left-border, "Received" prefix (matching main calc style)
       if (m.note) {
         const noteRow = document.createElement("div");
-        noteRow.className = "col-span-6 text-center text-xs italic text-blue-800 bg-blue-100 p-2 rounded my-1";
-        noteRow.textContent = m.note;
+        noteRow.className = "text-xs font-bold text-blue-900 bg-blue-100 border-l-4 border-blue-500 px-4 py-2 rounded my-1 mx-auto text-center" ; noteRow.style.maxWidth = "520px";
+        // "Received" only makes sense when a part payment was made
+        const hasPartPay = events.some(ev => ev.month === m.serial && ev.amount > 0);
+        noteRow.textContent = (hasPartPay ? "Received " : "") + m.note;
         inner.appendChild(noteRow);
       }
     });
@@ -428,11 +498,16 @@ function renderAmortization(schedule, originalN) {
 // ============================================================
 // MODAL LOGIC
 // ============================================================
-function openModal(monthSerial, year, balance, currentRoi) {
+function openModal(monthSerial, year, balance, currentRoi, originalRoi) {
   selectedMonthSerial = monthSerial;
   selectedYear        = year;
   selectedMaxAmount   = balance;
   selectedCurrentRoi  = currentRoi;
+  selectedOriginalRoi = originalRoi;
+
+  const ROI_CAP    = 3;
+  const minAllowed = Math.max(1,  currentRoi - ROI_CAP);
+  const maxAllowed = Math.min(25, currentRoi + ROI_CAP);
 
   // Pre-fill if editing an existing event
   const existingEv = events.find(ev => ev.month === monthSerial && ev.year === year);
@@ -446,19 +521,19 @@ function openModal(monthSerial, year, balance, currentRoi) {
     document.querySelector(`input[name="alterOption"][value="reduceTenure"]`).checked = true;
   }
 
-  const P    = Number(loanAmountInput.value);
-  const rate = parseFloat(interestRateInput.value);
-  const N    = parseInt(tenureInput.value, 10);
-  const mName = new Date(year, 0).toLocaleString("default", { month: "short" });
-  // Recalculate month label
   const sched = dataForPdf || [];
   const match = sched.find(m => m.serial === monthSerial);
   const dispMonth = match
     ? new Date(match.year, match.month - 1).toLocaleString("default", { month: "long" })
     : "";
-  modalMonthLabel.textContent  = `Month ${monthSerial} – ${dispMonth} ${year}`;
-  maxAmountHint.textContent    = `Max allowed: ₹${balance.toLocaleString("en-IN")}`;
-  currentRoiHint.textContent   = `Current rate for this month: ${currentRoi}%`;
+  modalMonthLabel.textContent = `Month ${monthSerial} – ${dispMonth} ${year}`;
+  maxAmountHint.textContent   = `Max allowed: ₹${balance.toLocaleString("en-IN")}`;
+
+  // Two-line ROI hint
+  currentRoiHint.innerHTML =
+    `<span class="text-gray-500">Original loan rate: <strong>${originalRoi}%</strong></span><br>` +
+    `<span class="text-blue-600">Effective rate at this month: <strong>${currentRoi}%</strong> &nbsp;|&nbsp; ` +
+    `Allowed change: <strong>${minAllowed}% – ${maxAllowed}%</strong> (±${ROI_CAP}%)</span>`;
 
   alterModal.classList.remove("hidden");
   setTimeout(() => {
@@ -492,15 +567,23 @@ confirmBtn.addEventListener("click", () => {
   }
 
   // Validate ROI
-  if (newRoi !== null && (newRoi < 1 || newRoi > 25 || isNaN(newRoi))) {
-    alert("Interest rate must be between 1% and 25%.");
-    return;
-  }
-
-  // Validate same ROI
-  if (newRoi !== null && newRoi === selectedCurrentRoi && partAmount === 0) {
-    alert("The new interest rate is the same as the current rate. Please change it or add a part payment.");
-    return;
+  if (newRoi !== null) {
+    if (isNaN(newRoi) || newRoi < 1 || newRoi > 25) {
+      alert("Interest rate must be between 1% and 25%.");
+      return;
+    }
+    const ROI_CAP = 3;
+    const minAllowed = Math.max(1,  selectedCurrentRoi - ROI_CAP);
+    const maxAllowed = Math.min(25, selectedCurrentRoi + ROI_CAP);
+    if (newRoi < minAllowed || newRoi > maxAllowed) {
+      alert(`New rate must be within ±${ROI_CAP}% of the current effective rate (${selectedCurrentRoi}%).
+Allowed range: ${minAllowed}% – ${maxAllowed}%.`);
+      return;
+    }
+    if (newRoi === selectedCurrentRoi && partAmount === 0) {
+      alert("The new interest rate is the same as the current effective rate. Please change it or add a part payment.");
+      return;
+    }
   }
 
   // Validate part payment
@@ -547,7 +630,8 @@ document.addEventListener("click", (e) => {
     const year        = parseInt(e.target.getAttribute("data-year"));
     const balance     = Number(e.target.getAttribute("data-balance"));
     const roi         = Number(e.target.getAttribute("data-roi"));
-    openModal(monthSerial, year, balance, roi);
+    const origRoi     = Number(e.target.getAttribute("data-original-roi"));
+    openModal(monthSerial, year, balance, roi, origRoi);
   }
 });
 
@@ -588,3 +672,68 @@ if (downloadPdfBtn) {
 // INITIAL RENDER
 // ============================================================
 updateResults();
+
+
+// ============================================================
+// SERVICE WORKER REGISTRATION
+// ============================================================
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(() => console.log('Service Worker registered'))
+    .catch((err) => console.log('Service Worker failed:', err));
+}
+
+// ============================================================
+// PWA INSTALL BANNER — exact same as main calc
+// ============================================================
+let deferredPrompt;
+const popup = document.getElementById('installPopup');
+const addShortCutBtn = document.getElementById('addShortCutBtn');
+const closeShortCutBtn = document.getElementById('closeShortCutBtn');
+let popupTimer;
+let popupDelay = 15000;
+
+function showPopup() {
+  if (localStorage.getItem('pwaInstalled') === 'true') return;
+  popup.classList.remove('hidden');
+  popup.classList.add('opacity-0');
+  popup.classList.add('transition-opacity', 'duration-700');
+  setTimeout(() => {
+    popup.classList.remove('opacity-0');
+    popup.classList.add('opacity-100');
+  }, 50);
+}
+
+function schedulePopup(delay) {
+  clearTimeout(popupTimer);
+  popupTimer = setTimeout(() => showPopup(), delay);
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  schedulePopup(popupDelay);
+});
+
+addShortCutBtn.addEventListener('click', async () => {
+  clearTimeout(popupTimer);
+  popup.classList.add('hidden');
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      localStorage.setItem('pwaInstalled', 'true');
+    } else {
+      popupDelay = 30000;
+      schedulePopup(popupDelay);
+    }
+    deferredPrompt = null;
+  }
+});
+
+closeShortCutBtn.addEventListener('click', () => {
+  clearTimeout(popupTimer);
+  popup.classList.add('hidden');
+  popupDelay = 30000;
+  schedulePopup(popupDelay);
+});
