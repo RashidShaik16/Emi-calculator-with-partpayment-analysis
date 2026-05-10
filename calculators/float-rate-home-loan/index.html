@@ -7,10 +7,20 @@
 
   <title>Floating Rate Home Loan Simulator | KnowYourEMI</title>
   <meta name="description" content="Simulate how changes in interest rate and part payments affect your home loan EMI and tenure. Free floating rate home loan calculator by KnowYourEMI." />
+  <meta name="keywords" content="floating rate home loan calculator, floating interest rate EMI, home loan rate change simulator, part payment calculator, reduce EMI or tenure, RLLR calculator, MCLR home loan, prepayment home loan India, home loan amortization, KnowYourEMI" />
+  <meta name="application-name" content="KnowYourEMI" />
 
   <link rel="canonical" href="https://knowyouremi.in/calculators/float-rate-home-loan/" />
   <link rel="icon" href="../../favicon.png" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.json" />
+
+  <!-- PWA -->
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="KnowYourEMI" />
+  <meta name="mobile-web-app-capable" content="yes" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Floating Rate Home Loan Simulator | KnowYourEMI" />
@@ -18,6 +28,91 @@
   <meta property="og:url" content="https://knowyouremi.in/calculators/float-rate-home-loan/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="KnowYourEMI" />
+  <meta property="og:image" content="https://www.knowyouremi.in/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Floating Rate Home Loan Simulator | KnowYourEMI" />
+  <meta name="twitter:description" content="Simulate how rate changes and part payments affect your home loan. See EMI vs tenure tradeoffs instantly. Free tool by KnowYourEMI." />
+  <meta name="twitter:image" content="https://www.knowyouremi.in/og-image.jpg" />
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Floating Rate Home Loan Simulator",
+    "url": "https://knowyouremi.in/calculators/float-rate-home-loan/",
+    "logo": "https://www.knowyouremi.in/logo-112x112.jpg",
+    "description": "Free floating rate home loan simulator. Model interest rate changes, part payments, and see the impact on your EMI and tenure in real time.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "inLanguage": "en",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a floating rate home loan?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A floating rate home loan has an interest rate that changes over time based on a benchmark rate set by your bank or the RBI. When the benchmark moves, your loan rate moves with it, affecting your EMI or loan tenure." }
+      },
+      {
+        "@type": "Question",
+        "name": "How often does the bank reset my floating interest rate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Most banks reset floating rates quarterly or annually. For repo-linked loans (RLLR), resets can happen every quarter. For MCLR-linked loans, the reset period is typically 6 months or 1 year as specified in your sanction letter." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which is better after a rate change, reduce EMI or reduce tenure?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Reducing tenure saves more total interest as you finish the loan earlier. Reducing EMI lowers your monthly outflow. Choose reduce tenure if your income is stable, and reduce EMI if you need lower monthly payments." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a part payment and how does it help?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A part payment is a lump sum paid over your regular EMI, applied directly to the outstanding principal. This reduces future interest significantly, especially when made in the first half of the loan tenure." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do banks charge a fee for part payments on floating rate loans?",
+        "acceptedAnswer": { "@type": "Answer", "text": "As per RBI guidelines, banks and NBFCs cannot charge any prepayment penalty on floating rate home loans taken by individual borrowers." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between floating rate and fixed rate home loans?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A fixed rate loan locks your interest rate for the entire tenure, keeping EMIs predictable. A floating rate loan moves with the market, potentially saving money when rates fall but increasing payments when rates rise." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I combine a rate change and part payment in the same month?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The simulator lets you enter a new interest rate, a part payment amount, or both together in the same event. The part payment is applied first and then the new EMI or tenure is calculated based on the revised principal and new rate." }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is this simulator compared to my actual bank statement?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This simulator uses standard reducing balance amortization, which is the method all Indian banks use for home loans. Small differences may appear due to rounding, exact payment dates, or bank charges not modelled here." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best strategy to reduce total interest on a floating rate loan?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Make part payments early in the loan tenure and choose reduce tenure over reduce EMI whenever your bank resets to a lower rate. Even small annual lump sums in the first 5 years of a 20-year loan can save 3 to 5 years of EMIs." }
+      }
+    ]
+  }
+  </script>
 
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -106,10 +201,10 @@
       <img class="w-20 inline-block" src="../../logo.png" alt="KnowYourEMI logo" />
     </a>
     <div class="hidden md:flex space-x-6 text-sm font-medium">
-      <a href="../../index.html" class="hover:text-yellow-300 transition">EMI Calculator</a>
-      <a href="../../index.html#balance-transfer" class="hover:text-yellow-300 transition">Balance Transfer</a>
+      <a href="../../index.html" class="hover:text-yellow-300 transition">Personal Loan Calculator</a>
+      <a href="../../index.html#balanceTransfer" class="hover:text-yellow-300 transition">Balance Transfer Calculator</a>
       <a href="../eligibility/index.html" class="hover:text-yellow-300 transition">Check Eligibility</a>
-      <a href="../../index.html#faq" class="hover:text-yellow-300 transition">FAQs</a>
+      <a href="./index.html#faq-section" class="hover:text-yellow-300 transition">FAQs</a>
       <a href="../../blogs/index.html" class="hover:text-yellow-300 transition">Blog</a>
     </div>
     <button id="menu-toggle" class="md:hidden focus:outline-none">
@@ -119,10 +214,10 @@
     </button>
   </div>
   <div id="mobile-menu" class="hidden md:hidden bg-indigo-900 px-4 pb-4 space-y-2 text-sm">
-    <a href="../../index.html" class="block py-2 hover:text-yellow-300">EMI Calculator</a>
-    <a href="../../index.html#balance-transfer" class="block py-2 hover:text-yellow-300">Balance Transfer</a>
+    <a href="../../index.html" class="block py-2 hover:text-yellow-300">Personal Loan Calculator</a>
+    <a href="../../index.html#balanceTransfer" class="block py-2 hover:text-yellow-300">Balance Transfer Calculator</a>
     <a href="../eligibility/" class="block py-2 hover:text-yellow-300">Check Eligibility</a>
-    <a href="../../index.html#faq" class="block py-2 hover:text-yellow-300">FAQs</a>
+    <a href="./index.html#faq-section" class="block py-2 hover:text-yellow-300">FAQs</a>
     <a href="../../blogs/index.html" class="block py-2 hover:text-yellow-300">Blog</a>
   </div>
 </nav>
@@ -422,6 +517,170 @@
     </div>
   </section>
 
+  <!-- FAQ SECTION -->
+  <section id="faq-section" class="rounded-2xl overflow-hidden shadow-md">
+    <div class="bg-gradient-to-r from-blue-700 to-indigo-700 px-6 py-5">
+      <h2 class="text-white font-bold text-lg">Frequently Asked Questions</h2>
+      <p class="text-blue-200 text-xs mt-1">Everything you need to know about floating rate home loans</p>
+    </div>
+    <div class="bg-white px-6 py-8">
+      <div id="faqAccordion" class="space-y-4">
+
+        <!-- FAQ 1 -->
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>What is a floating rate home loan?</span>
+            <span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">
+              A floating rate home loan (also called a variable rate loan) has an interest rate that changes over time based on a benchmark rate set by your bank or the RBI. In India, most banks link their floating rates to the Repo Rate or an internal benchmark. When the benchmark moves, your loan rate moves with it, sometimes up, sometimes down. Unlike a fixed rate loan where the EMI is locked for the entire tenure, a floating rate loan means your EMI or loan duration can change at each reset.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>How often does the bank reset my floating interest rate?</span>
+            <span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">
+              It depends on your loan agreement. Most banks reset floating rates quarterly or annually. For repo-linked loans (RLLR), resets can happen as frequently as every quarter. For MCLR-linked loans, the reset period is typically 6 months or 1 year as specified in your sanction letter. You will receive a communication from your bank whenever your rate is revised. This simulator lets you add a rate change event at any month to see exactly how that revision affects your repayment.
+            </p>
+            <p class="py-3 text-sm font-medium text-yellow-700">
+              💡 Pro Tip: Check your loan sanction letter for the "rate reset clause". It tells you exactly how often your rate can change.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>When the rate changes, which option is better, reduce EMI or reduce tenure?</span>
+            <span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">
+              This is the most important decision in a floating rate loan. There is no single right answer, it depends on your situation.
+            </p>
+            <p class="py-3 text-sm text-gray-600">
+              <strong>Reduce tenure</strong> saves you significantly more total interest. You pay the same EMI but finish the loan earlier. This is the better choice if your income is stable and you can afford the current EMI comfortably.
+            </p>
+            <p class="py-3 text-sm text-gray-600">
+              <strong>Reduce EMI</strong> lowers your monthly outflow immediately, giving you more cash in hand every month. This is better if your finances are tight or if you want liquidity for other investments.
+            </p>
+            <p class="py-3 text-sm font-medium text-yellow-700">
+              💡 Pro Tip: Use this simulator to compare both options side by side, add the same event twice with different options and compare the total interest saved.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>What is a part payment and how does it help?</span>
+            <span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">
+              A part payment (also called a prepayment) is when you pay an extra lump sum amount over and above your regular EMI. This amount is applied directly to your outstanding principal, which reduces the base on which future interest is calculated. Even a single part payment early in the loan tenure can save lakhs in interest because interest compounds on the remaining principal for all remaining months.
+            </p>
+            <p class="py-3 text-sm font-medium text-yellow-700">
+              💡 Pro Tip: Part payments made in the first half of your loan tenure have a much higher impact than those made later, because interest is front-loaded in the amortization schedule.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>Do banks charge a fee for part payments on floating rate loans?</span>
+            <span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">
+              As per RBI guidelines, banks and NBFCs cannot charge any prepayment penalty on floating rate home loans taken by individual borrowers. This means you can make part payments at any time without any extra charges. However, some lenders may charge a small administrative fee or have a minimum prepayment amount. Always check your loan agreement or call your bank to confirm before making a payment.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>What is the difference between floating rate and fixed rate home loans?</span>
+            <span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">
+              A <strong>fixed rate loan</strong> locks your interest rate for the entire tenure or a defined period. Your EMI stays the same regardless of market conditions. This gives predictability but you miss out if rates fall.
+            </p>
+            <p class="py-3 text-sm text-gray-600">
+              A <strong>floating rate loan</strong> moves with the market. When rates fall (like during a rate cut cycle), your EMI or tenure reduces automatically. When rates rise, it increases. Historically in India, floating rates have worked out cheaper over a 15-20 year loan tenure compared to fixed rates.
+            </p>
+            <p class="py-3 text-sm font-medium text-yellow-700">
+              💡 Pro Tip: Most home loans in India today are floating rate. If you are offered a fixed rate, check if it converts to floating after 3-5 years, many do.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 7 -->
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>Can I combine a rate change and part payment in the same month?</span>
+            <span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">
+              Yes, and this simulator supports exactly that. When you click Pay on any month, the event modal lets you enter a new interest rate, a part payment amount, or both together. This reflects real-life scenarios where your bank resets your rate in the same month you make a bonus payment. The simulator applies the part payment first and then calculates the new EMI or tenure based on the revised principal and the new rate.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 8 -->
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>How accurate is this simulator compared to my actual bank statement?</span>
+            <span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">
+              This simulator uses standard reducing balance amortization, which is the method all Indian banks use for home loans. The interest for each month is calculated as (Outstanding Principal x Annual Rate) / 12. For a straightforward loan with no events, the schedule will match your bank statement almost exactly.
+            </p>
+            <p class="py-3 text-sm text-gray-600">
+              Small differences may appear because banks may round EMIs to the nearest rupee, apply part payments on specific dates within the month, or include processing fees, GST on charges, and prepayment fees, none of which are modelled here. Use this tool for planning and comparison, not as a substitute for your official bank statement.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 9 -->
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>What is the best strategy to reduce total interest on a floating rate loan?</span>
+            <span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">
+              The two most effective strategies are:
+            </p>
+            <p class="py-3 text-sm text-gray-600">
+              <strong>1. Make part payments early and consistently.</strong> Even small annual lump sums, like bonus payouts or tax refunds, applied to the principal in the first 5 years of a 20-year loan can save 3-5 years of EMIs.
+            </p>
+            <p class="py-3 text-sm text-gray-600">
+              <strong>2. Choose reduce tenure over reduce EMI</strong> whenever your bank resets to a lower rate. Your cash flow stays the same but you exit the loan years earlier, saving a large amount in interest.
+            </p>
+            <p class="py-3 text-sm font-medium text-yellow-700">
+              💡 Pro Tip: Simulate both strategies here before your next rate reset or bonus month, the interest saved column in the amortization table shows the exact impact.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
   <!-- FEEDBACK FORM - matching blogs style exactly -->
   <section id="feedback-section" style="margin-top: 60px;">
     <div style="border-top: 1px solid #e5e7eb; padding-top: 40px;">
@@ -475,11 +734,11 @@
     <div>
       <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
       <ul class="space-y-2 text-sm">
-        <li><a href="../../index.html" class="hover:underline">EMI Calculator</a></li>
+        <li><a href="../../index.html" class="hover:underline">Personal Loan Calculator</a></li>
         <li><a href="../../index.html#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
         <li><a href="../eligibility/" class="hover:underline">Loan Eligibility</a></li>
-        <li><a href="../../index.html#faq-section" class="hover:underline">FAQs</a></li>
-        <li><a href="../../index.html#feedback-section" class="hover:underline">Feedback</a></li>
+        <li><a href="./index.html#faq-section" class="hover:underline">FAQs</a></li>
+        <li><a href="./index.html#feedback-section" class="hover:underline">Feedback</a></li>
         <li><a href="../../blogs/index.html" class="hover:underline">Blog</a></li>
       </ul>
     </div>

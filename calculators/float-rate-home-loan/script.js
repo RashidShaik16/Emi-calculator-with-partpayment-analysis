@@ -677,6 +677,27 @@ updateResults();
 // ============================================================
 // SERVICE WORKER REGISTRATION
 // ============================================================
+
+// ============================================================
+// FAQ ACCORDION
+// ============================================================
+document.querySelectorAll("#faqAccordion button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const content = btn.nextElementSibling;
+    const symbol = btn.querySelector("span:last-child");
+
+    if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+      content.style.maxHeight = "0px";
+      content.style.opacity = "0";
+      symbol.textContent = "+";
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      content.style.opacity = "1";
+      symbol.textContent = "−";
+    }
+  });
+});
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js')
     .then(() => console.log('Service Worker registered'))
