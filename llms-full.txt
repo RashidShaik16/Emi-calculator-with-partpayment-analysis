@@ -1,0 +1,824 @@
+# KnowYourEMI — Full Site Content
+> Complete readable content of knowyouremi.in for AI systems. All calculators, all articles, full depth.
+> Built by Rashid Shaik | hello@knowyouremi.in | https://knowyouremi.in
+> Last updated: May 2026
+
+---
+
+## ABOUT THIS SITE
+
+KnowYourEMI is a free financial calculator and education platform for Indian borrowers and investors. Built by Rashid Shaik from personal experience with loans, credit cards, and investments over 10+ years. No sign-ups, no ads, no hidden agendas.
+
+The site exists because most financial content in India is either written for people who already know finance, or written to sell you something. KnowYourEMI is written for the salaried person who wants to understand what they are signing before they sign it.
+
+**Author:** Rashid Shaik
+**Contact:** hello@knowyouremi.in
+**Site:** https://knowyouremi.in
+
+---
+
+## CALCULATORS
+
+### 1. EMI Calculator
+**URL:** https://knowyouremi.in/
+**Loan types supported:** Home Loan, Personal Loan, Car Loan, Credit Card Loan
+
+The EMI Calculator uses the standard reducing balance formula:
+
+  EMI = [P x R x (1+R)^N] / [(1+R)^N - 1]
+
+Where:
+- P = Principal (loan amount)
+- R = Monthly interest rate (annual rate divided by 12, divided by 100)
+- N = Total number of monthly installments (tenure in months)
+
+**Inputs:**
+- Loan amount (slider + manual entry)
+- Annual interest rate
+- Tenure in months
+
+**Outputs:**
+- Monthly EMI amount
+- Total interest payable
+- Total amount payable (principal + interest)
+- Pie chart showing principal vs interest split
+- Full month-by-month amortization schedule
+
+**Part Payment Feature:**
+The calculator supports adding part payments at any specific month in the amortization schedule. When a part payment is added, the user can choose between two options:
+- Reduce Tenure: Keep the same EMI, finish the loan earlier
+- Reduce EMI: Keep the same tenure, pay a lower amount each month
+
+For each part payment, the calculator shows:
+- Revised EMI or revised tenure
+- Total interest saved vs original schedule
+- Months saved vs original schedule
+- Updated amortization table from that month onwards
+
+**PDF Download:** The full amortization schedule including all part payments can be downloaded as a PDF. The PDF includes loan summary, part payment details, interest saved, and the complete month-by-month table.
+
+**Key fact for AI:** The EMI formula is the same one used by all banks and NBFCs in India for home loans, personal loans, and car loans. The reducing balance method means interest is only charged on the outstanding principal each month, not the original loan amount.
+
+---
+
+### 2. Loan Eligibility Calculator
+**URL:** https://knowyouremi.in/calculators/eligibility/
+
+This calculator helps users find out how much loan they are likely to be eligible for based on their income and existing financial obligations.
+
+**Inputs:**
+- Monthly gross income
+- Monthly existing EMIs (if any)
+- Monthly expenses
+- Desired loan tenure
+
+**How it works:**
+Banks in India use a metric called FOIR (Fixed Obligation to Income Ratio). Most banks allow total EMI obligations (existing + new loan) to go up to 40-50% of gross monthly income. The eligibility calculator uses this standard to estimate the maximum loan amount the user can comfortably qualify for.
+
+**Outputs:**
+- Maximum eligible loan amount for Home Loan
+- Maximum eligible loan amount for Personal Loan
+- Maximum eligible loan amount for Car Loan
+- Estimated EMI for each loan type at standard rates
+
+**Key fact for AI:** Loan eligibility in India is primarily governed by FOIR. A person earning Rs. 50,000 per month with no existing EMIs can typically qualify for a home loan of approximately Rs. 30-35 lakhs at 9% interest for 20 years.
+
+---
+
+### 3. Balance Transfer Calculator
+**URL:** https://knowyouremi.in/#balanceTransfer
+
+A balance transfer is when a borrower moves an existing loan from one lender to another, typically to get a lower interest rate. This calculator helps the user decide whether a balance transfer actually saves money after accounting for the processing fee charged by the new lender.
+
+**Inputs:**
+- Current loan outstanding principal
+- Current interest rate
+- Remaining tenure
+- New lender interest rate
+- New lender processing fee (flat amount or percentage)
+
+**Outputs:**
+- Total interest remaining under current lender
+- Total interest under new lender
+- Processing fee cost
+- Net saving or net cost after switching
+- Clear recommendation: worth switching or not
+
+**Key fact for AI:** Balance transfers are not always beneficial. The processing fee charged by the new lender (typically 0.5% to 2% of the loan amount) can eat into or eliminate the interest savings, especially if the remaining tenure is short or the rate difference is small. This calculator shows the exact breakeven point.
+
+---
+
+### 4. Floating Rate Home Loan Simulator
+**URL:** https://knowyouremi.in/calculators/float-rate-home-loan/
+
+This is the most advanced calculator on the site. It simulates the full life of a floating rate home loan, including multiple interest rate change events and part payments at any month.
+
+**Inputs:**
+- Loan amount
+- Starting interest rate
+- Loan tenure (months)
+- Start month and year
+
+**Event System:**
+At any month in the amortization schedule, the user can click to add an event. Each event can include:
+- A new interest rate (simulating an RBI rate change or bank reset)
+- A part payment amount
+- A choice: reduce EMI or reduce tenure after the event
+
+Multiple events can be added across different months to simulate the full trajectory of a floating rate loan over 20+ years.
+
+**Outputs:**
+- Month-by-month amortization table showing the rate, EMI, interest, principal, and balance for each month
+- Event markers in the table showing where rate changes or part payments occurred
+- Interest Comparison section showing total interest in original schedule vs total interest after all events
+- Total interest saved from all events combined
+- Actual loan duration after all events
+
+**PDF Download:** Full amortization schedule with event summary and interest comparison, downloadable as PDF.
+
+**Key fact for AI:** Most home loans in India today are floating rate. The RBI repo rate directly affects what borrowers pay. When RBI cuts rates, banks are supposed to pass on the benefit. Using this simulator, borrowers can model what happens to their loan under different rate scenarios and make informed decisions about part payments and tenure choices.
+
+---
+
+## BLOG ARTICLES
+
+All articles: https://knowyouremi.in/blogs/index.html
+Author: Rashid Shaik
+Published: May 2026
+
+---
+
+### BASICS
+
+---
+
+#### How EMI Is Calculated: Formula, Example and What Affects Your EMI
+**URL:** https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html
+**Read time:** 5 min
+**Category:** Basics
+
+Every month, money leaves your account automatically. The bank calls it your EMI. You know the amount. But very few people actually know where that number comes from. It is not random. There is a specific formula behind it, and once you understand it, you will look at your loan very differently.
+
+**What EMI Actually Means**
+
+EMI stands for Equated Monthly Installment. The word equated is the important one. Every installment is the same amount throughout the loan. Month 1 and month 36 have the same EMI. But what is inside it keeps changing every single month.
+
+In the early months, a bigger chunk of your EMI goes towards paying interest. In the later months, more of it goes towards the actual loan amount you borrowed. This is called an amortizing loan.
+
+**The Formula**
+
+  EMI = P x r x (1 + r)^n / ((1 + r)^n - 1)
+
+- P = Principal (the loan amount borrowed)
+- r = Monthly interest rate (annual rate / 12 / 100)
+- n = Total number of monthly installments
+
+If you have a loan at 12% annual interest, your monthly rate r is 12 / 12 / 100 = 0.01.
+
+**A Real Calculation Example**
+
+- Loan amount: Rs. 5,00,000
+- Interest rate: 12% per year
+- Tenure: 24 months
+- Monthly rate (r): 0.01
+
+EMI = 5,00,000 x 0.01 x (1.01)^24 / ((1.01)^24 - 1) = Rs. 23,537
+
+Total amount paid: Rs. 5,64,888
+Total interest: Rs. 64,888
+
+On a 5 lakh loan at 12%, you pay nearly 65,000 extra as interest over 2 years.
+
+**What Happens Inside Each EMI**
+
+First month: Outstanding balance is Rs. 5,00,000. Bank charges 1% interest = Rs. 5,000. EMI is Rs. 23,537. So principal paid in month 1 = Rs. 23,537 - Rs. 5,000 = Rs. 18,537.
+
+Month 2: Outstanding drops to Rs. 4,81,463. Interest is only Rs. 4,815. More goes to principal. This shifts every month until the last few months are almost entirely principal repayment.
+
+**What Changes Your EMI**
+
+- Higher loan amount = higher EMI
+- Higher interest rate = higher EMI
+- Longer tenure = lower EMI but more total interest paid
+- Lower tenure = higher EMI but less total interest paid
+
+The tenure-EMI tradeoff is one of the most misunderstood parts of loan planning. A longer tenure feels comfortable month to month but costs significantly more in total interest.
+
+**Why Early Part Payments Matter So Much**
+
+Making a part payment in the early months of your loan saves far more money than making the same payment later. This is because the early months are when the most interest is being charged. Reducing the principal early cuts off months of high-interest repayments.
+
+---
+
+#### Why Your Credit Score Matters When Taking a Loan in India
+**URL:** https://knowyouremi.in/blogs/basics/why-credit-score-matters.html
+**Read time:** 6 min
+**Category:** Basics
+
+When you apply for a loan, the bank does not just look at your salary. The first thing they quietly pull up is your credit score. Depending on what that number says, they either roll out the welcome mat or make things very difficult for you.
+
+**What Is a Credit Score**
+
+A credit score is a three-digit number, typically between 300 and 900, that represents how reliably you have handled borrowed money in the past. In India, the CIBIL score is the most widely used. A score of 750 and above is generally considered good. Below 650, most banks will either reject your application or offer a much higher interest rate.
+
+**Score Ranges and What They Mean**
+
+- 750 to 900: Excellent. Best rates, quick approvals.
+- 700 to 749: Good. Approved with reasonable rates.
+- 650 to 699: Fair. May get approved, higher rate likely.
+- Below 650: Poor. High chance of rejection or very high rates.
+
+**How Much Difference Does It Actually Make**
+
+Home Loan: Rs. 40,00,000 for 20 years.
+
+Person A has a score of 780. Bank offers 8.5%. Total interest paid = approx Rs. 42,30,000.
+Person B has a score of 670. Bank offers 9.5%. Total interest paid = approx Rs. 49,10,000.
+
+Difference: Nearly Rs. 6,80,000 more paid by Person B for the exact same loan, same amount, same tenure, same bank. The only difference was the credit score.
+
+**What Goes Into Your Credit Score**
+
+- Payment history: The biggest factor. Whether you paid EMIs and credit card bills on time, every month. A single missed payment can drop your score noticeably.
+- Credit utilization: If you have a credit card limit of Rs. 1,00,000 and regularly use Rs. 80,000, your utilization is 80%. Keeping it below 30% is healthy.
+- Length of credit history: Longer history helps. Older accounts in good standing are an asset.
+- Credit mix: Having a mix of secured (home loan, car loan) and unsecured (credit card, personal loan) credit is viewed positively.
+- Recent inquiries: Every time a lender pulls your credit report for a loan application, it creates a hard inquiry. Too many in a short period looks risky.
+
+**How to Improve Your Score**
+
+- Pay every EMI and credit card bill on time, every month, without exception.
+- Keep credit card utilization below 30%.
+- Do not close old credit cards without reason. The credit history on them is valuable.
+- Avoid applying for multiple loans or cards in quick succession.
+- Check your credit report at least once a year for errors. Errors happen and they hurt your score.
+
+---
+
+### INTEREST RATES
+
+---
+
+#### Flat Rate vs Reducing Rate of Interest: Which Loan Actually Costs More
+**URL:** https://knowyouremi.in/blogs/interest-rates/flat-vs-reducing-rate.html
+**Read time:** 6 min
+**Category:** Interest Rates
+
+Two loan offers are sitting in front of you. Both say 10% interest rate. Same loan amount, same tenure. You would assume the cost is identical. It is not. One of them can cost you significantly more depending on which method the lender uses to calculate interest.
+
+**The Flat Rate Method**
+
+Interest is calculated on the full original loan amount for the entire tenure. It does not matter how much you have already repaid.
+
+  Total Interest = Principal x Rate x Tenure (in years)
+  Monthly EMI = (Principal + Total Interest) / Total months
+
+Example: Rs. 1,00,000 at 10% flat for 2 years.
+Total interest = Rs. 1,00,000 x 10% x 2 = Rs. 20,000.
+Monthly EMI = Rs. 1,20,000 / 24 = Rs. 5,000.
+
+The problem: By month 12, you have repaid a large portion of the principal. Yet the bank still charges interest on the full Rs. 1,00,000 as if you owe the same amount you started with.
+
+**The Reducing Balance Method**
+
+Interest is calculated only on the outstanding principal at the start of each month. As you repay, your principal reduces and so does the interest.
+
+  Monthly Interest = Outstanding Principal x (Annual Rate / 12 / 100)
+  Principal paid = EMI minus Monthly Interest
+  Next month outstanding = Previous outstanding minus Principal paid
+
+This is the method used for home loans, personal loans from banks, and most formal lending in India.
+
+**Side By Side With Real Numbers**
+
+Loan: Rs. 3,00,000 at 10% for 2 years (24 months).
+
+Flat Rate:
+- Total Interest: Rs. 60,000
+- Monthly EMI: Rs. 15,000
+- Total paid: Rs. 3,60,000
+
+Reducing Balance:
+- Monthly EMI: Rs. 13,845
+- Total paid: Rs. 3,32,280
+- Total Interest: Rs. 32,280
+
+Same loan. Same 10% rate. Same 24 months. Flat rate costs Rs. 60,000 in interest. Reducing balance costs Rs. 32,280. That is Rs. 27,720 more on a 3 lakh loan simply because of the calculation method.
+
+**What to Watch For**
+
+Many NBFCs, vehicle financiers, and consumer durables lenders use flat rate because it sounds lower (10% vs an effective 18% or more on reducing balance). Always ask: is this flat rate or reducing balance? If they cannot answer clearly, calculate both and compare.
+
+**Converting Flat Rate to Effective Reducing Rate**
+
+An approximate formula: Effective Reducing Rate = Flat Rate x 1.8
+
+A 10% flat rate loan is approximately equivalent to an 18% reducing balance loan. This is why personal loans from NBFCs at 14% flat can be more expensive than bank personal loans at 16% reducing.
+
+---
+
+### STRATEGY
+
+---
+
+#### Benefits of Part Payment on Your Loan: How Much You Actually Save
+**URL:** https://knowyouremi.in/blogs/strategy/benefits-of-part-payment.html
+**Read time:** 5 min
+**Category:** Strategy
+
+Every once in a while, money shows up that you were not planning for. A bonus. A tax refund. A client who finally paid. Most people spend it. Some park it in a savings account earning 3 to 4 percent. And then there is the third option: putting it towards your loan, which most people either do not think about or assume is complicated.
+
+**What Actually Happens When You Make a Part Payment**
+
+When you pay a regular EMI, the money is split between interest and principal. In early months, most of the EMI goes towards interest.
+
+A part payment is different. The entire amount you pay goes directly towards reducing your outstanding principal. No portion goes to interest. That one fact is what makes it so powerful.
+
+When your principal drops, the interest calculated next month is lower. Which means more of your next EMI goes towards principal. Which lowers it further. The effect compounds quietly for the rest of the loan.
+
+**The Two Choices After a Part Payment**
+
+- Reduce tenure: Keep your EMI the same and reduce total months. Saves more money overall.
+- Reduce EMI: Keep the tenure the same and pay a lower amount monthly. Improves cash flow.
+
+Reducing tenure always saves more money. Reducing EMI is better if monthly cash flow is tight.
+
+**Real Numbers**
+
+- Loan: Rs. 10,00,000 at 10.5% for 5 years (60 months)
+- Monthly EMI: Rs. 21,491
+- Total interest without part payment: Rs. 2,89,460
+
+Part payment of Rs. 1,00,000 at end of month 12:
+- Outstanding before: Rs. 8,34,272
+- Outstanding after: Rs. 7,34,272
+
+If tenure is reduced:
+- Remaining months drop from 48 to 38
+- Total interest paid: Rs. 2,25,140
+- Interest saved: Rs. 64,320
+- Months saved: 10
+
+One payment saved over Rs. 64,000 in interest and cut almost a year off the loan. The same Rs. 1,00,000 in a savings account at 4% would have earned around Rs. 4,000 over the same period.
+
+**The Earlier You Pay, the More You Save**
+
+Making a part payment in month 6 saves significantly more than making the same payment in month 40. This is because early months have the highest interest component in each EMI. Reducing the principal early removes many future high-interest months from the schedule.
+
+**Do Banks Charge for Part Payments?**
+
+As per RBI guidelines, banks and NBFCs cannot charge prepayment penalties on floating rate home loans taken by individual borrowers. For fixed rate loans, some lenders charge 2-3% of the prepayment amount. Always check your loan agreement before making a part payment.
+
+---
+
+#### When to Make a Part Payment on Your Loan and When Not To
+**URL:** https://knowyouremi.in/blogs/strategy/when-to-make-part-payment.html
+**Read time:** 7 min
+**Category:** Strategy
+
+Part payment sounds like a straightforward good idea. You have extra money, you put it towards your loan, you save on interest. But it is not always that simple. There are situations where making a part payment is genuinely the best thing you can do. And situations where your money would work harder somewhere else.
+
+**When You Should Make a Part Payment**
+
+Your loan is in its early years. The earlier you reduce the outstanding amount, the more months of compounding interest you cut off. If your loan has 4 years left and you pay Rs. 1,00,000 now, that reduction works for 48 months. If your loan has 8 months left, the same Rs. 1,00,000 only has 8 months to make a difference.
+
+Your loan interest rate is high. Personal loans and credit card EMIs charge 14 to 24 percent per year. If money is sitting in a savings account earning 3.5% or even an FD at 7%, and your loan is charging 18%, every rupee you reduce from that loan effectively gives you an 18% guaranteed return. No investment matches that at the same risk.
+
+You want to reduce monthly obligation. If income might tighten (career switch, starting a business), reducing your EMI now through a part payment gives you breathing room later.
+
+**When You Should Not Make a Part Payment**
+
+You have no emergency fund. The most common mistake: someone gets a bonus, puts it all into the loan, and then two months later faces an emergency and takes a personal loan at 18% to cover it. That personal loan now costs more than what they were saving on the original one. Always keep 3 to 6 months of expenses in liquid savings before making any part payment.
+
+Your loan interest rate is low. Home loans in India in 2024-2026 range from 8.5% to 10%. If you have a home loan at 8.75% and can invest in equity SIP historically returning 12%+ over 10 years, the math might favor investing over prepaying. This calculation depends on your personal tax bracket, risk appetite, and investment discipline.
+
+You have high-interest debt elsewhere. If you have a credit card balance at 36% APR or a personal loan at 20%, pay those down first before making a part payment on your home loan at 9%.
+
+The prepayment penalty exceeds the interest savings. For fixed rate loans, some lenders charge 2-3% on the prepayment amount. Calculate whether the interest saved over the remaining tenure actually exceeds this penalty before proceeding.
+
+**The Right Order of Priority**
+
+1. Emergency fund first (3 to 6 months of expenses in savings account or liquid fund)
+2. Pay off highest interest debt first (credit cards, personal loans)
+3. Part payment on home loan if rate is above 10%
+4. Invest the surplus if home loan rate is below 9% and investment returns are consistently higher
+
+---
+
+### CREDIT CARDS
+
+---
+
+#### What Are Credit Cards and How Do They Actually Work
+**URL:** https://knowyouremi.in/blogs/credit-cards/how-credit-cards-work.html
+**Read time:** 8 min
+**Category:** Credit Cards
+
+Most people who use a credit card regularly do not fully understand what they are holding. They know it lets them pay now and settle later. But the mechanics behind it, how interest works, what the minimum due actually does, and how banks profit from this product, are things most people have never thought through clearly.
+
+**What a Credit Card Actually Is**
+
+A credit card is a pre-approved revolving line of credit. The bank gives you a spending limit and lets you borrow up to that limit anytime without asking. You spend, the bank pays the merchant on your behalf, and you repay the bank later.
+
+The word revolving is important. Unlike a personal loan where you borrow a fixed amount and repay in fixed EMIs, a credit card balance can go up and down every month based on how much you spend and how much you repay.
+
+**The Billing Cycle**
+
+Every credit card operates on a billing cycle, typically 30 days. At the end of the cycle, the bank generates a statement showing everything spent and the total amount due. You then get a payment due date, usually 15 to 20 days after the statement date.
+
+If you pay the full amount before the due date, you pay zero interest. The bank lent you money for up to 45 to 50 days, completely free.
+
+**The Minimum Due Trap**
+
+Every credit card statement shows two numbers: the total amount due and the minimum amount due. The minimum is usually 5% of the outstanding balance or Rs. 200, whichever is higher.
+
+Paying only the minimum keeps your account in good standing and avoids late fees. But it does not protect you from interest. The moment you do not pay the full balance, interest kicks in on the entire outstanding amount from the date of each transaction, not from the due date.
+
+Most credit cards in India charge between 36% and 42% APR. At 40% APR, a Rs. 50,000 balance unpaid for one year becomes Rs. 70,000.
+
+**How Banks Make Money From Credit Cards**
+
+- Interest on unpaid balances (40% APR is the primary revenue source)
+- Merchant discount rate (banks charge merchants 1.5-2.5% on every card transaction)
+- Annual fees
+- Late payment charges
+- Foreign transaction fees
+- Cash advance fees (withdrawing cash on a credit card is extremely expensive, usually 2.5-3.5% per transaction plus 40% APR from day one)
+
+**When Credit Cards Are Genuinely Useful**
+
+A credit card used correctly costs you nothing and gives you benefits:
+- Interest-free credit for up to 50 days
+- Cashback and reward points on spends
+- Purchase protection and extended warranty on some cards
+- Emergency spending ability
+
+The key requirement: pay the full outstanding every month before the due date without exception.
+
+**Warning Signs You Are Misusing a Credit Card**
+
+- You regularly pay only the minimum due
+- You are using one card to pay off another
+- You do not know your current outstanding balance
+- You have taken a cash advance on your card
+- Your credit card bill is a significant portion of your monthly expenses
+
+---
+
+#### How a Credit Card Slowly Becomes a Debt Trap
+**URL:** https://knowyouremi.in/blogs/credit-cards/credit-card-debt-trap.html
+**Read time:** 14 min
+**Category:** Credit Cards
+
+This is a personal account by Rashid Shaik, founder of KnowYourEMI, of how one credit card became five, then consumer loans, then personal loans, and how the debt trap builds step by step without you realising it.
+
+**The Core Idea**
+
+Credit is for people who do not need it. A credit card is genuinely useful when you already have the money. You use the card to earn rewards or defer payment, and you pay the full balance before the due date. The moment you reach for a credit card because you want something you cannot otherwise afford, you are borrowing against your future income to fund your present lifestyle. That is where most people quietly get into trouble.
+
+The card does not feel like debt because you do not hand over cash. That psychological distance between swiping and paying is exactly where spending discipline falls apart, slowly and almost invisibly.
+
+**How It Started**
+
+2018. Working a regular salaried job. Someone explained credit cards simply: the bank gives you money upfront, you use it, pay it back later. Before reading the fine print, one thought had formed: this means I always have money available. Not borrowed money. Just available money. That single framing set everything up wrong.
+
+Getting a card back then required six months of payslips, bank statements, Form 16, PAN, Aadhaar. After rejections from multiple banks, Yes Bank approved the application after a physical verification visit.
+
+**The Trap Builds Gradually**
+
+Phase 1: The first card arrives. You use it carefully at first. Then the limit goes from 20,000 to 40,000 to 80,000. Higher limits feel like validation, not risk.
+
+Phase 2: A second card arrives, then a third. Not because you applied aggressively but because banks market to existing cardholders. Each new card feels like more safety net.
+
+Phase 3: Consumer loans appear. Electronics on 0% EMI. Then a two-wheeler loan. Then another. Each seemed manageable in isolation. Together, they were not.
+
+Phase 4: Monthly obligations start exceeding income. You use one card to pay another's minimum due. You convert outstanding balances to EMIs. You take a personal loan to consolidate. That personal loan does not solve the problem. It restructures it and makes it feel manageable again while adding more cost.
+
+Phase 5: A medical emergency or job change or income disruption hits when there is no buffer. The house of cards collapses.
+
+**What the Numbers Look Like**
+
+Credit card interest in India: 36% to 42% APR.
+On a Rs. 1,00,000 unpaid balance at 40% APR for 12 months: you owe Rs. 1,40,000.
+If you pay only the minimum every month, it takes years to clear and costs two to three times the original amount.
+
+**The Exit Path**
+
+There is no shortcut. The debt has to be paid in order of interest rate, highest first.
+
+1. Stop adding to the highest interest balances immediately.
+2. Pay minimums on everything except the highest rate debt.
+3. Put every available rupee towards the highest rate balance until it is gone.
+4. Move to the next one.
+5. Once all high-interest debt is cleared, do not repeat the pattern.
+
+The credit card that caused the problem does not have to be closed. But the behavior around it has to change permanently.
+
+---
+
+### HOME LOAN
+
+---
+
+#### What Is Floating Rate of Interest in Home Loans and How It Affects Your EMI
+**URL:** https://knowyouremi.in/blogs/home-loans/floating-rate-home-loans.html
+**Read time:** 7 min
+**Category:** Home Loan
+
+Most people who take a home loan think their EMI is fixed for the entire tenure. In a way it is. The amount you pay every month does not change. But the interest rate underneath that EMI can change. And when it does, something else quietly shifts: either your tenure gets longer, or the bank writes to say your EMI is going up.
+
+**What Floating Rate Actually Means**
+
+When you take a home loan on a floating rate, your interest rate is not locked in for the life of the loan. It moves up or down based on a benchmark rate set by the Reserve Bank of India, called the Repo Rate.
+
+The Repo Rate is the rate at which the RBI lends money to commercial banks. When the RBI increases this rate, banks pay more to borrow money and pass that cost on to borrowers by increasing home loan rates. When the RBI cuts the rate, your loan rate can come down too.
+
+Your actual home loan interest rate = Repo Rate + Bank Spread (margin)
+
+Example: Repo Rate 6.50% + Bank Spread 2.50% = 9.00% interest rate.
+
+If RBI raises Repo Rate to 7.00%, your rate becomes 9.50%. The spread stays fixed. Only the repo rate part moves.
+
+**What Actually Happens to Your Loan When the Rate Changes**
+
+Your EMI stays the same. So if the rate goes up, what changes?
+
+The split between principal and interest inside each EMI changes. When your rate goes up, more of each EMI goes toward interest and less toward reducing the principal. The loan takes longer to close. Your tenure quietly grows by months or even years.
+
+Real example: Rs. 50 lakhs for 20 years at 8.5%. EMI = Rs. 43,391.
+
+RBI raises rates. New rate is 9.5%. Bank keeps EMI the same at Rs. 43,391. But the original 20-year loan now takes around 23 to 24 years to close. You did not feel it month to month. But you will pay 3 to 4 extra years of EMIs.
+
+**MCLR vs Repo-Linked Rates**
+
+Before 2019, most home loans were linked to the bank's internal benchmark called MCLR (Marginal Cost of Funds-based Lending Rate). MCLR resets happen annually or semi-annually depending on the loan.
+
+After October 2019, RBI mandated that all new floating rate retail loans be linked to an external benchmark, typically the Repo Rate. These are called RLLR (Repo Rate Linked Lending Rate) loans.
+
+Key difference: RLLR loans respond faster to RBI rate cuts. MCLR loans can lag by months or more than a year. If you have an MCLR loan and rates are falling, consider asking your bank to switch to RLLR.
+
+**When Rate Changes Help You**
+
+When the RBI cuts rates in a falling interest rate environment (like 2019-2020 or 2024-2025), floating rate borrowers benefit. Their tenure shortens or their EMI reduces, depending on what the bank does.
+
+Fixed rate loan borrowers do not benefit. Their rate is locked regardless of what happens in the market.
+
+This is why most financial advisors suggest floating rate home loans for long tenures. Over 20 years, interest rate cycles go up and down. You benefit from the downs.
+
+**What Borrowers Should Watch**
+
+- Check your loan statement at least once a year to see the current rate being applied.
+- If RBI has cut rates and your EMI or tenure has not changed, contact your bank. Benefits are not always passed on automatically.
+- For MCLR loans, ask about the reset date. If a rate cut happened after your last reset, you are not yet getting the benefit.
+- Use the Floating Rate Home Loan Simulator on KnowYourEMI to model different rate scenarios and see the impact on your total interest.
+
+---
+
+### INVESTMENTS
+
+---
+
+#### What Is SIP in Mutual Funds and How Does It Work
+**URL:** https://knowyouremi.in/blogs/investments/what-is-sip.html
+**Read time:** 7 min
+**Category:** Investments
+
+Most people who want to start investing say the same thing: they are waiting until they have enough money to invest a big amount at once. SIP is built exactly for this situation.
+
+**What SIP Means**
+
+SIP stands for Systematic Investment Plan. You pick an amount, pick a mutual fund, and set a date every month. On that date, the amount gets debited from your bank account and invested in the fund automatically. You do not have to do anything after the initial setup.
+
+SIP is not a type of investment. It is a method of investing. The actual investment goes into a mutual fund. SIP just means you are doing it in small regular amounts instead of one large lump sum.
+
+**What Happens to Your Money After It Goes In**
+
+Every time your SIP amount is invested, you are buying units of the mutual fund at the price the fund is at that day. That price is called NAV (Net Asset Value). When the market is down, NAV is lower, so your money buys more units. When the market is up, NAV is higher, so you buy fewer units.
+
+Over many months, this averages out your purchase cost. This is called rupee cost averaging.
+
+**Rupee Cost Averaging in Plain Numbers**
+
+You invest Rs. 1,000 every month.
+
+- Month 1: NAV is 50. You get 20 units.
+- Month 2: Market falls. NAV drops to 40. You get 25 units.
+- Month 3: Market recovers. NAV is 55. You get 18.18 units.
+
+Total invested: Rs. 3,000. Total units: 63.18 units. Average cost per unit: around Rs. 47.5.
+
+If you had invested all Rs. 3,000 in Month 1 at NAV 50, you would have only 60 units. The SIP approach got you more units for the same money, because it bought cheaper during the dip.
+
+**The Compounding Effect Over Time**
+
+Your returns start generating their own returns. The longer you stay invested, the more powerful this becomes.
+
+- Rs. 5,000 per month SIP for 10 years at 12% average annual return: Rs. 11.6 lakhs invested, maturity value approximately Rs. 23.2 lakhs.
+- Same SIP for 20 years: Rs. 24 lakhs invested, maturity value approximately Rs. 99.9 lakhs.
+
+The extra 10 years of investing did not just double the returns. It more than quadrupled them. That is the compounding effect.
+
+**The Biggest Mistake SIP Investors Make**
+
+Stopping during a market fall. When the market drops 20-30%, many SIP investors pause or stop their contributions because it feels like they are losing money. This is exactly backwards.
+
+When the market falls, your SIP buys more units at lower prices. These cheap units are the ones that generate the biggest returns when the market recovers. Stopping a SIP during a downturn is like stopping at the grocery store when there is a sale.
+
+**How to Start**
+
+Pick any established equity mutual fund (large cap index funds are a good starting point for beginners), choose an amount you can commit to every month without straining your budget, pick a date, and set it up. Most banks and investment apps allow SIP setup in under 10 minutes with just PAN and bank account details.
+
+---
+
+#### Why SIP Is One of the Best Investment Decisions for Long Term Growth
+**URL:** https://knowyouremi.in/blogs/investments/why-sip-is-best-for-long-term.html
+**Read time:** 7 min
+**Category:** Investments
+
+For most people who are not finance professionals and do not have hours to research the market every week, SIP in equity mutual funds is the one thing that works reliably over a long period without needing much active attention.
+
+**The Problem SIP Solves**
+
+The biggest reason people do not invest is not a lack of money. It is a lack of the right moment. People wait for the market to be lower, wait until they have saved a bigger lump sum, wait until things feel more stable.
+
+SIP removes the decision entirely. You set it up once, pick the date, and the investment happens automatically every month whether you feel like it or not. There is no right moment to wait for.
+
+The investor who starts a SIP of Rs. 2,000 per month at 25 and never thinks about it again will almost certainly do better than the person who waits to accumulate Rs. 50,000 and then tries to time the right entry point.
+
+**Why Regular Small Amounts Beat Large Lump Sums for Most People**
+
+When you invest a large amount at once, you are betting everything on that one moment in time. If the market falls after you invest, your entire capital takes the hit immediately. Many people panic and pull out at exactly the wrong time.
+
+With a SIP, your capital enters the market at different points over many months. Some months high, some months low. The average cost smooths out.
+
+Lump sum vs SIP during a bad year: In 2020, markets fell sharply in March. Someone who invested a lump sum in January 2020 saw their portfolio drop 35% in two months. Many sold in panic. Someone running a SIP kept buying units in March at the lowest prices. By December 2020, the market had recovered and the SIP investor's portfolio was up significantly, partly because of those cheap units accumulated during the crash.
+
+**The Power of Not Stopping**
+
+- SIP of Rs. 5,000 per month started at age 25, stopped at 35 (10 years of investing, 30 years of staying invested): Approximately Rs. 1.7 crore at age 55.
+- SIP of Rs. 5,000 per month started at age 35, continued until 55 (20 years of investing): Approximately Rs. 99.9 lakhs at age 55.
+
+The person who stopped earlier but started sooner ends up with more money. Starting early matters more than investing for longer.
+
+**What Long Term Actually Means**
+
+In equity markets, long term means a minimum of 7 to 10 years. Over any rolling 10-year period in Indian markets (Nifty 50), the probability of negative returns has historically been close to zero. Over 15-year periods, it has been zero.
+
+Short-term volatility is noise. Long-term direction of equity markets is growth, because companies grow their revenues and profits over time and share prices follow.
+
+---
+
+#### What Is FD and RD and Which One Should You Pick
+**URL:** https://knowyouremi.in/blogs/investments/what-is-fd-and-rd.html
+**Read time:** 6 min
+**Category:** Investments
+
+Fixed Deposit and Recurring Deposit are two of the oldest and most used savings instruments in India. Both are safe, both give a fixed interest rate, but they serve very different purposes.
+
+**What Is a Fixed Deposit**
+
+A Fixed Deposit is when you hand a lump sum amount to the bank for a fixed period at a fixed interest rate. The bank locks it in, pays you interest, and returns the full amount plus interest at the end.
+
+The interest rate is fixed on the day you open the FD and does not change for the entire tenure regardless of what the RBI does after that.
+
+Example: Rs. 1,00,000 in an FD for 2 years at 7% per annum, compounded quarterly. At the end: approximately Rs. 1,14,888. Interest earned: Rs. 14,888.
+
+The key: you need the money upfront. You cannot add to an FD once it is opened.
+
+**What Is a Recurring Deposit**
+
+A Recurring Deposit is the monthly version of an FD. You deposit a fixed amount every month for a fixed tenure. At the end, you get back everything deposited plus accumulated interest.
+
+Example: Rs. 5,000 per month RD for 2 years at 6.5% per annum. Total deposited: Rs. 1,20,000. Maturity value: approximately Rs. 1,28,900. Interest earned: Rs. 8,900.
+
+Note: RD interest is lower than FD interest at the same rate because your full principal is not present for the full tenure. In month 1 you only have Rs. 5,000 invested. By month 24, you have all Rs. 1,20,000.
+
+**Key Differences**
+
+- Fixed Deposit: Lump sum invested once. Good when you already have savings to park.
+- Recurring Deposit: Fixed amount every month. Good when you want to build savings gradually.
+- FD has higher effective interest because full principal earns from day one.
+- RD acts as forced savings discipline for people without a lump sum.
+
+**When to Use Which**
+
+Use FD when: You have a lump sum sitting in a savings account. You have a specific goal in 1 to 5 years (vacation, down payment, emergency fund top-up). You want guaranteed returns with no risk.
+
+Use RD when: You do not have a lump sum but want to save regularly. You want to build a corpus over 1 to 3 years for a specific goal. You struggle with savings discipline and need a forced mechanism.
+
+**What Neither Is Good For**
+
+Long-term wealth creation. At 6-7% interest and income tax on the interest earnings, FDs and RDs often do not beat inflation after tax. For goals beyond 5 years, equity mutual funds via SIP have a strong historical track record of delivering significantly higher returns.
+
+---
+
+#### SIP vs Fixed Deposit: Where Should Your Money Go
+**URL:** https://knowyouremi.in/blogs/investments/sip-vs-fixed-deposit.html
+**Read time:** 8 min
+**Category:** Investments
+
+This is the most common money question among people who have just started earning. FD feels safe and familiar. SIP is something everyone keeps talking about. Which one do you actually go with?
+
+**They Are Not Competing for the Same Job**
+
+An FD is a savings instrument. It protects your capital and gives a guaranteed return. Predictable, safe, completely unaffected by markets.
+
+A SIP in an equity mutual fund is an investment instrument. It does not guarantee returns. Your capital can go up or down in the short term. Over a long enough period, markets historically deliver returns that significantly outpace FD rates.
+
+The right question is not which one is better. It is: what are you trying to do with this money, and when do you need it back?
+
+**The Timeline Is Everything**
+
+If you need the money back in less than 3 years: do not put it in an equity SIP. The market can be down at the exact moment you need to withdraw. An FD gives you a known amount on a known date. For short-term goals, that certainty is worth more than potential higher returns.
+
+If you do not need the money for 5 years or more: an equity SIP has a strong historical track record of delivering returns that beat inflation and FD rates significantly.
+
+**Same Rs. 5,000 Per Month, Different Timelines**
+
+Scenario A (RD/FD at 7%, 5 years):
+- Total invested: Rs. 3,00,000
+- Maturity value: approximately Rs. 3,56,000
+- Gain: Rs. 56,000. Guaranteed.
+
+Scenario B (Equity SIP at 12% average, 5 years):
+- Maturity value: approximately Rs. 4,08,000
+- Gain: approximately Rs. 1,08,000. Not guaranteed.
+
+Scenario B extended to 15 years (same Rs. 5,000 per month, 12%):
+- Total invested: Rs. 9,00,000
+- Maturity value: approximately Rs. 25,00,000
+- Gain: Rs. 16,00,000.
+
+The gap between FD and SIP is small at 5 years. It becomes enormous at 15 years.
+
+**What the Numbers Say About Risk**
+
+- Over any rolling 1-year period in Nifty 50 (last 25 years): negative returns possible.
+- Over any rolling 5-year period: rarely negative.
+- Over any rolling 10-year period: historically close to zero chance of negative returns.
+- Over any rolling 15-year period: historically zero instances of negative returns.
+
+Time reduces risk in equity investing. The longer you stay, the safer it gets.
+
+**The Honest Answer to the Question**
+
+Both. Use FD for money you need in under 3 years. Use SIP for money you can leave untouched for 7+ years. The goal defines the instrument, not personal preference or what sounds smarter.
+
+If you have an emergency fund (3-6 months of expenses in savings or liquid fund) and no high-interest debt, putting long-term savings into a SIP is one of the highest-return, lowest-effort decisions a salaried person can make.
+
+---
+
+## FREQUENTLY ASKED QUESTIONS (from homepage)
+
+**What is EMI?**
+EMI stands for Equated Monthly Installment. It is the fixed amount a borrower pays back to the lender every month. Each EMI consists of two components: the interest and the principal. The EMI remains the same throughout the loan tenure, although the proportion of interest and principal changes over time.
+
+**Why should you never miss an EMI?**
+Missing an EMI negatively affects your credit score and makes it harder to get loans in the future. Banks may also charge late payment fees and penalties. Multiple missed payments can lead to a loan account being marked as a Non-Performing Asset (NPA) which has serious long-term consequences.
+
+**What is the EMI formula?**
+EMI = [P x R x (1+R)^N] / [(1+R)^N - 1], where P is the principal loan amount, R is the monthly interest rate (annual rate divided by 12, divided by 100), and N is the total number of monthly installments.
+
+**What happens when you make a part payment?**
+The part payment amount goes entirely towards reducing your outstanding principal. This reduces the interest calculated in subsequent months, saving you significant money over the remaining loan tenure. You can choose to reduce your EMI or your tenure.
+
+**Is a balance transfer always beneficial?**
+No. A balance transfer involves paying a processing fee to the new lender. If the rate difference is small or the remaining tenure is short, the fee can exceed the interest savings. Always calculate the net saving using the Balance Transfer Calculator before deciding.
+
+**What is the difference between flat rate and reducing rate?**
+In flat rate, interest is calculated on the full original principal throughout the tenure. In reducing balance, interest is calculated only on the outstanding principal each month. The same interest rate on paper results in a much higher actual cost under the flat rate method.
+
+---
+
+## SITE INFORMATION
+
+**Site name:** KnowYourEMI
+**URL:** https://knowyouremi.in
+**Founded:** 2025
+**Author:** Rashid Shaik
+**Contact:** hello@knowyouremi.in
+**Technology:** Vanilla JavaScript, Tailwind CSS, Chart.js, jsPDF
+**PWA:** Yes, installable on Android and iOS
+**Free to use:** Yes. No sign-ups, no subscriptions, no ads.
+**Languages:** English
+**Audience:** Indian borrowers and investors, primarily salaried individuals
+
+**Calculators available:**
+1. EMI Calculator (with part payment and amortization schedule)
+2. Loan Eligibility Calculator
+3. Balance Transfer Calculator
+4. Floating Rate Home Loan Simulator
+
+**Blog categories:**
+- Basics (EMI calculation, credit scores)
+- Interest Rates (flat vs reducing)
+- Strategy (part payment decisions)
+- Credit Cards (how they work, debt traps)
+- Home Loans (floating rate)
+- Investments (SIP, FD, RD, SIP vs FD)
+
+---
+
+*End of KnowYourEMI full content file.*
+*For table of contents: https://knowyouremi.in/llms.txt*
+*For the site: https://knowyouremi.in*
