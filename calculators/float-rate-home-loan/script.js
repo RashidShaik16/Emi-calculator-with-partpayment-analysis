@@ -614,6 +614,24 @@ Allowed range: ${minAllowed}% – ${maxAllowed}%.`);
   closeModal();
   updateResults();
 
+  // GA4 events for float calc
+  if (typeof gtag === "function") {
+    if (newRoi !== null) {
+      gtag("event", "float_rate_change", {
+        event_category: "Float Rate Calc",
+        event_label: "Rate Change Applied",
+        value: newRoi
+      });
+    }
+    if (partAmount > 0) {
+      gtag("event", "float_part_payment", {
+        event_category: "Float Rate Calc",
+        event_label: "Part Payment Applied",
+        value: partAmount
+      });
+    }
+  }
+
   // Scroll to savings
   setTimeout(() => {
     const el = document.getElementById("savingsHighlight");
@@ -664,6 +682,15 @@ if (downloadPdfBtn) {
     };
 
     pdfGeneratorFloat(dataForPdf, events, loanInfo);
+
+    // GA4 event for PDF download
+    if (typeof gtag === "function") {
+      gtag("event", "float_pdf_download", {
+        event_category: "Float Rate Calc",
+        event_label: "PDF Downloaded",
+        value: 1
+      });
+    }
   });
 }
 
