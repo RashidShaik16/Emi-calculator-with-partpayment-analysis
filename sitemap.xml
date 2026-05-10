@@ -4,27 +4,41 @@
   <!-- Main Site -->
   <url>
     <loc>https://knowyouremi.in/</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <!-- Calculators -->
+  <url>
+    <loc>https://knowyouremi.in/calculators/eligibility/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://knowyouremi.in/calculators/float-rate-home-loan/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <!-- Static Pages -->
   <url>
     <loc>https://knowyouremi.in/pages/about.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/pages/privacy-policy.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/pages/terms-and-conditions.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -32,7 +46,7 @@
   <!-- Blog Index -->
   <url>
     <loc>https://knowyouremi.in/blogs/index.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -40,13 +54,13 @@
   <!-- Blog: Basics -->
   <url>
     <loc>https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/basics/why-credit-score-matters.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -54,7 +68,7 @@
   <!-- Blog: Interest Rates -->
   <url>
     <loc>https://knowyouremi.in/blogs/interest-rates/flat-vs-reducing-rate.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -62,13 +76,13 @@
   <!-- Blog: Strategy -->
   <url>
     <loc>https://knowyouremi.in/blogs/strategy/benefits-of-part-payment.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/strategy/when-to-make-part-payment.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -76,21 +90,21 @@
   <!-- Blog: Credit Cards -->
   <url>
     <loc>https://knowyouremi.in/blogs/credit-cards/how-credit-cards-work.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/credit-cards/credit-card-debt-trap.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Blog: Home Loan -->
   <url>
-    <loc>https://knowyouremi.in/blogs/home-loan/floating-rate-home-loans.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <loc>https://knowyouremi.in/blogs/home-loans/floating-rate-home-loans.html</loc>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -98,25 +112,25 @@
   <!-- Blog: Investments -->
   <url>
     <loc>https://knowyouremi.in/blogs/investments/what-is-sip.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/investments/why-sip-is-best-for-long-term.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/investments/what-is-fd-and-rd.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/investments/sip-vs-fixed-deposit.html</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

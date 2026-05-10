@@ -3,6 +3,8 @@
     <head>
     <!-- Basic Meta -->
     <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -220,7 +222,7 @@
         <nav id="calculator" class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
             <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
                 <!-- Logo / Title -->
-                <a href="#calculator" class="text-xl font-bold"><img class="w-20 my-0 inline-block" src="./logo.png" alt="logo"></a>
+                <a href="#calculator" class="text-xl font-bold"><img class="w-20 my-0 inline-block" src="./logo.png" alt="KnowYourEMI logo" width="80" height="40" fetchpriority="high"></a>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
@@ -539,32 +541,37 @@
                 </div>
             </section>
 
-            <!-- Nudge section -->
-            <div class="grid grid-cols-1 sm:grid-cols-2">
+            <!-- Other Calculators -->
+            <section class="bg-white shadow-lg rounded-2xl py-10 px-6 mt-10">
+              <h2 class="text-2xl font-bold text-center mb-8">Explore Our Other Calculators</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
                 <!-- Eligibility nudge -->
-                <div class="bg-gradient-to-r from-blue-800 to-indigo-900" style="margin: 24px auto; max-width: 640px; border-radius: 14px; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-                <div>
-                    <p style="font-size: 0.95rem; font-weight: 600; color: white; margin-bottom: 4px;">Loan Eligibility Check</p>
-                    <p style="font-size: 0.78rem; color: #c7d2fe; line-height: 1.5;">See how much amount you may be eligible for with our Eligibility Calculator</p>
-                </div>
-                <a href="./calculators/eligibility/index.html"
-                    style="flex-shrink: 0; background: #facc15; color: #1e3a8a; font-size: 0.82rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; text-decoration: none; white-space: nowrap;">
+                <div class="bg-gradient-to-r from-blue-800 to-indigo-900 rounded-2xl p-5 flex justify-between items-center gap-4 shadow-md">
+                  <div>
+                    <p class="text-sm font-semibold text-white mb-1">Loan Eligibility Check</p>
+                    <p class="text-xs text-indigo-200 leading-relaxed">See how much loan amount you may be eligible for based on your income and expenses.</p>
+                  </div>
+                  <a href="./calculators/eligibility/index.html"
+                    class="flex-shrink-0 bg-yellow-400 text-blue-900 text-xs font-bold px-4 py-2 rounded-lg hover:bg-yellow-300 transition whitespace-nowrap">
                     Try it &rarr;
-                </a>
+                  </a>
                 </div>
 
-                <!-- Floating rate calculator nudge -->
-                <div class="bg-gradient-to-r from-blue-800 to-indigo-900" style="margin: 24px auto; max-width: 640px; border-radius: 14px; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-                <div>
-                    <p style="font-size: 0.95rem; font-weight: 600; color: white; margin-bottom: 4px;">Floating Rate Home Loan Simulator</p>
-                    <p style="font-size: 0.78rem; color: #c7d2fe; line-height: 1.5;">See how RBI rate change effects your emi & interest along with part payments</p>
-                </div>
-                <a href="./calculators/float-rate-home-loan/"
-                    style="flex-shrink: 0; background: #facc15; color: #1e3a8a; font-size: 0.82rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; text-decoration: none; white-space: nowrap;">
+                <!-- Floating rate nudge -->
+                <div class="bg-gradient-to-r from-blue-800 to-indigo-900 rounded-2xl p-5 flex justify-between items-center gap-4 shadow-md">
+                  <div>
+                    <p class="text-sm font-semibold text-white mb-1">Floating Rate Home Loan Simulator</p>
+                    <p class="text-xs text-indigo-200 leading-relaxed">Simulate how RBI rate changes and part payments affect your home loan EMI and tenure.</p>
+                  </div>
+                  <a href="./calculators/float-rate-home-loan/"
+                    class="flex-shrink-0 bg-yellow-400 text-blue-900 text-xs font-bold px-4 py-2 rounded-lg hover:bg-yellow-300 transition whitespace-nowrap">
                     Try it &rarr;
-                </a>
+                  </a>
                 </div>
-            </div>
+
+              </div>
+            </section>
 
 
             <!-- Balance Transfer Calculator -->

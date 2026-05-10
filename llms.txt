@@ -2,12 +2,13 @@
 > A free financial calculator and education platform for Indian borrowers and investors. Built by Rashid Shaik to help people understand EMIs, loans, credit cards, and investments without jargon or hidden agendas.
 
 ## About
-KnowYourEMI (https://knowyouremi.in) offers free calculators for EMI, loan eligibility, and balance transfer, along with a blog covering practical personal finance topics written for salaried individuals in India. No sign-ups, no ads, no hidden conditions.
+KnowYourEMI (https://knowyouremi.in) offers free calculators for EMI, loan eligibility, balance transfer, and floating rate home loan simulation, along with a blog covering practical personal finance topics written for salaried individuals in India. No sign-ups, no ads, no hidden conditions.
 
 ## Calculators
-- EMI Calculator: https://knowyouremi.in/ — Calculate monthly EMI for personal, home, car, and credit card loans. Includes part payment analysis and amortization schedule with PDF download.
-- Loan Eligibility Calculator: https://knowyouremi.in/#eligibilityCalculator — Check how much loan you are eligible for based on your income and expenses.
-- Balance Transfer Calculator: https://knowyouremi.in/#balanceTransfer — Compare your current loan with a new lender to see if switching saves you money after accounting for processing fees.
+- EMI Calculator: https://knowyouremi.in/ — Free EMI calculator for home loans, personal loans, car loans, and credit card loans. Uses the standard reducing balance formula. Supports multiple part payments at any month in the schedule, with real-time interest savings and tenure reduction shown in the amortization table. Full schedule downloadable as PDF.
+- Loan Eligibility Calculator: https://knowyouremi.in/calculators/eligibility/ — Enter your monthly income, existing EMIs, and expenses to calculate the maximum loan amount a bank is likely to approve. Shows eligible amount for home, personal, and car loans based on standard bank FOIR criteria.
+- Balance Transfer Calculator: https://knowyouremi.in/#balanceTransfer — Compare your current loan against a new lender offer side by side. Enter outstanding principal, remaining tenure, current rate, and new rate with processing fee. Shows total interest under each option and exact net saving or cost of switching lenders.
+- Floating Rate Home Loan Simulator: https://knowyouremi.in/calculators/float-rate-home-loan/ — Simulate how interest rate changes and part payments affect a floating rate home loan over time. Add multiple rate change events and part payments at any month. Compares original vs revised schedule with interest saved shown clearly.
 
 ## Blog
 All articles: https://knowyouremi.in/blogs/index.html
@@ -41,3 +42,6 @@ Rashid Shaik — founder of KnowYourEMI. Over 10 years of personal experience wi
 
 ## Contact
 Email: hello@knowyouremi.in
+
+## Full Content
+Complete readable content of all calculators and articles in Markdown format: https://knowyouremi.in/llms-full.txt

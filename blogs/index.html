@@ -135,6 +135,50 @@
       });
     });
   </script>
+
+  <!-- Structured Data: CollectionPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Blog | KnowYourEMI",
+    "url": "https://knowyouremi.in/blogs/index.html",
+    "description": "Practical, no-nonsense articles about EMI, loans, credit cards, and smart borrowing. Written for salaried individuals in India.",
+    "publisher": {
+      "@type": "Person",
+      "name": "Rashid Shaik",
+      "url": "https://knowyouremi.in"
+    },
+    "hasPart": [
+      { "@type": "Article", "name": "How EMI Is Calculated", "url": "https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html" },
+      { "@type": "Article", "name": "Flat Rate vs Reducing Rate of Interest", "url": "https://knowyouremi.in/blogs/interest-rates/flat-vs-reducing-rate.html" },
+      { "@type": "Article", "name": "Benefits of Part Payment on Your Loan", "url": "https://knowyouremi.in/blogs/strategy/benefits-of-part-payment.html" },
+      { "@type": "Article", "name": "When to Make a Part Payment and When Not To", "url": "https://knowyouremi.in/blogs/strategy/when-to-make-part-payment.html" },
+      { "@type": "Article", "name": "What Are Credit Cards and How Do They Actually Work", "url": "https://knowyouremi.in/blogs/credit-cards/how-credit-cards-work.html" },
+      { "@type": "Article", "name": "How a Credit Card Slowly Becomes a Debt Trap", "url": "https://knowyouremi.in/blogs/credit-cards/credit-card-debt-trap.html" },
+      { "@type": "Article", "name": "What Is Floating Rate of Interest in Home Loans", "url": "https://knowyouremi.in/blogs/home-loans/floating-rate-home-loans.html" },
+      { "@type": "Article", "name": "Why Your Credit Score Matters When Taking a Loan", "url": "https://knowyouremi.in/blogs/basics/why-credit-score-matters.html" },
+      { "@type": "Article", "name": "What Is SIP in Mutual Funds and How Does It Work", "url": "https://knowyouremi.in/blogs/investments/what-is-sip.html" },
+      { "@type": "Article", "name": "Why SIP Is One of the Best Investment Decisions for Long Term Growth", "url": "https://knowyouremi.in/blogs/investments/why-sip-is-best-for-long-term.html" },
+      { "@type": "Article", "name": "What Is FD and RD and Which One Should You Pick", "url": "https://knowyouremi.in/blogs/investments/what-is-fd-and-rd.html" },
+      { "@type": "Article", "name": "SIP vs Fixed Deposit: Where Should Your Money Go", "url": "https://knowyouremi.in/blogs/investments/sip-vs-fixed-deposit.html" }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: Person (Author) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rashid Shaik",
+    "url": "https://knowyouremi.in",
+    "email": "hello@knowyouremi.in",
+    "description": "Founder of KnowYourEMI. Over 10 years of personal experience with loans, credit cards, and investments. Writes from real experience, not textbooks.",
+    "knowsAbout": ["EMI", "Home Loans", "Credit Cards", "Personal Finance", "Mutual Funds", "SIP", "Fixed Deposits"],
+    "sameAs": []
+  }
+  </script>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
@@ -143,7 +187,7 @@
   <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
     <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
       <a href="../index.html" class="text-xl font-bold">
-        <img class="w-20 inline-block" src="../logo.png" alt="KnowYourEMI logo">
+        <img class="w-20 inline-block" src="../logo.png" alt="KnowYourEMI logo" width="80" height="40" fetchpriority="high">
       </a>
       <div class="hidden md:flex space-x-6 text-sm">
         <a href="../index.html" class="hover:text-yellow-300">EMI Calculator</a>
