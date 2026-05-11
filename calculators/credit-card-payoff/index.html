@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>Credit Card Payoff Calculator | Month-by-Month Schedule | KnowYourEMI</title>
+  <meta name="description" content="See exactly how long it takes to pay off your credit card balance, month by month. Add new purchases, skip payments, and watch how each decision affects your debt. Free calculator by KnowYourEMI." />
+  <meta name="keywords" content="credit card payoff calculator India, credit card balance calculator, credit card interest calculator month by month, credit card amortization schedule, revolving credit calculator, minimum payment calculator, credit card debt payoff India, HDFC credit card interest, how long to pay off credit card, KnowYourEMI" />
+  <meta name="application-name" content="KnowYourEMI" />
+
+  <link rel="canonical" href="https://knowyouremi.in/calculators/credit-card-payoff/" />
+  <link rel="icon" href="../../favicon.png" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="KnowYourEMI" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <meta property="og:title" content="Credit Card Payoff Calculator | Month-by-Month Schedule | KnowYourEMI" />
+  <meta property="og:description" content="See exactly how your credit card balance shrinks month by month. Add purchases, skip payments, understand the real cost of revolving debt." />
+  <meta property="og:url" content="https://knowyouremi.in/calculators/credit-card-payoff/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="KnowYourEMI" />
+  <meta property="og:image" content="https://www.knowyouremi.in/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Credit Card Payoff Calculator | KnowYourEMI" />
+  <meta name="twitter:description" content="Month-by-month credit card balance simulator. Add purchases, skip payments, see the real cost." />
+  <meta name="twitter:image" content="https://www.knowyouremi.in/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Credit Card Payoff Calculator",
+    "url": "https://knowyouremi.in/calculators/credit-card-payoff/",
+    "logo": "https://www.knowyouremi.in/logo-112x112.jpg",
+    "description": "Free credit card payoff calculator with month-by-month amortization schedule, new purchase simulation, minimum due and payment default scenarios for Indian credit cards.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "inLanguage": "en",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a credit card revolving balance?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A revolving balance is the unpaid amount carried over from one billing cycle to the next. When you do not pay your full statement balance by the due date, the remaining amount revolves and starts attracting interest, typically at 36% to 45% per annum on Indian credit cards." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is credit card interest calculated in India?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Indian banks calculate credit card interest on the outstanding balance at a monthly rate, typically between 3% and 3.75% per month. This is applied to the full outstanding balance from the statement date if you have not paid the previous bill in full. This calculator uses monthly compounding on the closing balance as a simplified model." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the minimum amount due on a credit card?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The minimum amount due on most Indian credit cards is 5% of the outstanding balance or Rs.200, whichever is higher. Paying only the minimum due means the remaining balance continues to attract interest, making total repayment significantly more expensive." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I miss a credit card payment?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If you miss even the minimum payment by the due date, the bank charges a late payment fee based on your outstanding balance, plus 18% GST on that fee. Interest also continues to accrue on the full balance. HDFC Bank's late fee ranges from Rs.100 for balances below Rs.500 to Rs.1,300 for balances above Rs.50,000, before GST." }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to pay off a credit card balance by paying only the minimum due?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Paying only the minimum due on a large credit card balance can take many years. For example, a balance of Rs.1,00,000 at 3.75% monthly interest with minimum due payments of 5% takes over 5 years to clear, and you end up paying significantly more in interest than the original balance. Use this calculator to see your exact timeline." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does adding new purchases affect my credit card payoff timeline?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. When you have an outstanding balance on a credit card and make new purchases, those purchases are added to your balance and immediately start attracting interest. There is no interest-free grace period on new purchases when you are already revolving a balance. This calculator lets you add purchases at any month to see the real impact." }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I pay more than the minimum due on my credit card?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, always pay more than the minimum due if you can. The minimum due is designed to keep your account in good standing, not to help you become debt-free quickly. Paying even Rs.1,000 to Rs.2,000 extra each month can dramatically reduce the time and total interest you pay. Use this calculator to compare different payment amounts." }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is this credit card payoff calculator?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This calculator uses monthly compounding on the outstanding balance, which is a simplified model. Actual bank calculations use average daily balance method, and interest may be backdated to the transaction date when you carry a balance. Late fees are based on HDFC Bank's published slab as of August 2024. Use this for planning purposes and check with your bank for exact figures." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best strategy to pay off credit card debt faster?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The most effective strategy is to stop adding new purchases to the card, pay as much above the minimum due as possible each month, and avoid skipping payments entirely. Even one missed payment adds a late fee and compounds interest on the higher balance. If you have multiple cards, pay off the highest interest rate card first while making minimum payments on others." }
+      }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EM8B59T3F5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EM8B59T3F5');
+  </script>
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .lora { font-family: 'Lora', Georgia, serif; }
+
+    #progressBar {
+      position: fixed; top: 0; left: 0; height: 5px; width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #6366f1);
+      box-shadow: 0 0 8px rgba(99,102,241,0.6);
+      z-index: 9999; transition: width 0.1s;
+    }
+
+    input[type=range] {
+      -webkit-appearance: none; appearance: none;
+      height: 6px; border-radius: 3px; background: #dbeafe; outline: none; width: 100%;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 18px; height: 18px;
+      border-radius: 50%; background: #2563eb; cursor: pointer;
+      border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    input[type=range]::-moz-range-thumb {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: #2563eb; cursor: pointer; border: 2px solid #fff;
+    }
+
+    /* Global pay type segment */
+    .seg-btn {
+      flex: 1; padding: 0.55rem 0; text-align: center;
+      font-size: 0.78rem; font-weight: 600;
+      border: 1.5px solid #e5e7eb; cursor: pointer;
+      transition: all 0.15s; color: #6b7280; background: white;
+    }
+    .seg-btn:first-child { border-radius: 8px 0 0 8px; }
+    .seg-btn:last-child  { border-radius: 0 8px 8px 0; }
+    .seg-btn + .seg-btn  { border-left: none; }
+    .seg-active-pay  { background: #eff6ff !important; border-color: #3b82f6 !important; color: #1d4ed8 !important; }
+    .seg-active-min  { background: #fffbeb !important; border-color: #f59e0b !important; color: #92400e !important; }
+    .seg-active-skip { background: #fef2f2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+
+    /* Row pay type pills */
+    .pay-pill {
+      font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 999px;
+      border: 1.5px solid #e5e7eb; background: #f9fafb; color: #6b7280;
+      cursor: pointer; transition: all 0.15s; white-space: nowrap;
+    }
+    .pay-pill:hover { border-color: #93c5fd; color: #2563eb; }
+    .pp-pay  { background: #eff6ff; border-color: #3b82f6; color: #1d4ed8; }
+    .pp-min  { background: #fffbeb; border-color: #f59e0b; color: #92400e; }
+    .pp-skip { background: #fef2f2; border-color: #ef4444; color: #991b1b; }
+
+    .pay-override {
+      font-size: 0.75rem; width: 78px; text-align: right;
+      border: 1px solid #e5e7eb; border-radius: 6px;
+      padding: 2px 5px; outline: none; color: #374151;
+      transition: border-color 0.15s;
+    }
+    .pay-override:focus   { border-color: #3b82f6; }
+    .pay-override:disabled { background: #f3f4f6; color: #9ca3af; cursor: not-allowed; }
+
+    .btn-add-purchase {
+      font-size: 0.65rem; font-weight: 600; padding: 2px 8px;
+      border-radius: 999px; border: 1.5px dashed #818cf8;
+      color: #6366f1; background: transparent; cursor: pointer;
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .btn-add-purchase:hover { background: #eef2ff; }
+
+    .chip-purchase {
+      font-size: 0.65rem; font-weight: 600; padding: 2px 7px; border-radius: 999px;
+      background: #eef2ff; border: 1px solid #a5b4fc; color: #4f46e5; cursor: pointer;
+    }
+    .chip-purchase:hover { background: #e0e7ff; }
+
+    .chip-late {
+      font-size: 0.65rem; font-weight: 600; padding: 2px 7px; border-radius: 999px;
+      background: #fef2f2; border: 1px solid #fca5a5; color: #dc2626;
+    }
+
+    tr.row-skip     { background: #fff5f5; }
+    tr.row-min      { background: #fffdf0; }
+    tr.row-purchase { background: #f5f3ff; }
+
+    .bal-high { color: #dc2626; font-weight: 700; }
+    .bal-mid  { color: #d97706; font-weight: 700; }
+    .bal-low  { color: #16a34a; font-weight: 700; }
+    .bal-zero { color: #16a34a; font-weight: 700; }
+
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(2px); z-index: 200;
+      display: flex; align-items: center; justify-content: center; padding: 1rem;
+    }
+    .modal-box {
+      background: white; border-radius: 1rem; padding: 1.75rem;
+      width: 100%; max-width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    .fadein   { animation: fadeUp 0.35s ease both; }
+    .delay-1  { animation-delay: 0.05s; }
+    .delay-2  { animation-delay: 0.1s; }
+
+    @media(max-width:640px){
+      .pay-override { width: 62px; }
+    }
+
+    /* Sticky controls column — desktop only */
+    .col-sticky {
+      position: sticky;
+      right: 0;
+      background: white;
+      z-index: 2;
+      box-shadow: -3px 0 8px rgba(0,0,0,0.06);
+    }
+    thead .col-sticky { background: #f9fafb; z-index: 3; }
+    tr.row-skip  .col-sticky { background: #fff5f5; }
+    tr.row-min   .col-sticky { background: #fffdf0; }
+    tr.row-purchase .col-sticky { background: #f5f3ff; }
+    tr:hover .col-sticky { background: #f9fafb; }
+
+    /* ── MOBILE CARD LAYOUT ─────────────────────────────── */
+    #schedule-cards { display: none; }
+
+    @media(max-width: 768px) {
+      /* Hide table, show cards */
+      #schedule-table-wrap { display: none; }
+      #schedule-cards      { display: block; }
+
+      /* Each month card */
+      .month-card {
+        border-bottom: 2px solid #e5e7eb;
+        padding: 12px 16px;
+        background: white;
+        transition: background 0.15s;
+      }
+      .month-card.card-skip     { background: #fff5f5; }
+      .month-card.card-min      { background: #fffdf0; }
+      .month-card.card-purchase { background: #f5f3ff; }
+
+      /* Top row: month label + closing balance */
+      .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .card-month-label {
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: #374151;
+      }
+      .card-closing {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+
+      /* Numbers grid: 3 cols */
+      .card-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 6px 8px;
+        margin-bottom: 10px;
+      }
+      .card-cell { display: flex; flex-direction: column; gap: 1px; }
+      .card-cell-label {
+        font-size: 0.62rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #9ca3af;
+      }
+      .card-cell-value {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #374151;
+      }
+      .card-cell-value.red   { color: #ef4444; }
+      .card-cell-value.green { color: #16a34a; }
+      .card-cell-value.muted { color: #d1d5db; }
+
+      /* Badges: purchase chip + late fee chip */
+      .card-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+
+      /* Controls row */
+      .card-controls {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: nowrap;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<div id="progressBar"></div>
+
+<!-- PWA INSTALL BANNER -->
+<div id="installPopup" class="fixed top-0 inset-x-0 bg-white shadow-lg border-b border-gray-200 p-4 z-50 hidden opacity-0 transition-opacity duration-700">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm text-gray-700">
+    <div class="text-center sm:text-left leading-tight">&#128241; <strong>Install KnowYourEMI</strong><br>Add to your Home Screen for quick access.</div>
+    <div class="flex justify-center sm:justify-end gap-2">
+      <button id="addShortCutBtn" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg">Add Shortcut</button>
+      <button id="closeShortCutBtn" class="text-gray-500 hover:text-gray-700 text-xs px-3 py-1.5">Maybe Later</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <a href="../../index.html">
+      <img class="w-20 inline-block" src="../../logo.png" alt="KnowYourEMI logo" width="80" height="40" fetchpriority="high" />
+    </a>
+    <div class="hidden md:flex space-x-6 text-sm font-medium">
+      <a href="../../index.html" class="hover:text-yellow-300 transition">EMI Calculator</a>
+      <a href="../../index.html#balanceTransfer" class="hover:text-yellow-300 transition">Balance Transfer</a>
+      <a href="../eligibility/index.html" class="hover:text-yellow-300 transition">Check Eligibility</a>
+      <a href="../float-rate-home-loan/index.html" class="hover:text-yellow-300 transition">Float Rate</a>
+      <a href="../../blogs/index.html" class="hover:text-yellow-300 transition">Blog</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-indigo-900 px-4 pb-4 space-y-2 text-sm">
+    <a href="../../index.html" class="block py-2 hover:text-yellow-300">EMI Calculator</a>
+    <a href="../../index.html#balanceTransfer" class="block py-2 hover:text-yellow-300">Balance Transfer</a>
+    <a href="../eligibility/index.html" class="block py-2 hover:text-yellow-300">Check Eligibility</a>
+    <a href="../float-rate-home-loan/index.html" class="block py-2 hover:text-yellow-300">Float Rate</a>
+    <a href="../../blogs/index.html" class="block py-2 hover:text-yellow-300">Blog</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="py-10 px-4 text-center">
+  <h1 class="lora text-2xl sm:text-3xl font-bold text-gray-900">Credit Card Payoff Calculator</h1>
+  <p class="mt-2 text-gray-500 text-sm sm:text-base max-w-xl mx-auto">
+    Set your balance, payment, and rate. Then skip a month, add a purchase, and watch what actually happens to your debt.
+  </p>
+  <div class="mt-3 flex justify-center gap-4 text-xs text-blue-700 flex-wrap font-medium">
+    <span>&#10003; Month-by-month schedule</span>
+    <span>&#10003; New purchases mid-way</span>
+    <span>&#10003; Min due and skip simulation</span>
+    <span>&#10003; PDF download</span>
+  </div>
+</div>
+
+<main class="max-w-6xl mx-auto px-4 pb-12 space-y-6">
+
+  <!-- INPUT ROW -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- LEFT: Inputs -->
+    <section class="bg-white rounded-2xl shadow-md p-6 space-y-8">
+      <h2 class="lora text-lg font-bold text-blue-800 border-b border-gray-100 pb-2">Your Card Details</h2>
+
+      <!-- Balance slider -->
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <label class="text-sm font-semibold text-gray-600">Outstanding Balance</label>
+          <div class="flex items-center gap-1">
+            <span class="text-sm text-gray-400">&#8377;</span>
+            <input id="inp-balance-num" type="number" min="1000" max="1000000" step="1000" value="100000"
+              class="w-32 text-right border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+          </div>
+        </div>
+        <input id="inp-balance-range" type="range" min="1000" max="1000000" step="1000" value="100000" />
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>&#8377;1,000</span>
+          <span id="disp-balance" class="font-semibold text-blue-700">&#8377;1,00,000</span>
+          <span>&#8377;10,00,000</span>
+        </div>
+      </div>
+
+      <!-- Monthly payment slider -->
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <label class="text-sm font-semibold text-gray-600">Monthly Payment (default)</label>
+          <div class="flex items-center gap-1">
+            <span class="text-sm text-gray-400">&#8377;</span>
+            <input id="inp-payment-num" type="number" min="0" max="500000" step="500" value="10000"
+              class="w-32 text-right border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+          </div>
+        </div>
+        <input id="inp-payment-range" type="range" min="500" max="200000" step="500" value="10000" />
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>&#8377;500</span>
+          <span id="disp-payment" class="font-semibold text-blue-700">&#8377;10,000</span>
+          <span>&#8377;2,00,000</span>
+        </div>
+        <p class="text-xs text-gray-400 mt-1">Applies to all months. Override any individual month in the schedule.</p>
+      </div>
+
+      <!-- Rate slider -->
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <label class="text-sm font-semibold text-gray-600">Monthly Interest Rate</label>
+          <span id="disp-rate" class="text-sm font-semibold text-blue-700">3.75% / mo &nbsp;(45% p.a.)</span>
+        </div>
+        <input id="inp-rate" type="range" min="1" max="4.5" step="0.05" value="3.75" />
+        <div class="flex justify-between text-xs text-gray-400 mt-1">
+          <span>1% / mo</span><span>2.25%</span><span>3.75%</span><span>4.5%</span>
+        </div>
+      </div>
+
+      <!-- Default payment type -->
+      <div>
+        <label class="text-sm font-semibold text-gray-600 block mb-2">Default payment type for all months</label>
+        <div class="flex" id="global-seg">
+          <button class="seg-btn seg-active-pay" onclick="setGlobalType('pay', this)">Pay Set Amount</button>
+          <button class="seg-btn" onclick="setGlobalType('min', this)">Minimum Due Only</button>
+        </div>
+        <p class="text-xs text-gray-400 mt-1.5" id="global-hint">Every month pays your set amount above. Override individual months in the schedule.</p>
+        <p class="text-xs text-blue-500 mt-1">To skip a specific month, use the Skip button on that row in the schedule below.</p>
+      </div>
+    </section>
+
+    <!-- RIGHT: Summary -->
+    <section class="bg-white rounded-2xl shadow-md p-6 flex flex-col justify-between">
+      <div>
+        <h2 class="lora text-lg font-bold text-blue-800 border-b border-gray-100 pb-2 mb-4">Payoff Summary</h2>
+        <div class="divide-y divide-gray-50 text-sm mb-5">
+          <div class="flex justify-between py-2.5">
+            <span class="text-gray-500">Outstanding Balance</span>
+            <span id="s-balance" class="font-semibold text-gray-800">--</span>
+          </div>
+          <div class="flex justify-between py-2.5">
+            <span class="text-gray-500">Monthly Rate</span>
+            <span id="s-rate" class="font-semibold text-gray-800">--</span>
+          </div>
+          <div class="flex justify-between py-2.5">
+            <span class="text-gray-500">Months to Pay Off</span>
+            <span id="s-months" class="font-semibold text-blue-700">--</span>
+          </div>
+          <div class="flex justify-between py-2.5">
+            <span class="text-gray-500">Total Interest</span>
+            <span id="s-interest" class="font-semibold text-red-500">--</span>
+          </div>
+          <div class="flex justify-between py-2.5">
+            <span class="text-gray-500">Late Fees (incl. 18% GST)</span>
+            <span id="s-fees" class="font-semibold text-red-400">--</span>
+          </div>
+          <div class="flex justify-between py-2.5">
+            <span class="text-gray-500">Total Amount Paid</span>
+            <span id="s-total" class="font-semibold text-gray-800">--</span>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center px-3 py-3 rounded-xl bg-red-50 border border-red-100 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-red-400 flex-shrink-0"></span>
+            <span class="text-sm font-medium text-gray-600">You pay extra (interest + fees)</span>
+          </div>
+          <span id="s-extra" class="font-bold text-red-600">--</span>
+        </div>
+
+        <!-- Row color guide -->
+        <div class="grid grid-cols-2 gap-1.5 text-xs text-gray-500">
+          <div class="flex items-center gap-1.5"><span class="inline-block w-2.5 h-2.5 rounded-full bg-blue-200 flex-shrink-0"></span>Set amount row</div>
+          <div class="flex items-center gap-1.5"><span class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-200 flex-shrink-0"></span>Min due row</div>
+          <div class="flex items-center gap-1.5"><span class="inline-block w-2.5 h-2.5 rounded-full bg-red-200 flex-shrink-0"></span>Defaulted row</div>
+          <div class="flex items-center gap-1.5"><span class="inline-block w-2.5 h-2.5 rounded-full bg-indigo-200 flex-shrink-0"></span>Purchase added</div>
+        </div>
+      </div>
+
+      <button onclick="downloadPDF()"
+        class="mt-6 w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-6 py-3 rounded-xl shadow hover:from-blue-700 hover:to-indigo-700 transition flex items-center justify-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17v3a1 1 0 001 1h16a1 1 0 001-1v-3"/>
+        </svg>
+        Download PDF Report
+      </button>
+    </section>
+  </div>
+
+  <!-- CHART -->
+  <section class="bg-white rounded-2xl shadow-md p-6 fadein delay-1">
+    <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+      <h2 class="lora text-lg font-bold text-blue-800">Balance Over Time</h2>
+      <div class="flex items-center gap-4 text-xs text-gray-400">
+        <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-1.5 rounded bg-red-400"></span>Balance</span>
+        <span class="flex items-center gap-1.5"><span class="inline-block w-2.5 h-2.5 rounded-full bg-indigo-400"></span>Purchase added</span>
+      </div>
+    </div>
+    <div style="height:200px;">
+      <canvas id="balanceChart"></canvas>
+    </div>
+  </section>
+
+  <!-- SCHEDULE TABLE -->
+  <section class="bg-white rounded-2xl shadow-md overflow-hidden fadein delay-2">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 flex-wrap gap-2">
+      <div>
+        <h2 class="lora text-lg font-bold text-blue-800">Month-by-Month Schedule</h2>
+        <p class="text-xs text-gray-400 mt-0.5">Tap Pay / Min / Skip on any row to change that month. Use + Purchase to add a new spend.</p>
+      </div>
+    </div>
+    <!-- Desktop: full table -->
+    <div id="schedule-table-wrap" class="overflow-x-auto">
+      <table class="w-full text-sm min-w-max">
+        <thead class="bg-gray-50 border-b border-gray-100">
+          <tr>
+            <th class="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Month</th>
+            <th class="text-right px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Opening</th>
+            <th class="text-right px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Interest</th>
+            <th class="text-right px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Purchase</th>
+            <th class="text-right px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Late Fee</th>
+            <th class="text-right px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Payment</th>
+            <th class="text-right px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">To Principal</th>
+            <th class="text-right px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Closing</th>
+            <th class="col-sticky text-center px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Controls</th>
+          </tr>
+        </thead>
+        <tbody id="schedule-body" class="divide-y divide-gray-50"></tbody>
+      </table>
+    </div>
+
+    <!-- Mobile: card layout -->
+    <div id="schedule-cards"></div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <div class="bg-amber-50 border border-amber-200 rounded-xl px-5 py-3 flex items-start gap-2 text-sm text-amber-700">
+    <svg class="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+    </svg>
+    Late payment fees are based on HDFC Bank's published slab (August 2024) including 18% GST. Minimum due = 5% of outstanding or &#8377;200, whichever is higher. Monthly compounding is used for simplicity. Actual charges vary by bank and card type.
+  </div>
+
+</main>
+
+<!-- SCROLL NAVIGATOR (center bottom, bidirectional) -->
+<div id="scroll-nav"
+  style="display:none; position:fixed; bottom:28px; left:50%; transform:translateX(-50%);
+         z-index:150; flex-direction:column; align-items:center; gap:6px;">
+  <button id="scroll-nav-btn"
+    onclick="handleScrollNavClick()"
+    style="display:flex; flex-direction:column; align-items:center; gap:4px;
+           background: linear-gradient(135deg,#2563eb,#6366f1); color:white;
+           border:none; border-radius:999px; padding:10px 20px; cursor:pointer;
+           box-shadow:0 4px 20px rgba(37,99,235,0.4);
+           font-family:Inter,sans-serif; font-size:0.75rem; font-weight:600;
+           letter-spacing:0.02em; transition:transform 0.15s, box-shadow 0.15s;"
+    onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='0 6px 24px rgba(37,99,235,0.5)'"
+    onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,99,235,0.4)'">
+    <svg id="scroll-nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="6,9 12,15 18,9"></polyline>
+    </svg>
+    <span id="scroll-nav-label">Scroll to last month</span>
+  </button>
+</div>
+
+<!-- PURCHASE MODAL -->
+<div id="purchase-modal" class="modal-backdrop hidden" style="display:none;">
+  <div class="modal-box">
+    <h3 class="lora text-base font-bold text-gray-900 mb-1">Add a New Purchase</h3>
+    <p class="text-xs text-gray-500 mb-4">This will be added to <strong id="modal-month-label" class="text-gray-700"></strong>'s closing balance and carried into the next month.</p>
+    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Purchase Amount (&#8377;)</label>
+    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-400">
+      <span class="px-3 py-2.5 bg-gray-50 text-gray-400 text-sm border-r border-gray-200">&#8377;</span>
+      <input id="modal-amount" type="number" min="1" placeholder="e.g. 5000"
+        class="flex-1 px-3 py-2.5 text-sm font-semibold text-gray-800 outline-none" />
+    </div>
+    <div class="flex gap-2 mt-5">
+      <button onclick="confirmPurchase()"
+        class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm py-2.5 rounded-lg transition">Add Purchase</button>
+      <button onclick="closePurchaseModal()"
+        class="flex-1 border border-gray-200 text-gray-500 hover:text-gray-700 font-semibold text-sm py-2.5 rounded-lg transition">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-4">
+  <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div>
+      <h3 class="lora text-lg font-semibold mb-3">About KnowYourEMI</h3>
+      <p class="text-sm text-gray-200 leading-relaxed">
+        KnowYourEMI is a free financial calculator platform built to help you understand loans, credit cards, and interest transparently. No sign-ups, no hidden conditions.
+      </p>
+    </div>
+    <div>
+      <h3 class="lora text-lg font-semibold mb-3">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="../../index.html" class="hover:underline">EMI Calculator</a></li>
+        <li><a href="../../index.html#balanceTransfer" class="hover:underline">Balance Transfer</a></li>
+        <li><a href="../eligibility/index.html" class="hover:underline">Loan Eligibility</a></li>
+        <li><a href="../float-rate-home-loan/index.html" class="hover:underline">Float Rate Simulator</a></li>
+        <li><a href="../../blogs/index.html" class="hover:underline">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="lora text-lg font-semibold mb-3">Contact</h3>
+      <p class="text-sm text-gray-200">
+        &#128231; <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">hello@knowyouremi.in</a>
+      </p>
+    </div>
+  </div>
+  <div class="border-t border-blue-700 py-4 px-6 flex flex-wrap justify-between items-center text-xs text-gray-300 gap-2">
+    <span>&copy; <span id="footer-year"></span> KnowYourEMI. All rights reserved.</span>
+    <div class="flex gap-4">
+      <a href="../../about.html" class="hover:text-white">About</a>
+      <a href="../../privacy.html" class="hover:text-white">Privacy Policy</a>
+      <a href="../../terms.html" class="hover:text-white">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
