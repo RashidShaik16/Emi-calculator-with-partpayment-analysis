@@ -77,7 +77,7 @@
       {
         "@type": "Question",
         "name": "What happens if I miss a credit card payment?",
-        "acceptedAnswer": { "@type": "Answer", "text": "If you miss even the minimum payment by the due date, the bank charges a late payment fee based on your outstanding balance, plus 18% GST on that fee. Interest also continues to accrue on the full balance. HDFC Bank's late fee ranges from Rs.100 for balances below Rs.500 to Rs.1,300 for balances above Rs.50,000, before GST." }
+        "acceptedAnswer": { "@type": "Answer", "text": "If you miss even the minimum payment by the due date, the bank charges a late payment fee based on your outstanding balance, plus 18% GST on that fee. Interest also continues to accrue on the full balance. Standard bank late payment fees in India range from Rs.100 for small balances up to Rs.1,300 for larger outstanding amounts, before GST." }
       },
       {
         "@type": "Question",
@@ -97,7 +97,7 @@
       {
         "@type": "Question",
         "name": "How accurate is this credit card payoff calculator?",
-        "acceptedAnswer": { "@type": "Answer", "text": "This calculator uses monthly compounding on the outstanding balance, which is a simplified model. Actual bank calculations use average daily balance method, and interest may be backdated to the transaction date when you carry a balance. Late fees are based on HDFC Bank's published slab as of August 2024. Use this for planning purposes and check with your bank for exact figures." }
+        "acceptedAnswer": { "@type": "Answer", "text": "This calculator uses monthly compounding on the outstanding balance, which is a simplified model. Actual bank calculations use average daily balance method, and interest may be backdated to the transaction date when you carry a balance. Late fees are based on standard Indian bank slab rates. Use this for planning purposes and check with your bank for exact figures." }
       },
       {
         "@type": "Question",
@@ -228,7 +228,20 @@
       .pay-override { width: 62px; }
     }
 
-    /* Sticky controls column — desktop only */
+    /* FAQ smooth accordion */
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .faq-a.faq-open {
+      max-height: 400px;
+      padding-bottom: 1rem;
+    }
+
+    /* Sticky controls column desktop only */
     .col-sticky {
       position: sticky;
       right: 0;
@@ -340,7 +353,7 @@
       <a href="../../index.html" class="hover:text-yellow-300 transition">EMI Calculator</a>
       <a href="../../index.html#balanceTransfer" class="hover:text-yellow-300 transition">Balance Transfer</a>
       <a href="../eligibility/index.html" class="hover:text-yellow-300 transition">Check Eligibility</a>
-      <a href="../float-rate-home-loan/index.html" class="hover:text-yellow-300 transition">Float Rate</a>
+      <a href="../float-rate-home-loan/index.html" class="hover:text-yellow-300 transition">Floating Rate Home Loan</a>
       <a href="../../blogs/index.html" class="hover:text-yellow-300 transition">Blog</a>
     </div>
     <button id="menu-toggle" class="md:hidden focus:outline-none">
@@ -353,7 +366,7 @@
     <a href="../../index.html" class="block py-2 hover:text-yellow-300">EMI Calculator</a>
     <a href="../../index.html#balanceTransfer" class="block py-2 hover:text-yellow-300">Balance Transfer</a>
     <a href="../eligibility/index.html" class="block py-2 hover:text-yellow-300">Check Eligibility</a>
-    <a href="../float-rate-home-loan/index.html" class="block py-2 hover:text-yellow-300">Float Rate</a>
+    <a href="../float-rate-home-loan/index.html" class="block py-2 hover:text-yellow-300">Floating Rate Home Loan</a>
     <a href="../../blogs/index.html" class="block py-2 hover:text-yellow-300">Blog</a>
   </div>
 </nav>
@@ -546,12 +559,195 @@
     <div id="schedule-cards"></div>
   </section>
 
+  <!-- HOW IT WORKS -->
+  <section class="bg-white rounded-2xl shadow-md p-6">
+    <h2 class="lora text-lg font-bold text-blue-800 mb-5">How This Calculator Works</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <!-- Step 1 -->
+      <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center">
+          <span class="text-xs font-bold text-blue-600">1</span>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-700 mb-0.5">Enter your card details</p>
+          <p class="text-xs text-gray-500 leading-relaxed">Type in your current outstanding balance, the monthly payment you plan to make, and your card's monthly interest rate. Most Indian credit cards charge between 3% and 3.75% per month.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center">
+          <span class="text-xs font-bold text-blue-600">2</span>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-700 mb-0.5">Choose your default payment type</p>
+          <p class="text-xs text-gray-500 leading-relaxed"><strong class="text-gray-600">Pay Set Amount</strong> applies your entered payment to every month. <strong class="text-gray-600">Minimum Due Only</strong> pays just 5% of the outstanding balance each month try this to see how long it really takes.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center">
+          <span class="text-xs font-bold text-blue-600">3</span>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-700 mb-0.5">Override any individual month</p>
+          <p class="text-xs text-gray-500 leading-relaxed">In the month-by-month schedule, each row has <strong class="text-gray-600">Pay / Min / Skip</strong> buttons. Pay lets you enter a custom amount for that month. Min pays only the minimum due. Skip misses the payment entirely and applies a standard late fee as per bank slab rates plus 18% GST.</p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center">
+          <span class="text-xs font-bold text-blue-600">4</span>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-700 mb-0.5">Add new purchases mid-way</p>
+          <p class="text-xs text-gray-500 leading-relaxed">Click <strong class="text-gray-600">+ Purchase</strong> on any month's row to add a new spend during that month. The amount is added to that month's closing balance and carries forward just like how credit cards actually work when you have an outstanding balance.</p>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center">
+          <span class="text-xs font-bold text-blue-600">5</span>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-700 mb-0.5">Read the closing balance colour</p>
+          <p class="text-xs text-gray-500 leading-relaxed">The closing balance changes colour as you pay down your debt. <span class="font-semibold text-red-500">Red</span> means over 60% still remaining. <span class="font-semibold text-yellow-500">Amber</span> means 30–60% remaining. <span class="font-semibold text-green-600">Green</span> means under 30% you are nearly there. A &#10003; means fully paid off.</p>
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="flex gap-3">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center">
+          <span class="text-xs font-bold text-blue-600">6</span>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-gray-700 mb-0.5">Download your schedule as a PDF</p>
+          <p class="text-xs text-gray-500 leading-relaxed">Once you have set up your scenario, click <strong class="text-gray-600">Download PDF Report</strong> on the summary panel. The PDF includes all your inputs, the full month-by-month table, and a summary of total interest and fees paid.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Formula box -->
+    <div class="mt-5 bg-gray-900 rounded-xl px-5 py-4">
+      <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">How the maths works</p>
+      <div class="space-y-1 text-xs font-mono text-green-400">
+        <p>Monthly Interest = Opening Balance &times; (Monthly Rate / 100)</p>
+        <p>To Principal = Payment &minus; Monthly Interest</p>
+        <p>Closing Balance = Opening + Interest + Late Fee &minus; Payment + New Purchases</p>
+        <p>Minimum Due = max(5% of Balance, &#8377;200)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-white rounded-2xl shadow-md p-6">
+    <h2 class="lora text-lg font-bold text-blue-800 mb-5">Frequently Asked Questions</h2>
+    <div class="space-y-2" id="faq-list">
+
+      <div class="faq-item border border-gray-100 rounded-xl overflow-hidden">
+        <button class="faq-q w-full flex justify-between items-center px-5 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
+          <span>What is a credit card revolving balance?</span>
+          <svg class="faq-icon w-4 h-4 text-blue-500 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a px-5 text-sm text-gray-500 leading-relaxed">
+          A revolving balance is the unpaid amount carried over from one billing cycle to the next. When you do not pay your full statement balance by the due date, the remaining amount revolves and starts attracting interest, typically at 36% to 45% per annum on Indian credit cards.
+        </div>
+      </div>
+
+      <div class="faq-item border border-gray-100 rounded-xl overflow-hidden">
+        <button class="faq-q w-full flex justify-between items-center px-5 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
+          <span>How is credit card interest calculated in India?</span>
+          <svg class="faq-icon w-4 h-4 text-blue-500 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a px-5 text-sm text-gray-500 leading-relaxed">
+          Indian banks charge interest on the outstanding balance at a monthly rate, typically between 3% and 3.75% per month (36% to 45% per annum). This applies to the full outstanding balance from the statement date if you have not paid the previous bill in full. This calculator uses monthly compounding on the closing balance as a simplified model.
+        </div>
+      </div>
+
+      <div class="faq-item border border-gray-100 rounded-xl overflow-hidden">
+        <button class="faq-q w-full flex justify-between items-center px-5 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
+          <span>What is the minimum amount due on a credit card?</span>
+          <svg class="faq-icon w-4 h-4 text-blue-500 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a px-5 text-sm text-gray-500 leading-relaxed">
+          The minimum amount due on most Indian credit cards is 5% of the outstanding balance or &#8377;200, whichever is higher. Paying only the minimum means the remaining balance keeps attracting interest every month, making total repayment significantly more expensive than the original balance.
+        </div>
+      </div>
+
+      <div class="faq-item border border-gray-100 rounded-xl overflow-hidden">
+        <button class="faq-q w-full flex justify-between items-center px-5 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
+          <span>What happens if I miss a credit card payment?</span>
+          <svg class="faq-icon w-4 h-4 text-blue-500 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a px-5 text-sm text-gray-500 leading-relaxed">
+          If you miss even the minimum payment by the due date, the bank charges a late payment fee based on your outstanding balance, plus 18% GST on that fee. Interest also continues to accrue on the full balance. Standard Indian bank late fees range from &#8377;100 for small balances up to &#8377;1,300 for larger outstanding amounts, before GST.
+        </div>
+      </div>
+
+      <div class="faq-item border border-gray-100 rounded-xl overflow-hidden">
+        <button class="faq-q w-full flex justify-between items-center px-5 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
+          <span>How long does it take to pay off a credit card by paying only the minimum due?</span>
+          <svg class="faq-icon w-4 h-4 text-blue-500 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a px-5 text-sm text-gray-500 leading-relaxed">
+          Much longer than most people expect. A balance of &#8377;1,00,000 at 3.75% monthly interest with minimum due payments of 5% takes over 5 years to clear, and you end up paying significantly more in interest than the original balance. Switch the default payment type to "Minimum Due Only" in this calculator to see your exact timeline.
+        </div>
+      </div>
+
+      <div class="faq-item border border-gray-100 rounded-xl overflow-hidden">
+        <button class="faq-q w-full flex justify-between items-center px-5 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
+          <span>Does adding new purchases affect my payoff timeline?</span>
+          <svg class="faq-icon w-4 h-4 text-blue-500 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a px-5 text-sm text-gray-500 leading-relaxed">
+          Yes, significantly. When you already have an outstanding balance, any new purchase is added to that balance and immediately attracts interest. There is no interest-free grace period when you are revolving a balance. Use the <strong class="text-gray-600">+ Purchase</strong> button on any month's row to simulate this and see exactly how it pushes your payoff date further out.
+        </div>
+      </div>
+
+      <div class="faq-item border border-gray-100 rounded-xl overflow-hidden">
+        <button class="faq-q w-full flex justify-between items-center px-5 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
+          <span>Should I pay more than the minimum due?</span>
+          <svg class="faq-icon w-4 h-4 text-blue-500 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a px-5 text-sm text-gray-500 leading-relaxed">
+          Always. The minimum due is designed to keep your account in good standing, not to help you become debt-free. Paying even &#8377;1,000 or &#8377;2,000 extra each month can dramatically reduce the total interest paid and the time to payoff. Use this calculator to compare: enter a higher payment amount and see how many months you save.
+        </div>
+      </div>
+
+      <div class="faq-item border border-gray-100 rounded-xl overflow-hidden">
+        <button class="faq-q w-full flex justify-between items-center px-5 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
+          <span>How accurate is this calculator?</span>
+          <svg class="faq-icon w-4 h-4 text-blue-500 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a px-5 text-sm text-gray-500 leading-relaxed">
+          This calculator uses monthly compounding on the closing balance, which is a simplified model. Actual banks use the average daily balance method, and interest may be backdated to the transaction date when you carry a balance. Late fees are based on standard Indian bank slab rates. Use this for planning and directional understanding check with your bank for exact figures.
+        </div>
+      </div>
+
+      <div class="faq-item border border-gray-100 rounded-xl overflow-hidden">
+        <button class="faq-q w-full flex justify-between items-center px-5 py-4 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors" onclick="toggleFaq(this)">
+          <span>What is the best strategy to pay off credit card debt faster?</span>
+          <svg class="faq-icon w-4 h-4 text-blue-500 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a px-5 text-sm text-gray-500 leading-relaxed">
+          Stop adding new purchases to the card, pay as much above the minimum due as possible each month, and never skip a payment. Even one missed payment adds a late fee and compounds interest on a higher balance. If you have multiple cards, pay off the highest interest rate card first while making minimum payments on others this is called the debt avalanche method.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- DISCLAIMER -->
   <div class="bg-amber-50 border border-amber-200 rounded-xl px-5 py-3 flex items-start gap-2 text-sm text-amber-700">
     <svg class="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
     </svg>
-    Late payment fees are based on HDFC Bank's published slab (August 2024) including 18% GST. Minimum due = 5% of outstanding or &#8377;200, whichever is higher. Monthly compounding is used for simplicity. Actual charges vary by bank and card type.
+    Late payment fees are based on standard Indian bank slab rates including 18% GST. Minimum due = 5% of outstanding or &#8377;200, whichever is higher. Monthly compounding is used for simplicity. Actual charges vary by bank and card type.
   </div>
 
 </main>
@@ -597,6 +793,67 @@
   </div>
 </div>
 
+<!-- FEEDBACK SECTION -->
+<div class="max-w-6xl mx-auto px-4 pb-12">
+  <section id="feedback-section" class="bg-white rounded-2xl shadow-md overflow-hidden">
+    <div class="grid grid-cols-1 md:grid-cols-2">
+
+      <!-- Left: info panel -->
+      <div class="bg-gradient-to-br from-blue-700 to-indigo-800 text-white p-8 flex flex-col justify-center">
+        <p class="text-xs font-semibold tracking-widest uppercase text-blue-200 mb-3">FEEDBACK</p>
+        <h2 class="lora text-2xl font-bold mb-3">Have something to say?</h2>
+        <p class="text-sm text-blue-100 leading-relaxed mb-4">A suggestion, a feature request, or just a thought about this calculator. We read every message.</p>
+        <p class="text-xs font-semibold text-yellow-300">We will not store or send spam emails. That is our promise.</p>
+      </div>
+
+      <!-- Right: form -->
+      <div class="p-8">
+        <form id="feedbackForm" class="space-y-5">
+          <div>
+            <label for="from_name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+            <input id="from_name" name="from_name" type="text" required
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm text-sm" />
+          </div>
+          <div>
+            <label for="from_email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+            <input id="from_email" name="from_email" type="email" required
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm text-sm" />
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+            <textarea id="message" name="message" rows="4" required
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm text-sm"></textarea>
+          </div>
+          <div class="flex justify-center">
+            <div class="g-recaptcha" data-sitekey="6LcFMc0rAAAAAO8qxEkn-AmuhqfOHrSVBGXAk3NS"></div>
+          </div>
+          <button id="feedbackSubmitBtn" type="submit"
+            class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:from-blue-700 hover:to-indigo-700 transition font-semibold text-sm">
+            Send Message
+          </button>
+        </form>
+        <p id="feedbackStatus" class="mt-4 text-center text-sm font-semibold"></p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- FEEDBACK POPUP (appears after 30s if user hasn't scrolled to form) -->
+<div id="feedbackPopup" class="hidden fixed bottom-6 left-4 right-4 md:left-auto md:right-6 md:w-80 bg-white border border-blue-100 rounded-2xl shadow-xl p-4 z-50">
+  <div class="flex justify-between items-start mb-1">
+    <p class="text-sm font-semibold text-blue-800">Enjoying this calculator?</p>
+    <button onclick="document.getElementById('feedbackPopup').classList.add('hidden'); scheduleFeedbackPopup(30000);"
+      class="text-gray-400 hover:text-gray-600 text-lg leading-none ml-2">&times;</button>
+  </div>
+  <p class="text-xs text-gray-500 mb-3">Share your thoughts or suggestions. It takes 30 seconds.</p>
+  <a href="#feedback-section"
+    onclick="document.getElementById('feedbackPopup').classList.add('hidden'); clearTimeout(feedbackPopupTimer);"
+    class="block text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2 rounded-lg transition">
+    Give Feedback
+  </a>
+</div>
+
 <!-- FOOTER -->
 <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-4">
   <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -626,13 +883,168 @@
   <div class="border-t border-blue-700 py-4 px-6 flex flex-wrap justify-between items-center text-xs text-gray-300 gap-2">
     <span>&copy; <span id="footer-year"></span> KnowYourEMI. All rights reserved.</span>
     <div class="flex gap-4">
-      <a href="../../about.html" class="hover:text-white">About</a>
-      <a href="../../privacy.html" class="hover:text-white">Privacy Policy</a>
-      <a href="../../terms.html" class="hover:text-white">Terms</a>
+      <a href="../../pages/about.html" class="hover:text-white">About</a>
+      <a href="../../pages/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+      <a href="../../pages/terms-and-conditions.html" class="hover:text-white">Terms</a>
     </div>
   </div>
 </footer>
 
 <script src="script.js"></script>
+
+<!-- EmailJS + reCAPTCHA -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<script>
+  (function() { emailjs.init("vGkMgPqy7msXERp1n"); })();
+
+  const feedbackForm   = document.getElementById("feedbackForm");
+  const feedbackStatus = document.getElementById("feedbackStatus");
+  const feedbackBtn    = document.getElementById("feedbackSubmitBtn");
+  let feedbackPopupTimer;
+
+  // Feedback popup logic
+  window.showFeedbackPopup = function() {
+    const form = document.getElementById("feedback-section");
+    if (!form) return;
+    const rect = form.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 100) return;
+    const popup = document.getElementById("feedbackPopup");
+    popup.classList.remove("hidden");
+    popup.style.opacity = "0";
+    popup.style.transition = "opacity 0.5s ease";
+    setTimeout(() => { popup.style.opacity = "1"; }, 50);
+  };
+
+  window.scheduleFeedbackPopup = function(delay) {
+    clearTimeout(feedbackPopupTimer);
+    feedbackPopupTimer = setTimeout(window.showFeedbackPopup, delay);
+  };
+
+  window.scheduleFeedbackPopup(30000);
+
+  // Hide popup when user scrolls near the feedback section
+  window.addEventListener("scroll", () => {
+    const form = document.getElementById("feedback-section");
+    if (!form) return;
+    const rect = form.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 100) {
+      document.getElementById("feedbackPopup").classList.add("hidden");
+      clearTimeout(feedbackPopupTimer);
+    }
+  });
+
+  // Form submission
+  if (feedbackForm) {
+    feedbackForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const captchaResponse = grecaptcha.getResponse();
+      if (!captchaResponse) {
+        feedbackStatus.textContent = "Please verify the reCAPTCHA before submitting.";
+        feedbackStatus.className = "mt-4 text-red-600 font-semibold";
+        return;
+      }
+
+      feedbackBtn.disabled = true;
+      feedbackBtn.textContent = "Sending...";
+
+      const captchaField = document.createElement("input");
+      captchaField.type  = "hidden";
+      captchaField.name  = "g-recaptcha-response";
+      captchaField.value = captchaResponse;
+      feedbackForm.appendChild(captchaField);
+
+      emailjs.sendForm("service_e5o8v41", "template_gt38jdj", feedbackForm)
+        .then(() => {
+          feedbackStatus.textContent = "Thank you! Your feedback has been sent.";
+          feedbackStatus.className = "mt-4 text-green-600 font-semibold";
+          feedbackForm.reset();
+          grecaptcha.reset();
+          feedbackBtn.disabled = false;
+          feedbackBtn.textContent = "Send Feedback";
+          if (typeof gtag === "function") {
+            gtag("event", "feedback_submit", { event_category: "engagement", event_label: "cc_payoff_feedback" });
+          }
+        })
+        .catch((err) => {
+          console.error("EmailJS error:", err);
+          feedbackStatus.textContent = "Something went wrong. Please try again.";
+          feedbackStatus.className = "mt-4 text-red-600 font-semibold";
+          feedbackBtn.disabled = false;
+          feedbackBtn.textContent = "Send Feedback";
+        });
+    });
+  }
+</script>
+
+<!-- PWA Install Logic -->
+<script>
+  // Service worker registration
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(() => console.log('Service Worker registered'))
+      .catch((err) => console.log('Service Worker failed:', err));
+  }
+
+  // PWA install banner
+  let deferredPrompt;
+  const pwaPopup        = document.getElementById('installPopup');
+  const pwaAddBtn       = document.getElementById('addShortCutBtn');
+  const pwaCloseBtn     = document.getElementById('closeShortCutBtn');
+  let pwaPopupTimer;
+  let pwaPopupDelay = 15000;
+
+  function showPwaPopup() {
+    if (localStorage.getItem('pwaInstalled') === 'true') return;
+    pwaPopup.classList.remove('hidden');
+    pwaPopup.classList.add('opacity-0');
+    setTimeout(() => {
+      pwaPopup.classList.remove('opacity-0');
+      pwaPopup.classList.add('opacity-100');
+    }, 50);
+  }
+
+  function schedulePwaPopup(delay) {
+    clearTimeout(pwaPopupTimer);
+    pwaPopupTimer = setTimeout(showPwaPopup, delay);
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    schedulePwaPopup(pwaPopupDelay);
+  });
+
+  if (pwaAddBtn) {
+    pwaAddBtn.addEventListener('click', async () => {
+      clearTimeout(pwaPopupTimer);
+      pwaPopup.classList.add('hidden');
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          localStorage.setItem('pwaInstalled', 'true');
+          if (typeof gtag === 'function') gtag('event', 'app_installed');
+        } else {
+          pwaPopupDelay = 30000;
+          schedulePwaPopup(pwaPopupDelay);
+        }
+        deferredPrompt = null;
+      }
+    });
+  }
+
+  if (pwaCloseBtn) {
+    pwaCloseBtn.addEventListener('click', () => {
+      clearTimeout(pwaPopupTimer);
+      pwaPopup.classList.add('hidden');
+      pwaPopupDelay = 30000;
+      schedulePwaPopup(pwaPopupDelay);
+    });
+  }
+</script>
+
 </body>
 </html>

@@ -310,7 +310,9 @@ addBtn.addEventListener("click", () => {
 
   // Reset all input and output values
   newLoan.querySelectorAll("input").forEach((inp) => (inp.value = ""));
-  newLoan.querySelectorAll("span").forEach((span) => (span.textContent = "–"));
+  // Reset only value spans (those with specific data classes), not label spans
+  const valueClasses = [".oldEmi",".outstanding",".remainingEmis",".remainingTotal",".foreclosureFee",".foreclosureGst",".totalForeclose"];
+  valueClasses.forEach(cls => { const el = newLoan.querySelector(cls); if (el) el.textContent = "–"; });
 
   // ✅ Ensure all stored data attributes are cleared
   newLoan.dataset.forecloseAmount = "";
@@ -497,73 +499,58 @@ if (savings > 0) {
   // ✅ Positive savings
   labelEl.textContent = "You Save";
   amountEl.textContent = `₹${Number(savings.toFixed(0)).toLocaleString('en-IN')}`;
-  amountEl.className = "text-xl font-bold text-green-700";
-  emojiSection.className = "bg-green-100 border border-green-200 text-center rounded-2xl py-4";
-  savingsSection.className = "bg-green-100 border border-green-200 text-center rounded-2xl py-4 sm:py-8";
-  titleEl.className = "text-lg font-semibold text-green-700 mb-2";
-  recommendationBox.className = "mt-4 bg-green-100 border-l-8 border-green-700 rounded-r-2xl p-4"
-  recommendationText.className = "text-sm text-green-800 text-left font-medium"
+  amountEl.style.color = '#15803d';;;
 
   if (savings <= 10000) {
-     emojiEl.src = "assets/is-it-worth.gif";
-    titleEl.textContent = "Nice offer, but worth ?";
-    recoEl.textContent = `Surely you save some money, but for ₹${Number(savings.toFixed(0)).toLocaleString('en-IN')}, is it worth going through all the process ? Taking new loan can also temporarily drops your credit score`;
+     emojiEl.src = (window.KYE_ASSETS||"../../assets/")+"is-it-worth.gif";
+    titleEl.textContent = "Nice offer, but worth ?"; titleEl.style.color='#15803d';
+    recoEl.textContent = `Surely you save some money, but for ₹${Number(savings.toFixed(0)).toLocaleString('en-IN')}, is it worth going through all the process? Taking a new loan can also temporarily drop your credit score`;
   } else if (savings > 10000 && savings <= 20000) {
-    emojiEl.src = "assets/clap.gif";
-    titleEl.textContent = "Decent savings";
-    recoEl.textContent = `Not a big savings but you can still consider it`;
+    emojiEl.src = (window.KYE_ASSETS||"../../assets/")+"clap.gif";
+    titleEl.textContent = "Decent savings"; titleEl.style.color='#15803d';
+    recoEl.textContent = `Not a huge saving but still worth considering if the process is simple`;
   } else if (savings > 20000 && savings <= 50000) {
-    emojiEl.src = "assets/star-eyes.gif";
-    titleEl.textContent = "Solid Deal! Go for it";
-    recoEl.textContent = `It's a good amount of savings. Go for it, if the offer is available`;
+    emojiEl.src = (window.KYE_ASSETS||"../../assets/")+"star-eyes.gif";
+    titleEl.textContent = "Solid Deal! Go for it"; titleEl.style.color='#15803d';
+    recoEl.textContent = `It's a good saving. Go for it if the offer is available`;
   } else {
-    emojiEl.src = "assets/dollar-face.gif";
-    titleEl.textContent = "Jackpot savings! Don’t miss it";
-    recoEl.textContent = `Excellent offer — you’ll save big! Go ahead and lock this deal before rates change.`;
+    emojiEl.src = (window.KYE_ASSETS||"../../assets/")+"dollar-face.gif";
+    titleEl.textContent = "Jackpot savings! Don’t miss it"; titleEl.style.color='#15803d';
+    recoEl.textContent = `Excellent offer. You'll save big. Go ahead and lock this deal before rates change.`;
   }
 
 
 } else if (savings < 0) {
   // ❌ Negative savings (it costs more)
   labelEl.textContent = "It Costs You";
-  amountEl.textContent = `₹${Number(Math.abs(savings).toFixed(0)).toLocaleString('en-IN')}`;
-  amountEl.className = "text-xl font-bold text-red-700";
-  emojiSection.className = "bg-red-100 border border-red-200 text-center rounded-2xl py-4";
-  savingsSection.className = "bg-red-100 border border-red-200 text-center rounded-2xl py-4 sm:py-8";
-  titleEl.className = "text-lg font-semibold text-red-700 mb-2";
-  recommendationBox.className = "mt-4 bg-red-100 border-l-8 border-red-700 rounded-r-2xl p-4"
-  recommendationText.className = "text-sm text-red-700 text-left font-medium"
+  amountEl.textContent = `-₹${Number(Math.abs(savings).toFixed(0)).toLocaleString('en-IN')}`;
+  amountEl.style.color = '#b91c1c';;;
 
   const cost = Math.abs(savings);
   if (cost <= 10000) {
-    emojiEl.src = "assets/thumbs-down.gif";
-    titleEl.textContent = "Not ideal — think twice";
-    recoEl.textContent = `You end up paying more interest. Better continue with your existing loans`;
+    emojiEl.src = (window.KYE_ASSETS||"../../assets/")+"thumbs-down.gif";
+    titleEl.textContent = "Not ideal, think twice"; titleEl.style.color='#b91c1c';
+    recoEl.textContent = `You end up paying more interest. Better to continue with your existing loans`;
     
   } else if (cost > 10000 && cost <= 25000) {
-    emojiEl.src = "assets/very-bad-offer.gif";
-    titleEl.textContent = "Bad deal";
-    recoEl.textContent = `You end up paying more interest. Better continue with your existing loans`;
+    emojiEl.src = (window.KYE_ASSETS||"../../assets/")+"very-bad-offer.gif";
+    titleEl.textContent = "Bad deal"; titleEl.style.color='#b91c1c';
+    recoEl.textContent = `You end up paying more interest. Better to continue with your existing loans`;
   } else {
-    emojiEl.src = "assets/dont-even-think.gif";
-    titleEl.textContent = "Don't even think of doing that";
-    recoEl.textContent = `You’ll regret this, ₹${Number(cost.toFixed(0)).toLocaleString('en-IN')} is way too much to lose! Stay where you are.`;
+    emojiEl.src = (window.KYE_ASSETS||"../../assets/")+"dont-even-think.gif";
+    titleEl.textContent = "Don't even think of doing that"; titleEl.style.color='#b91c1c';
+    recoEl.textContent = `You'll regret this. ₹${Number(cost.toFixed(0)).toLocaleString('en-IN')} is way too much to lose. Stay where you are.`;
   }
 
 
 } else {
   // Neutral
-  emojiEl.src = "assets/neutral-face.gif";
-  titleEl.textContent = "It's a waste of time";
-  titleEl.className = "text-lg font-semibold text-gray-700 mb-2";
+  emojiEl.src = (window.KYE_ASSETS||"../../assets/")+"neutral-face.gif";
+  titleEl.textContent = "It's a waste of time"; titleEl.style.color='#374151';;
   labelEl.textContent = "No Gain / No Loss";
   amountEl.textContent = "₹0";
-  amountEl.className = "text-xl font-bold text-gray-700";
-  recoEl.textContent = "When the total cost is about the same, Then why to waste your time.";
-   emojiSection.className = "bg-gray-100 border border-gray-200 text-center rounded-2xl py-4";
-  savingsSection.className = "bg-gray-100 border border-gray-200 text-center rounded-2xl py-4 sm:py-8";
-  recommendationBox.className = "mt-4 bg-gray-100 border-l-8 border-gray-600 rounded-r-2xl p-4"
-  recommendationText.className = "text-sm text-gray-600 text-left font-medium"
+  amountEl.style.color = '#374151';;
+  recoEl.textContent = "When the total cost is about the same, why go through all the paperwork?";
 }
 
 // ✅ GA4 Tracking for Balance Transfer Comparison

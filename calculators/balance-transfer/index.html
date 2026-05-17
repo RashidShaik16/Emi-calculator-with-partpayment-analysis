@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loan Balance Transfer Calculator | KnowYourEMI</title>
+  <meta name="description" content="Compare your existing loans with a new lender's offer. See exact foreclosure costs, new EMI, and whether transferring will actually save you money." />
+  <meta name="keywords" content="loan balance transfer calculator, home loan transfer, balance transfer savings, foreclosure charges, loan refinance India, KnowYourEMI" />
+  <link rel="canonical" href="https://knowyouremi.in/calculators/balance-transfer/" />
+  <meta property="og:title" content="Loan Balance Transfer Calculator | KnowYourEMI" />
+  <meta property="og:description" content="Should you transfer your loan? Enter your existing loan details and a new lender's offer. See exact savings or cost before you decide." />
+  <meta property="og:url" content="https://knowyouremi.in/calculators/balance-transfer/" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="../../favicon.png" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:site_name" content="KnowYourEMI" />
+  <meta property="og:image" content="https://www.knowyouremi.in/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Loan Balance Transfer Calculator | KnowYourEMI" />
+  <meta name="twitter:description" content="Should you switch lenders? Enter your existing loan and new lender offer. See exact savings or cost before you decide. Free tool by KnowYourEMI." />
+  <meta name="twitter:image" content="https://www.knowyouremi.in/og-image.jpg" />
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Loan Balance Transfer Calculator",
+    "url": "https://knowyouremi.in/calculators/balance-transfer/",
+    "logo": "https://www.knowyouremi.in/logo-112x112.jpg",
+    "description": "Free loan balance transfer calculator. Compare your existing loan with a new lender offer. See exact foreclosure costs, new EMI, and net savings before switching.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "inLanguage": "en",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a loan balance transfer?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A loan balance transfer means moving your outstanding loan from your current lender to a new lender who is offering a lower interest rate. The new lender pays off your existing loan and you start repaying them at the new, lower rate." }
+      },
+      {
+        "@type": "Question",
+        "name": "When does a balance transfer actually make sense?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A balance transfer makes sense when the interest rate difference is at least 0.5% to 1% and you have a significant outstanding principal with many EMIs remaining. If you are near the end of your loan, the savings are minimal and rarely justify the switching costs." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a foreclosure charge?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A foreclosure charge is a fee your current lender charges for closing your loan before the original tenure ends. As per RBI guidelines, banks cannot charge foreclosure fees on floating rate home loans for individual borrowers. For fixed rate and personal loans, charges typically range from 2% to 5% of outstanding principal plus 18% GST." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the processing fee at the new lender?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The new lender treats your balance transfer as a fresh loan and charges a processing fee, typically between 0.5% and 2% of the new loan amount, plus 18% GST. Some lenders offer zero processing fee as a promotional offer." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I transfer multiple loans to one lender?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, some lenders offer loan consolidation where they pay off multiple existing loans and combine them into one. This calculator supports multiple existing loans and totals all outstanding amounts and foreclosure costs automatically." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will a balance transfer affect my credit score?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, temporarily. The new lender will do a hard credit inquiry which can reduce your score by a few points. However, if you make timely payments on the new loan, your score recovers and usually improves over time." }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is the outstanding principal calculation?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This calculator uses standard reducing balance amortization, which is what all Indian banks use. The outstanding principal is calculated by running the full amortization schedule after the number of EMIs paid. Small differences may occur due to rounding." }
+      },
+      {
+        "@type": "Question",
+        "name": "What documents do I need for a balance transfer?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Typical documents include your existing loan account statement (last 12 months), original loan sanction letter, property documents for home loans, KYC documents, latest salary slips or ITR, and a foreclosure letter from your current lender." }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EM8B59T3F5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-EM8B59T3F5');
+  </script>
+
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1e40af" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    input[type=number] { -moz-appearance: textfield; }
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+    .step-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #1e3a8a; color: #fff;
+      font-size: 0.72rem; font-weight: 700;
+      padding: 3px 12px 3px 3px; border-radius: 999px;
+      margin-bottom: 18px; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .step-badge .num {
+      background: #fff; color: #1e3a8a;
+      width: 20px; height: 20px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800;
+    }
+
+    .result-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 7px 0; border-bottom: 1px dashed #bfdbfe; font-size: 0.85rem;
+    }
+    .result-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .verdict-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    @media(max-width:540px) { .verdict-grid { grid-template-columns: 1fr; } }
+
+    .foreclose-banner {
+      background: linear-gradient(135deg, #1e3a8a, #312e81);
+      color: #fff; border-radius: 16px; padding: 22px 28px; margin-bottom: 0;
+    }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media(max-width:600px) { .two-col { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <script>
+    // GA Event: page visited
+    if (typeof gtag === 'function') gtag('event', 'balance_transfer_visited', { event_category: 'calculator', event_label: 'balance_transfer' });
+  </script>
+  <div id="progressBar" class="fixed top-0 left-0 h-0.5 bg-blue-500 z-50 transition-all duration-200" style="width:0%"></div>
+
+  <!-- ===== PWA INSTALL BANNER ===== -->
+  <div id="installPopup" class="fixed top-0 inset-x-0 bg-white shadow-lg border-b border-gray-200 p-4 z-50 hidden opacity-0 transition-opacity duration-700">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm text-gray-700">
+      <div class="text-center sm:text-left leading-tight">
+        &#128241; <strong>Install KnowYourEMI</strong><br>
+        Add to your Home Screen for quick access.
+      </div>
+      <div class="flex justify-center sm:justify-end gap-2">
+        <button id="addShortCutBtn" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg">Add Shortcut</button>
+        <button id="closeShortCutBtn" class="text-gray-500 hover:text-gray-700 text-xs px-3 py-1.5">Maybe Later</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV — exact match to float rate calc -->
+  <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="../../index.html">
+        <img class="w-20 inline-block" src="../../logo.png" alt="KnowYourEMI logo" width="80" height="40" fetchpriority="high" />
+      </a>
+      <div class="hidden md:flex space-x-6 text-sm font-medium">
+        <a href="../../index.html" class="hover:text-yellow-300 transition">EMI Calculator</a>
+        <a href="../eligibility/" class="hover:text-yellow-300 transition">Check Eligibility</a>
+        <a href="../float-rate-home-loan/" class="hover:text-yellow-300 transition">Floating Rate Home Loan</a>
+        <a href="../credit-card-payoff/" class="hover:text-yellow-300 transition">Credit Card Payoff</a>
+        <a href="../../blogs/index.html" class="hover:text-yellow-300 transition">Blog</a>
+      </div>
+      <button id="menu-toggle" class="md:hidden focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-indigo-900 px-4 pb-4 space-y-2 text-sm">
+      <a href="../../index.html" class="block py-2 hover:text-yellow-300">EMI Calculator</a>
+      <a href="../eligibility/" class="block py-2 hover:text-yellow-300">Check Eligibility</a>
+      <a href="../float-rate-home-loan/" class="block py-2 hover:text-yellow-300">Float Rate</a>
+      <a href="../credit-card-payoff/" class="block py-2 hover:text-yellow-300">CC Payoff</a>
+      <a href="../../blogs/index.html" class="block py-2 hover:text-yellow-300">Blog</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="bg-gradient-to-r from-blue-800 to-indigo-900 py-10 px-4">
+    <div class="max-w-4xl mx-auto">
+      <span class="inline-block bg-white bg-opacity-20 text-white text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-3">Free Calculator</span>
+      <h1 class="text-2xl md:text-3xl font-bold text-white" style="font-family:'Lora',serif;">Loan Balance Transfer Calculator</h1>
+      <p class="text-sm text-blue-200 mt-2 max-w-xl">Compare your existing loans with a new lender offer. See exact foreclosure costs, new EMI, and whether switching will actually save you money.</p>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="max-w-4xl mx-auto px-4 py-8 space-y-6">
+
+    <!-- STEP 1 -->
+    <div class="bg-white rounded-2xl shadow p-6">
+      <div class="step-badge"><span class="num">1</span> Your Existing Loans</div>
+
+      <div id="existingLoansWrapper" class="space-y-6">
+        <div class="existing-loan pb-6 border-b border-gray-100">
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="text-base font-semibold text-gray-800">Existing Loan 1</h3>
+          </div>
+          <div class="two-col">
+            <!-- inputs -->
+            <div>
+              <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Original Loan Amount (₹)</label>
+                <input type="number" class="oldLoanAmount w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="e.g. 15,00,000">
+              </div>
+              <div class="grid grid-cols-2 gap-3 mb-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Interest Rate (% p.a.)</label>
+                  <input type="number" class="oldInterest w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="e.g. 9.5" min="1" max="36" step="0.01">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Tenure (Months)</label>
+                  <input type="number" class="oldTenureMonths w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="e.g. 240" step="1" min="3" max="360">
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3 mb-5">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">EMIs Paid</label>
+                  <input type="number" class="emisPaid w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="e.g. 60" min="0" step="1">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Foreclosure Charges (%)</label>
+                  <input type="number" class="foreclosureRate w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none" placeholder="e.g. 2" step="0.01">
+                </div>
+              </div>
+              <button type="button" class="calcExistingLoan w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm transition">
+                Calculate Outstanding
+              </button>
+            </div>
+            <!-- results -->
+            <div class="bg-blue-50 border border-blue-100 rounded-xl p-4">
+              <h4 class="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-3">Loan Summary</h4>
+              <div class="result-row"><span class="text-gray-600">Existing EMI</span><span class="oldEmi font-semibold text-gray-800">–</span></div>
+              <div class="result-row"><span class="text-gray-600">Principal Outstanding</span><span class="outstanding font-semibold text-blue-700">–</span></div>
+              <div class="result-row"><span class="text-gray-600">Remaining EMIs</span><span class="remainingEmis font-semibold text-gray-800">–</span></div>
+              <div class="result-row"><span class="text-blue-700 font-semibold">Remaining Payments</span><span class="remainingTotal font-semibold text-blue-700">–</span></div>
+              <div class="result-row"><span class="text-red-600 font-semibold">Foreclosure Fee</span><span class="foreclosureFee font-semibold text-red-600">–</span></div>
+              <div class="result-row"><span class="text-red-600 font-semibold">GST on Fee (18%)</span><span class="foreclosureGst font-semibold text-red-600">–</span></div>
+              <div class="result-row pt-1"><span class="font-bold text-gray-800">Total to Close Loan</span><span class="totalForeclose font-bold text-blue-700 text-base">–</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button id="addLoanBtn" class="hidden mt-5 border-2 border-dashed border-blue-300 hover:border-blue-500 text-blue-600 hover:text-blue-800 font-semibold text-sm px-5 py-2.5 rounded-xl transition bg-blue-50 hover:bg-blue-100">
+        + Add Another Existing Loan
+      </button>
+    </div>
+
+    <!-- TOTAL FORECLOSURE BANNER -->
+    <div id="totalForeclosureSection" class="hidden foreclose-banner">
+      <p class="text-xs font-semibold uppercase tracking-widest opacity-75 mb-1">Total to Close All Existing Loans</p>
+      <p class="text-3xl font-bold">₹<span id="totalForeclosureSum">0</span></p>
+      <p class="text-xs opacity-70 mt-1">This becomes the new loan amount from your new lender</p>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="bg-white rounded-2xl shadow p-6">
+      <div class="step-badge"><span class="num">2</span> New Lender Offer</div>
+
+      <div class="two-col">
+        <div>
+          <div class="grid grid-cols-2 gap-3 mb-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Interest Rate (% p.a.)</label>
+              <input id="newInterest" type="number" placeholder="e.g. 8.5" min="1" max="36" step="0.01"
+                class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-green-400 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">New Tenure (Months)</label>
+              <input id="newTenureMonths" type="number" min="3" max="360" placeholder="e.g. 180"
+                class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-green-400 focus:outline-none">
+            </div>
+          </div>
+          <div class="mb-5">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Processing Fee (%)</label>
+            <input id="processingFeeRate" type="number" placeholder="e.g. 1.5" step="0.01"
+              class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-green-400 focus:outline-none">
+          </div>
+          <button id="compareTransfer" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2.5 rounded-xl text-sm transition">
+            Compare &amp; Calculate Savings
+          </button>
+        </div>
+
+        <div class="bg-green-50 border border-green-100 rounded-xl p-4">
+          <h4 class="text-xs font-semibold text-green-700 uppercase tracking-wide mb-3">New Loan Summary</h4>
+          <div class="result-row" style="border-bottom-color:#bbf7d0;"><span class="text-gray-600">New Loan Amount</span><span id="newLoanAmount" class="font-semibold text-gray-800">–</span></div>
+          <div class="result-row" style="border-bottom-color:#bbf7d0;"><span class="text-gray-600">New EMI</span><span id="newEmi" class="font-semibold text-gray-800">–</span></div>
+          <div class="result-row" style="border-bottom-color:#bbf7d0;"><span class="text-gray-600">New Tenure</span><span id="newTenure" class="font-semibold text-gray-800">–</span></div>
+          <div class="result-row" style="border-bottom-color:#bbf7d0;"><span class="text-red-600 font-semibold">Processing Fee</span><span id="newProcFees" class="font-semibold text-red-600">–</span></div>
+          <div class="result-row" style="border-bottom-color:#bbf7d0;"><span class="text-red-600 font-semibold">GST on Fee (18%)</span><span id="newGstFees" class="font-semibold text-red-600">–</span></div>
+          <div class="result-row pt-1"><span class="font-bold text-gray-800">Total New Repayment</span><span id="newTotal" class="font-bold text-green-700 text-base">–</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDICT -->
+    <div id="decisionBox" class="hidden rounded-2xl overflow-hidden shadow-lg" style="border:2px solid #e5e7eb;">
+
+      <!-- Header strip -->
+      <div class="px-6 py-4 flex items-center gap-3" style="background:#0f172a;">
+        <svg style="width:18px;height:18px;flex-shrink:0;" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+        <h3 class="font-bold text-white text-base tracking-wide" style="font-family:'Lora',serif;letter-spacing:0.02em;">Our Verdict</h3>
+      </div>
+
+      <!-- Main verdict body -->
+      <div style="background:#fff;">
+
+        <!-- Emoji + amount row -->
+        <div class="verdict-grid">
+          <!-- Emoji panel -->
+          <div id="emoji-section" style="padding:32px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-right:2px solid #f1f5f9;background:#f8fafc;">
+            <img id="decisionEmoji" src="../../assets/clap.gif" alt="verdict emoji" style="width:90px;height:90px;margin-bottom:14px;border-radius:50%;box-shadow:0 4px 20px rgba(0,0,0,0.10);">
+            <h4 id="decisionTitle" class="text-base font-bold text-green-700" style="font-family:'Lora',serif;line-height:1.3;max-width:180px;"></h4>
+          </div>
+
+          <!-- Amount panel -->
+          <div id="savings-section" style="padding:32px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#f8fafc;">
+            <p id="decisionAmountLabel" style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:#94a3b8;margin-bottom:10px;">You Save</p>
+            <p id="decisionAmount" style="font-size:2.8rem;font-weight:800;line-height:1;font-family:'Lora',serif;"></p>
+            <p style="font-size:0.72rem;color:#94a3b8;margin-top:8px;">vs staying with current lender</p>
+          </div>
+        </div>
+
+        <!-- Recommendation bar -->
+        <div id="recommendationBox" style="border-top:2px solid #f1f5f9;padding:18px 24px;display:flex;align-items:flex-start;gap:12px;">
+          <span style="font-size:1.2rem;flex-shrink:0;margin-top:1px;">💡</span>
+          <p id="recommendationText" style="font-size:0.875rem;color:#374151;line-height:1.65;"></p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== HOW TO USE ===== -->
+  <div class="max-w-4xl mx-auto px-4 pb-4 space-y-6">
+
+  <section class="rounded-2xl overflow-hidden shadow-md">
+    <div class="bg-gradient-to-r from-blue-700 to-indigo-700 px-6 py-5">
+      <h2 class="text-white font-bold text-lg">How to Use This Calculator</h2>
+      <p class="text-blue-200 text-xs mt-1">A complete guide to evaluating your balance transfer decision</p>
+    </div>
+    <div class="bg-white px-6 py-8 space-y-8">
+
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-7 h-7 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">1</span>
+          <h3 class="text-base font-bold text-gray-800">Enter your existing loan details</h3>
+        </div>
+        <p class="text-base text-gray-600 leading-relaxed pl-10">
+          Fill in your <strong>original loan amount</strong>, <strong>interest rate</strong>, and <strong>total tenure in months</strong>. Then enter how many EMIs you have already paid. This lets the calculator find your exact outstanding principal today. Add your bank's <strong>foreclosure charge percentage</strong> — typically 0 to 4% for floating rate loans. Hit <strong>Calculate Outstanding</strong> to see your loan summary.
+        </p>
+      </div>
+
+      <hr class="border-gray-100" />
+
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-7 h-7 rounded-full bg-indigo-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">2</span>
+          <h3 class="text-base font-bold text-gray-800">Add multiple loans if needed</h3>
+        </div>
+        <p class="text-base text-gray-600 leading-relaxed pl-10">
+          If you have more than one loan you want to consolidate into a single balance transfer, click <strong>+ Add Another Existing Loan</strong> and repeat the process. The calculator adds all outstanding amounts and foreclosure costs together. This total becomes the new loan amount your new lender will need to cover.
+        </p>
+      </div>
+
+      <hr class="border-gray-100" />
+
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-7 h-7 rounded-full bg-green-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">3</span>
+          <h3 class="text-base font-bold text-gray-800">Enter the new lender's offer</h3>
+        </div>
+        <p class="text-base text-gray-600 leading-relaxed pl-10 mb-4">
+          Enter the <strong>interest rate</strong> the new lender is offering, the <strong>new tenure</strong> you want, and their <strong>processing fee percentage</strong>. Hit <strong>Compare and Calculate Savings</strong>. The calculator shows you the new EMI, total repayment, and processing costs.
+        </p>
+        <div class="pl-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="border-l-4 border-indigo-400 pl-4 py-1">
+            <p class="text-sm font-bold text-gray-800 mb-1">What to watch</p>
+            <p class="text-sm text-gray-500 leading-relaxed">The new total repayment must be significantly lower than your remaining payments on the existing loan to justify the switch. Processing fees and GST add to the real cost of transfer.</p>
+          </div>
+          <div class="border-l-4 border-blue-400 pl-4 py-1">
+            <p class="text-sm font-bold text-gray-800 mb-1">Break-even point</p>
+            <p class="text-sm text-gray-500 leading-relaxed">If the savings are small and you are near the end of your loan, a balance transfer usually does not make financial sense. The savings need to comfortably exceed the total cost of switching.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="border-gray-100" />
+
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-7 h-7 rounded-full bg-purple-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">4</span>
+          <h3 class="text-base font-bold text-gray-800">Read the verdict</h3>
+        </div>
+        <p class="text-base text-gray-600 leading-relaxed pl-10">
+          The verdict card shows you exactly how much you save or lose by making the transfer. Green means go for it. Red means stay where you are. The recommendation text explains the reasoning in plain language so you can make the decision confidently.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="bg-amber-50 border-t border-amber-200 px-6 py-3 flex items-start gap-2">
+      <svg class="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+      </svg>
+      <p class="text-sm text-amber-700">Foreclosure charges, processing fees, and GST are estimates. Confirm exact figures with your bank before proceeding.</p>
+    </div>
+  </section>
+
+  <!-- ===== FAQ SECTION ===== -->
+  <section id="faq-section" class="rounded-2xl overflow-hidden shadow-md">
+    <div class="bg-gradient-to-r from-blue-700 to-indigo-700 px-6 py-5">
+      <h2 class="text-white font-bold text-lg">Frequently Asked Questions</h2>
+      <p class="text-blue-200 text-xs mt-1">Everything you need to know about loan balance transfers</p>
+    </div>
+    <div class="bg-white px-6 py-8">
+      <div id="faqAccordion" class="space-y-4">
+
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>What is a loan balance transfer?</span><span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">A loan balance transfer means moving your outstanding loan from your current lender to a new lender who is offering a lower interest rate. The new lender pays off your existing loan and you start repaying them at the new, lower rate. It is commonly used for home loans and personal loans when interest rates in the market fall or when you find a better offer from another bank.</p>
+          </div>
+        </div>
+
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>When does a balance transfer actually make sense?</span><span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">A balance transfer makes sense when the interest rate difference is at least 0.5% to 1% and you have a significant outstanding principal with many EMIs remaining. If you are in the last few years of your loan, most of your interest has already been paid (interest is front-loaded), so the savings from switching are minimal and rarely justify the costs involved.</p>
+            <p class="py-3 text-sm font-medium text-yellow-700">💡 Pro Tip: Use this calculator to check if the total savings exceed the total switching cost (foreclosure fee + processing fee + GST) before deciding.</p>
+          </div>
+        </div>
+
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>What is a foreclosure charge and who charges it?</span><span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">A foreclosure charge is a fee your current lender charges for closing your loan before the original tenure ends. As per RBI guidelines, banks cannot charge foreclosure fees on floating rate home loans for individual borrowers. However, for fixed rate loans and personal loans, foreclosure charges typically range from 2% to 5% of the outstanding principal plus 18% GST on that fee. Always check your loan agreement or call your bank to get the exact figure before calculating.</p>
+          </div>
+        </div>
+
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>What is the processing fee at the new lender?</span><span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">The new lender treats your balance transfer as a fresh loan application and charges a processing fee, typically between 0.5% and 2% of the new loan amount, plus 18% GST. Some lenders offer zero processing fee as a promotional offer to attract balance transfers. This fee is a real cost of switching and this calculator includes it in the total comparison so you see the true net savings.</p>
+          </div>
+        </div>
+
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>Can I transfer multiple loans to one lender?</span><span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">Yes, some lenders offer loan consolidation where they pay off multiple existing loans and combine them into one. This calculator supports this scenario — you can add multiple existing loans and it totals up all outstanding amounts and foreclosure costs. The combined total becomes the amount you need from your new lender. Not all banks offer multi-loan consolidation, so check with your target lender first.</p>
+          </div>
+        </div>
+
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>Will a balance transfer affect my credit score?</span><span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">Yes, temporarily. When you apply for a balance transfer, the new lender will do a hard credit inquiry which can reduce your score by a few points. The closure of your old loan also slightly affects your credit history length. However, if you make timely payments on the new loan, your score recovers and usually improves over time. Avoid applying to multiple lenders simultaneously as multiple hard inquiries can hurt your score more significantly.</p>
+          </div>
+        </div>
+
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>How accurate is the outstanding principal calculation?</span><span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">This calculator uses standard reducing balance amortization, which is what all Indian banks use. The outstanding principal is calculated by running the full amortization schedule and finding the balance after the number of EMIs you have paid. For loans without any part payments or rate changes, this will match your bank statement very closely. Small differences can occur due to rounding and the exact date on which your bank applies each payment.</p>
+          </div>
+        </div>
+
+        <div class="border rounded-lg overflow-hidden">
+          <button class="w-full flex justify-between items-center p-4 font-semibold text-left text-gray-800 hover:bg-gray-50 focus:outline-none">
+            <span>What documents do I need for a balance transfer?</span><span class="text-xl">+</span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0 px-4">
+            <p class="py-3 text-sm text-gray-600">Typical documents required include your existing loan account statement (last 12 months), original loan sanction letter, property documents (for home loans), KYC documents (Aadhaar, PAN), latest salary slips or ITR (last 2-3 years), and a foreclosure letter from your current lender. The process is similar to a fresh loan application and usually takes 2 to 4 weeks end to end.</p>
+            <p class="py-3 text-sm font-medium text-yellow-700">💡 Pro Tip: Request a provisional foreclosure letter from your current bank before applying. It shows the exact outstanding and charges, which is more accurate than any calculator estimate.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEEDBACK SECTION ===== -->
+  <section id="feedback-section" style="margin-top: 60px;">
+    <div style="border-top: 1px solid #e5e7eb; padding-top: 40px;">
+      <p class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-4">Feedback</p>
+      <div style="background: white; border: 1px solid #e5e7eb; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+        <h2 class="text-xl font-bold text-gray-900 mb-1" style="font-family:'Lora',serif;">Have something to say?</h2>
+        <p class="text-sm text-gray-500 mb-4">A suggestion, a feature request, or just a thought about this calculator. We read every message.</p>
+        <p class="text-xs font-semibold text-yellow-700 mb-6">We will not store or send spam emails. That is our promise.</p>
+        <form id="feedbackForm" class="space-y-5">
+          <div>
+            <label for="from_name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+            <input id="from_name" name="from_name" type="text" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm text-sm">
+          </div>
+          <div>
+            <label for="from_email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+            <input id="from_email" name="from_email" type="email" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm text-sm">
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+            <textarea id="message" name="message" rows="4" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm text-sm"></textarea>
+          </div>
+          <div class="flex justify-center">
+            <div class="g-recaptcha" data-sitekey="6LcFMc0rAAAAAO8qxEkn-AmuhqfOHrSVBGXAk3NS"></div>
+          </div>
+          <button id="feedbackSubmitBtn" type="submit"
+            class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:from-blue-700 hover:to-indigo-700 transition font-semibold text-sm">
+            Send Message
+          </button>
+        </form>
+        <p id="feedbackStatus" class="mt-4 text-center text-sm font-semibold"></p>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- end educational wrapper -->
+
+<!-- ===== FEEDBACK POPUP ===== -->
+<div id="feedbackPopup"
+  class="hidden fixed z-40 cursor-pointer"
+  style="bottom: 80px; right: 16px; max-width: 220px;"
+  onclick="document.getElementById('feedback-section').scrollIntoView({behavior:'smooth'}); document.getElementById('feedbackPopup').classList.add('hidden');">
+  <div class="bg-white border border-gray-200 rounded-2xl shadow-xl p-4 flex items-start gap-3" style="box-shadow: 0 8px 32px rgba(37,99,235,0.15);">
+    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+      </svg>
+    </div>
+    <div class="min-w-0">
+      <p class="text-sm font-bold text-gray-800 leading-tight">Share your feedback</p>
+      <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Help us improve this calculator</p>
+    </div>
+    <button onclick="event.stopPropagation(); document.getElementById('feedbackPopup').classList.add('hidden'); if(window.scheduleFeedbackPopup) window.scheduleFeedbackPopup(30000);"
+      class="text-gray-300 hover:text-gray-500 text-base leading-none flex-shrink-0 ml-1">&times;</button>
+  </div>
+</div>
+
+  <!-- FOOTER — exact match to float rate calc -->
+  <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-lg font-semibold mb-3">About KnowYourEMI</h3>
+        <p class="text-sm text-gray-200 leading-relaxed">KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility, and evaluate balance transfers transparently. No sign-ups, no hidden conditions.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="../../index.html" class="hover:underline">EMI Calculator</a></li>
+          <li><a href="../eligibility/" class="hover:underline">Loan Eligibility</a></li>
+          <li><a href="../float-rate-home-loan/" class="hover:underline">Float Rate Simulator</a></li>
+          <li><a href="../credit-card-payoff/" class="hover:underline">CC Payoff Calculator</a></li>
+          <li><a href="./index.html#faq-section" class="hover:underline">FAQs</a></li>
+          <li><a href="./index.html#feedback-section" class="hover:underline">Feedback</a></li>
+          <li><a href="../../blogs/index.html" class="hover:underline">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Contact</h3>
+        <p class="text-sm text-gray-200 mb-2">&#128231; <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">hello@knowyouremi.in</a></p>
+        <p class="text-sm text-gray-200">More tools and articles coming soon.</p>
+      </div>
+    </div>
+    <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
+      <span>&#169; <span id="year"></span> knowyouremi.in | All rights reserved.</span>
+      <a href="../../pages/about.html" class="underline hover:text-yellow-300">About</a> |
+      <a href="../../pages/privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
+      <a href="../../pages/terms-and-conditions.html" class="underline hover:text-yellow-300">Terms &amp; Conditions</a>
+    </div>
+  </footer>
+
+  <script>window.KYE_ASSETS = "../../assets/";</script>
+  <script src="./balanceTransfer.js"></script>
+<!-- ===== SCRIPTS ===== -->
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('menu-toggle').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const pct = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('#faqAccordion button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const content = btn.nextElementSibling;
+      const symbol = btn.querySelector('span:last-child');
+      if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        content.style.maxHeight = '0px';
+        content.style.opacity = '0';
+        symbol.textContent = '+';
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.opacity = '1';
+        symbol.textContent = '−';
+      }
+    });
+  });
+
+  // Service worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(() => console.log('Service Worker registered'))
+      .catch((err) => console.log('Service Worker failed:', err));
+  }
+
+  // PWA install banner
+  let deferredPrompt;
+  const popup = document.getElementById('installPopup');
+  const addShortCutBtn = document.getElementById('addShortCutBtn');
+  const closeShortCutBtn = document.getElementById('closeShortCutBtn');
+  let popupTimer;
+  let popupDelay = 15000;
+
+  function showPopup() {
+    if (localStorage.getItem('pwaInstalled') === 'true') return;
+    popup.classList.remove('hidden');
+    popup.classList.add('opacity-0');
+    popup.classList.add('transition-opacity', 'duration-700');
+    setTimeout(() => { popup.classList.remove('opacity-0'); popup.classList.add('opacity-100'); }, 50);
+  }
+  function schedulePopup(delay) { clearTimeout(popupTimer); popupTimer = setTimeout(() => showPopup(), delay); }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault(); deferredPrompt = e; schedulePopup(popupDelay);
+  });
+  addShortCutBtn.addEventListener('click', async () => {
+    clearTimeout(popupTimer); popup.classList.add('hidden');
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') { localStorage.setItem('pwaInstalled', 'true'); }
+      else { popupDelay = 30000; schedulePopup(popupDelay); }
+      deferredPrompt = null;
+    }
+  });
+  closeShortCutBtn.addEventListener('click', () => {
+    clearTimeout(popupTimer); popup.classList.add('hidden'); popupDelay = 30000; schedulePopup(popupDelay);
+  });
+
+  // Feedback popup
+  const feedbackPopup = document.getElementById('feedbackPopup');
+  let feedbackPopupTimer;
+  window.showFeedbackPopup = function() {
+    const form = document.getElementById('feedback-section');
+    if (!form) return;
+    const rect = form.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 100) return;
+    feedbackPopup.classList.remove('hidden');
+    feedbackPopup.style.opacity = '0';
+    feedbackPopup.style.transition = 'opacity 0.5s ease';
+    setTimeout(() => { feedbackPopup.style.opacity = '1'; }, 50);
+  };
+  window.scheduleFeedbackPopup = function(delay) {
+    clearTimeout(feedbackPopupTimer);
+    feedbackPopupTimer = setTimeout(window.showFeedbackPopup, delay);
+  };
+  window.scheduleFeedbackPopup(30000);
+
+  // GA Event: compare button clicked
+  const compareBtn = document.getElementById('compareTransfer');
+  if (compareBtn) {
+    compareBtn.addEventListener('click', () => {
+      if (typeof gtag === 'function') gtag('event', 'balance_transfer_checked', { event_category: 'calculator', event_label: 'compare_savings' });
+    });
+  }
+  window.addEventListener('scroll', () => {
+    const form = document.getElementById('feedback-section');
+    if (!form) return;
+    const rect = form.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 100) {
+      feedbackPopup.classList.add('hidden');
+      clearTimeout(feedbackPopupTimer);
+    }
+  });
+</script>
+
+<!-- EmailJS + reCAPTCHA -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+  (function() { emailjs.init("vGkMgPqy7msXERp1n"); })();
+  const feedbackForm   = document.getElementById("feedbackForm");
+  const feedbackStatus = document.getElementById("feedbackStatus");
+  const feedbackBtn    = document.getElementById("feedbackSubmitBtn");
+  if (feedbackForm) {
+    feedbackForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const captchaResponse = grecaptcha.getResponse();
+      if (!captchaResponse) {
+        feedbackStatus.textContent = "Please verify the reCAPTCHA before submitting.";
+        feedbackStatus.className = "mt-4 text-red-600 font-semibold";
+        return;
+      }
+      feedbackBtn.disabled = true;
+      feedbackBtn.textContent = "Sending...";
+      const captchaField = document.createElement("input");
+      captchaField.type = "hidden"; captchaField.name = "g-recaptcha-response"; captchaField.value = captchaResponse;
+      feedbackForm.appendChild(captchaField);
+      emailjs.sendForm("service_e5o8v41", "template_gt38jdj", feedbackForm)
+        .then(() => {
+          feedbackStatus.textContent = "Thank you! Your feedback has been sent.";
+          feedbackStatus.className = "mt-4 text-green-600 font-semibold";
+          feedbackForm.reset(); grecaptcha.reset();
+          feedbackBtn.disabled = false; feedbackBtn.textContent = "Send Message";
+        })
+        .catch((err) => {
+          feedbackStatus.textContent = "Something went wrong. Please try again.";
+          feedbackStatus.className = "mt-4 text-red-600 font-semibold";
+          feedbackBtn.disabled = false; feedbackBtn.textContent = "Send Message";
+        });
+    });
+  }
+</script>
+
+
+</body>
+</html>

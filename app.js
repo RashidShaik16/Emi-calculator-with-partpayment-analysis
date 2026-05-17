@@ -107,16 +107,25 @@ loanTypeButtons.forEach((btn) => {
     // Update global loan type
     currentLoanType = btn.dataset.type;
     document.getElementById("loanType").textContent = currentLoanType
-       if (currentLoanType === "credit") {
-        // Show note smoothly
+       const homeLoanNote = document.getElementById("homeLoanNote");
+      if (currentLoanType === "credit") {
         loanTypeNote.classList.remove("opacity-0", "max-h-0");
-        loanTypeNote.classList.add("opacity-100", "max-h-24");
-        document.getElementById("additional-charges-div").classList.remove("hidden")
-      } else {
-        // Hide note smoothly
+        loanTypeNote.classList.add("opacity-100", "max-h-40");
+        homeLoanNote.classList.add("opacity-0", "max-h-0");
+        homeLoanNote.classList.remove("opacity-100", "max-h-16");
+        document.getElementById("additional-charges-div").classList.remove("hidden");
+      } else if (currentLoanType === "home") {
+        homeLoanNote.classList.remove("opacity-0", "max-h-0");
+        homeLoanNote.classList.add("opacity-100", "max-h-16");
         loanTypeNote.classList.add("opacity-0", "max-h-0");
-        loanTypeNote.classList.remove("opacity-100", "max-h-24");
-        document.getElementById("additional-charges-div").classList.add("hidden")
+        loanTypeNote.classList.remove("opacity-100", "max-h-40");
+        document.getElementById("additional-charges-div").classList.add("hidden");
+      } else {
+        loanTypeNote.classList.add("opacity-0", "max-h-0");
+        loanTypeNote.classList.remove("opacity-100", "max-h-40");
+        homeLoanNote.classList.add("opacity-0", "max-h-0");
+        homeLoanNote.classList.remove("opacity-100", "max-h-16");
+        document.getElementById("additional-charges-div").classList.add("hidden");
       }
 
     // Update limits
@@ -232,6 +241,90 @@ if (downloadBtn) {
       });
     }
     
+  });
+}
+
+
+// ============================================================
+// WHATSAPP SHARE
+// ============================================================
+const whatsappShareBtn = document.getElementById("whatsappShareBtn");
+if (whatsappShareBtn) {
+  whatsappShareBtn.addEventListener("click", () => {
+    const loanAmount    = Number(loanInput.value);
+    const interestRate  = Number(rateInput.value);
+    const tenure        = Number(tenureInput.value);
+    const emiValue      = Math.round(calculateEMI(loanAmount, interestRate, tenure));
+    const totalInterest = Math.round(originalTotalInterest);
+    const totalPayment  = Math.round(loanAmount + originalTotalInterest);
+
+    const loanTypeLabel = {
+      personal: "Personal Loan",
+      home:     "Home Loan",
+      car:      "Car Loan",
+      credit:   "Credit Card Loan"
+    }[currentLoanType] || "Loan";
+
+    const hasPartPayments = partPayments && partPayments.length > 0;
+    const interestSaved   = hasPartPayments ? Math.round(originalTotalInterest - newTotalInterest) : 0;
+    const tenureReduced   = hasPartPayments && dataForPdf ? tenure - dataForPdf.length : 0;
+    const newTotalInt     = hasPartPayments ? Math.round(newTotalInterest) : totalInterest;
+    const newTotalPay     = hasPartPayments ? Math.round(loanAmount + newTotalInterest) : totalPayment;
+
+    const line = "==================";
+
+    // Proc fee and charges (all loan types)
+    const procFeeValue  = Number(document.getElementById("procFeeVal")?.textContent?.replace(/,/g, "") || 0);
+    const gstOnFee      = Number(document.getElementById("gstVal")?.textContent?.replace(/,/g, "") || 0);
+    const gstOnInterest = currentLoanType === "credit" ? Number(document.getElementById("gstValOnInt")?.textContent?.replace(/,/g, "") || 0) : 0;
+    const paybackValue  = currentLoanType === "credit" ? Number(document.getElementById("payBackValue")?.textContent?.replace(/,/g, "") || 0) : 0;
+
+    let msg =
+      "*EMI Summary - KnowYourEMI*\n" + line + "\n" +
+      "*Loan Type:* " + loanTypeLabel + "\n" +
+      "*Loan Amount:* Rs. " + loanAmount.toLocaleString("en-IN") + "\n" +
+      "*Interest Rate:* " + interestRate + "% p.a.\n" +
+      "*Tenure:* " + tenure + " months\n" +
+      line + "\n" +
+      "*Monthly EMI:* Rs. " + emiValue.toLocaleString("en-IN") + "\n" +
+      "*Total Interest:* Rs. " + totalInterest.toLocaleString("en-IN") + "\n" +
+      "*Total Payment:* Rs. " + totalPayment.toLocaleString("en-IN") + "\n";
+
+    // Proc fee for all loan types
+    if (procFeeValue > 0) {
+      msg +=
+        line + "\n" +
+        "*Processing Fee:* Rs. " + Math.round(procFeeValue).toLocaleString("en-IN") + "\n" +
+        "*GST on Fee:* Rs. " + Math.round(gstOnFee).toLocaleString("en-IN") + "\n";
+    }
+    // GST on interest + total payback for credit card only
+    if (currentLoanType === "credit") {
+      msg +=
+        "*GST on Interest:* Rs. " + Math.round(gstOnInterest).toLocaleString("en-IN") + "\n" +
+        "*Total Payback (incl. GST):* Rs. " + Math.round(paybackValue).toLocaleString("en-IN") + "\n";
+    }
+
+    if (hasPartPayments) {
+      msg +=
+        line + "\n" +
+        "*Part Payments Applied:* " + partPayments.length + "\n" +
+        "*Interest Saved:* Rs. " + interestSaved.toLocaleString("en-IN") + "\n" +
+        "*Months Saved:* " + tenureReduced + "\n" +
+        "*New Total Interest:* Rs. " + newTotalInt.toLocaleString("en-IN") + "\n" +
+        "*New Total Payment:* Rs. " + newTotalPay.toLocaleString("en-IN") + "\n";
+    }
+
+    msg += line + "\nhttps://knowyouremi.in";
+
+    window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
+
+    if (typeof gtag === "function") {
+      gtag("event", "whatsapp_share", {
+        event_category: "engagement",
+        event_label: "loan_summary_shared",
+        value: loanAmount
+      });
+    }
   });
 }
 

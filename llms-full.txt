@@ -86,7 +86,7 @@ Banks in India use a metric called FOIR (Fixed Obligation to Income Ratio). Most
 ---
 
 ### 3. Balance Transfer Calculator
-**URL:** https://knowyouremi.in/#balanceTransfer
+**URL:** https://knowyouremi.in/calculators/balance-transfer/
 
 A balance transfer is when a borrower moves an existing loan from one lender to another, typically to get a lower interest rate. This calculator helps the user decide whether a balance transfer actually saves money after accounting for the processing fee charged by the new lender.
 
@@ -109,6 +109,8 @@ A balance transfer is when a borrower moves an existing loan from one lender to 
 ---
 
 ### 4. Floating Rate Home Loan Simulator
+5. Credit Card Payoff Calculator
+
 **URL:** https://knowyouremi.in/calculators/float-rate-home-loan/
 
 This is the most advanced calculator on the site. It simulates the full life of a floating rate home loan, including multiple interest rate change events and part payments at any month.
@@ -808,12 +810,14 @@ In flat rate, interest is calculated on the full original principal throughout t
 2. Loan Eligibility Calculator
 3. Balance Transfer Calculator
 4. Floating Rate Home Loan Simulator
+5. Credit Card Payoff Calculator
+
 
 **Blog categories:**
 - Basics (EMI calculation, credit scores)
 - Interest Rates (flat vs reducing)
 - Strategy (part payment decisions)
-- Credit Cards (how they work, debt traps)
+- Credit Cards (how they work, debt traps, payoff planning)
 - Home Loans (floating rate)
 - Investments (SIP, FD, RD, SIP vs FD)
 

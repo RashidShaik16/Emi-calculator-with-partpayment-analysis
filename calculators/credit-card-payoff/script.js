@@ -50,6 +50,47 @@ function setGlobalType(type, btn) {
   recompute();
 }
 
+// ── INPUT VALIDATION ─────────────────────────────────────────────────────────
+function showInputError(fieldId, msg) {
+  // Remove any existing error for this field
+  clearInputError(fieldId);
+  const field = document.getElementById(fieldId);
+  if (!field) return;
+  const err = document.createElement('p');
+  err.className = 'input-error-msg';
+  err.id = 'err-' + fieldId;
+  err.style.cssText = 'color:#dc2626;font-size:0.72rem;font-weight:600;margin-top:4px;';
+  err.textContent = msg;
+  field.parentNode.parentNode.appendChild(err);
+  field.style.borderColor = '#dc2626';
+}
+
+function clearInputError(fieldId) {
+  const existing = document.getElementById('err-' + fieldId);
+  if (existing) existing.remove();
+  const field = document.getElementById(fieldId);
+  if (field) field.style.borderColor = '';
+}
+
+function showScheduleWarning(msg) {
+  let warn = document.getElementById('schedule-warning');
+  if (!warn) {
+    warn = document.createElement('div');
+    warn.id = 'schedule-warning';
+    warn.style.cssText = 'margin:0 24px 12px;padding:10px 14px;background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;font-size:0.8rem;color:#92400e;font-weight:500;display:flex;align-items:center;gap:8px;';
+    warn.innerHTML = '<span style="font-size:1rem;">&#9888;</span> <span id="schedule-warning-text"></span>';
+    const tableWrap = document.getElementById('schedule-table-wrap');
+    if (tableWrap) tableWrap.parentNode.insertBefore(warn, tableWrap);
+  }
+  document.getElementById('schedule-warning-text').textContent = msg;
+  warn.style.display = 'flex';
+}
+
+function clearScheduleWarning() {
+  const warn = document.getElementById('schedule-warning');
+  if (warn) warn.style.display = 'none';
+}
+
 // ── COMPUTE ───────────────────────────────────────────────────────────────────
 function computeSchedule() {
   const balance = parseFloat(document.getElementById('inp-balance-num').value) || 0;
@@ -57,8 +98,34 @@ function computeSchedule() {
   const rate    = parseFloat(document.getElementById('inp-rate').value)         || 3.75;
 
   scheduleData = [];
+  clearScheduleWarning();
+
+  // ── EDGE CASE: Zero or missing balance ───────────────────────────────────
+  if (balance <= 0) {
+    showInputError('inp-balance-num', 'Please enter a valid outstanding balance.');
+    return;
+  } else {
+    clearInputError('inp-balance-num');
+  }
+
+  // ── EDGE CASE: Payment >= balance (pointless calculation) ────────────────
+  // Only applies when global type is 'pay' — min/skip don't use this payment
+  if (globalType === 'pay' && payment >= balance) {
+    showInputError('inp-payment-num', 'Monthly payment equals or exceeds your balance. Your card will be cleared in month 1 — no schedule needed.');
+    return;
+  } else {
+    clearInputError('inp-payment-num');
+  }
+
+  // ── EDGE CASE: Zero payment with 'pay' type = infinite loop risk ─────────
+  if (globalType === 'pay' && payment <= 0) {
+    showInputError('inp-payment-num', 'Please enter a monthly payment amount greater than ₹0.');
+    return;
+  }
+
   let bal = balance;
   const MAX_MONTHS = 600;
+  let hitCap = false;
 
   for (let i = 0; i < MAX_MONTHS && bal > 0; i++) {
     const ov       = overrides[i];
@@ -76,7 +143,14 @@ function computeSchedule() {
     } else {
       // 'pay' — use override amount if set, else global default payment
       const amt = ov ? ov.amount : payment;
-      paid = Math.min(amt, opening + interest);
+      // ── EDGE CASE: Row override amount = 0 with type 'pay' ──────────────
+      // Treat as skip — balance grows, late fee applies
+      if (amt <= 0) {
+        paid    = 0;
+        lateFee = lateFeeGST(opening);
+      } else {
+        paid = Math.min(amt, opening + interest);
+      }
     }
 
     const toPrincipal = Math.max(0, paid - interest);
@@ -97,11 +171,28 @@ function computeSchedule() {
     });
 
     bal = closing;
+
+    // Check if we're near the cap
+    if (i === MAX_MONTHS - 1 && bal > 0) hitCap = true;
+  }
+
+  // ── EDGE CASE: Payment barely covers interest (schedule never ends) ───────
+  if (hitCap) {
+    showScheduleWarning('At this payment amount, the balance takes over 50 years to clear. Try increasing your monthly payment — even a small increase makes a big difference.');
+  }
+
+  // ── EDGE CASE: Payment barely above interest — show a nudge ──────────────
+  if (!hitCap && scheduleData.length > 0 && globalType === 'pay') {
+    const firstInterest = scheduleData[0].interest;
+    if (payment > 0 && payment < firstInterest * 1.1 && payment < balance) {
+      showScheduleWarning('Your payment is barely above the monthly interest of ' + inrText(firstInterest) + '. Very little goes to principal each month — consider paying more to clear this faster.');
+    }
   }
 }
 
 // ── RENDER SUMMARY ────────────────────────────────────────────────────────────
 function renderSummary() {
+  const fmt = n => 'Rs.' + Math.round(n).toLocaleString('en-IN');
   const balance   = parseFloat(document.getElementById('inp-balance-num').value) || 0;
   const rate      = parseFloat(document.getElementById('inp-rate').value);
   const months    = scheduleData.length;
@@ -297,7 +388,27 @@ function setRowType(i, type, btn) {
 }
 
 function setRowAmount(i, val) {
-  const amt = parseFloat(val) || 0;
+  let amt = parseFloat(val);
+
+  // ── EDGE CASE: Negative value — clamp to 0 ───────────────────────────────
+  if (isNaN(amt) || amt < 0) amt = 0;
+
+  // ── EDGE CASE: type is 'pay' but amount is 0 — warn user ─────────────────
+  if (amt === 0) {
+    const currentType = overrides[i] ? overrides[i].type : globalType;
+    if (currentType === 'pay') {
+      // Force the input back to 1 minimum and show inline hint
+      const inputEl = document.getElementById('ro-' + i) || document.getElementById('cro-' + i);
+      if (inputEl) {
+        inputEl.value = 1;
+        inputEl.style.borderColor = '#f59e0b';
+        inputEl.title = 'Use the Skip button to miss a payment. Pay amount must be at least ₹1.';
+        setTimeout(() => { inputEl.style.borderColor = ''; inputEl.title = ''; }, 2500);
+      }
+      amt = 1;
+    }
+  }
+
   overrides[i] = overrides[i] ? { ...overrides[i], amount: amt } : { type: 'pay', amount: amt };
   recompute();
 }
@@ -318,11 +429,38 @@ function closePurchaseModal() {
   modal.classList.add('hidden');
   modal.style.display = 'none';
   pendingPurchaseMonth = null;
+  // Reset modal input state
+  document.getElementById('modal-amount').style.borderColor = '';
+  document.getElementById('modal-amount').value = '';
+  const errMsg = document.getElementById('modal-err');
+  if (errMsg) errMsg.remove();
 }
 
 function confirmPurchase() {
-  const amt = parseFloat(document.getElementById('modal-amount').value) || 0;
-  if (amt <= 0) { alert('Please enter a valid amount.'); return; }
+  const raw = document.getElementById('modal-amount').value;
+  const amt = parseFloat(raw);
+
+  // ── EDGE CASE: Non-numeric, zero, or negative ────────────────────────────
+  if (isNaN(amt) || amt <= 0) {
+    const input = document.getElementById('modal-amount');
+    input.style.borderColor = '#dc2626';
+    let errMsg = document.getElementById('modal-err');
+    if (!errMsg) {
+      errMsg = document.createElement('p');
+      errMsg.id = 'modal-err';
+      errMsg.style.cssText = 'color:#dc2626;font-size:0.72rem;font-weight:600;margin-top:6px;';
+      input.parentNode.after(errMsg);
+    }
+    errMsg.textContent = 'Please enter a valid purchase amount greater than ₹0.';
+    input.focus();
+    return;
+  }
+
+  // Clear any error state
+  document.getElementById('modal-amount').style.borderColor = '';
+  const errMsg = document.getElementById('modal-err');
+  if (errMsg) errMsg.remove();
+
   purchases[pendingPurchaseMonth] = amt;
   closePurchaseModal();
   recompute();
@@ -336,98 +474,151 @@ function removePurchase(i) {
 
 // ── PDF ───────────────────────────────────────────────────────────────────────
 function downloadPDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+  if (!scheduleData || scheduleData.length === 0) {
+    alert('No schedule data available to generate PDF.');
+    return;
+  }
 
-  const balance   = parseFloat(document.getElementById('inp-balance-num').value);
-  const payment   = parseFloat(document.getElementById('inp-payment-num').value);
-  const rate      = parseFloat(document.getElementById('inp-rate').value);
+  const { jsPDF } = window.jspdf;
+  const fmt = n => 'Rs.' + Math.round(n).toLocaleString('en-IN');
+  // Portrait + pt units — mirrors pdfGenerator.js to avoid jsPDF.f3 errors
+  const doc = new jsPDF('p', 'pt', 'a4');
+
+  const pageWidth  = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+
+  const balance   = parseFloat(document.getElementById('inp-balance-num').value) || 0;
+  const rate      = parseFloat(document.getElementById('inp-rate').value)         || 3.75;
   const months    = scheduleData.length;
   const totalInt  = scheduleData.reduce((s, r) => s + r.interest, 0);
   const totalFee  = scheduleData.reduce((s, r) => s + r.lateFee,  0);
   const totalPaid = scheduleData.reduce((s, r) => s + r.payment,  0);
 
-  // Header bar
-  doc.setFillColor(30, 58, 138);
-  doc.rect(0, 0, 297, 22, 'F');
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(14); doc.setFont('helvetica', 'bold');
-  doc.text('Credit Card Payoff Schedule', 14, 10);
-  doc.setFontSize(8); doc.setFont('helvetica', 'normal');
-  doc.text(
-    'Generated by KnowYourEMI.in  |  ' +
-    new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }),
-    14, 17
-  );
+  // ── HEADER BAR ─────────────────────────────────────────────────────────
+  doc.setFillColor(30, 64, 175);
+  doc.rect(0, 0, pageWidth, 60, 'F');
 
-  // Summary strip
-  const sy = 26;
-  [
-    ['Balance',        inrText(balance)],
-    ['Monthly Rate',   rate.toFixed(2) + '%'],
-    ['Months',         String(months)],
-    ['Total Interest', inrText(totalInt)],
-    ['Late Fees (GST)',inrText(totalFee)],
-    ['Total Paid',     inrText(totalPaid)],
-    ['Extra Paid',     inrText(totalInt + totalFee)]
-  ].forEach(([label, val], idx) => {
-    const x = 14 + idx * 39;
-    doc.setFillColor(239, 246, 255);
-    doc.roundedRect(x, sy, 37, 12, 1.5, 1.5, 'F');
-    doc.setTextColor(107, 114, 128); doc.setFontSize(6); doc.setFont('helvetica', 'normal');
-    doc.text(label.toUpperCase(), x + 2, sy + 4.5);
-    doc.setTextColor(30, 58, 138); doc.setFontSize(9); doc.setFont('helvetica', 'bold');
-    doc.text(val, x + 2, sy + 10);
+  // Logo replaced with text to avoid jsPDF.f3 error
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.setTextColor(255, 255, 255);
+  doc.text('KnowYourEMI.in', 25, 38);
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(16);
+  doc.setTextColor(255, 255, 255);
+  doc.text('Credit Card Payoff Schedule', pageWidth / 2, 28, { align: 'center' });
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.text('Generated by KnowYourEMI.in', pageWidth / 2, 48, { align: 'center' });
+
+  // ── SUMMARY BOX ────────────────────────────────────────────────────────
+  let startY = 80;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(30, 64, 175);
+  doc.text('Payoff Summary', 40, startY);
+  startY += 15;
+
+  doc.setDrawColor(140, 170, 220);
+  doc.setFillColor(220, 235, 255);
+  doc.roundedRect(40, startY, pageWidth - 80, 150, 6, 6, 'FD');
+  startY += 25;
+
+  const summaryRows = [
+    ['Outstanding Balance',         fmt(balance)],
+    ['Monthly Interest Rate',       rate.toFixed(2) + '%  (' + (rate * 12).toFixed(1) + '% p.a.)'],
+    ['Months to Pay Off',           months + ' months' + (months >= 12 ? '  (' + Math.floor(months / 12) + ' yr ' + (months % 12) + ' mo)' : '')],
+    ['Total Interest Paid',         fmt(totalInt)],
+    ['Late Fees (incl. 18% GST)',   fmt(totalFee)],
+    ['Total Amount Paid',           fmt(totalPaid)],
+    ['Extra Paid (beyond balance)', fmt(totalInt + totalFee)]
+  ];
+
+  const labelX = 60;
+  const valueX = pageWidth - 60;
+  doc.setFontSize(10);
+  summaryRows.forEach(function([label, value]) {
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(60, 60, 60);
+    doc.text(label, labelX, startY);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(30, 64, 175);
+    doc.text(value, valueX, startY, { align: 'right' });
+    startY += 19;
   });
 
-  // Schedule table
+  startY += 25;
+
+  // ── SCHEDULE HEADING ───────────────────────────────────────────────────
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(30, 64, 175);
+  doc.text('Month-by-Month Schedule', pageWidth / 2, startY, { align: 'center' });
+  startY += 15;
+
+  // ── AUTOTABLE ──────────────────────────────────────────────────────────
   doc.autoTable({
-    startY: sy + 16,
+    startY: startY,
     head: [['Month', 'Opening', 'Interest', 'Purchase', 'Late Fee', 'Payment', 'To Principal', 'Closing', 'Type']],
-    body: scheduleData.map(r => [
+    body: scheduleData.map(function(r) { return [
       'M' + r.month,
-      inrText(r.opening),
-      inrText(r.interest),
-      r.purchase > 0 ? inrText(r.purchase) : '--',
-      r.lateFee   > 0 ? inrText(r.lateFee)  : '--',
-      r.type === 'skip' ? 'SKIPPED' : inrText(r.payment),
-      inrText(r.toPrincipal),
-      r.closing <= 0 ? 'PAID OFF' : inrText(r.closing),
+      fmt(r.opening),
+      fmt(r.interest),
+      r.purchase > 0 ? fmt(r.purchase) : '--',
+      r.lateFee   > 0 ? fmt(r.lateFee)  : '--',
+      r.type === 'skip' ? 'SKIPPED' : fmt(r.payment),
+      fmt(r.toPrincipal),
+      r.closing <= 0 ? 'PAID OFF' : fmt(r.closing),
       r.type === 'pay' ? 'Set Amt' : r.type === 'min' ? 'Min Due' : 'Defaulted'
-    ]),
+    ]; }),
     theme: 'grid',
-    headStyles:        { fillColor: [30, 58, 138], textColor: 255, fontSize: 7, fontStyle: 'bold' },
+    headStyles:        { fillColor: [30, 64, 175], textColor: 255, fontSize: 7, fontStyle: 'bold' },
     bodyStyles:        { fontSize: 7, textColor: [55, 65, 81] },
     alternateRowStyles:{ fillColor: [249, 250, 251] },
     columnStyles: {
-      0: { halign: 'center', cellWidth: 14 },
+      0: { halign: 'center', cellWidth: 35 },
       1: { halign: 'right' }, 2: { halign: 'right' },
       3: { halign: 'right' }, 4: { halign: 'right' },
       5: { halign: 'right' }, 6: { halign: 'right' },
       7: { halign: 'right', fontStyle: 'bold' },
-      8: { halign: 'center', cellWidth: 22 }
+      8: { halign: 'center', cellWidth: 45 }
     },
-    margin: { left: 14, right: 14 },
-    didParseCell: data => {
+    margin: { left: 40, right: 40 },
+    didParseCell: function(data) {
       if (data.section !== 'body') return;
-      const r = scheduleData[data.row.index];
+      var r = scheduleData[data.row.index];
       if (!r) return;
       if (r.type === 'skip') {
-        data.cell.styles.textColor  = [185, 28, 28];
-        data.cell.styles.fillColor  = [254, 242, 242];
+        data.cell.styles.textColor = [185, 28, 28];
+        data.cell.styles.fillColor = [254, 242, 242];
       } else if (r.type === 'min') {
-        data.cell.styles.fillColor  = [255, 253, 235];
+        data.cell.styles.fillColor = [255, 253, 235];
       }
       if (data.column.index === 7 && r.closing <= 0) {
-        data.cell.styles.textColor  = [22, 163, 74];
+        data.cell.styles.textColor = [22, 163, 74];
+        data.cell.styles.fontStyle = 'bold';
       }
     }
   });
 
-  // Footer note
-  const ph = doc.internal.pageSize.height;
-  doc.setTextColor(156, 163, 175); doc.setFontSize(7); doc.setFont('helvetica', 'normal');
-  doc.text('Late fees: HDFC Bank slab Aug 2024 + 18% GST. Monthly compounding. Actual charges vary by bank.', 14, ph - 5);
+  // ── FOOTER on every page ───────────────────────────────────────────────
+  var pageCount = doc.internal.getNumberOfPages();
+  for (var i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.setFontSize(7);
+    doc.setTextColor(150, 150, 150);
+    doc.setFont('helvetica', 'normal');
+    doc.text(
+      'Late fees: standard Indian bank slabs + 18% GST. Monthly compounding. Actual charges vary by bank.',
+      40, pageHeight - 18
+    );
+    doc.text(
+      'Page ' + i + ' of ' + pageCount,
+      pageWidth - 40, pageHeight - 18, { align: 'right' }
+    );
+  }
 
   doc.save('credit-card-payoff-KnowYourEMI.pdf');
   if (typeof gtag !== 'undefined') gtag('event', 'cc_pdf_download');
@@ -612,6 +803,26 @@ document.addEventListener('DOMContentLoaded', function () {
   bindSlider('inp-payment-range', 'inp-payment-num', 'disp-payment',
     v => '&#8377;' + Math.round(v).toLocaleString('en-IN'));
 
+  // ── EDGE CASE: Clamp payment to be less than balance on blur ─────────────
+  // We don't clamp on every keystroke (too jarring) — only on blur/change
+  function clampPaymentToBalance() {
+    if (globalType !== 'pay') return;  // min/skip modes don't use this
+    const balance = parseFloat(document.getElementById('inp-balance-num').value) || 0;
+    const payment = parseFloat(document.getElementById('inp-payment-num').value) || 0;
+    if (balance > 0 && payment >= balance) {
+      // Don't auto-correct silently — let computeSchedule show the error
+      // but prevent the slider from going above balance - 1
+      document.getElementById('inp-payment-range').max = Math.max(balance - 1, 500);
+    } else {
+      document.getElementById('inp-payment-range').max = 200000;
+    }
+  }
+
+  document.getElementById('inp-balance-num').addEventListener('change', clampPaymentToBalance);
+  document.getElementById('inp-balance-range').addEventListener('input', clampPaymentToBalance);
+  document.getElementById('inp-payment-num').addEventListener('change', clampPaymentToBalance);
+  document.getElementById('inp-payment-range').addEventListener('input', clampPaymentToBalance);
+
   document.getElementById('inp-rate').addEventListener('input', function () {
     const v = parseFloat(this.value);
     document.getElementById('disp-rate').textContent =
@@ -646,3 +857,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initial render
   recompute();
 });
+
+// ── FAQ ACCORDION ─────────────────────────────────────────────────────────────
+function toggleFaq(el) {
+  const answer = el.nextElementSibling;
+  if (answer) answer.classList.toggle('faq-open');
+}
