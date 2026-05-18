@@ -1,3 +1,18 @@
+// ── Count-up animation helper ─────────────────────────────────────────────
+function ccCountUp(el, finalNum, prefix, suffix, duration) {
+  const startVal = finalNum * 0.1;
+  const startTime = performance.now();
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function tick(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const current = Math.round(startVal + (finalNum - startVal) * easeOut(progress));
+    el.textContent = prefix + current.toLocaleString('en-IN') + suffix;
+    if (progress < 1) requestAnimationFrame(tick);
+    else el.textContent = prefix + Math.round(finalNum).toLocaleString('en-IN') + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+
 // ── STATE ────────────────────────────────────────────────────────────────────
 let scheduleData         = [];
 let overrides            = {};   // { i: { type:'pay'|'min'|'skip', amount:number } }
@@ -192,7 +207,6 @@ function computeSchedule() {
 
 // ── RENDER SUMMARY ────────────────────────────────────────────────────────────
 function renderSummary() {
-  const fmt = n => 'Rs.' + Math.round(n).toLocaleString('en-IN');
   const balance   = parseFloat(document.getElementById('inp-balance-num').value) || 0;
   const rate      = parseFloat(document.getElementById('inp-rate').value);
   const months    = scheduleData.length;
@@ -200,14 +214,74 @@ function renderSummary() {
   const totalFee  = scheduleData.reduce((s, r) => s + r.lateFee,  0);
   const totalPaid = scheduleData.reduce((s, r) => s + r.payment,  0);
 
+  // Static fields — no count-up needed
   document.getElementById('s-balance').innerHTML  = inr(balance);
   document.getElementById('s-rate').textContent   = rate.toFixed(2) + '% / mo  (' + (rate * 12).toFixed(1) + '% p.a.)';
-  document.getElementById('s-months').textContent =
-    months + ' months' + (months >= 12 ? '  (' + Math.floor(months / 12) + ' yr ' + (months % 12) + ' mo)' : '');
-  document.getElementById('s-interest').innerHTML = inr(totalInt);
-  document.getElementById('s-fees').innerHTML     = inr(totalFee);
-  document.getElementById('s-total').innerHTML    = inr(totalPaid);
-  document.getElementById('s-extra').innerHTML    = inr(totalInt + totalFee);
+
+  // Months — count up the number part
+  const monthsEl = document.getElementById('s-months');
+  const monthSuffix = months >= 12 ? ' months  (' + Math.floor(months / 12) + ' yr ' + (months % 12) + ' mo)' : ' months';
+  ccCountUp(monthsEl, months, '', monthSuffix, 900);
+
+  // Money fields — count up
+  const intEl   = document.getElementById('s-interest');
+  const feeEl   = document.getElementById('s-fees');
+  const totEl   = document.getElementById('s-total');
+  const extEl   = document.getElementById('s-extra');
+
+  // Set final values immediately for reference, then animate
+  setTimeout(() => ccCountUp(intEl, totalInt,             'Rs.', '', 1100), 80);
+  setTimeout(() => ccCountUp(feeEl, totalFee,             'Rs.', '', 900),  160);
+  setTimeout(() => ccCountUp(totEl, totalPaid,            'Rs.', '', 1300), 240);
+  setTimeout(() => ccCountUp(extEl, totalInt + totalFee,  'Rs.', '', 1200), 320);
+}
+
+// ── SCROLL-TRIGGERED CHART ────────────────────────────────────────────────────
+let chartObserver = null;
+function observeChart() {
+  const canvas = document.getElementById('balanceChart');
+  if (!canvas) return;
+  if (chartObserver) chartObserver.disconnect();
+
+  // Destroy existing chart and clear — wait for scroll to re-render
+  if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+
+  // Check if canvas is already visible — if so defer until user scrolls away and back
+  const rect = canvas.getBoundingClientRect();
+  const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+  if (alreadyVisible) {
+    // Temporarily mark as pending, animate when scrolled out and back in
+    canvas.dataset.chartPending = 'true';
+  }
+
+  chartObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && canvas.dataset.chartPending !== 'skip') {
+        canvas.dataset.chartPending = 'skip';
+        renderChart();
+        chartObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '0px 0px -50px 0px' });
+
+  if (alreadyVisible) {
+    // Scroll listener: fire once canvas leaves and re-enters view
+    canvas.dataset.chartPending = 'true';
+    const scrollHandler = () => {
+      const r = canvas.getBoundingClientRect();
+      const nowVisible = r.top < window.innerHeight && r.bottom > 0;
+      if (!nowVisible) {
+        // Left viewport — now observe for re-entry
+        window.removeEventListener('scroll', scrollHandler);
+        canvas.dataset.chartPending = 'true';
+        chartObserver.observe(canvas);
+      }
+    };
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+  } else {
+    chartObserver.observe(canvas);
+  }
 }
 
 // ── RENDER CHART ──────────────────────────────────────────────────────────────
@@ -247,6 +321,11 @@ function renderChart() {
       ]
     },
     options: {
+      animation: {
+        duration: 1400,
+        easing: 'easeOutQuart',
+        x: { from: 0 },
+      },
       responsive: true,
       maintainAspectRatio: false,
       interaction: { mode: 'index', intersect: false },

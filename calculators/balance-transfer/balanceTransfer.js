@@ -1,3 +1,21 @@
+// ── Count-up animation helper ─────────────────────────────────────────────
+function btCountUp(el, finalValue, isNegative, duration) {
+  const prefix = isNegative ? '-₹' : '₹';
+  const absVal = Math.abs(finalValue);
+  const startVal = absVal * 0.15;
+  const startTime = performance.now();
+  function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
+  function tick(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const eased = easeOut(progress);
+    const current = Math.round(startVal + (absVal - startVal) * eased);
+    el.textContent = prefix + current.toLocaleString('en-IN');
+    if (progress < 1) requestAnimationFrame(tick);
+    else el.textContent = prefix + absVal.toLocaleString('en-IN');
+  }
+  requestAnimationFrame(tick);
+}
+
 // balanceTransfer.js
 
 // ------------------------------
@@ -479,6 +497,18 @@ document.getElementById("compareTransfer").addEventListener("click", () => {
   // Show decision box
 const decisionBox = document.getElementById("decisionBox");
 decisionBox.classList.remove("hidden");
+// Smooth scroll verdict into view
+setTimeout(() => {
+  decisionBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}, 80);
+// Entrance animation
+decisionBox.style.opacity = '0';
+decisionBox.style.transform = 'translateY(20px)';
+decisionBox.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+setTimeout(() => {
+  decisionBox.style.opacity = '1';
+  decisionBox.style.transform = 'translateY(0)';
+}, 100);
 
 const titleEl = document.getElementById("decisionTitle");
 const emojiEl = document.getElementById("decisionEmoji");
@@ -498,8 +528,8 @@ if(Math.abs(savings) < 1){
 if (savings > 0) {
   // ✅ Positive savings
   labelEl.textContent = "You Save";
-  amountEl.textContent = `₹${Number(savings.toFixed(0)).toLocaleString('en-IN')}`;
-  amountEl.style.color = '#15803d';;;
+  amountEl.style.color = '#15803d';
+  amountEl.textContent = '₹0';
 
   if (savings <= 10000) {
      emojiEl.src = (window.KYE_ASSETS||"../../assets/")+"is-it-worth.gif";
@@ -523,8 +553,8 @@ if (savings > 0) {
 } else if (savings < 0) {
   // ❌ Negative savings (it costs more)
   labelEl.textContent = "It Costs You";
-  amountEl.textContent = `-₹${Number(Math.abs(savings).toFixed(0)).toLocaleString('en-IN')}`;
-  amountEl.style.color = '#b91c1c';;;
+  amountEl.style.color = '#b91c1c';
+  amountEl.textContent = '-₹0';
 
   const cost = Math.abs(savings);
   if (cost <= 10000) {
@@ -549,8 +579,15 @@ if (savings > 0) {
   titleEl.textContent = "It's a waste of time"; titleEl.style.color='#374151';;
   labelEl.textContent = "No Gain / No Loss";
   amountEl.textContent = "₹0";
-  amountEl.style.color = '#374151';;
+  amountEl.style.color = '#374151';
   recoEl.textContent = "When the total cost is about the same, why go through all the paperwork?";
+}
+
+// ── Trigger count-up on savings amount ───────────────────────────────────
+if (savings > 0) {
+  setTimeout(() => btCountUp(amountEl, Number(savings.toFixed(0)), false, 1600), 300);
+} else if (savings < 0) {
+  setTimeout(() => btCountUp(amountEl, Number(Math.abs(savings).toFixed(0)), true, 1600), 300);
 }
 
 // ✅ GA4 Tracking for Balance Transfer Comparison

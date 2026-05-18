@@ -298,15 +298,18 @@ function updateResults() {
 
     savingsHighlight.classList.remove("hidden");
 
-    // Animate count
-    const duration = 1400;
+    // Animate savings amount with easeOut
+    const duration = 1600;
     const startTime = performance.now();
     const endVal = Math.max(saved, 0);
+    const startVal = endVal * 0.1;
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
     function animateCount(now) {
       const progress = Math.min((now - startTime) / duration, 1);
-      const cur = Math.floor(progress * endVal);
+      const cur = Math.round(startVal + (endVal - startVal) * easeOutCubic(progress));
       savingsAmount.textContent = "₹" + cur.toLocaleString("en-IN");
       if (progress < 1) requestAnimationFrame(animateCount);
+      else savingsAmount.textContent = "₹" + endVal.toLocaleString("en-IN");
     }
     requestAnimationFrame(animateCount);
 
@@ -346,8 +349,23 @@ function updateResults() {
     if (tenureReduced > 0) {
       const pill = document.createElement("span");
       pill.className = "inline-flex items-center gap-1.5 bg-green-100 text-green-800 text-xs font-semibold px-3 py-1.5 rounded-full";
-      pill.innerHTML = `<svg class="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Loan closes <strong>&nbsp;${tenureReduced} months&nbsp;</strong> early`;
+      const monthsSpan = document.createElement('strong');
+      monthsSpan.textContent = '0 months';
+      pill.innerHTML = `<svg class="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Loan closes &nbsp;`;
+      pill.appendChild(monthsSpan);
+      pill.appendChild(document.createTextNode('  early'));
       savingsDetail.appendChild(pill);
+      // Count up months saved
+      const mDuration = 1200;
+      const mStart = performance.now();
+      function animateMonths(now) {
+        const progress = Math.min((now - mStart) / mDuration, 1);
+        const cur = Math.round(tenureReduced * (1 - Math.pow(1 - progress, 3)));
+        monthsSpan.textContent = cur + ' months';
+        if (progress < 1) requestAnimationFrame(animateMonths);
+        else monthsSpan.textContent = tenureReduced + ' months';
+      }
+      setTimeout(() => requestAnimationFrame(animateMonths), 200);
     }
   } else {
     savingsHighlight.classList.add("hidden");
