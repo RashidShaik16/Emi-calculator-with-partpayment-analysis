@@ -1,3 +1,108 @@
+
+    // ── Count-up animation ─────────────────────────────────────────
+    function animateCountUp(el, finalText, duration = 1200) {
+      // Extract numeric part and prefix/suffix
+      const match = finalText.match(/^(Rs\.\s*)?([\d,\.]+)(.*)/);
+      if (!match) { el.textContent = finalText; return; }
+
+      const prefix = match[1] || '';
+      const rawNum = parseFloat(match[2].replace(/,/g, ''));
+      const suffix = match[3] || '';
+
+      if (isNaN(rawNum)) { el.textContent = finalText; return; }
+
+      const startTime = performance.now();
+      const startVal = rawNum * 0.3;
+
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+      function tick(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeOut(progress);
+        const current = Math.round(startVal + (rawNum - startVal) * eased);
+        el.textContent = prefix + current.toLocaleString('en-IN') + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+        else el.textContent = finalText; // snap to exact final value
+      }
+      requestAnimationFrame(tick);
+    }
+
+    // ── Verification animation overlay ─────────────────────────────
+    function runVerificationAnimation(callback) {
+      const panel = document.getElementById('resultPanel');
+      const body  = panel.querySelector('.result-body');
+
+      // Build overlay
+      const overlay = document.createElement('div');
+      overlay.id = 'verifyOverlay';
+      overlay.style.cssText = `
+        position:absolute; inset:0; background:rgba(255,255,255,0.97);
+        display:flex; flex-direction:column; align-items:center;
+        justify-content:center; z-index:10; border-radius:0 0 16px 16px;
+        gap:16px; padding:32px;
+      `;
+
+      const steps = [
+        { icon: '📋', text: 'Reading your income details...' },
+        { icon: '🔍', text: 'Verifying salary and obligations...' },
+        { icon: '📊', text: 'Calculating FOIR and EMI capacity...' },
+        { icon: '🏦', text: 'Checking bank rate matrix...' },
+        { icon: '📈', text: 'Matching your credit score...' },
+        { icon: '✅', text: 'Eligibility confirmed.' },
+      ];
+
+      const iconEl = document.createElement('div');
+      iconEl.style.cssText = 'font-size:2.5rem; transition:all 0.3s ease;';
+
+      const textEl = document.createElement('div');
+      textEl.style.cssText = 'font-size:0.85rem; font-weight:600; color:#374151; text-align:center; min-height:24px; transition:opacity 0.3s;';
+
+      // Progress bar
+      const barWrap = document.createElement('div');
+      barWrap.style.cssText = 'width:200px; height:4px; background:#e5e7eb; border-radius:999px; overflow:hidden;';
+      const bar = document.createElement('div');
+      bar.style.cssText = 'height:100%; width:0%; background:linear-gradient(90deg,#3b82f6,#6366f1); border-radius:999px; transition:width 0.4s ease;';
+      barWrap.appendChild(bar);
+
+      overlay.appendChild(iconEl);
+      overlay.appendChild(textEl);
+      overlay.appendChild(barWrap);
+
+      // Make panel relative for overlay positioning
+      panel.style.position = 'relative';
+      panel.style.overflow = 'hidden';
+      body.appendChild(overlay);
+
+      // Auto-scroll result panel to center of viewport
+      setTimeout(() => {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+
+      let step = 0;
+      const stepDuration = 750;
+
+      function showStep() {
+        if (step >= steps.length) {
+          // Done — fade out overlay and run callback
+          overlay.style.transition = 'opacity 0.4s ease';
+          overlay.style.opacity = '0';
+          setTimeout(() => {
+            overlay.remove();
+            callback();
+          }, 400);
+          return;
+        }
+        iconEl.textContent = steps[step].icon;
+        textEl.textContent = steps[step].text;
+        bar.style.width = ((step + 1) / steps.length * 100) + '%';
+        step++;
+        setTimeout(showStep, stepDuration);
+      }
+
+      showStep();
+    }
+
     // ── Utilities ──────────────────────────────────────────────────
     document.getElementById('menu-toggle').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
@@ -52,6 +157,9 @@
       noteIds.forEach(id => { document.getElementById(id).textContent = ''; });
       document.getElementById('rejectionPanel').classList.remove('visible');
       document.getElementById('resultSubtitle').textContent = 'Fill in your details and click Calculate';
+      // Clear hero amount
+      const heroEl = document.getElementById('eligibility-hero');
+      if (heroEl) heroEl.style.display = 'none';
     }
 
     // ── Tenure options by loan type ────────────────────────────────
@@ -324,17 +432,135 @@
           'A better score within this band puts you closer to <strong>' + formatRs(loanHigh) + '</strong>.';
       }
 
-      // Animate result panel
+      // ── Run verification animation then reveal results ────────────
+      // Collect all final values before animating
+      const finalLoanRange  = document.getElementById('res-loanRange').textContent;
+      const finalEmiCap     = document.getElementById('res-emiCapacity').textContent;
+      const finalRate       = document.getElementById('res-rate').textContent;
+
+      // Reset to dashes while animation plays
+      ['res-loanRange','res-emiCapacity','res-rate','res-tenure','res-foir','res-loanType','res-score'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && !el.innerHTML.includes('badge')) el.textContent = '--';
+      });
+      document.getElementById('resultNote').style.display = 'none';
+      document.getElementById('rejectionPanel').classList.remove('visible');
+
       const panel = document.getElementById('resultPanel');
       panel.classList.remove('animate-in');
       void panel.offsetWidth;
       panel.classList.add('animate-in');
 
-      // GA4 event
-      if (typeof gtag === 'function') {
-        gtag('event', 'advanced_eligibility_check', {
-          event_category: 'calculator',
-          event_label: loanType + '_' + creditScore
-        });
-      }
+      runVerificationAnimation(() => {
+        // ── Hero loan amount ──────────────────────────────────────
+        let heroEl = document.getElementById('eligibility-hero');
+        if (!heroEl) {
+          heroEl = document.createElement('div');
+          heroEl.id = 'eligibility-hero';
+          heroEl.style.cssText = `
+            text-align:center; padding:24px 16px 20px;
+            border-bottom:1px solid #e5e7eb; margin-bottom:4px;
+          `;
+          const resultBody = document.querySelector('#resultPanel .result-body');
+          resultBody.insertBefore(heroEl, resultBody.firstChild);
+        }
+
+        if (roi) {
+          const loanHigh = calcMaxLoan(emiCapacity, roi.low, tenureYrs * 12);
+          let heroAmountStr;
+          if (loanHigh >= 10000000) heroAmountStr = (loanHigh / 10000000).toFixed(2) + ' Cr';
+          else if (loanHigh >= 100000) heroAmountStr = (loanHigh / 100000).toFixed(2) + ' Lakhs';
+          else heroAmountStr = Math.round(loanHigh).toLocaleString('en-IN');
+
+          heroEl.innerHTML = `
+            <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6b7280;margin-bottom:6px;">You May Be Eligible For Up To</p>
+            <p id="hero-amount" style="font-size:2.6rem;font-weight:800;color:#1e40af;line-height:1;font-family:'Lora',serif;">&#8377;0</p>
+            <p style="font-size:0.72rem;color:#9ca3af;margin-top:6px;">${loanTypeLabels[loanType]} &nbsp;·&nbsp; ${tenureYrs} yr tenure &nbsp;·&nbsp; Based on best rate offered</p>
+          `;
+          heroEl.style.display = 'block';
+
+          // Count up the hero number
+          const heroAmountEl = document.getElementById('hero-amount');
+          const startTime = performance.now();
+          const duration = 2200;
+          function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+          function tickHero(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const eased = easeOut(progress);
+            const current = Math.round(loanHigh * 0.2 + (loanHigh - loanHigh * 0.2) * eased);
+            let display;
+            if (current >= 10000000) display = (current / 10000000).toFixed(2) + ' Cr';
+            else if (current >= 100000) display = (current / 100000).toFixed(2) + ' L';
+            else display = current.toLocaleString('en-IN');
+            heroAmountEl.textContent = '₹' + display;
+            if (progress < 1) requestAnimationFrame(tickHero);
+            else heroAmountEl.textContent = '₹' + heroAmountStr;
+          }
+          requestAnimationFrame(tickHero);
+        } else {
+          heroEl.innerHTML = `
+            <p style="font-size:0.75rem;font-weight:700;color:#b91c1c;text-align:center;padding:8px 0;">Loan approval unlikely at this credit score</p>
+          `;
+          heroEl.style.display = 'block';
+        }
+
+        // Restore all values
+        document.getElementById('res-loanType').textContent  = loanTypeLabels[loanType];
+        document.getElementById('res-loanType').className    = 'result-value';
+        document.getElementById('res-tenure').textContent    = tenureYrs + (tenureYrs === 1 ? ' Year' : ' Years');
+        document.getElementById('res-tenure').className      = 'result-value';
+        document.getElementById('res-foir').textContent      = Math.round(foir * 100) + '%';
+        document.getElementById('res-foir').className        = 'result-value';
+        document.getElementById('res-score').innerHTML       = scoreBadge(creditScore);
+        document.getElementById('res-score').className       = 'result-value';
+
+        if (!roi) {
+          document.getElementById('res-rate').textContent     = 'Not favourable';
+          document.getElementById('res-rate').className       = 'result-value';
+          document.getElementById('res-loanRange').textContent = 'See note below';
+          document.getElementById('res-loanRange').className  = 'result-value';
+          document.getElementById('rejectionPanel').classList.add('visible');
+        } else {
+          // Count-up for key numbers
+          const elRate  = document.getElementById('res-rate');
+          const elLoan  = document.getElementById('res-loanRange');
+          const elEmi   = document.getElementById('res-emiCapacity');
+          elRate.className  = 'result-value highlight';
+          elLoan.className  = 'result-value highlight';
+          elEmi.className   = 'result-value';
+
+          // Rate just set directly (not a single number)
+          elRate.textContent = finalRate;
+
+          // EMI capacity count-up
+          animateCountUp(elEmi, finalEmiCap, 1400);
+
+          // Loan range — animate the first number if range, else animate single
+          if (finalLoanRange.includes(' to ')) {
+            const parts = finalLoanRange.split(' to ');
+            setTimeout(() => {
+              elLoan.textContent = finalLoanRange; // set immediately, range is complex
+            }, 200);
+          } else {
+            animateCountUp(elLoan, finalLoanRange, 2000);
+          }
+
+          document.getElementById('resultNote').style.display = 'block';
+          document.getElementById('note-maxEmi').textContent  = 'Rs. ' + Math.floor(salary * foir).toLocaleString('en-IN') + ' / month';
+          document.getElementById('note-obligations').textContent = 'Rs. ' + obligations.toLocaleString('en-IN') + ' / month';
+          document.getElementById('note-available').textContent   = 'Rs. ' + emiCapacity.toLocaleString('en-IN') + ' / month';
+          document.getElementById('note-summary').innerHTML = summaryEl ? summaryEl.innerHTML :
+            'At your credit score, banks typically offer <strong>' +
+            (roi.low === roi.high ? roi.low + '%' : roi.low + '% to ' + roi.high + '%') +
+            '</strong> on ' + loanTypeLabels[loanType].toLowerCase() + 's.';
+        }
+
+        // GA4 event
+        if (typeof gtag === 'function') {
+          gtag('event', 'advanced_eligibility_check', {
+            event_category: 'calculator',
+            event_label: loanType + '_' + creditScore
+          });
+        }
+      });
     }
