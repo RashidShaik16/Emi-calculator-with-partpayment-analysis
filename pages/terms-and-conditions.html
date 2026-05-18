@@ -1,125 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Terms & Conditions - Read KnowYourEMI's policies on calculator use and disclaimer.">
-  <meta name="theme-color" content="#2563eb">
-  <title>Terms & Conditions | KnowYourEMI</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms and Conditions | KnowYourEMI</title>
+  <meta name="description" content="Terms and conditions for using KnowYourEMI. Free financial calculators for educational purposes. Not financial advice." />
+  <meta name="theme-color" content="#1e3a8a" />
+  <link rel="icon" href="../favicon.png" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="canonical" href="https://knowyouremi.in/pages/terms-and-conditions.html" />
+  <meta property="og:title" content="Terms and Conditions | KnowYourEMI" />
+  <meta property="og:description" content="Terms of use for KnowYourEMI. Our calculators are free educational tools and do not constitute financial advice." />
+  <meta property="og:url" content="https://knowyouremi.in/pages/terms-and-conditions.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.knowyouremi.in/og-image.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EM8B59T3F5"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.getElementById('menu-toggle');
-      const mobileMenu = document.getElementById('mobile-menu');
-      menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-      });
-    });
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-EM8B59T3F5');
   </script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2 { font-family: 'Lora', serif; }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+    .policy-section {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 24px;
+    }
+    .policy-section h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 10px;
+    }
+    .policy-section p {
+      font-size: 0.88rem;
+      color: #4b5563;
+      line-height: 1.75;
+    }
+    .highlight-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 0.875rem;
+      color: #1e40af;
+      line-height: 1.6;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-inter">
+<body class="bg-gray-50 text-gray-800">
 
   <!-- NAVBAR -->
-  <nav id="calculator" class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
-      <a href="../index.html#calculator" class="text-xl font-bold">
-        <img class="w-20 inline-block" src="../logo.png" alt="KnowYourEMI logo">
+  <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="../index.html">
+        <img class="w-20 inline-block" src="../logo.png" alt="KnowYourEMI logo" width="80" height="40" fetchpriority="high" />
       </a>
-      <div class="hidden md:flex space-x-6">
-        <a href="../index.html#balanceTransfer" class="hover:text-yellow-300">Balance Transfer</a>
-        <a href="../index.html#eligibilityCalculator" class="hover:text-yellow-300">Check Eligibility</a>
-        <a href="../index.html#why-use" class="hover:text-yellow-300">Why Use</a>
-        <a href="../index.html#faq-section" class="hover:text-yellow-300">FAQs</a>
-        <a href="../index.html#feedback-section" class="hover:text-yellow-300">Feedback</a>
+      <div class="hidden md:flex space-x-6 text-sm font-medium">
+        <a href="../index.html" class="hover:text-yellow-300 transition">EMI Calculator</a>
+        <a href="../calculators/eligibility/" class="hover:text-yellow-300 transition">Check Eligibility</a>
+        <a href="../calculators/float-rate-home-loan/" class="hover:text-yellow-300 transition">Floating Rate</a>
+        <a href="../calculators/credit-card-payoff/" class="hover:text-yellow-300 transition">CC Payoff</a>
+        <a href="../blogs/index.html" class="hover:text-yellow-300 transition">Blog</a>
       </div>
-      <button id="menu-toggle" class="md:hidden text-white focus:outline-none text-2xl">☰</button>
+      <button id="menu-toggle" class="md:hidden focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-gradient-to-r from-blue-600 to-indigo-600">
-      <a href="../index.html#balanceTransfer" class="hover:text-yellow-300">Balance Transfer</a>
-      <a href="../index.html#eligibilityCalculator" class="hover:text-yellow-300">Check Eligibility</a>
-      <a href="../index.html#why-use" class="hover:text-yellow-300">Why Use</a>
-      <a href="../index.html#faq-section" class="hover:text-yellow-300">FAQs</a>
-      <a href="../index.html#feedback-section" class="hover:text-yellow-300">Feedback</a>
+    <div id="mobile-menu" class="hidden md:hidden bg-indigo-900 px-4 pb-4 space-y-2 text-sm">
+      <a href="../index.html" class="block py-2 hover:text-yellow-300">EMI Calculator</a>
+      <a href="../calculators/eligibility/" class="block py-2 hover:text-yellow-300">Check Eligibility</a>
+      <a href="../calculators/float-rate-home-loan/" class="block py-2 hover:text-yellow-300">Floating Rate</a>
+      <a href="../calculators/credit-card-payoff/" class="block py-2 hover:text-yellow-300">CC Payoff</a>
+      <a href="../blogs/index.html" class="block py-2 hover:text-yellow-300">Blog</a>
     </div>
   </nav>
 
-  <!-- PAGE CONTENT -->
-  <main class="max-w-3xl mx-auto px-6 py-12">
-    <h1 class="text-3xl font-bold text-blue-600 mb-4">Terms & Conditions</h1>
-    <p class="mb-4"><strong>Effective Date:</strong> November 2025</p>
+  <!-- PAGE HEADER -->
+  <div class="bg-gradient-to-r from-blue-800 to-indigo-900 py-12 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="section-label text-blue-200">Legal</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-3">Terms and Conditions</h1>
+      <p class="text-blue-200 text-sm">Last updated: May 2026</p>
+    </div>
+  </div>
 
-    <p class="mb-4">Welcome to <strong>KnowYourEMI</strong>. By accessing and using our website (<a href="https://www.knowyouremi.in" class="text-blue-600 underline">knowyouremi.in</a>), you agree to comply with the following Terms and Conditions.</p>
+  <main class="max-w-3xl mx-auto px-4 py-12">
 
-    <h2 class="text-2xl font-semibold mt-6 mb-3">1. About KnowYourEMI</h2>
-    <p class="mb-4">KnowYourEMI is an independent, educational platform that offers free financial calculators, including EMI, Loan Eligibility, and Balance Transfer tools. We are <strong>not</strong> a bank, lender, or financial intermediary.</p>
+    <!-- Summary box -->
+    <div class="highlight-box mb-10">
+      Short version: KnowYourEMI provides free educational calculators. We are not a bank, lender, or financial advisor. Results are estimates based on standard formulas. Always verify with your lender before making any financial decision.
+    </div>
 
-    <h2 class="text-2xl font-semibold mt-6 mb-3">2. Accuracy of Results</h2>
-    <p class="mb-4">Our tools provide approximate results based on standard formulas and user input. Actual loan offers may differ based on lender terms, credit score, and market conditions.</p>
+    <div class="space-y-8">
 
-    <h2 class="text-2xl font-semibold mt-6 mb-3">3. No Financial Advice</h2>
-    <p class="mb-4">All information provided is for general education purposes only. Users should consult a licensed financial advisor before making any financial decisions.</p>
+      <div class="policy-section">
+        <h2>1. Who We Are</h2>
+        <p>KnowYourEMI (knowyouremi.in) is an independent, free financial calculator platform. We are not a bank, non-banking financial company (NBFC), loan aggregator, or financial advisor. We do not process loan applications, offer credit, or earn commissions from lenders.</p>
+      </div>
 
-    <h2 class="text-2xl font-semibold mt-6 mb-3">4. Limitation of Liability</h2>
-    <p class="mb-4">KnowYourEMI will not be liable for any losses, damages, or decisions made based on calculator results or website content.</p>
+      <div class="policy-section">
+        <h2>2. Calculator Results Are Estimates</h2>
+        <p>All results produced by our calculators are based on standard mathematical formulas and the inputs you provide. Actual loan offers, EMIs, interest rates, and eligibility criteria will vary based on your lender's specific policies, your credit profile, and prevailing market conditions. Do not treat calculator results as a guarantee or a formal loan offer.</p>
+      </div>
 
-    <h2 class="text-2xl font-semibold mt-6 mb-3">5. Intellectual Property</h2>
-    <p class="mb-4">All content, layout, design, and functionality are the intellectual property of KnowYourEMI. Unauthorized copying or redistribution is prohibited.</p>
+      <div class="policy-section">
+        <h2>3. Not Financial Advice</h2>
+        <p>Nothing on this website constitutes financial, investment, legal, or tax advice. The tools and articles are for general educational purposes only. Before making any borrowing, repayment, or refinancing decision, consult a qualified financial advisor or speak directly with your lender.</p>
+      </div>
 
-    <h2 class="text-2xl font-semibold mt-6 mb-3">6. External Links</h2>
-    <p class="mb-4">Our site may include references to third-party websites. We do not control or endorse their content and are not responsible for their actions.</p>
+      <div class="policy-section">
+        <h2>4. Accuracy of Information</h2>
+        <p>We make reasonable efforts to ensure the formulas, logic, and content on this site are accurate and up to date. However, we do not warrant that the information is error-free or complete. Interest rate conventions, regulatory guidelines, and lender practices can change, and our tools may not always reflect the latest.</p>
+      </div>
 
-    <h2 class="text-2xl font-semibold mt-6 mb-3">7. Policy Updates</h2>
-    <p class="mb-4">We may update these Terms and the Privacy Policy from time to time. Users are encouraged to review this page periodically for any updates.</p>
+      <div class="policy-section">
+        <h2>5. Limitation of Liability</h2>
+        <p>KnowYourEMI and its creators will not be liable for any financial loss, missed opportunity, or adverse outcome resulting from decisions made based on our calculator outputs or site content. Use of this platform is entirely at your own discretion and risk.</p>
+      </div>
 
-    <h2 class="text-2xl font-semibold mt-6 mb-3">8. Contact</h2>
-    <p>For queries, clarifications, or permissions, please contact us at <a href="mailto:hello@knowyouremi.in" class="text-blue-600 underline">hello@knowyouremi.in</a>.</p>
+      <div class="policy-section">
+        <h2>6. Intellectual Property</h2>
+        <p>All content on this website, including text, calculator logic, design, and layout, is the intellectual property of KnowYourEMI. You may not reproduce, redistribute, or commercially use any part of this site without prior written permission. Personal, non-commercial use is permitted.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>7. External Links</h2>
+        <p>Our site and blog may reference or link to third-party websites such as lender sites, government portals, or financial resources. We do not control, endorse, or take responsibility for the content, privacy practices, or accuracy of those external sites.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>8. Embedded Integration</h2>
+        <p>KnowYourEMI tools may be embedded on third-party websites under a licensing arrangement. The embedded experience is subject to the same terms outlined here. The third-party website's own terms and privacy policy govern their platform.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>9. Updates to These Terms</h2>
+        <p>We may revise these Terms and Conditions from time to time. The effective date at the top of this page will be updated whenever we make changes. Continued use of the site after an update means you accept the revised terms.</p>
+      </div>
+
+      <div class="policy-section">
+        <h2>10. Contact</h2>
+        <p>For questions, permissions, or concerns related to these terms, reach us at <a href="mailto:hello@knowyouremi.in" class="text-blue-600 hover:underline">hello@knowyouremi.in</a>.</p>
+      </div>
+
+    </div>
   </main>
 
   <!-- FOOTER -->
-  <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
-      <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-
-        <!-- About -->
-        <div>
-          <h3 class="text-lg font-semibold mb-3">About KnowYourEMI</h3>
-          <p class="text-sm text-gray-200 leading-relaxed">
-            KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility, 
-            and evaluate balance transfers transparently — no sign-ups, no hidden conditions.
-          </p>
-        </div>
-
-        <!-- Quick Links -->
-        <div>
-          <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
-          <ul class="space-y-2 text-sm">
-            <li><a href="../index.html#calculator" class="hover:underline">EMI Calculator</a></li>
-            <li><a href="../index.html#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
-            <li><a href="../index.html#eligibilityCalculator" class="hover:underline">Loan Eligibility</a></li>
-            <li><a href="../index.html#faq-section" class="hover:underline">FAQs</a></li>
-            <li><a href="../index.html#feedback-section" class="hover:underline">Feedback</a></li>
-          </ul>
-        </div>
-
-        <!-- Contact -->
-        <div>
-          <h3 class="text-lg font-semibold mb-3">Contact</h3>
-          <p class="text-sm text-gray-200 mb-2">
-            📧 Email:
-            <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">
-              hello@knowyouremi.in
-            </a>
-          </p>
-          <p class="text-sm text-gray-200">🌐 More updates and tools coming soon!</p>
-        </div>
+  <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-8">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-lg font-semibold mb-3">About KnowYourEMI</h3>
+        <p class="text-sm text-gray-200 leading-relaxed">KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility, and evaluate balance transfers transparently. No sign-ups, no hidden conditions.</p>
       </div>
-
-      <!-- Bottom bar -->
-      <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
-        <span>© <span id="year"></span> knowyouremi.in | All rights reserved.</span>
-        <a href="./about.html" class="underline hover:text-yellow-300">About</a> |
-        <a href="./privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
-        <a href="./terms-and-conditions.html" class="underline hover:text-yellow-300">Terms & Conditions</a>
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="../index.html" class="hover:underline">EMI Calculator</a></li>
+          <li><a href="../calculators/eligibility/" class="hover:underline">Loan Eligibility</a></li>
+          <li><a href="../calculators/balance-transfer/" class="hover:underline">Balance Transfer</a></li>
+          <li><a href="../calculators/float-rate-home-loan/" class="hover:underline">Float Rate Simulator</a></li>
+          <li><a href="../calculators/credit-card-payoff/" class="hover:underline">CC Payoff Calculator</a></li>
+          <li><a href="../blogs/index.html" class="hover:underline">Blog</a></li>
+        </ul>
       </div>
-    </footer>
+      <div>
+        <h3 class="text-lg font-semibold mb-3">Contact</h3>
+        <p class="text-sm text-gray-200 mb-2">&#128231; <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">hello@knowyouremi.in</a></p>
+        <p class="text-sm text-gray-200">More tools and articles coming soon.</p>
+      </div>
+    </div>
+    <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
+      <span>&#169; <span id="year"></span> knowyouremi.in | All rights reserved.</span>
+      <a href="./about.html" class="underline hover:text-yellow-300">About</a> |
+      <a href="./privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
+      <a href="./terms-and-conditions.html" class="underline hover:text-yellow-300">Terms and Conditions</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
 </body>
 </html>
