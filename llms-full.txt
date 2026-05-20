@@ -518,7 +518,58 @@ The credit card that caused the problem does not have to be closed. But the beha
 
 ---
 
-### HOME LOAN
+#### Why Paying the Minimum Due on Your Credit Card Costs You the Maximum
+**URL:** https://knowyouremi.in/blogs/credit-cards/minimum-due-trap.html
+**Read time:** 8 min
+**Category:** Credit Cards
+
+The minimum due amount on a credit card statement is one of the most cleverly designed numbers in personal finance. It is just low enough to feel manageable, just high enough to feel responsible, and just misleading enough to keep borrowers paying interest for years without realising what is actually happening.
+
+**What the Minimum Due Actually Is**
+
+Most Indian banks set the minimum due at 5% of the outstanding balance or Rs. 200, whichever is higher. On a Rs. 50,000 outstanding, the minimum due is Rs. 2,500. The remaining Rs. 47,500 starts attracting interest immediately at 36% to 45% per year, which is 3% to 3.75% per month on the full outstanding balance.
+
+At 3.75% monthly interest on Rs. 50,000: interest for the month = Rs. 1,875. Minimum due paid = Rs. 2,500. Principal actually reduced = Rs. 625. New outstanding = Rs. 49,375.
+
+You paid Rs. 2,500 and your balance went down by Rs. 625. The other Rs. 1,875 went to the bank as interest.
+
+**The Mindset That Makes It Worse**
+
+Most people who pay the minimum due are not careless. They are short on cash that month and see the minimum as a responsible act. They plan to pay more next month. Next month comes, there are new expenses on the card on top of the old balance. The minimum due is slightly higher. They pay it again.
+
+People who pay minimum due for one month almost always pay it for three. People who pay it for three months often pay it for a year.
+
+**What Actually Happens Over Time**
+
+Rs. 50,000 outstanding, minimum due only, 3.75% monthly rate, no new purchases:
+- Month 6: Balance around Rs. 46,800. Paid Rs. 14,400 total. Outstanding reduced by Rs. 3,200.
+- Month 12: Balance around Rs. 43,900. Paid Rs. 27,600 in a year. Outstanding reduced by Rs. 6,100.
+- At this pace it will take over 8 years to clear Rs. 50,000. Total paid: close to Rs. 1,50,000 for a debt that started at Rs. 50,000.
+
+**Why the Bank Designs It This Way**
+
+The minimum due is not a courtesy. It is a product feature designed to keep borrowers in a revolving balance as long as possible. When you pay the full outstanding every month, the bank earns nothing from you on interest. A customer revolving Rs. 50,000 at 3.75% monthly generates Rs. 1,875 of interest income for the bank every month.
+
+**The Snowball Effect**
+
+If you keep using the card while carrying a balance, every new purchase adds to the outstanding. Monthly interest compounds on a growing base. A balance that started at Rs. 50,000 becomes Rs. 70,000 or Rs. 80,000 even though you have been making payments faithfully. Monthly interest charges start exceeding the principal portion of the minimum due payment. At that point, the balance will never reduce no matter how long you keep paying minimum.
+
+**How to Stop the Cycle**
+
+1. Stop adding to the balance immediately. Use cash or UPI for all expenses until cleared.
+2. Pay as much above the minimum as possible every month. Even Rs. 1,000 extra makes a significant difference.
+3. Check if your bank offers balance conversion to EMI at a lower rate (12% to 18% instead of 36% to 45%).
+4. Consider a balance transfer to a lower rate card if available.
+5. Use any windfalls (bonus, tax refund, gift money) directly against the balance. At 36% to 45% annual interest, no investment beats the guaranteed return of paying off this debt.
+6. Set a target payoff date. Use the Credit Card Payoff Calculator to find exactly how much you need to pay each month to clear the balance by that date.
+
+**The Key Insight**
+
+The minimum due is designed to keep you comfortable enough to keep going. Getting out requires being briefly uncomfortable: cutting spending, paying more than feels easy, and facing the exact size of the problem. That discomfort lasts months. The debt, left alone, lasts years.
+
+**Related calculator:** https://knowyouremi.in/calculators/credit-card-payoff/
+
+---
 
 ---
 
@@ -817,7 +868,7 @@ In flat rate, interest is calculated on the full original principal throughout t
 - Basics (EMI calculation, credit scores)
 - Interest Rates (flat vs reducing)
 - Strategy (part payment decisions)
-- Credit Cards (how they work, debt traps, payoff planning)
+- Credit Cards (how they work, debt traps, minimum due trap, payoff planning)
 - Home Loans (floating rate)
 - Investments (SIP, FD, RD, SIP vs FD)
 
