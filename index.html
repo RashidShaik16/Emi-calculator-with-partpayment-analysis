@@ -535,6 +535,7 @@
 
                     </div>
 
+
                 </section>
             </div>
 
@@ -545,6 +546,20 @@
                         ₹0
                     </p>
                     <p id="savingsDetail" class="text-sm text-gray-700 mt-2 font-bold"></p>
+            </div>
+
+
+            <!-- Sponsored Offers Section -->
+            <div id="sponsoredOffers" class="hidden mt-6" style="overflow-x:visible">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Sponsored</span>
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                    <span class="text-xs text-gray-300 italic">Affiliate links</span>
+                </div>
+                <div id="offersStrip" style="display:flex;gap:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:none;justify-content:center">
+                    <!-- Cards injected by JS based on loan type -->
+                </div>
+                <p class="text-gray-400 text-xs mt-3 text-center">We may earn a small commission if you apply through these links, at no extra cost to you.</p>
             </div>
 
             <!-- Amortization Section -->
@@ -1151,5 +1166,111 @@
     <script src="scripts/feedback-toast.js"></script>
     <script src="app.js"></script>
  
-    </body>
+        <script>
+        // Sponsored offers data per loan type
+        const sponsoredOffers = {
+            personal: [
+                {
+                    name: "Tata Capital Personal Loan",
+                    detail: "Up to ₹35L · From 10.99% p.a.",
+                    initials: "TC",
+                    color: "bg-blue-50",
+                    textColor: "text-blue-800",
+                    accentColor: "#1d4ed8",
+                    href: "https://bitli.in/WaP8ZE9"
+                },
+                {
+                    name: "HDFC Bank Personal Loan",
+                    detail: "Up to ₹75L · From 9.99% p.a.",
+                    initials: "HD",
+                    color: "bg-red-50",
+                    textColor: "text-red-700",
+                    accentColor: "#b91c1c",
+                    href: "https://bitli.in/e2RMGcF"
+                },
+                {
+                    name: "Hero Fincorp Personal Loan",
+                    detail: "Up to ₹5L · Quick disbursal",
+                    initials: "HF",
+                    color: "bg-green-50",
+                    textColor: "text-green-700",
+                    accentColor: "#16a34a",
+                    href: "https://bitli.in/kjYtHTH"
+                }
+                // Add more personal loan offers here — use accentColor for unique identity
+            ],
+            home: [
+                // Add home loan offers here when available
+            ],
+            car: [
+                // Add car loan offers here when available
+            ],
+            credit: [
+                // Add credit card offers here when available
+            ]
+        };
+
+        function renderSponsoredOffers(loanType) {
+            const section = document.getElementById('sponsoredOffers');
+            const strip = document.getElementById('offersStrip');
+            const offers = sponsoredOffers[loanType] || [];
+
+            if (offers.length === 0) {
+                section.classList.add('hidden');
+                return;
+            }
+
+            strip.innerHTML = offers.map(o => `
+                <a href="${o.href}" rel="nofollow sponsored" target="_blank"
+                   class="flex-shrink-0 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group"
+                   style="min-width:230px;max-width:270px;flex:0 0 auto;text-decoration:none;scroll-snap-align:start;border-top:1px solid #f3f4f6;border-right:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6;border-left:4px solid ${o.accentColor}">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-xl ${o.color} border border-blue-100 flex items-center justify-center shadow-sm">
+                        <span class="${o.textColor} font-black text-sm">${o.initials}</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-bold text-gray-800 truncate leading-tight">${o.name}</p>
+                        <p class="text-xs font-semibold mt-0.5" style="color:${o.accentColor}">${o.detail}</p>
+                    </div>
+                    <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-opacity group-hover:opacity-80" style="background:${o.accentColor}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </a>
+            `).join('');
+
+            section.classList.remove('hidden');
+        }
+
+        // Show offers when loanSummary becomes visible
+        (function() {
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(m) {
+                    if (m.type === 'attributes' && m.attributeName === 'class') {
+                        const el = m.target;
+                        if (el.id === 'loanSummary' && !el.classList.contains('hidden')) {
+                            const activeBtn = document.querySelector('.loan-type-btn.active');
+                            const loanType = activeBtn ? activeBtn.dataset.type : 'personal';
+                            renderSponsoredOffers(loanType);
+                        }
+                    }
+                });
+            });
+            document.addEventListener('DOMContentLoaded', function() {
+                const summary = document.getElementById('loanSummary');
+                if (summary) observer.observe(summary, { attributes: true });
+
+                // Also re-render when loan type changes
+                document.querySelectorAll('.loan-type-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const section = document.getElementById('sponsoredOffers');
+                        if (section && !section.classList.contains('hidden')) {
+                            renderSponsoredOffers(btn.dataset.type);
+                        }
+                    });
+                });
+            });
+        })();
+    </script>
+</body>
 </html>
