@@ -144,7 +144,7 @@ Multiple events can be added across different months to simulate the full trajec
 
 ## BLOG ARTICLES
 
-All articles: https://knowyouremi.in/blogs/index.html
+All articles: https://knowyouremi.in/blogs/
 Author: Rashid Shaik
 Published: May 2026
 

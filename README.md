@@ -48,7 +48,7 @@ Whether you’re planning a **home loan, car loan, or personal loan**, this app 
    git clone https://github.com/your-username/know-your-emi.git
    cd know-your-emi
    ```
-2. Open `index.html` in your browser.  
+2. Open `` in your browser.  
 3. Start exploring! 🎉  
 
 ---

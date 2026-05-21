@@ -12,7 +12,7 @@ KnowYourEMI (https://knowyouremi.in) offers free calculators for EMI, loan eligi
 - Floating Rate Home Loan Simulator: https://knowyouremi.in/calculators/float-rate-home-loan/ — Simulate how interest rate changes and part payments affect a floating rate home loan over time. Add multiple rate change events and part payments at any month. Compares original vs revised schedule with interest saved shown clearly.
 
 ## Blog
-All articles: https://knowyouremi.in/blogs/index.html
+All articles: https://knowyouremi.in/blogs/
 
 ### Basics
 - How EMI Is Calculated: https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html — The EMI formula explained with real examples. What principal and interest mean inside each payment and why a small rate difference costs lakhs over time.
