@@ -1,0 +1,504 @@
+/* ============================================
+   KnowYourEMI — Comments Section Styles
+   comments.css — only comment-specific styles
+   Site globals (Tailwind, Inter, Lora) already loaded
+   ============================================ */
+
+/* ── Section wrapper ── */
+#knowyouremi-comments {
+  font-family: 'Inter', sans-serif;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 1rem 4rem;
+}
+
+/* ── Section heading pill (matches site's section-tag style) ── */
+.kye-section-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #1e3a8a, #312e81);
+  color: white;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.kye-section-title {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.375rem;
+}
+
+.kye-section-sub {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+/* ── Comment form card ── */
+.kye-form-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.kye-form-card h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.kye-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 540px) {
+  .kye-form-row { grid-template-columns: 1fr; }
+}
+
+.kye-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  color: #111827;
+  background: #fafafa;
+  box-sizing: border-box;
+}
+
+.kye-input:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 3px rgba(29,78,216,0.1);
+  background: white;
+}
+
+.kye-input::placeholder { color: #9ca3af; }
+
+.kye-textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.5;
+}
+
+.kye-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.kye-checkbox-row input[type="checkbox"] {
+  accent-color: #1d4ed8;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.kye-submit-btn {
+  background: #1d4ed8;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  padding: 0.55rem 1.4rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.kye-submit-btn:hover { background: #1e40af; }
+.kye-submit-btn:active { transform: scale(0.98); }
+.kye-submit-btn:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Sort bar ── */
+.kye-sort-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+.kye-sort-btn {
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  padding: 3px 12px;
+  border-radius: 999px;
+  border: 1.5px solid #e5e7eb;
+  background: white;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.kye-sort-btn:hover { border-color: #1d4ed8; color: #1d4ed8; }
+.kye-sort-btn.active {
+  background: #1e3a8a;
+  border-color: #1e3a8a;
+  color: white;
+}
+
+/* ── Comment card ── */
+.kye-comment-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 0.875rem;
+}
+
+/* ── Avatar ── */
+.kye-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+/* Avatar color palette — cycles by index */
+.kye-avatar-0  { background: #1d4ed8; }
+.kye-avatar-1  { background: #7c3aed; }
+.kye-avatar-2  { background: #0891b2; }
+.kye-avatar-3  { background: #059669; }
+.kye-avatar-4  { background: #d97706; }
+.kye-avatar-5  { background: #dc2626; }
+.kye-avatar-6  { background: #db2777; }
+.kye-avatar-7  { background: #65a30d; }
+
+/* ── Comment header ── */
+.kye-comment-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.kye-comment-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #111827;
+}
+
+.kye-comment-time {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* ── Comment body ── */
+.kye-comment-body {
+  font-size: 0.875rem;
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
+  word-break: break-word;
+}
+
+.kye-comment-body .kye-mention {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* ── Comment actions row ── */
+.kye-comment-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.kye-like-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: #6b7280;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.15s;
+}
+
+.kye-like-btn:hover { color: #1d4ed8; }
+
+.kye-like-btn.liked {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.kye-like-btn.liked .kye-like-icon {
+  animation: kye-pop 0.3s ease;
+}
+
+@keyframes kye-pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.kye-like-btn:disabled { cursor: not-allowed; }
+
+.kye-reply-btn {
+  font-size: 0.78rem;
+  color: #6b7280;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.15s;
+  padding: 0;
+}
+
+.kye-reply-btn:hover { color: #1d4ed8; }
+
+/* ── Replies section ── */
+.kye-replies-wrap {
+  margin-top: 0.875rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+/* Indent line */
+.kye-reply-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-left: 2px solid #e0e7ff;
+  padding-left: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.kye-reply-item:last-child { margin-bottom: 0; }
+
+.kye-reply-content { flex: 1; min-width: 0; }
+
+.kye-reply-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.kye-reply-name {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #111827;
+}
+
+.kye-reply-time {
+  font-size: 0.72rem;
+  color: #9ca3af;
+}
+
+.kye-reply-body {
+  font-size: 0.84rem;
+  color: #374151;
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.kye-reply-avatar {
+  width: 28px;
+  height: 28px;
+  font-size: 0.65rem;
+}
+
+/* ── Show all replies toggle ── */
+.kye-show-replies-btn {
+  font-size: 0.78rem;
+  color: #1d4ed8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  padding: 0.3rem 0;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.kye-show-replies-btn:hover { text-decoration: underline; }
+
+/* ── Inline reply form ── */
+.kye-reply-form {
+  margin-top: 0.875rem;
+  padding: 0.875rem;
+  background: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.kye-reply-form-header {
+  font-size: 0.78rem;
+  color: #374151;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.kye-reply-form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.kye-cancel-btn {
+  font-size: 0.82rem;
+  color: #6b7280;
+  background: none;
+  border: 1px solid #d1d5db;
+  border-radius: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.15s;
+}
+
+.kye-cancel-btn:hover { border-color: #9ca3af; }
+
+.kye-reply-submit-btn {
+  font-size: 0.82rem;
+  color: white;
+  background: #1d4ed8;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.kye-reply-submit-btn:hover { background: #1e40af; }
+.kye-reply-submit-btn:disabled { background: #93c5fd; cursor: not-allowed; }
+
+/* ── Load more button ── */
+.kye-load-more-wrap {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.kye-load-more-btn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: #1d4ed8;
+  background: white;
+  border: 1.5px solid #1d4ed8;
+  border-radius: 0.5rem;
+  padding: 0.55rem 1.75rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.kye-load-more-btn:hover {
+  background: #1d4ed8;
+  color: white;
+}
+
+.kye-load-more-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Empty state ── */
+.kye-empty {
+  text-align: center;
+  padding: 2.5rem 0;
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+.kye-empty-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Toast notification ── */
+.kye-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: #111827;
+  color: white;
+  font-size: 0.82rem;
+  font-family: 'Inter', sans-serif;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+
+.kye-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Loading spinner ── */
+.kye-spinner {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.kye-spinner-ring {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #1d4ed8;
+  border-radius: 50%;
+  animation: kye-spin 0.7s linear infinite;
+}
+
+@keyframes kye-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Comment count ── */
+.kye-count {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.kye-count strong {
+  color: #111827;
+  font-weight: 600;
+}
