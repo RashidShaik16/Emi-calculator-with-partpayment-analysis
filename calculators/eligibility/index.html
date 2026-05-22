@@ -231,6 +231,10 @@
       color: #4b5563;
       margin-bottom: 1rem;
     }
+
+    .mini-article{
+      padding: 8px;
+    }
     .mini-article strong { color: #111827; }
 
     .section-divider {
@@ -475,7 +479,7 @@
     </section>
 
     <!-- Comments Section -->
-    <div id="knowyouremi-comments" class="mt-8"></div>
+    <!-- <div id="knowyouremi-comments" class="mt-8"></div> -->
 
     <!-- MINI ARTICLE -->
     <hr class="section-divider">
@@ -626,19 +630,21 @@
 
     // Auto-scroll offers strip every 3 seconds
     let autoScrollInterval = null;
+    let currentCard = 0;
 
     function startAutoScroll() {
       const strip = document.getElementById('offersStrip');
       if (!strip) return;
       clearInterval(autoScrollInterval);
+      currentCard = 0;
+
       autoScrollInterval = setInterval(function() {
-        const cardWidth = 230 + 12; // card min-width + gap
-        const maxScroll = strip.scrollWidth - strip.clientWidth;
-        if (strip.scrollLeft + cardWidth >= maxScroll) {
-          strip.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          strip.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        }
+        const cards = strip.querySelectorAll('a');
+        if (!cards.length) return;
+        currentCard = (currentCard + 1) % cards.length;
+        // Scroll only within the strip — does not affect page scroll position
+        const targetLeft = cards[currentCard].offsetLeft - strip.offsetLeft;
+        strip.scrollTo({ left: targetLeft, behavior: 'smooth' });
       }, 3000);
 
       // Pause on hover/touch
@@ -656,7 +662,7 @@
     });
   </script>
 
-  <script type="module" src="/comments/comments.js"></script>
+  <!-- <script type="module" src="/comments/comments.js"></script> -->
 
 </body>
 </html>
