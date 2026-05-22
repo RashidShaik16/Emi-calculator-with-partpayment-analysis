@@ -572,17 +572,14 @@
 
   <script>
     const eligibilityOffers = [
-      { name: "Tata Capital Personal Loan", detail: "Up to ₹35L · From 10.99% p.a.", initials: "TC", color: "bg-blue-50", textColor: "text-blue-800", accentColor: "#1d4ed8", href: "https://bitli.in/WaP8ZE9" },
-      { name: "HDFC Bank Personal Loan",    detail: "Up to ₹75L · From 9.99% p.a.",  initials: "HD", color: "bg-red-50",    textColor: "text-red-700",   accentColor: "#b91c1c", href: "https://bitli.in/e2RMGcF" },
-      { name: "Hero Fincorp Personal Loan", detail: "Up to ₹5L · Quick disbursal",   initials: "HF", color: "bg-green-50",  textColor: "text-green-700", accentColor: "#16a34a", href: "https://bitli.in/kjYtHTH" },
-      { name: "Fibe Personal Loan",         detail: "Up to ₹5L · From 20% p.a.",     initials: "FB", color: "bg-purple-50", textColor: "text-purple-700",accentColor: "#7c3aed", href: "https://bitli.in/275qI8Q" }
+      // Personal loan offers temporarily disabled — switching to Cuelinks
     ];
 
     function showEligibilityOffers() {
       const loanType = document.getElementById('loanType').value;
       const section  = document.getElementById('sponsoredOffers');
       const strip    = document.getElementById('offersStrip');
-      if (loanType !== 'personal') { section.classList.add('hidden'); return; }
+      if (loanType !== 'personal' || eligibilityOffers.length === 0) { section.classList.add('hidden'); return; }
       strip.innerHTML = eligibilityOffers.map(o => `
         <a href="${o.href}" rel="nofollow sponsored" target="_blank"
            onclick="if(typeof gtag==='function'){gtag('event','affiliate_click',{offer_name:'${o.name}',loan_type:'personal_eligibility',page_path:location.pathname})}"
