@@ -1177,6 +1177,7 @@
                     color: "bg-blue-50",
                     textColor: "text-blue-800",
                     accentColor: "#1d4ed8",
+                    badge: "",
                     href: "https://bitli.in/WaP8ZE9"
                 },
                 {
@@ -1186,6 +1187,7 @@
                     color: "bg-red-50",
                     textColor: "text-red-700",
                     accentColor: "#b91c1c",
+                    badge: "",
                     href: "https://bitli.in/e2RMGcF"
                 },
                 {
@@ -1195,9 +1197,19 @@
                     color: "bg-green-50",
                     textColor: "text-green-700",
                     accentColor: "#16a34a",
+                    badge: "",
                     href: "https://bitli.in/kjYtHTH"
+                },
+                {
+                    name: "Fibe Personal Loan",
+                    detail: "Up to ₹5L · From 20% p.a.",
+                    initials: "FB",
+                    color: "bg-purple-50",
+                    textColor: "text-purple-700",
+                    accentColor: "#7c3aed",
+                    badge: "",
+                    href: "https://bitli.in/275qI8Q"
                 }
-                // Add more personal loan offers here — use accentColor for unique identity
             ],
             home: [
                 // Add home loan offers here when available
@@ -1206,7 +1218,46 @@
                 // Add car loan offers here when available
             ],
             credit: [
-                // Add credit card offers here when available
+                {
+                    name: "SBI SimplyClick Credit Card",
+                    detail: "2.5% back on Amazon & more",
+                    badge: "Welcome gift: Rs 500 Amazon voucher",
+                    initials: "SBI",
+                    color: "bg-blue-50",
+                    textColor: "text-blue-800",
+                    accentColor: "#1d4ed8",
+                    href: "https://bitli.in/r6ME3sV"
+                },
+                {
+                    name: "HDFC Millennia Credit Card",
+                    detail: "5% cashback on Amazon & Flipkart",
+                    badge: "10% off on Swiggy Dineout",
+                    initials: "HDFC",
+                    color: "bg-red-50",
+                    textColor: "text-red-700",
+                    accentColor: "#b91c1c",
+                    href: "https://bitli.in/bJmOQnB"
+                },
+                {
+                    name: "Axis MY Zone Rupay Card",
+                    detail: "Buy 1 Get 1 on movie tickets",
+                    badge: "4 free airport lounges annually",
+                    initials: "AXS",
+                    color: "bg-pink-50",
+                    textColor: "text-pink-700",
+                    accentColor: "#db2777",
+                    href: "https://bitli.in/720mG2c"
+                },
+                {
+                    name: "AU LIT Credit Card",
+                    detail: "Lifetime FREE card",
+                    badge: "10% instant discount on Amazon & Flipkart",
+                    initials: "AU",
+                    color: "bg-orange-50",
+                    textColor: "text-orange-700",
+                    accentColor: "#ea580c",
+                    href: "https://bitli.in/kleQQbp"
+                }
             ]
         };
 
@@ -1222,6 +1273,7 @@
 
             strip.innerHTML = offers.map(o => `
                 <a href="${o.href}" rel="nofollow sponsored" target="_blank"
+                   onclick="if(typeof gtag==='function'){gtag('event','affiliate_click',{offer_name:'${o.name}',loan_type:'${loanType}',page_path:location.pathname})}"
                    class="flex-shrink-0 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group"
                    style="min-width:230px;max-width:270px;flex:0 0 auto;text-decoration:none;scroll-snap-align:start;border-top:1px solid #f3f4f6;border-right:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6;border-left:4px solid ${o.accentColor}">
                     <div class="flex-shrink-0 w-10 h-10 rounded-xl ${o.color} border border-blue-100 flex items-center justify-center shadow-sm">
@@ -1230,6 +1282,7 @@
                     <div class="flex-1 min-w-0">
                         <p class="text-sm font-bold text-gray-800 truncate leading-tight">${o.name}</p>
                         <p class="text-xs font-semibold mt-0.5" style="color:${o.accentColor}">${o.detail}</p>
+                        ${o.badge ? `<p class="text-xs text-gray-400 mt-0.5 truncate">${o.badge}</p>` : ''}
                     </div>
                     <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-opacity group-hover:opacity-80" style="background:${o.accentColor}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">

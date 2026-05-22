@@ -459,7 +459,23 @@
       <p class="text-xs text-gray-400 mt-4 leading-relaxed">
         This is an estimate based on standard banking guidelines. Actual loan approval depends on the lender's internal policies, your full credit report, employment verification, and other factors. This tool does not guarantee loan approval.
       </p>
+
+      <!-- Sponsored Offers -->
+      <div id="sponsoredOffers" class="hidden mt-6" style="overflow-x:visible">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Sponsored</span>
+          <div class="flex-1 h-px bg-gray-200"></div>
+          <span class="text-xs text-gray-300 italic">Affiliate links</span>
+        </div>
+        <div id="offersStrip" style="display:flex;gap:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:none">
+        </div>
+        <p class="text-gray-400 text-xs mt-2 text-center">We may earn a small commission if you apply through these links, at no extra cost to you.</p>
+      </div>
+
     </section>
+
+    <!-- Comments Section -->
+    <div id="knowyouremi-comments" class="mt-8"></div>
 
     <!-- MINI ARTICLE -->
     <hr class="section-divider">
@@ -549,6 +565,98 @@
   </footer>
 
   <script src="./script.js"></script>
+
+  <script>
+    const eligibilityOffers = [
+      { name: "Tata Capital Personal Loan", detail: "Up to ₹35L · From 10.99% p.a.", initials: "TC", color: "bg-blue-50", textColor: "text-blue-800", accentColor: "#1d4ed8", href: "https://bitli.in/WaP8ZE9" },
+      { name: "HDFC Bank Personal Loan",    detail: "Up to ₹75L · From 9.99% p.a.",  initials: "HD", color: "bg-red-50",    textColor: "text-red-700",   accentColor: "#b91c1c", href: "https://bitli.in/e2RMGcF" },
+      { name: "Hero Fincorp Personal Loan", detail: "Up to ₹5L · Quick disbursal",   initials: "HF", color: "bg-green-50",  textColor: "text-green-700", accentColor: "#16a34a", href: "https://bitli.in/kjYtHTH" },
+      { name: "Fibe Personal Loan",         detail: "Up to ₹5L · From 20% p.a.",     initials: "FB", color: "bg-purple-50", textColor: "text-purple-700",accentColor: "#7c3aed", href: "https://bitli.in/275qI8Q" }
+    ];
+
+    function showEligibilityOffers() {
+      const loanType = document.getElementById('loanType').value;
+      const section  = document.getElementById('sponsoredOffers');
+      const strip    = document.getElementById('offersStrip');
+      if (loanType !== 'personal') { section.classList.add('hidden'); return; }
+      strip.innerHTML = eligibilityOffers.map(o => `
+        <a href="${o.href}" rel="nofollow sponsored" target="_blank"
+           onclick="if(typeof gtag==='function'){gtag('event','affiliate_click',{offer_name:'${o.name}',loan_type:'personal_eligibility',page_path:location.pathname})}"
+           class="flex-shrink-0 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group"
+           style="min-width:230px;max-width:270px;flex:0 0 auto;text-decoration:none;scroll-snap-align:start;border-top:1px solid #f3f4f6;border-right:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6;border-left:4px solid ${o.accentColor}">
+          <div class="flex-shrink-0 w-10 h-10 rounded-xl ${o.color} flex items-center justify-center shadow-sm">
+            <span class="${o.textColor} font-black text-sm">${o.initials}</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-bold text-gray-800 truncate leading-tight">${o.name}</p>
+            <p class="text-xs font-semibold mt-0.5" style="color:${o.accentColor}">${o.detail}</p>
+          </div>
+          <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center" style="background:${o.accentColor}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+      `).join('');
+      section.classList.remove('hidden');
+    }
+
+    // Watch resultNote — only fires after validation passes and results are shown
+    // Timer starts from that moment: 2000ms count-up + 5000ms reading = 7000ms
+    let offersTimer = null;
+    const resultNoteEl = document.getElementById('resultNote');
+    const offerObserver = new MutationObserver(function() {
+      if (resultNoteEl.style.display === 'block') {
+        clearTimeout(offersTimer);
+        offersTimer = setTimeout(function() {
+          showEligibilityOffers();
+          const section = document.getElementById('sponsoredOffers');
+          if (section && !section.classList.contains('hidden')) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            setTimeout(startAutoScroll, 500);
+          }
+        }, 7000);
+      } else {
+        // Results reset — hide offers immediately
+        clearTimeout(offersTimer);
+        document.getElementById('sponsoredOffers').classList.add('hidden');
+      }
+    });
+    offerObserver.observe(resultNoteEl, { attributes: true, attributeFilter: ['style'] });
+
+    // Auto-scroll offers strip every 3 seconds
+    let autoScrollInterval = null;
+
+    function startAutoScroll() {
+      const strip = document.getElementById('offersStrip');
+      if (!strip) return;
+      clearInterval(autoScrollInterval);
+      autoScrollInterval = setInterval(function() {
+        const cardWidth = 230 + 12; // card min-width + gap
+        const maxScroll = strip.scrollWidth - strip.clientWidth;
+        if (strip.scrollLeft + cardWidth >= maxScroll) {
+          strip.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          strip.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        }
+      }, 3000);
+
+      // Pause on hover/touch
+      strip.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+      strip.addEventListener('touchstart', () => clearInterval(autoScrollInterval), { passive: true });
+      strip.addEventListener('mouseleave', startAutoScroll);
+      strip.addEventListener('touchend', startAutoScroll, { passive: true });
+    }
+
+    // Hide offers when loan type changes
+    document.getElementById('loanType').addEventListener('change', function() {
+      clearTimeout(offersTimer);
+      clearInterval(autoScrollInterval);
+      document.getElementById('sponsoredOffers').classList.add('hidden');
+    });
+  </script>
+
+  <script type="module" src="/comments/comments.js"></script>
 
 </body>
 </html>
