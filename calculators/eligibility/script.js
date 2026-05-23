@@ -343,6 +343,16 @@
       const tenureYrs   = parseInt(document.getElementById('tenure').value);
       const creditScore = document.getElementById('creditScore').value;
 
+      // GA4 — fire immediately after validation passes
+      if (typeof gtag === 'function') {
+        gtag('event', 'eligibility_checked', {
+          loan_type:    loanType,
+          loan_tenure:  tenureYrs + ' years',
+          credit_score: creditScore,
+          salary:       salary
+        });
+      }
+
       const foir        = foirByType[loanType];
       const maxEMI      = Math.floor(salary * foir);
       const emiCapacity = maxEMI - obligations;
@@ -555,12 +565,5 @@
             '</strong> on ' + loanTypeLabels[loanType].toLowerCase() + 's.';
         }
 
-        // GA4 event
-        if (typeof gtag === 'function') {
-          gtag('event', 'advanced_eligibility_check', {
-            event_category: 'calculator',
-            event_label: loanType + '_' + creditScore
-          });
-        }
       });
     }
