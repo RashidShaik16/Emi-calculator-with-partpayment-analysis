@@ -274,7 +274,7 @@
                             
                             <!-- Personal Loan -->
                             <button type="button" data-type="personal"
-                            class="loan-type-btn active bg-blue-600 text-white rounded-xl py-2 font-medium flex flex-col items-center justify-center hover:scale-[1.02] transition">
+                            class="loan-type-btn active bg-blue-800 text-white rounded-xl py-2 font-medium flex flex-col items-center justify-center hover:scale-[1.02] transition">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0 6a9 9 0 100-18 9 9 0 000 18z" />
@@ -550,16 +550,23 @@
 
 
             <!-- Sponsored Offers Section -->
-            <div id="sponsoredOffers" class="hidden mt-6 px-1" style="overflow-x:visible">
+            <div id="sponsoredOffers" class="hidden mt-6 px-1">
+                <div class="max-w-2xl mx-auto">
                 <div class="flex items-center gap-2 mb-3">
                     <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Sponsored</span>
                     <div class="flex-1 h-px bg-gray-200"></div>
                     <span class="text-xs text-gray-300 italic">Affiliate links</span>
                 </div>
-                <div id="offersStrip" style="display:flex;gap:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:none">
-                    <!-- Cards injected by JS based on loan type -->
+                <div style="position:relative;border-radius:14px;overflow:hidden;">
+                    <div id="offersCarouselTrack" style="display:flex;transition:transform 0.8s cubic-bezier(0.4,0,0.2,1);">
+                        <!-- Banner slides injected by JS -->
+                    </div>
+                    <button id="offersPrev" aria-label="Previous offer" style="position:absolute;top:50%;left:6px;transform:translateY(-50%);background:rgba(255,255,255,0.2);border:none;color:white;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);z-index:2;">&#8249;</button>
+                    <button id="offersNext" aria-label="Next offer" style="position:absolute;top:50%;right:6px;transform:translateY(-50%);background:rgba(255,255,255,0.2);border:none;color:white;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);z-index:2;">&#8250;</button>
                 </div>
-                <p class="text-gray-400 text-xs mt-3 text-center">We may earn a small commission if you apply through these links, at no extra cost to you.</p>
+                <div id="offersDots" style="display:flex;justify-content:center;gap:6px;margin-top:10px;"></div>
+                <p class="text-gray-400 text-xs mt-2 text-center">We may earn a small commission if you apply through these links, at no extra cost to you.</p>
+                </div>
             </div>
 
             <!-- Amortization Section -->
@@ -937,6 +944,7 @@
 
             
           <!-- User Comments -->
+            <div id="comments-anchor" style="scroll-margin-top:70px;height:1px;"></div>
             <div id="knowyouremi-comments"></div>
     
 
@@ -1105,19 +1113,20 @@
 
         <!-- Feedback Toast -->
         <div id="feedbackToast" 
-            class="hidden fixed bottom-10 left-1/2 -translate-x-1/2 w-96 bg-blue-600 text-white rounded-xl shadow-lg px-4 py-3 flex items-center justify-between gap-3 text-sm sm:text-base z-50 transition-all duration-700 ease-in-out translate-y-20">
+            class="hidden fixed bottom-10 left-1/2 -translate-x-1/2 w-96 bg-white text-gray-800 rounded-xl shadow-xl px-4 py-3 flex items-center justify-between gap-3 text-sm sm:text-base z-50 transition-all duration-700 ease-in-out translate-y-20" style="border:1px solid #e5e7eb;">
 
             <div class="flex items-center gap-2">
-                <!-- <span class="text-xl">💬</span> -->
-                <span>Found this calculator helpful?</span>
+                <span style="font-size:1.2rem;">💬</span>
+                <span class="font-medium text-gray-700">Found this helpful? Leave a comment!</span>
             </div>
 
             <div class="flex items-center gap-2">
                 <button id="toastFeedbackBtn" 
-                class="bg-white text-blue-700 px-3 py-1 rounded-lg font-semibold hover:bg-blue-100 transition text-sm">
-                Give Feedback
+                onclick="document.getElementById('feedbackToast').classList.add('hidden');setTimeout(function(){var c=document.getElementById('comments-anchor');if(c){var y=c.getBoundingClientRect().top+window.scrollY-70;window.scrollTo({top:y,behavior:'smooth'});}},100);"
+                class="bg-blue-600 text-white px-3 py-1 rounded-lg font-semibold hover:bg-blue-700 transition text-sm">
+                Leave a Comment
                 </button>
-                <button id="closeToastBtn" class="text-white hover:text-gray-300 text-lg font-bold leading-none">&times;</button>
+                <button id="closeToastBtn" class="text-gray-400 hover:text-gray-600 text-lg font-bold leading-none">&times;</button>
             </div>
         </div>
 
@@ -1222,39 +1231,109 @@
             ]
         };
 
-        function renderSponsoredOffers(loanType) {
-            const section = document.getElementById('sponsoredOffers');
-            const strip = document.getElementById('offersStrip');
-            const offers = sponsoredOffers[loanType] || [];
+        var _offersCarouselIdx = 0;
+        var _offersCarouselTimer = null;
+        var _offersCarouselTotal = 0;
 
-            if (offers.length === 0) {
-                section.classList.add('hidden');
-                return;
+        function _offersGoTo(n) {
+            _offersCarouselIdx = (n + _offersCarouselTotal) % _offersCarouselTotal;
+            var track = document.getElementById('offersCarouselTrack');
+            if (track) track.style.transform = 'translateX(-' + (_offersCarouselIdx * 100) + '%)';
+            document.querySelectorAll('.offers-dot').forEach(function(d, i) {
+                d.style.background = i === _offersCarouselIdx ? '#fff' : 'rgba(255,255,255,0.35)';
+                d.style.transform = i === _offersCarouselIdx ? 'scale(1.3)' : 'scale(1)';
+            });
+        }
+
+        function _offersStartTimer() {
+            _offersCarouselTimer = setInterval(function() { _offersGoTo(_offersCarouselIdx + 1); }, 6000);
+        }
+
+        function _offersIsMobile() { return window.innerWidth < 480; }
+
+        function renderSponsoredOffers(loanType) {
+            var section = document.getElementById('sponsoredOffers');
+            var track = document.getElementById('offersCarouselTrack');
+            var dotsEl = document.getElementById('offersDots');
+            var offers = sponsoredOffers[loanType] || [];
+
+            if (offers.length === 0) { section.classList.add('hidden'); return; }
+
+            _offersCarouselTotal = offers.length;
+            _offersCarouselIdx = 0;
+            if (_offersCarouselTimer) clearInterval(_offersCarouselTimer);
+
+            var gradients = {
+                'SBI':  { bg: 'linear-gradient(135deg,#1a3a8f 0%,#0f2060 100%)', tag: '#c8d8ff', btn: '#1a3a8f', card: 'linear-gradient(135deg,#2251c5,#0f2060)', network: 'VISA' },
+                'HDFC': { bg: 'linear-gradient(135deg,#8b1a1a 0%,#4a0909 100%)', tag: '#ffd0d0', btn: '#8b1a1a', card: 'linear-gradient(135deg,#b52020,#4a0909)', network: 'VISA' },
+                'AXS':  { bg: 'linear-gradient(135deg,#6b1f5e 0%,#3a0d33 100%)', tag: '#f0c8ec', btn: '#6b1f5e', card: 'linear-gradient(135deg,#922b80,#3a0d33)', network: 'RuPay' },
+                'IDFC': { bg: 'linear-gradient(135deg,#b85c00 0%,#6b3100 100%)', tag: '#ffe0bb', btn: '#b85c00', card: 'linear-gradient(135deg,#e07010,#6b3100)', network: 'VISA' }
+            };
+
+            var mob = _offersIsMobile();
+
+            track.innerHTML = offers.map(function(o) {
+                var g = gradients[o.initials] || gradients['HDFC'];
+                var cardArt = mob ? '' :
+                    '<div style="position:relative;z-index:2;flex-shrink:0;width:110px;height:70px;border-radius:10px;display:flex;flex-direction:column;justify-content:space-between;padding:9px;box-shadow:0 6px 20px rgba(0,0,0,0.25);background:' + g.card + ';">' +
+                      '<div style="display:flex;justify-content:space-between;align-items:flex-start;">' +
+                        '<div style="width:20px;height:14px;border-radius:3px;background:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.5);"></div>' +
+                        '<div style="font-size:9px;font-weight:700;color:white;opacity:0.9;">' + g.network + '</div>' +
+                      '</div>' +
+                      '<div>' +
+                        '<div style="font-size:7px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);">' + o.initials + '</div>' +
+                        '<div style="font-size:10px;font-weight:700;color:white;">' + o.name.replace(' Credit Card','').replace(' Rupay Card','') + '</div>' +
+                      '</div>' +
+                    '</div>';
+                return '<div style="min-width:100%;box-sizing:border-box;">' +
+                  '<div style="position:relative;overflow:hidden;border-radius:14px;padding:' + (mob ? '16px 36px' : '20px 48px') + ';display:flex;align-items:center;justify-content:space-between;gap:10px;background:' + g.bg + ';">' +
+                    '<div style="position:relative;z-index:2;flex:1;min-width:0;">' +
+                      '<div style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:20px;margin-bottom:6px;background:rgba(255,255,255,0.15);color:' + g.tag + ';">' + o.initials + '</div>' +
+                      '<div style="font-size:' + (mob ? '14px' : '17px') + ';font-weight:700;line-height:1.2;margin-bottom:4px;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + o.name + '</div>' +
+                      '<div style="font-size:11px;opacity:0.85;margin-bottom:12px;line-height:1.4;color:' + g.tag + ';">' + o.detail + (o.badge ? '<br>' + o.badge : '') + '</div>' +
+                      '<a href="' + o.href + '" rel="nofollow sponsored" target="_blank" onclick="if(typeof gtag===\'function\'){gtag(\'event\',\'affiliate_click\',{offer_name:\'' + o.name + '\',loan_type:\'' + loanType + '\',page_path:location.pathname})}" style="display:inline-block;padding:' + (mob ? '7px 14px' : '8px 18px') + ';border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;background:#ffffff;color:' + g.btn + ';">Apply Now →</a>' +
+                    '</div>' +
+                    cardArt +
+                  '</div>' +
+                '</div>';
+            }).join('');
+
+            dotsEl.innerHTML = offers.map(function(_, i) {
+                return '<div class="offers-dot" onclick="_offersGoTo(' + i + ');if(_offersCarouselTimer)clearInterval(_offersCarouselTimer);_offersStartTimer();" style="width:7px;height:7px;border-radius:50%;cursor:pointer;transition:all 0.3s;background:' + (i === 0 ? '#fff' : 'rgba(255,255,255,0.35)') + ';transform:' + (i === 0 ? 'scale(1.3)' : 'scale(1)') + ';"></div>';
+            }).join('');
+
+            var prev = document.getElementById('offersPrev');
+            var next = document.getElementById('offersNext');
+            if (prev) prev.onclick = function() { _offersGoTo(_offersCarouselIdx - 1); if(_offersCarouselTimer) clearInterval(_offersCarouselTimer); _offersStartTimer(); };
+            if (next) next.onclick = function() { _offersGoTo(_offersCarouselIdx + 1); if(_offersCarouselTimer) clearInterval(_offersCarouselTimer); _offersStartTimer(); };
+
+            var wrap = section.querySelector('div[style*="position:relative"]');
+            if (wrap) {
+                wrap.onmouseenter = function() { if(_offersCarouselTimer) clearInterval(_offersCarouselTimer); };
+                wrap.onmouseleave = function() { if(_offersCarouselTimer) clearInterval(_offersCarouselTimer); _offersStartTimer(); };
             }
 
-            strip.innerHTML = offers.map(o => `
-                <a href="${o.href}" rel="nofollow sponsored" target="_blank"
-                   onclick="if(typeof gtag==='function'){gtag('event','affiliate_click',{offer_name:'${o.name}',loan_type:'${loanType}',page_path:location.pathname})}"
-                   class="flex-shrink-0 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group"
-                   style="min-width:230px;max-width:270px;flex:0 0 auto;text-decoration:none;scroll-snap-align:start;border-top:1px solid #f3f4f6;border-right:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6;border-left:4px solid ${o.accentColor}">
-                    <div class="flex-shrink-0 w-10 h-10 rounded-xl ${o.color} border border-blue-100 flex items-center justify-center shadow-sm">
-                        <span class="${o.textColor} font-black text-sm">${o.initials}</span>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-bold text-gray-800 truncate leading-tight">${o.name}</p>
-                        <p class="text-xs font-semibold mt-0.5" style="color:${o.accentColor}">${o.detail}</p>
-                        ${o.badge ? `<p class="text-xs text-gray-400 mt-0.5 truncate">${o.badge}</p>` : ''}
-                    </div>
-                    <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-opacity group-hover:opacity-80" style="background:${o.accentColor}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                        </svg>
-                    </div>
-                </a>
-            `).join('');
-
+            _offersLastLoanType = loanType;
+            _offersGoTo(0);
+            _offersStartTimer();
             section.classList.remove('hidden');
         }
+
+        // Resize handler — registered once, outside renderSponsoredOffers
+        var _offersResizeTimer;
+        var _offersLastLoanType = null;
+        window.addEventListener('resize', function() {
+            clearTimeout(_offersResizeTimer);
+            _offersResizeTimer = setTimeout(function() {
+                if (_offersLastLoanType) {
+                    var currentIdx = _offersCarouselIdx;
+                    if (_offersCarouselTimer) clearInterval(_offersCarouselTimer);
+                    renderSponsoredOffers(_offersLastLoanType);
+                    _offersGoTo(currentIdx);
+                    _offersStartTimer();
+                }
+            }, 300);
+        });
 
         // Show offers when loanSummary becomes visible
         (function() {

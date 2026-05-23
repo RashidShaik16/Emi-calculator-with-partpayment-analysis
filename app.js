@@ -97,12 +97,12 @@ function updateLoanLimits(type) {
 loanTypeButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     // Remove active class from others
-    loanTypeButtons.forEach((b) => b.classList.remove("active", "bg-blue-600", "text-white"));
+    loanTypeButtons.forEach((b) => b.classList.remove("active", "bg-blue-600", "bg-blue-800", "text-white"));
     loanTypeButtons.forEach((b) => b.classList.add("bg-gray-100", "text-gray-800"));
 
     // Add active class to this
     btn.classList.remove("bg-gray-100", "text-gray-800");
-    btn.classList.add("active", "bg-blue-600", "text-white");
+    btn.classList.add("active", "bg-blue-800", "text-white");
 
     // Update global loan type
     currentLoanType = btn.dataset.type;

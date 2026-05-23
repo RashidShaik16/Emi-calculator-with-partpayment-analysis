@@ -522,6 +522,24 @@
     </div>
   </section>
 
+  <!-- Sponsored Credit Card Offers -->
+  <div id="ccPayoffOffers" class="mt-2">
+    <div class="max-w-2xl mx-auto">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Sponsored</span>
+        <div class="flex-1 h-px bg-gray-200"></div>
+        <span class="text-xs text-gray-300 italic">Affiliate links</span>
+      </div>
+      <div style="position:relative;border-radius:14px;overflow:hidden;">
+        <div id="ccPayoffTrack" style="display:flex;transition:transform 0.8s cubic-bezier(0.4,0,0.2,1);"></div>
+        <button id="ccPayoffPrev" aria-label="Previous offer" style="position:absolute;top:50%;left:6px;transform:translateY(-50%);background:rgba(255,255,255,0.2);border:none;color:white;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);z-index:2;">&#8249;</button>
+        <button id="ccPayoffNext" aria-label="Next offer" style="position:absolute;top:50%;right:6px;transform:translateY(-50%);background:rgba(255,255,255,0.2);border:none;color:white;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);z-index:2;">&#8250;</button>
+      </div>
+      <div id="ccPayoffDots" style="display:flex;justify-content:center;gap:6px;margin-top:10px;"></div>
+      <p class="text-gray-400 text-xs mt-2 text-center">We may earn a small commission if you apply through these links, at no extra cost to you.</p>
+    </div>
+  </div>
+
   <!-- SCHEDULE TABLE -->
   <section class="bg-white rounded-2xl shadow-md overflow-hidden fadein delay-2">
     <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 flex-wrap gap-2">
@@ -789,6 +807,7 @@
 </div>
 
   <!-- User Comments -->
+  <div id="comments-anchor" style="scroll-margin-top:70px;height:1px;"></div>
   <div id="knowyouremi-comments"></div>
 
 <!-- FEEDBACK SECTION -->
@@ -838,18 +857,18 @@
 </div>
 
 <!-- FEEDBACK POPUP (appears after 30s if user hasn't scrolled to form) -->
-<div id="feedbackPopup" class="hidden fixed bottom-6 left-4 right-4 md:left-auto md:right-6 md:w-80 bg-white border border-blue-100 rounded-2xl shadow-xl p-4 z-50">
+<div id="feedbackPopup" class="hidden fixed bottom-6 left-4 right-4 md:left-auto md:right-6 md:w-80 bg-white border border-gray-200 rounded-2xl shadow-xl p-4 z-50">
   <div class="flex justify-between items-start mb-1">
-    <p class="text-sm font-semibold text-blue-800">Enjoying this calculator?</p>
+    <p class="text-sm font-semibold text-gray-800">💬 Found this helpful?</p>
     <button onclick="document.getElementById('feedbackPopup').classList.add('hidden'); scheduleFeedbackPopup(30000);"
       class="text-gray-400 hover:text-gray-600 text-lg leading-none ml-2">&times;</button>
   </div>
-  <p class="text-xs text-gray-500 mb-3">Share your thoughts or suggestions. It takes 30 seconds.</p>
-  <a href="#feedback-section"
-    onclick="document.getElementById('feedbackPopup').classList.add('hidden'); clearTimeout(feedbackPopupTimer);"
-    class="block text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2 rounded-lg transition">
-    Give Feedback
-  </a>
+  <p class="text-xs text-gray-500 mb-3">Leave a comment — we read every one.</p>
+  <button
+    onclick="document.getElementById('feedbackPopup').classList.add('hidden'); clearTimeout(feedbackPopupTimer); setTimeout(function(){ var c=document.getElementById('comments-anchor'); if(c){ var y=c.getBoundingClientRect().top+window.scrollY-70; window.scrollTo({top:y,behavior:'smooth'}); }}, 100);"
+    class="block w-full text-center bg-blue-800 hover:bg-blue-900 text-white text-xs font-semibold py-2 rounded-lg transition">
+    Leave a Comment
+  </button>
 </div>
 
 <!-- FOOTER -->
@@ -1043,6 +1062,103 @@
       schedulePwaPopup(pwaPopupDelay);
     });
   }
+</script>
+
+<script>
+(function() {
+    var ccOffers = [
+        { name: 'SBI SimplyClick Credit Card', detail: '10x reward points on Amazon & more', badge: '₹500 Amazon voucher on joining', initials: 'SBI', href: 'https://bitli.in/r6ME3sV' },
+        { name: 'HDFC Millennia Credit Card',  detail: '5% cashback on Amazon & Flipkart',  badge: 'Milestone rewards up to ₹1,000/quarter', initials: 'HDFC', href: 'https://bitli.in/bJmOQnB' },
+        { name: 'Axis MY Zone Rupay Card',      detail: '15% off on Swiggy & Zomato every month', badge: 'Free domestic lounge access. Lifetime free', initials: 'AXS', href: 'https://bitli.in/720mG2c' },
+        { name: 'IDFC FIRST SWYP Credit Card', detail: 'Up to 20% off on Zomato, Nykaa & Myntra', badge: '25% off on movie tickets + hotel & flight deals', initials: 'IDFC', href: 'https://bitli.in/E3ZH3kZ' }
+    ];
+
+    var gradients = {
+        'SBI':  { bg: 'linear-gradient(135deg,#1a3a8f 0%,#0f2060 100%)', tag: '#c8d8ff', btn: '#1a3a8f', card: 'linear-gradient(135deg,#2251c5,#0f2060)', network: 'VISA' },
+        'HDFC': { bg: 'linear-gradient(135deg,#8b1a1a 0%,#4a0909 100%)', tag: '#ffd0d0', btn: '#8b1a1a', card: 'linear-gradient(135deg,#b52020,#4a0909)', network: 'VISA' },
+        'AXS':  { bg: 'linear-gradient(135deg,#6b1f5e 0%,#3a0d33 100%)', tag: '#f0c8ec', btn: '#6b1f5e', card: 'linear-gradient(135deg,#922b80,#3a0d33)', network: 'RuPay' },
+        'IDFC': { bg: 'linear-gradient(135deg,#b85c00 0%,#6b3100 100%)', tag: '#ffe0bb', btn: '#b85c00', card: 'linear-gradient(135deg,#e07010,#6b3100)', network: 'VISA' }
+    };
+
+    var idx = 0, timer = null;
+    var total = ccOffers.length;
+
+    function isMob() { return window.innerWidth < 480; }
+
+    function buildSlides() {
+        var track = document.getElementById('ccPayoffTrack');
+        var dotsEl = document.getElementById('ccPayoffDots');
+        if (!track || !dotsEl) return;
+        var mob = isMob();
+
+        track.innerHTML = ccOffers.map(function(o) {
+            var g = gradients[o.initials];
+            var cardArt = mob ? '' :
+                '<div style="position:relative;z-index:2;flex-shrink:0;width:110px;height:70px;border-radius:10px;display:flex;flex-direction:column;justify-content:space-between;padding:9px;box-shadow:0 6px 20px rgba(0,0,0,0.25);background:' + g.card + ';">' +
+                  '<div style="display:flex;justify-content:space-between;align-items:flex-start;">' +
+                    '<div style="width:20px;height:14px;border-radius:3px;background:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.5);"></div>' +
+                    '<div style="font-size:9px;font-weight:700;color:white;opacity:0.9;">' + g.network + '</div>' +
+                  '</div>' +
+                  '<div>' +
+                    '<div style="font-size:7px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);">' + o.initials + '</div>' +
+                    '<div style="font-size:10px;font-weight:700;color:white;">' + o.name.replace(' Credit Card','').replace(' Rupay Card','') + '</div>' +
+                  '</div>' +
+                '</div>';
+            return '<div style="min-width:100%;box-sizing:border-box;">' +
+              '<div style="position:relative;overflow:hidden;border-radius:14px;padding:' + (mob?'16px 36px':'20px 48px') + ';display:flex;align-items:center;justify-content:space-between;gap:10px;background:' + g.bg + ';">' +
+                '<div style="position:relative;z-index:2;flex:1;min-width:0;">' +
+                  '<div style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:20px;margin-bottom:6px;background:rgba(255,255,255,0.15);color:' + g.tag + ';">' + o.initials + '</div>' +
+                  '<div style="font-size:' + (mob?'14px':'17px') + ';font-weight:700;line-height:1.2;margin-bottom:4px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + o.name + '</div>' +
+                  '<div style="font-size:11px;opacity:0.85;margin-bottom:12px;line-height:1.4;color:' + g.tag + ';">' + o.detail + '<br>' + o.badge + '</div>' +
+                  '<a href="' + o.href + '" rel="nofollow sponsored" target="_blank" onclick="if(typeof gtag===\'function\'){gtag(\'event\',\'affiliate_click\',{offer_name:\'' + o.name + '\',loan_type:\'cc_payoff\',page_path:location.pathname})}" style="display:inline-block;padding:' + (mob?'7px 14px':'8px 18px') + ';border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;background:#fff;color:' + g.btn + ';">Apply Now →</a>' +
+                '</div>' +
+                cardArt +
+              '</div>' +
+            '</div>';
+        }).join('');
+
+        dotsEl.innerHTML = ccOffers.map(function(_, i) {
+            return '<div class="ccpayoff-dot" onclick="ccGoTo(' + i + ')" style="width:7px;height:7px;border-radius:50%;cursor:pointer;transition:all 0.3s;background:' + (i===0?'rgba(0,0,0,0.5)':'rgba(0,0,0,0.15)') + ';transform:' + (i===0?'scale(1.3)':'scale(1)') + ';"></div>';
+        }).join('');
+    }
+
+    window.ccGoTo = function(n) {
+        idx = (n + total) % total;
+        var track = document.getElementById('ccPayoffTrack');
+        if (track) track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        document.querySelectorAll('.ccpayoff-dot').forEach(function(d, i) {
+            d.style.background = i === idx ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.15)';
+            d.style.transform = i === idx ? 'scale(1.3)' : 'scale(1)';
+        });
+    };
+
+    function startTimer() { timer = setInterval(function() { ccGoTo(idx + 1); }, 6000); }
+    function stopTimer() { if (timer) clearInterval(timer); }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        buildSlides();
+        ccGoTo(0);
+        startTimer();
+
+        var prev = document.getElementById('ccPayoffPrev');
+        var next = document.getElementById('ccPayoffNext');
+        var wrap = document.querySelector('#ccPayoffTrack')?.parentElement;
+
+        if (prev) prev.onclick = function() { stopTimer(); ccGoTo(idx - 1); startTimer(); };
+        if (next) next.onclick = function() { stopTimer(); ccGoTo(idx + 1); startTimer(); };
+        if (wrap) { wrap.onmouseenter = stopTimer; wrap.onmouseleave = startTimer; }
+
+        var resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                var cur = idx;
+                buildSlides();
+                ccGoTo(cur);
+            }, 300);
+        });
+    });
+})();
 </script>
 
 </body>
