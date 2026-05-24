@@ -1231,109 +1231,13 @@
             ]
         };
 
-        var _offersCarouselIdx = 0;
-        var _offersCarouselTimer = null;
-        var _offersCarouselTotal = 0;
-
-        function _offersGoTo(n) {
-            _offersCarouselIdx = (n + _offersCarouselTotal) % _offersCarouselTotal;
-            var track = document.getElementById('offersCarouselTrack');
-            if (track) track.style.transform = 'translateX(-' + (_offersCarouselIdx * 100) + '%)';
-            document.querySelectorAll('.offers-dot').forEach(function(d, i) {
-                d.style.background = i === _offersCarouselIdx ? '#fff' : 'rgba(255,255,255,0.35)';
-                d.style.transform = i === _offersCarouselIdx ? 'scale(1.3)' : 'scale(1)';
-            });
-        }
-
-        function _offersStartTimer() {
-            _offersCarouselTimer = setInterval(function() { _offersGoTo(_offersCarouselIdx + 1); }, 6000);
-        }
-
-        function _offersIsMobile() { return window.innerWidth < 480; }
-
         function renderSponsoredOffers(loanType) {
             var section = document.getElementById('sponsoredOffers');
-            var track = document.getElementById('offersCarouselTrack');
-            var dotsEl = document.getElementById('offersDots');
             var offers = sponsoredOffers[loanType] || [];
-
             if (offers.length === 0) { section.classList.add('hidden'); return; }
-
-            _offersCarouselTotal = offers.length;
-            _offersCarouselIdx = 0;
-            if (_offersCarouselTimer) clearInterval(_offersCarouselTimer);
-
-            var gradients = {
-                'SBI':  { bg: 'linear-gradient(135deg,#1a3a8f 0%,#0f2060 100%)', tag: '#c8d8ff', btn: '#1a3a8f', card: 'linear-gradient(135deg,#2251c5,#0f2060)', network: 'VISA' },
-                'HDFC': { bg: 'linear-gradient(135deg,#8b1a1a 0%,#4a0909 100%)', tag: '#ffd0d0', btn: '#8b1a1a', card: 'linear-gradient(135deg,#b52020,#4a0909)', network: 'VISA' },
-                'AXS':  { bg: 'linear-gradient(135deg,#6b1f5e 0%,#3a0d33 100%)', tag: '#f0c8ec', btn: '#6b1f5e', card: 'linear-gradient(135deg,#922b80,#3a0d33)', network: 'RuPay' },
-                'IDFC': { bg: 'linear-gradient(135deg,#b85c00 0%,#6b3100 100%)', tag: '#ffe0bb', btn: '#b85c00', card: 'linear-gradient(135deg,#e07010,#6b3100)', network: 'VISA' }
-            };
-
-            var mob = _offersIsMobile();
-
-            track.innerHTML = offers.map(function(o) {
-                var g = gradients[o.initials] || gradients['HDFC'];
-                var cardArt = mob ? '' :
-                    '<div style="position:relative;z-index:2;flex-shrink:0;width:110px;height:70px;border-radius:10px;display:flex;flex-direction:column;justify-content:space-between;padding:9px;box-shadow:0 6px 20px rgba(0,0,0,0.25);background:' + g.card + ';">' +
-                      '<div style="display:flex;justify-content:space-between;align-items:flex-start;">' +
-                        '<div style="width:20px;height:14px;border-radius:3px;background:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.5);"></div>' +
-                        '<div style="font-size:9px;font-weight:700;color:white;opacity:0.9;">' + g.network + '</div>' +
-                      '</div>' +
-                      '<div>' +
-                        '<div style="font-size:7px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);">' + o.initials + '</div>' +
-                        '<div style="font-size:10px;font-weight:700;color:white;">' + o.name.replace(' Credit Card','').replace(' Rupay Card','') + '</div>' +
-                      '</div>' +
-                    '</div>';
-                return '<div style="min-width:100%;box-sizing:border-box;">' +
-                  '<div style="position:relative;overflow:hidden;border-radius:14px;padding:' + (mob ? '16px 36px' : '20px 48px') + ';display:flex;align-items:center;justify-content:space-between;gap:10px;background:' + g.bg + ';">' +
-                    '<div style="position:relative;z-index:2;flex:1;min-width:0;">' +
-                      '<div style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:20px;margin-bottom:6px;background:rgba(255,255,255,0.15);color:' + g.tag + ';">' + o.initials + '</div>' +
-                      '<div style="font-size:' + (mob ? '14px' : '17px') + ';font-weight:700;line-height:1.2;margin-bottom:4px;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + o.name + '</div>' +
-                      '<div style="font-size:11px;opacity:0.85;margin-bottom:12px;line-height:1.4;color:' + g.tag + ';">' + o.detail + (o.badge ? '<br>' + o.badge : '') + '</div>' +
-                      '<a href="' + o.href + '" rel="nofollow sponsored" target="_blank" onclick="if(typeof gtag===\'function\'){gtag(\'event\',\'affiliate_click\',{offer_name:\'' + o.name + '\',loan_type:\'' + loanType + '\',page_path:location.pathname})}" style="display:inline-block;padding:' + (mob ? '7px 14px' : '8px 18px') + ';border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;background:#ffffff;color:' + g.btn + ';">Apply Now →</a>' +
-                    '</div>' +
-                    cardArt +
-                  '</div>' +
-                '</div>';
-            }).join('');
-
-            dotsEl.innerHTML = offers.map(function(_, i) {
-                return '<div class="offers-dot" onclick="_offersGoTo(' + i + ');if(_offersCarouselTimer)clearInterval(_offersCarouselTimer);_offersStartTimer();" style="width:7px;height:7px;border-radius:50%;cursor:pointer;transition:all 0.3s;background:' + (i === 0 ? '#fff' : 'rgba(255,255,255,0.35)') + ';transform:' + (i === 0 ? 'scale(1.3)' : 'scale(1)') + ';"></div>';
-            }).join('');
-
-            var prev = document.getElementById('offersPrev');
-            var next = document.getElementById('offersNext');
-            if (prev) prev.onclick = function() { _offersGoTo(_offersCarouselIdx - 1); if(_offersCarouselTimer) clearInterval(_offersCarouselTimer); _offersStartTimer(); };
-            if (next) next.onclick = function() { _offersGoTo(_offersCarouselIdx + 1); if(_offersCarouselTimer) clearInterval(_offersCarouselTimer); _offersStartTimer(); };
-
-            var wrap = section.querySelector('div[style*="position:relative"]');
-            if (wrap) {
-                wrap.onmouseenter = function() { if(_offersCarouselTimer) clearInterval(_offersCarouselTimer); };
-                wrap.onmouseleave = function() { if(_offersCarouselTimer) clearInterval(_offersCarouselTimer); _offersStartTimer(); };
-            }
-
-            _offersLastLoanType = loanType;
-            _offersGoTo(0);
-            _offersStartTimer();
             section.classList.remove('hidden');
+            initOffersCarousel(offers, loanType);
         }
-
-        // Resize handler — registered once, outside renderSponsoredOffers
-        var _offersResizeTimer;
-        var _offersLastLoanType = null;
-        window.addEventListener('resize', function() {
-            clearTimeout(_offersResizeTimer);
-            _offersResizeTimer = setTimeout(function() {
-                if (_offersLastLoanType) {
-                    var currentIdx = _offersCarouselIdx;
-                    if (_offersCarouselTimer) clearInterval(_offersCarouselTimer);
-                    renderSponsoredOffers(_offersLastLoanType);
-                    _offersGoTo(currentIdx);
-                    _offersStartTimer();
-                }
-            }, 300);
-        });
 
         // Show offers when loanSummary becomes visible
         (function() {
@@ -1353,7 +1257,6 @@
                 const summary = document.getElementById('loanSummary');
                 if (summary) observer.observe(summary, { attributes: true });
 
-                // Also re-render when loan type changes
                 document.querySelectorAll('.loan-type-btn').forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         const section = document.getElementById('sponsoredOffers');
@@ -1365,5 +1268,105 @@
             });
         })();
     </script>
+
+<script>
+(function() {
+    var _offers = [];
+    var _loanType = 'credit_card';
+
+    var gradients = {
+        'SBI':  { bg: 'linear-gradient(135deg,#1a3a8f 0%,#0f2060 100%)', tag: '#c8d8ff', btn: '#1a3a8f', card: 'linear-gradient(135deg,#2251c5,#0f2060)', network: 'VISA' },
+        'HDFC': { bg: 'linear-gradient(135deg,#8b1a1a 0%,#4a0909 100%)', tag: '#ffd0d0', btn: '#8b1a1a', card: 'linear-gradient(135deg,#b52020,#4a0909)', network: 'VISA' },
+        'AXS':  { bg: 'linear-gradient(135deg,#6b1f5e 0%,#3a0d33 100%)', tag: '#f0c8ec', btn: '#6b1f5e', card: 'linear-gradient(135deg,#922b80,#3a0d33)', network: 'RuPay' },
+        'IDFC': { bg: 'linear-gradient(135deg,#b85c00 0%,#6b3100 100%)', tag: '#ffe0bb', btn: '#b85c00', card: 'linear-gradient(135deg,#e07010,#6b3100)', network: 'VISA' }
+    };
+
+    var idx = 0, timer = null;
+    var total = 0;
+
+    function isMob() { return window.innerWidth < 480; }
+
+    function buildSlides() {
+        var track = document.getElementById('offersCarouselTrack');
+        var dotsEl = document.getElementById('offersDots');
+        if (!track || !dotsEl) return;
+        var mob = isMob();
+
+        track.innerHTML = _offers.map(function(o) {
+            var g = gradients[o.initials];
+            var cardArt = mob ? '' :
+                '<div style="position:relative;z-index:2;flex-shrink:0;width:110px;height:70px;border-radius:10px;display:flex;flex-direction:column;justify-content:space-between;padding:9px;box-shadow:0 6px 20px rgba(0,0,0,0.25);background:' + g.card + ';">' +
+                  '<div style="display:flex;justify-content:space-between;align-items:flex-start;">' +
+                    '<div style="width:20px;height:14px;border-radius:3px;background:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.5);"></div>' +
+                    '<div style="font-size:9px;font-weight:700;color:white;opacity:0.9;">' + g.network + '</div>' +
+                  '</div>' +
+                  '<div>' +
+                    '<div style="font-size:7px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);">' + o.initials + '</div>' +
+                    '<div style="font-size:10px;font-weight:700;color:white;">' + o.name.replace(' Credit Card','').replace(' Rupay Card','') + '</div>' +
+                  '</div>' +
+                '</div>';
+            return '<div style="min-width:100%;box-sizing:border-box;">' +
+              '<div style="position:relative;overflow:hidden;border-radius:14px;padding:' + (mob?'16px 36px':'20px 48px') + ';display:flex;align-items:center;justify-content:space-between;gap:10px;background:' + g.bg + ';">' +
+                '<div style="position:relative;z-index:2;flex:1;min-width:0;">' +
+                  '<div style="display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:20px;margin-bottom:6px;background:rgba(255,255,255,0.15);color:' + g.tag + ';">' + o.initials + '</div>' +
+                  '<div style="font-size:' + (mob?'14px':'17px') + ';font-weight:700;line-height:1.2;margin-bottom:4px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + o.name + '</div>' +
+                  '<div style="font-size:11px;opacity:0.85;margin-bottom:12px;line-height:1.4;color:' + g.tag + ';">' + o.detail + '<br>' + o.badge + '</div>' +
+                  '<a href="' + o.href + '" rel="nofollow sponsored" target="_blank" onclick="if(typeof gtag===\'function\'){gtag(\'event\',\'affiliate_click\',{offer_name:\'' + o.name + '\',loan_type:\'' + _loanType + '\',page_path:location.pathname})}" style="display:inline-block;padding:' + (mob?'7px 14px':'8px 18px') + ';border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;background:#fff;color:' + g.btn + ';">Apply Now →</a>' +
+                '</div>' +
+                cardArt +
+              '</div>' +
+            '</div>';
+        }).join('');
+
+        dotsEl.innerHTML = _offers.map(function(_, i) {
+            return '<div class="offers-dot" onclick="offersGoTo(' + i + ')" style="width:7px;height:7px;border-radius:50%;cursor:pointer;transition:all 0.3s;background:' + (i===0?'rgba(0,0,0,0.5)':'rgba(0,0,0,0.15)') + ';transform:' + (i===0?'scale(1.3)':'scale(1)') + ';"></div>';
+        }).join('');
+    }
+
+    window.offersGoTo = function(n) {
+        idx = (n + total) % total;
+        var track = document.getElementById('offersCarouselTrack');
+        if (track) track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        document.querySelectorAll('.offers-dot').forEach(function(d, i) {
+            d.style.background = i === idx ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0.15)';
+            d.style.transform = i === idx ? 'scale(1.3)' : 'scale(1)';
+        });
+    };
+
+    function startTimer() { clearInterval(timer); timer = setInterval(function() { offersGoTo(idx + 1); }, 6000); }
+    function stopTimer()  { clearInterval(timer); timer = null; }
+
+    window.initOffersCarousel = function(offers, loanType) {
+        _offers = offers;
+        _loanType = loanType;
+        total = offers.length;
+        idx = 0;
+        stopTimer();
+        buildSlides();
+        offersGoTo(0);
+        startTimer();
+
+        var prev = document.getElementById('offersPrev');
+        var next = document.getElementById('offersNext');
+        var wrap = document.querySelector('#offersCarouselTrack') ? document.querySelector('#offersCarouselTrack').parentElement : null;
+
+        if (prev) prev.onclick = function() { stopTimer(); offersGoTo(idx - 1); startTimer(); };
+        if (next) next.onclick = function() { stopTimer(); offersGoTo(idx + 1); startTimer(); };
+        if (wrap) { wrap.onmouseenter = stopTimer; wrap.onmouseleave = startTimer; }
+
+        var resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                var cur = idx;
+                stopTimer();
+                buildSlides();
+                offersGoTo(cur);
+                startTimer();
+            }, 300);
+        });
+    };
+})();
+</script>
 </body>
 </html>

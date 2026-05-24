@@ -1132,8 +1132,8 @@
         });
     };
 
-    function startTimer() { timer = setInterval(function() { ccGoTo(idx + 1); }, 6000); }
-    function stopTimer() { if (timer) clearInterval(timer); }
+    function startTimer() { clearInterval(timer); timer = setInterval(function() { ccGoTo(idx + 1); }, 6000); }
+    function stopTimer()  { clearInterval(timer); timer = null; }
 
     document.addEventListener('DOMContentLoaded', function() {
         buildSlides();
@@ -1153,8 +1153,10 @@
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(function() {
                 var cur = idx;
+                stopTimer();
                 buildSlides();
                 ccGoTo(cur);
+                startTimer();
             }, 300);
         });
     });
