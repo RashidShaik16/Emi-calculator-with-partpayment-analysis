@@ -1,30 +1,17 @@
 /* ============================================
    KnowYourEMI — Comments System
    /comments/comments.js
-
-   Add to any page:
-     <div id="knowyouremi-comments"></div>
-     <script type="module" src="/comments/comments.js"></script>
 ============================================ */
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  updateDoc,
-  arrayUnion,
-  increment,
-  query,
-  orderBy,
-  limit,
-  startAfter,
-  getCountFromServer,
-  serverTimestamp,
-  getDoc
+  getFirestore, collection, addDoc, getDocs, doc, updateDoc,
+  arrayUnion, increment, query, orderBy, limit, startAfter,
+  getCountFromServer, serverTimestamp, getDoc
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+import {
+  getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
 // ── Firebase Config ──────────────────────────────────────────────
 const firebaseConfig = {
@@ -36,17 +23,19 @@ const firebaseConfig = {
   appId: "1:248147543329:web:be05e925f23373587d6a60"
 };
 
-const app = initializeApp(firebaseConfig);
-const db  = getFirestore(app);
+const app  = initializeApp(firebaseConfig);
+const db   = getFirestore(app);
+const auth = getAuth(app);
+
+// ── Owner UID — set this after first Google sign-in ─────────────
+// Steps: sign in via Google button → open browser console → type: firebase.auth().currentUser.uid
+// Paste that value here:
+const OWNER_UID = "REPLACE_WITH_YOUR_UID";
 
 // ── GA4 event helper ─────────────────────────────────────────────
 function trackEvent(eventName, params = {}) {
   if (typeof gtag === "function") {
-    gtag("event", eventName, {
-      event_category: "comments",
-      page_path: location.pathname,
-      ...params
-    });
+    gtag("event", eventName, { event_category: "comments", page_path: location.pathname, ...params });
   }
 }
 
@@ -54,15 +43,17 @@ function trackEvent(eventName, params = {}) {
 const PAGE_SIZE       = 20;
 const REPLIES_PREVIEW = 3;
 
-// ── Page key — flattened to a single string so Firestore path is always
-// pages/{pageKey}/comments/{commentId} — 3 segments (odd), never 4
+// ── Auth state ───────────────────────────────────────────────────
+let currentUser = null;
+
+// ── Page key ────────────────────────────────────────────────────
 function getPageKey() {
   const host = location.hostname || "knowyouremi.in";
   const path = location.pathname.replace(/\/+$/, "").replace(/\.html$/, "") || "/";
   return (host + path).replace(/\//g, "__");
 }
 
-// ── Device ID for like deduplication ────────────────────────────
+// ── Device ID ───────────────────────────────────────────────────
 function getDeviceId() {
   let id = localStorage.getItem("kye_device_id");
   if (!id) {
@@ -134,6 +125,68 @@ function updateCountLabel() {
   if (el) el.innerHTML = `<strong>${totalCount}</strong> ${totalCount === 1 ? "comment" : "comments"}`;
 }
 
+// ── Avatar HTML — photo or initials ─────────────────────────────
+function avatarHTML(name, photoURL, size = "main") {
+  const cls = size === "reply" ? "kye-avatar kye-reply-avatar" : "kye-avatar";
+  if (photoURL) {
+    return `<img src="${sanitize(photoURL)}" class="${cls} kye-avatar-photo" alt="${sanitize(name)}" referrerpolicy="no-referrer" />`;
+  }
+  return `<div class="${cls} kye-avatar-${avatarColor(name)}">${initials(name)}</div>`;
+}
+
+// ── Owner badge ──────────────────────────────────────────────────
+function ownerBadge(uid) {
+  if (!uid || uid !== OWNER_UID) return "";
+  return `<span class="kye-owner-badge">Author</span>`;
+}
+
+// ── Auth UI ──────────────────────────────────────────────────────
+function updateAuthUI() {
+  const signInBtn  = document.getElementById("kye-signin-btn");
+  const signOutBtn = document.getElementById("kye-signout-btn");
+  const userInfo   = document.getElementById("kye-user-info");
+  const nameInput  = document.getElementById("kye-name");
+  const nameWrap   = document.getElementById("kye-name-wrap");
+
+  if (!signInBtn) return;
+
+  if (currentUser) {
+    signInBtn.style.display  = "none";
+    signOutBtn.style.display = "inline-flex";
+    if (userInfo) {
+      userInfo.style.display = "flex";
+      userInfo.innerHTML = `
+        ${avatarHTML(currentUser.displayName, currentUser.photoURL)}
+        <div class="kye-user-meta">
+          <span class="kye-user-name">${sanitize(currentUser.displayName)}</span>
+          <span class="kye-user-label">Commenting as this account</span>
+        </div>`;
+    }
+    if (nameWrap) nameWrap.style.display = "none";
+  } else {
+    signInBtn.style.display  = "inline-flex";
+    signOutBtn.style.display = "none";
+    if (userInfo) userInfo.style.display = "none";
+    if (nameWrap) nameWrap.style.display = "block";
+  }
+}
+
+async function handleSignIn() {
+  try {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(auth, provider);
+  } catch (err) {
+    if (err.code !== "auth/popup-closed-by-user") {
+      showToast("Sign-in failed. Please try again.");
+    }
+  }
+}
+
+async function handleSignOut() {
+  await signOut(auth);
+  showToast("Signed out.");
+}
+
 // ── Query builder ────────────────────────────────────────────────
 function buildQuery(afterDoc = null) {
   const col   = commentsCol();
@@ -187,6 +240,22 @@ async function loadComments(append = false) {
   }
 }
 
+// ── Build reply HTML ─────────────────────────────────────────────
+function buildReplyHTML(r, i) {
+  return `
+    <div class="kye-reply-item" data-reply-index="${i}">
+      ${avatarHTML(r.name, r.photoURL || null, "reply")}
+      <div class="kye-reply-content">
+        <div class="kye-reply-header">
+          <span class="kye-reply-name">${sanitize(r.name)}</span>
+          ${ownerBadge(r.uid)}
+          <span class="kye-reply-time">${timeAgo(r.timestamp)}</span>
+        </div>
+        <div class="kye-reply-body">${renderBody(r.message)}</div>
+      </div>
+    </div>`;
+}
+
 // ── Build comment card ───────────────────────────────────────────
 function buildCommentCard(id, data) {
   const card     = document.createElement("div");
@@ -200,9 +269,10 @@ function buildCommentCard(id, data) {
 
   card.innerHTML = `
     <div class="kye-comment-header">
-      <div class="kye-avatar kye-avatar-${avatarColor(data.name)}">${initials(data.name)}</div>
-      <div>
+      ${avatarHTML(data.name, data.photoURL || null)}
+      <div class="kye-comment-name-wrap">
         <span class="kye-comment-name">${sanitize(data.name)}</span>
+        ${ownerBadge(data.uid)}
         <span class="kye-comment-time">&nbsp;&middot;&nbsp;${timeAgo(data.timestamp)}</span>
       </div>
     </div>
@@ -225,65 +295,47 @@ function buildCommentCard(id, data) {
 
   card.querySelector(".kye-like-btn").addEventListener("click", () => handleLike(id, card));
   card.querySelector(".kye-reply-btn").addEventListener("click", () => openReplyForm(id, data.name, ""));
-  card.querySelector(".kye-show-replies-btn")?.addEventListener("click", e => expandReplies(id, e.target));
+  attachShowAllReplies(card, id, replies);
   attachReplyOnReplyHandlers(card, id);
 
   return card;
 }
 
-// ── Build reply HTML ─────────────────────────────────────────────
-function buildReplyHTML(reply, index) {
-  return `
-    <div class="kye-reply-item" data-reply-index="${index}">
-      <div class="kye-avatar kye-reply-avatar kye-avatar-${avatarColor(reply.name)}">${initials(reply.name)}</div>
-      <div class="kye-reply-content">
-        <div class="kye-reply-header">
-          <span class="kye-reply-name">${sanitize(reply.name)}</span>
-          <span class="kye-reply-time">&middot; ${timeAgo(reply.timestamp)}</span>
-        </div>
-        <div class="kye-reply-body">${renderBody(reply.message)}</div>
-        <button class="kye-reply-btn" style="margin-top:0.3rem;font-size:0.75rem"
-                data-reply-to="${sanitize(reply.name)}">Reply</button>
-      </div>
-    </div>`;
-}
-
-function attachReplyOnReplyHandlers(card, parentId) {
-  card.querySelectorAll("[data-reply-to]").forEach(btn => {
-    btn.addEventListener("click", () => openReplyForm(parentId, null, `@${btn.dataset.replyTo} `));
+// ── Show all replies ─────────────────────────────────────────────
+function attachShowAllReplies(card, id, replies) {
+  const btn = card.querySelector(".kye-show-replies-btn");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    const list = card.querySelector(".kye-replies-list");
+    if (!list) return;
+    list.innerHTML = replies.map((r, i) => buildReplyHTML(r, i)).join("");
+    btn.remove();
+    attachReplyOnReplyHandlers(card, id);
   });
 }
 
-// ── Expand all replies ───────────────────────────────────────────
-async function expandReplies(commentId, btn) {
-  btn.textContent = "Loading...";
-  btn.disabled = true;
-  try {
-    const snap    = await getDoc(doc(db, "pages", getPageKey(), "comments", commentId));
-    const replies = snap.exists() ? (snap.data().replies || []) : [];
-    const card    = document.querySelector(`[data-id="${commentId}"]`);
-    const list    = card?.querySelector(".kye-replies-list");
-    if (list) {
-      list.innerHTML = replies.map((r, i) => buildReplyHTML(r, i)).join("");
-      attachReplyOnReplyHandlers(card, commentId);
-    }
-    btn.remove();
-  } catch (err) {
-    console.error("KYE Comments: expand replies error", err);
-    btn.textContent = `Show all ${btn.dataset.total} replies`;
-    btn.disabled = false;
-  }
+function attachReplyOnReplyHandlers(card, commentId) {
+  card.querySelectorAll(".kye-reply-item").forEach((item, idx) => {
+    const existing = item.querySelector(".kye-reply-on-reply-btn");
+    if (existing) return;
+    const btn = document.createElement("button");
+    btn.className = "kye-reply-btn";
+    btn.textContent = "Reply";
+    btn.style.marginTop = "0.2rem";
+    const replyName = item.querySelector(".kye-reply-name")?.textContent || "";
+    btn.addEventListener("click", () => openReplyForm(commentId, replyName, `@${replyName} `));
+    item.querySelector(".kye-reply-content").appendChild(btn);
+  });
 }
 
 // ── Like ─────────────────────────────────────────────────────────
 async function handleLike(commentId, card) {
   const btn     = card.querySelector(".kye-like-btn");
   const countEl = card.querySelector(".kye-like-count");
-  btn.disabled  = true;
+  btn.disabled = true;
   try {
     await updateDoc(doc(db, "pages", getPageKey(), "comments", commentId), {
-      likes:   increment(1),
-      likedBy: arrayUnion(deviceId)
+      likes: increment(1), likedBy: arrayUnion(deviceId)
     });
     countEl.textContent = parseInt(countEl.textContent || "0") + 1;
     btn.classList.add("liked");
@@ -307,11 +359,12 @@ function openReplyForm(commentId, parentName, prefill) {
     wrap.style.display = "none"; wrap.innerHTML = ""; return;
   }
 
+  const isSignedIn = !!currentUser;
   wrap.style.display = "block";
   wrap.innerHTML = `
     <div class="kye-reply-form">
       <div class="kye-reply-form-header">Reply${parentName ? ` to ${sanitize(parentName)}` : ""}</div>
-      <input class="kye-input" id="rname-${commentId}" type="text" placeholder="Your name *" maxlength="60" />
+      ${!isSignedIn ? `<input class="kye-input" id="rname-${commentId}" type="text" placeholder="Your name *" maxlength="60" />` : ""}
       <textarea class="kye-input kye-textarea" id="rmsg-${commentId}"
                 placeholder="Write your reply..." maxlength="1000"
                 style="margin-top:0.5rem">${prefill || ""}</textarea>
@@ -325,26 +378,43 @@ function openReplyForm(commentId, parentName, prefill) {
     wrap.style.display = "none"; wrap.innerHTML = "";
   });
   document.getElementById(`rsubmit-${commentId}`).addEventListener("click", () => submitReply(commentId));
-  setTimeout(() => document.getElementById(`rname-${commentId}`)?.focus(), 50);
+  setTimeout(() => {
+    const focus = isSignedIn ? document.getElementById(`rmsg-${commentId}`) : document.getElementById(`rname-${commentId}`);
+    focus?.focus();
+  }, 50);
 }
 
 // ── Submit reply ─────────────────────────────────────────────────
 async function submitReply(commentId) {
-  const nameEl = document.getElementById(`rname-${commentId}`);
   const msgEl  = document.getElementById(`rmsg-${commentId}`);
   const btn    = document.getElementById(`rsubmit-${commentId}`);
 
-  const name = nameEl?.value.trim();
-  const msg  = msgEl?.value.trim();
+  let name, photoURL = null, uid = null;
 
-  if (!name) { nameEl.focus(); showToast("Please enter your name."); return; }
-  if (!msg)  { msgEl.focus();  showToast("Reply cannot be empty."); return; }
+  if (currentUser) {
+    name     = currentUser.displayName;
+    photoURL = currentUser.photoURL;
+    uid      = currentUser.uid;
+  } else {
+    const nameEl = document.getElementById(`rname-${commentId}`);
+    name = nameEl?.value.trim();
+    if (!name) { nameEl.focus(); showToast("Please enter your name."); return; }
+  }
+
+  const msg = msgEl?.value.trim();
+  if (!msg) { msgEl.focus(); showToast("Reply cannot be empty."); return; }
 
   btn.disabled = true;
   btn.textContent = "Posting...";
 
-  // ISO string timestamp — serverTimestamp() not supported inside arrayUnion
-  const replyData = { name, message: msg, timestamp: new Date().toISOString(), likes: 0 };
+  const replyData = {
+    name,
+    message:   msg,
+    timestamp: new Date().toISOString(),
+    likes:     0,
+    ...(photoURL && { photoURL }),
+    ...(uid      && { uid })
+  };
 
   try {
     await updateDoc(doc(db, "pages", getPageKey(), "comments", commentId), {
@@ -382,15 +452,23 @@ async function submitReply(commentId) {
 
 // ── Submit top-level comment ─────────────────────────────────────
 async function submitComment() {
-  const nameEl = document.getElementById("kye-name");
-  const msgEl  = document.getElementById("kye-message");
-  const btn    = document.getElementById("kye-submit");
+  const msgEl = document.getElementById("kye-message");
+  const btn   = document.getElementById("kye-submit");
 
-  const name = nameEl?.value.trim();
-  const msg  = msgEl?.value.trim();
+  let name, photoURL = null, uid = null;
 
-  if (!name) { nameEl.focus(); showToast("Please enter your name."); return; }
-  if (!msg)  { msgEl.focus();  showToast("Please write a comment."); return; }
+  if (currentUser) {
+    name     = currentUser.displayName;
+    photoURL = currentUser.photoURL;
+    uid      = currentUser.uid;
+  } else {
+    const nameEl = document.getElementById("kye-name");
+    name = nameEl?.value.trim();
+    if (!name) { nameEl.focus(); showToast("Please enter your name."); return; }
+  }
+
+  const msg = msgEl?.value.trim();
+  if (!msg)           { msgEl.focus(); showToast("Please write a comment."); return; }
   if (msg.length < 3) { msgEl.focus(); showToast("Comment is too short."); return; }
 
   btn.disabled = true;
@@ -404,14 +482,17 @@ async function submitComment() {
       likes:     0,
       likedBy:   [],
       replies:   [],
-      page:      getPageKey()
+      page:      getPageKey(),
+      ...(photoURL && { photoURL }),
+      ...(uid      && { uid })
     });
 
     showToast("Comment posted! Thanks for joining the discussion.");
     trackEvent("comment_posted", { comment_length: msg.length });
 
-    nameEl.value = "";
-    msgEl.value  = "";
+    msgEl.value = "";
+    const nameEl = document.getElementById("kye-name");
+    if (nameEl) nameEl.value = "";
     btn.disabled = false;
     btn.textContent = "Post Comment";
 
@@ -425,7 +506,9 @@ async function submitComment() {
     const fakeData = {
       name, message: msg,
       timestamp: { toMillis: () => Date.now(), toDate: () => new Date() },
-      likes: 0, likedBy: [], replies: []
+      likes: 0, likedBy: [], replies: [],
+      ...(photoURL && { photoURL }),
+      ...(uid      && { uid })
     };
     list.prepend(buildCommentCard(docRef.id, fakeData));
 
@@ -455,8 +538,20 @@ function render() {
     </div>
 
     <div class="kye-form-card">
-      <h3>Leave a comment</h3>
-      <input class="kye-input" id="kye-name" type="text" placeholder="Your name *" maxlength="60" style="margin-bottom:0.75rem" />
+      <div class="kye-auth-bar">
+        <button id="kye-signin-btn" class="kye-signin-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" style="flex-shrink:0"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Sign in with Google
+        </button>
+        <div id="kye-user-info" class="kye-user-info" style="display:none"></div>
+        <button id="kye-signout-btn" class="kye-signout-btn" style="display:none">Sign out</button>
+      </div>
+
+      <div id="kye-name-wrap">
+        <input class="kye-input" id="kye-name" type="text" placeholder="Your name *" maxlength="60" style="margin-bottom:0.75rem" />
+      </div>
+
+      <h3 style="font-size:0.85rem;font-weight:600;color:#111827;margin-bottom:0.5rem;">Leave a comment</h3>
       <textarea class="kye-input kye-textarea" id="kye-message"
                 placeholder="Your comment..." maxlength="2000"></textarea>
       <button class="kye-submit-btn" id="kye-submit" style="margin-top:0.75rem">Post Comment</button>
@@ -480,6 +575,8 @@ function render() {
     </div>
   `;
 
+  document.getElementById("kye-signin-btn").addEventListener("click", handleSignIn);
+  document.getElementById("kye-signout-btn").addEventListener("click", handleSignOut);
   document.getElementById("kye-submit").addEventListener("click", submitComment);
   document.getElementById("kye-message").addEventListener("keydown", e => {
     if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) submitComment();
@@ -496,6 +593,12 @@ function render() {
   });
 
   document.getElementById("kye-load-more").addEventListener("click", () => loadComments(true));
+
+  // Auth state listener
+  onAuthStateChanged(auth, user => {
+    currentUser = user;
+    updateAuthUI();
+  });
 
   loadComments(false);
 }
