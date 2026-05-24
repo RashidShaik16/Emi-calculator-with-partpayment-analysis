@@ -5,8 +5,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const feedbackBtn = document.getElementById("toastFeedbackBtn");
 
 
+  // --- Function to check if user is near comments section ---
+  const isNearComments = () => {
+    const anchor = document.getElementById("comments-anchor") || document.getElementById("knowyouremi-comments");
+    if (!anchor) return false;
+    const rect = anchor.getBoundingClientRect();
+    return rect.top < window.innerHeight + 200;
+  };
+
   // --- Function to show toast ---
   const showToast = () => {
+    if (isNearComments()) return;
     toast.classList.remove("hidden", "hide");
     toast.classList.add("show");
     
