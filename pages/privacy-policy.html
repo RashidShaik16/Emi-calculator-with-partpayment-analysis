@@ -108,7 +108,7 @@
 
     <!-- Summary box -->
     <div class="highlight-box mb-10">
-      Short version: Calculator inputs stay on your device and are never sent to our servers. If you leave a comment, your name and message are stored publicly via Firebase. Some pages include affiliate links (clearly labeled as Sponsored) where we may earn a commission if you apply.
+      Short version: Calculator inputs stay on your device and are never sent to our servers. If you leave a comment, your name and message are stored publicly via Firebase. You may optionally sign in with Google to comment. If you do, your display name and profile photo are stored but your email is never shown publicly. Some pages include affiliate links (clearly labeled as Sponsored) where we may earn a commission if you apply.
     </div>
 
     <div class="space-y-8">
@@ -136,9 +136,11 @@
 
 
       <div class="policy-section">
-        <h2>5. Comments Section</h2>
-        <p>Our website includes a public comments section powered by Google Firebase Firestore. If you leave a comment, the name you provide and your comment text are stored in Firebase and visible to all visitors of that page. We do not require an email address to comment.</p>
-        <p class="mt-3">Comments are public by nature. Do not include sensitive personal or financial information in your comments. If you wish to have your comment removed, email us at <a href="mailto:hello@knowyouremi.in" class="text-blue-600 hover:underline">hello@knowyouremi.in</a> and we will delete it promptly.</p>
+        <h2>5. Comments and Google Sign-In</h2>
+        <p>Our website includes a public comments section powered by Google Firebase Firestore. If you leave a comment, the name you provide and your comment text are stored in Firebase and visible to all visitors of that page.</p>
+        <p class="mt-3">You may optionally sign in with your Google account to comment. If you do, we store your Google display name, profile photo URL, and a unique Firebase user ID (not your email address) alongside your comment. Your email address is accessible to us via Firebase Authentication but is never displayed publicly or shared with third parties.</p>
+        <p class="mt-3">Signing in with Google is entirely optional. You can comment anonymously using just your name at any time.</p>
+        <p class="mt-3">Comments are public by nature. Do not include sensitive personal or financial information in your comments. If you wish to have your comment or account data removed, email us at <a href="mailto:hello@knowyouremi.in" class="text-blue-600 hover:underline">hello@knowyouremi.in</a> and we will delete it promptly.</p>
         <p class="mt-3">To prevent duplicate likes on comments, we store an anonymous device identifier in your browser's localStorage. This identifier does not contain any personal information and is never transmitted to our servers.</p>
       </div>
 
