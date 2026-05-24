@@ -30,7 +30,7 @@ const auth = getAuth(app);
 // ── Owner UID — set this after first Google sign-in ─────────────
 // Steps: sign in via Google button → open browser console → type: firebase.auth().currentUser.uid
 // Paste that value here:
-const OWNER_UID = "REPLACE_WITH_YOUR_UID";
+const OWNER_UID = "mLoa5SeCd5SQ8rx52QNzaldkdYD2";
 
 // ── GA4 event helper ─────────────────────────────────────────────
 function trackEvent(eventName, params = {}) {
