@@ -87,13 +87,21 @@ function avatarColor(name) {
 
 function timeAgo(ts) {
   if (!ts) return "";
-  const ms   = ts.toMillis ? ts.toMillis() : Number(ts);
+  let ms;
+  if (ts.toMillis) {
+    ms = ts.toMillis();
+  } else if (typeof ts === "string") {
+    ms = new Date(ts).getTime();
+  } else {
+    ms = Number(ts);
+  }
+  if (isNaN(ms)) return "";
   const secs = Math.floor((Date.now() - ms) / 1000);
   if (secs < 60)      return "just now";
   if (secs < 3600)    return `${Math.floor(secs / 60)}m ago`;
   if (secs < 86400)   return `${Math.floor(secs / 3600)}h ago`;
   if (secs < 2592000) return `${Math.floor(secs / 86400)}d ago`;
-  const d = ts.toDate ? ts.toDate() : new Date(ms);
+  const d = new Date(ms);
   return d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 }
 
