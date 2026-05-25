@@ -291,7 +291,7 @@ function buildCommentCard(id, data) {
         <span class="kye-like-count">${data.likes || 0}</span>
       </button>
       <button class="kye-reply-btn">Reply</button>
-      ${currentUser?.uid === OWNER_UID ? `<button class="kye-delete-btn" title="Delete comment">🗑️</button>` : ""}
+      <button class="kye-delete-btn" title="Delete comment" style="display:${currentUser?.uid === OWNER_UID ? 'inline-block' : 'none'}">🗑️</button>
     </div>
     <div class="kye-replies-wrap" id="replies-${id}" ${replies.length === 0 ? 'style="display:none"' : ""}>
       <div class="kye-replies-list">
@@ -304,9 +304,7 @@ function buildCommentCard(id, data) {
 
   card.querySelector(".kye-like-btn").addEventListener("click", () => handleLike(id, card));
   card.querySelector(".kye-reply-btn").addEventListener("click", () => openReplyForm(id, data.name, ""));
-  if (currentUser?.uid === OWNER_UID) {
-    card.querySelector(".kye-delete-btn").addEventListener("click", () => deleteComment(id, card));
-  }
+  card.querySelector(".kye-delete-btn").addEventListener("click", () => deleteComment(id, card));
   attachShowAllReplies(card, id, replies);
   attachReplyOnReplyHandlers(card, id);
 
@@ -626,6 +624,10 @@ function render() {
   onAuthStateChanged(auth, user => {
     currentUser = user;
     updateAuthUI();
+    const isOwner = user?.uid === OWNER_UID;
+    document.querySelectorAll(".kye-delete-btn").forEach(btn => {
+      btn.style.display = isOwner ? "inline-block" : "none";
+    });
   });
 
   loadComments(false);
