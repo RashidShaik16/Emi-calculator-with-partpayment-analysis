@@ -5,7 +5,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 import {
-  getFirestore, collection, addDoc, getDocs, doc, updateDoc,
+  getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc,
   arrayUnion, increment, query, orderBy, limit, startAfter,
   getCountFromServer, serverTimestamp, getDoc
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
@@ -291,6 +291,7 @@ function buildCommentCard(id, data) {
         <span class="kye-like-count">${data.likes || 0}</span>
       </button>
       <button class="kye-reply-btn">Reply</button>
+      ${currentUser?.uid === OWNER_UID ? `<button class="kye-delete-btn" title="Delete comment">🗑️</button>` : ""}
     </div>
     <div class="kye-replies-wrap" id="replies-${id}" ${replies.length === 0 ? 'style="display:none"' : ""}>
       <div class="kye-replies-list">
@@ -303,10 +304,29 @@ function buildCommentCard(id, data) {
 
   card.querySelector(".kye-like-btn").addEventListener("click", () => handleLike(id, card));
   card.querySelector(".kye-reply-btn").addEventListener("click", () => openReplyForm(id, data.name, ""));
+  if (currentUser?.uid === OWNER_UID) {
+    card.querySelector(".kye-delete-btn").addEventListener("click", () => deleteComment(id, card));
+  }
   attachShowAllReplies(card, id, replies);
   attachReplyOnReplyHandlers(card, id);
 
   return card;
+}
+
+// ── Delete comment ───────────────────────────────────────────────
+async function deleteComment(commentId, card) {
+  if (!confirm("Delete this comment? This cannot be undone.")) return;
+  try {
+    await deleteDoc(doc(db, "pages", getPageKey(), "comments", commentId));
+    card.remove();
+    totalCount = Math.max(0, totalCount - 1);
+    loadedCount = Math.max(0, loadedCount - 1);
+    updateCountLabel();
+    showToast("Comment deleted.");
+  } catch (err) {
+    console.error("KYE Comments: delete error", err);
+    showToast("Could not delete. Please try again.");
+  }
 }
 
 // ── Show all replies ─────────────────────────────────────────────

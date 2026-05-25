@@ -548,3 +548,18 @@
   flex-wrap: wrap;
   gap: 0;
 }
+
+/* ── Admin delete button ── */
+.kye-delete-btn {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: auto;
+  transition: color 0.15s;
+  line-height: 1;
+}
+
+.kye-delete-btn:hover { color: #dc2626; }
