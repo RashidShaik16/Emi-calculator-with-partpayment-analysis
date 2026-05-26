@@ -32,8 +32,57 @@
     "publisher": { "@type": "Organization", "name": "KnowYourEMI", "url": "https://knowyouremi.in" },
     "image": "https://www.knowyouremi.in/og-image.jpg",
     "datePublished": "2026-05-01T00:00:00+05:30",
-    "dateModified": "2026-05-10T00:00:00+05:30",
+    "dateModified": "2026-05-25T00:00:00+05:30",
     "url": "https://knowyouremi.in/blogs/basics/why-credit-score-matters.html"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a good credit score in India?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A credit score of 750 and above is considered good by most lenders in India. Scores between 700 and 749 are acceptable but may get slightly higher rates. Scores below 650 are considered poor and may lead to rejection. CIBIL scores range from 300 to 900."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to improve a credit score?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "With consistent good behaviour - paying all bills on time, keeping utilization below 30 percent, avoiding unnecessary applications - you can see meaningful improvement in 6 to 12 months. Recovering from a serious default takes 2 to 3 years."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does checking my own credit score reduce it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Checking your own score is a soft inquiry and does not affect your score. Only hard inquiries from lenders when you apply for a loan or credit card can temporarily reduce your score by a few points."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does closing an old credit card affect my score?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Closing an old card reduces your total available credit, increasing your utilization ratio. It can also shorten your average credit history. It is generally better to keep old cards open with zero balance than to close them, unless there is an annual fee not worth paying."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does my credit score affect my home loan interest rate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most banks use risk-based pricing, meaning higher scores get lower rates. The difference can be 0.25 to 1 percent per year. On a Rs. 50 lakh home loan over 20 years, even a 0.5 percent difference translates to over Rs. 3 to 4 lakh in total interest savings."
+        }
+      }
+    ]
   }
   </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -194,6 +243,18 @@
       transition: width 0.1s linear;
       box-shadow: 0 0 8px rgba(37, 99, 235, 0.6);
     }
+
+    /* FAQ Accordion */
+    .faq-list { margin-top: 1.5rem; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+    .faq-item { border-bottom: 1px solid #f1f5f9; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: #f9fafb; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #111827; text-align: left; transition: background 0.15s; }
+    .faq-question:hover { background: #f3f4f6; }
+    .faq-icon { font-size: 1.2rem; color: #1e3a8a; flex-shrink: 0; transition: transform 0.2s; font-weight: 400; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-answer p { padding: 0 1.25rem 1rem; font-size: 0.92rem; color: #374151; line-height: 1.75; margin-bottom: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item.open .faq-answer { max-height: 400px; }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -425,6 +486,62 @@
         Building the habit early makes everything easier later, whether you want a home loan, a car loan, or just a better interest rate when you actually need money.
       </p>
 
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What is a good credit score in India?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>A credit score of 750 and above is considered good by most lenders in India. Scores between 700 and 749 are acceptable and will get you loan approvals but possibly at a slightly higher rate. Scores below 650 are considered poor and may lead to rejection or very high interest rates. CIBIL scores range from 300 to 900, and most banks prefer applicants with scores above 750 for the best terms.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How long does it take to improve a credit score?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>There is no shortcut. Credit scores reflect your behaviour over time. If you start paying all bills on time, keeping utilization below 30 percent, and avoiding new credit applications unnecessarily, you can typically see meaningful improvement in 6 to 12 months. Recovering from a serious default or settlement takes longer, sometimes 2 to 3 years of consistent good behaviour before lenders treat you normally again.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Does checking my own credit score reduce it?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Checking your own credit score is called a soft inquiry and does not affect your score at all. Only hard inquiries, which happen when a lender checks your score as part of a loan or credit card application, can temporarily reduce your score by a few points. You can check your own score as many times as you want without any impact.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How does closing an old credit card affect my score?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Closing an old credit card reduces your total available credit limit, which increases your credit utilization ratio even if your outstanding balance stays the same. It can also shorten your average credit history if it was one of your older accounts. In general, it is better to keep old cards open with zero balance than to close them, unless there is an annual fee that is not worth paying.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How does my credit score affect my home loan interest rate?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Most banks now use risk-based pricing, which means borrowers with higher credit scores get lower interest rates. The difference can be 0.25 to 1 percent per year depending on the bank and loan size. On a Rs. 50 lakh home loan over 20 years, even a 0.5 percent difference in interest rate translates to over Rs. 3 to 4 lakh in total interest savings. Use the loan eligibility calculator to see how different scenarios compare.</p>
+          </div>
+        </div>
+
+      </div>
+
     </section>
 
     <!-- CTA -->
@@ -500,6 +617,13 @@
     });
 
     // GA4: article_read fires when user scrolls past 80%
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
     let articleReadFired = false;
     window.addEventListener('scroll', () => {
       if (articleReadFired) return;

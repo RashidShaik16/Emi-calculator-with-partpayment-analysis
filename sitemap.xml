@@ -4,7 +4,7 @@
   <!-- Main Site -->
   <url>
     <loc>https://knowyouremi.in/</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -44,7 +44,7 @@
   </url>
   <url>
     <loc>https://knowyouremi.in/pages/privacy-policy.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -66,13 +66,13 @@
   <!-- Blog: Basics -->
   <url>
     <loc>https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/basics/why-credit-score-matters.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -80,7 +80,7 @@
   <!-- Blog: Interest Rates -->
   <url>
     <loc>https://knowyouremi.in/blogs/interest-rates/flat-vs-reducing-rate.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -88,13 +88,13 @@
   <!-- Blog: Strategy -->
   <url>
     <loc>https://knowyouremi.in/blogs/strategy/benefits-of-part-payment.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/strategy/when-to-make-part-payment.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -102,19 +102,19 @@
   <!-- Blog: Credit Cards -->
   <url>
     <loc>https://knowyouremi.in/blogs/credit-cards/how-credit-cards-work.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/credit-cards/credit-card-debt-trap.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/credit-cards/minimum-due-trap.html</loc>
-    <lastmod>2026-05-19</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -122,7 +122,7 @@
   <!-- Blog: Home Loan -->
   <url>
     <loc>https://knowyouremi.in/blogs/home-loans/floating-rate-home-loans.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

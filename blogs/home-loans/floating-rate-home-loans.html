@@ -32,8 +32,57 @@
     "publisher": { "@type": "Organization", "name": "KnowYourEMI", "url": "https://knowyouremi.in" },
     "image": "https://www.knowyouremi.in/og-image.jpg",
     "datePublished": "2026-05-01T00:00:00+05:30",
-    "dateModified": "2026-05-10T00:00:00+05:30",
+    "dateModified": "2026-05-25T00:00:00+05:30",
     "url": "https://knowyouremi.in/blogs/home-loans/floating-rate-home-loans.html"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a floating interest rate on a home loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A floating rate home loan has an interest rate that changes based on the RBI repo rate. When the repo rate goes up, your home loan rate increases. When it comes down, your rate decreases. Your EMI or tenure can change during the loan period."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens to my EMI when the interest rate increases?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most banks keep your EMI fixed and increase your loan tenure instead. Some banks increase the EMI directly. If your tenure has been extended significantly, making a part payment is the most effective way to bring it back under control."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a floating rate better than a fixed rate for a home loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Historically in India, floating rates have been lower than fixed rates over long tenures. Over a 20-year home loan, rates go through multiple cycles. Floating rate borrowers benefit when rates fall. For most long-term borrowers, floating rate works out cheaper."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often does the floating rate change?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The RBI Monetary Policy Committee meets roughly every two months. Banks pass on rate changes to repo-linked loans within a reset period, typically quarterly. Your rate can change up to 4 to 6 times a year in theory."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I switch from floating to fixed rate mid-loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, most banks allow switching with a conversion fee of 0.5 to 2 percent of the outstanding principal. Since fixed rates are always higher than current floating rates, switching usually results in a higher immediate EMI even if it provides certainty."
+        }
+      }
+    ]
   }
   </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -281,6 +330,18 @@
     .compare-table tr:nth-child(even) td { background: #f9fafb; }
     .compare-table th:first-child { border-radius: 8px 0 0 0; }
     .compare-table th:last-child { border-radius: 0 8px 0 0; }
+
+    /* FAQ Accordion */
+    .faq-list { margin-top: 1.5rem; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+    .faq-item { border-bottom: 1px solid #f1f5f9; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: #f9fafb; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #111827; text-align: left; transition: background 0.15s; }
+    .faq-question:hover { background: #f3f4f6; }
+    .faq-icon { font-size: 1.2rem; color: #1e3a8a; flex-shrink: 0; transition: transform 0.2s; font-weight: 400; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-answer p { padding: 0 1.25rem 1rem; font-size: 0.92rem; color: #374151; line-height: 1.75; margin-bottom: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item.open .faq-answer { max-height: 400px; }
   </style>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EM8B59T3F5"></script>
@@ -327,7 +388,7 @@
   </nav>
 
   <!-- ARTICLE -->
-  <main class="max-w-2xl mx-auto px-4 py-12">
+  <main class="max-w-3xl mx-auto px-4 py-12">
 
     <p class="text-xs text-gray-400 mb-6">
       <a href="../../" class="hover:text-blue-600">Home</a>
@@ -559,6 +620,62 @@
           A home loan is the largest financial commitment most people ever make. Understanding the mechanics does not take long but it can change how you manage it. And over a 20-year loan, small decisions made at the right time can save you more money than almost anything else you do financially.
         </p>
 
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>What is a floating interest rate on a home loan?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>A floating rate home loan has an interest rate that changes over time based on an external benchmark - currently the RBI repo rate for most banks. When the repo rate goes up, your home loan rate increases. When it comes down, your rate decreases. Unlike fixed rate loans, your EMI or tenure can change during the loan period depending on how your bank applies the rate change.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>What happens to my EMI when the interest rate increases?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Most banks keep your EMI amount fixed and increase your loan tenure instead. This means your monthly outflow stays the same but you end up paying for more months. Some banks do increase the EMI directly. Check with your bank which approach they follow. If your tenure has been extended significantly, making a part payment is the most effective way to bring it back under control.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Is a floating rate better than a fixed rate for a home loan?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Historically in India, floating rates have been lower than fixed rates over long tenures because fixed rate loans carry a premium for the certainty they offer. Over a 20-year home loan, rates will likely go through multiple cycles of increase and decrease. Floating rate borrowers benefit when rates fall, which fixed rate borrowers do not. For most long-term borrowers, floating rate works out cheaper.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>How often does the floating rate change?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>The RBI Monetary Policy Committee meets roughly every two months to decide on the repo rate. Banks are required to pass on rate changes to repo-linked loans within a set reset period, typically quarterly. So your rate can change up to 4 to 6 times a year in theory, though in practice RBI often holds rates steady for several consecutive meetings.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Can I switch from floating to fixed rate mid-loan?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, most banks allow switching between floating and fixed rates, usually with a conversion fee of 0.5 to 2 percent of the outstanding principal. It is worth considering when rates are low and you expect them to rise significantly. However, since fixed rates are always higher than current floating rates, switching mid-loan usually results in a higher immediate EMI even if it provides certainty.</p>
+            </div>
+          </div>
+
+        </div>
+
       </section>
 
       <!-- CTA -->
@@ -584,6 +701,11 @@
     </article>
 
   </main>
+
+  <!-- Comments -->
+    <div id="knowyouremi-comments"></div>
+ 
+  
 
   <!-- FOOTER -->
   <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-16">
@@ -628,6 +750,13 @@
       document.getElementById('progressBar').style.width = (scrollTop / docHeight * 100) + '%';
     });
 
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
     let articleReadFired = false;
     window.addEventListener('scroll', () => {
       if (articleReadFired) return;
@@ -644,6 +773,7 @@
       }
     });
   </script>
+  <script type="module" src="/comments/comments.js"></script>
 
 </body>
 </html>

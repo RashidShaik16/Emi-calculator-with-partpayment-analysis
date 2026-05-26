@@ -32,8 +32,57 @@
     "publisher": { "@type": "Organization", "name": "KnowYourEMI", "url": "https://knowyouremi.in" },
     "image": "https://www.knowyouremi.in/og-image.jpg",
     "datePublished": "2026-05-01T00:00:00+05:30",
-    "dateModified": "2026-05-10T00:00:00+05:30",
+    "dateModified": "2026-05-25T00:00:00+05:30",
     "url": "https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is EMI and how is it calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "EMI stands for Equated Monthly Instalment. It is calculated using: EMI = P x R x (1+R)^N / ((1+R)^N - 1), where P is the principal, R is the monthly interest rate, and N is the number of instalments. Each EMI contains both an interest component and a principal component."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the EMI amount change during the loan tenure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For fixed rate loans, the EMI stays the same throughout. For floating rate loans, the EMI can change when the interest rate changes. Most banks keep the EMI fixed and adjust the remaining tenure instead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What portion of my EMI goes toward interest vs principal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In the early months, a larger portion of each EMI goes toward interest. As the loan progresses, the interest component decreases and the principal component increases, because interest is always calculated on the outstanding balance which reduces with each payment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does a part payment affect my EMI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A part payment directly reduces your outstanding principal. Banks typically give you two options: reduce your EMI amount while keeping the tenure the same, or keep the EMI the same and reduce the tenure. Reducing tenure saves more total interest."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I miss an EMI payment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Missing an EMI triggers a late payment penalty, typically 1 to 2 percent of the unpaid amount. The unpaid amount is added to your outstanding principal, so interest is charged on a higher balance. Repeated missed payments negatively affect your credit score."
+        }
+      }
+    ]
   }
   </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -194,6 +243,18 @@
       transition: width 0.1s linear;
       box-shadow: 0 0 8px rgba(37, 99, 235, 0.6);
     }
+
+    /* FAQ Accordion */
+    .faq-list { margin-top: 1.5rem; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+    .faq-item { border-bottom: 1px solid #f1f5f9; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: #f9fafb; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #111827; text-align: left; transition: background 0.15s; }
+    .faq-question:hover { background: #f3f4f6; }
+    .faq-icon { font-size: 1.2rem; color: #1e3a8a; flex-shrink: 0; transition: transform 0.2s; font-weight: 400; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-answer p { padding: 0 1.25rem 1rem; font-size: 0.92rem; color: #374151; line-height: 1.75; margin-bottom: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item.open .faq-answer { max-height: 400px; }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -395,6 +456,62 @@
         One missed payment can quietly increase your total interest burden by more than you expect.
       </p>
 
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What is EMI and how is it calculated?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>EMI stands for Equated Monthly Instalment. It is the fixed amount you pay every month to repay a loan. It is calculated using the formula: EMI = P x R x (1+R)^N / ((1+R)^N - 1), where P is the principal loan amount, R is the monthly interest rate (annual rate divided by 12), and N is the number of monthly instalments. Each EMI contains both an interest component and a principal component.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Does the EMI amount change during the loan tenure?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>For fixed rate loans, the EMI stays the same throughout the tenure. For floating rate loans, the EMI can change when the interest rate changes. Most banks keep the EMI fixed and adjust the remaining tenure instead. However, if rates rise significantly, some banks may increase the EMI to keep the tenure manageable.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What portion of my EMI goes toward interest vs principal?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>In the early months of a loan, a larger portion of each EMI goes toward interest and a smaller portion reduces the principal. As the loan progresses, the interest component decreases and the principal component increases. This is because interest is always calculated on the outstanding balance, which reduces with each payment. The full breakdown is visible in the amortization schedule in the EMI calculator.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How does a part payment affect my EMI?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>A part payment directly reduces your outstanding principal. Since interest is calculated on the principal, a lower principal means less interest in all future EMIs. Banks typically give you two options after a part payment: reduce your EMI amount while keeping the tenure the same, or keep the EMI the same and reduce the tenure. Reducing tenure saves more total interest.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What happens if I miss an EMI payment?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Missing an EMI payment triggers a late payment penalty from your bank, typically 1 to 2 percent of the unpaid amount. The unpaid amount is added to your outstanding principal, so interest is charged on a higher balance in the next cycle. Repeated missed payments also negatively affect your credit score and can eventually lead to the loan being classified as an NPA (non-performing asset).</p>
+          </div>
+        </div>
+
+      </div>
+
     </section>
 
     <!-- CTA -->
@@ -469,6 +586,13 @@
     });
 
     // GA4: article_read fires when user scrolls past 80%
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
     let articleReadFired = false;
     window.addEventListener('scroll', () => {
       if (articleReadFired) return;
