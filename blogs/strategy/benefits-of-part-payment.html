@@ -32,8 +32,49 @@
     "publisher": { "@type": "Organization", "name": "KnowYourEMI", "url": "https://knowyouremi.in" },
     "image": "https://www.knowyouremi.in/og-image.jpg",
     "datePublished": "2026-05-01T00:00:00+05:30",
-    "dateModified": "2026-05-10T00:00:00+05:30",
+    "dateModified": "2026-05-25T00:00:00+05:30",
     "url": "https://knowyouremi.in/blogs/strategy/benefits-of-part-payment.html"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does making a part payment reduce EMI or tenure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most banks give you the choice. Reducing tenure saves more interest overall. Reducing EMI gives you more cash flow each month. If you can afford the current EMI, reducing tenure is almost always the better financial decision."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a minimum amount for a part payment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It varies by lender. Most banks require a minimum of one EMI amount. Some have a fixed minimum like Rs. 5,000 or Rs. 10,000. There is usually no upper limit on how much you can prepay in a single transaction."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I make a part payment on a personal loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but personal loans often have prepayment penalties of 2 to 4 percent of the amount prepaid. Even with this penalty, if you are early in the loan tenure, the interest savings usually outweigh the penalty."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best time in a loan to make a part payment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The earlier the better. In the first half of your loan tenure, a large portion of each EMI goes toward interest. A part payment made early reduces the principal for all remaining months. The same amount paid in the second half saves significantly less."
+        }
+      }
+    ]
   }
   </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -199,6 +240,18 @@
       transition: width 0.1s linear;
       box-shadow: 0 0 8px rgba(37, 99, 235, 0.6);
     }
+
+    /* FAQ Accordion */
+    .faq-list { margin-top: 1.5rem; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+    .faq-item { border-bottom: 1px solid #f1f5f9; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: #f9fafb; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #111827; text-align: left; transition: background 0.15s; }
+    .faq-question:hover { background: #f3f4f6; }
+    .faq-icon { font-size: 1.2rem; color: #1e3a8a; flex-shrink: 0; transition: transform 0.2s; font-weight: 400; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-answer p { padding: 0 1.25rem 1rem; font-size: 0.92rem; color: #374151; line-height: 1.75; margin-bottom: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item.open .faq-answer { max-height: 400px; }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -247,7 +300,7 @@
   </nav>
 
   <!-- ARTICLE -->
-  <main class="max-w-2xl mx-auto px-4 py-12">
+  <main class="max-w-4xl mx-auto px-4 py-12">
 
     <p class="text-xs text-gray-400 mb-6">
       <a href="../../" class="hover:text-blue-600">Home</a>
@@ -383,7 +436,64 @@
         Not sure when to make a part payment and when it might not make sense? <a href="./when-to-make-part-payment.html" class="related-link">Read the next article on exactly that.</a>
       </p>
 
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Does making a part payment reduce EMI or tenure?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Most banks give you the choice. Reducing tenure saves more interest overall because the loan closes earlier. Reducing EMI gives you more cash flow each month. If you can afford the current EMI, reducing tenure is almost always the better financial decision. You can model both options in the EMI calculator on this site to see the exact difference for your loan.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Is there a minimum amount for a part payment?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>It varies by lender. Most banks require a minimum of one EMI amount as a part payment. Some have a fixed minimum like Rs. 5,000 or Rs. 10,000. Check your loan agreement or call your bank before transferring the amount. There is usually no upper limit on how much you can prepay in a single transaction.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I make a part payment on a personal loan?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, but personal loans often have prepayment penalties unlike floating rate home loans. Typically 2 to 4 percent of the amount prepaid. Even with this penalty, if you are early in the loan tenure, the interest savings usually outweigh the penalty. Calculate both before deciding. The EMI calculator lets you see your savings before you commit.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How soon after taking a loan can I make a part payment?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>For most home loans, banks have a lock-in period of 6 to 12 months before allowing part payments. For personal loans it is often 6 months. After the lock-in, you can usually make part payments at any time. Confirm the lock-in period with your lender when you take the loan so you can plan accordingly.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What is the best time in a loan to make a part payment?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>The earlier the better. In the first half of your loan tenure, a large portion of each EMI goes toward interest. A part payment made early reduces the principal on which interest is calculated for all remaining months. The same amount paid in the second half of the loan saves significantly less because most of the interest has already been paid.</p>
+          </div>
+        </div>
+
+      </div>
+
     </section>
+    
 
     <!-- CTA -->
     <div class="cta-box">
@@ -397,6 +507,9 @@
     </p>
 
     </article>
+
+     <!-- Comments -->
+    <div id="knowyouremi-comments"></div>
 
   </main>
 
@@ -443,6 +556,13 @@
       document.getElementById('progressBar').style.width = (scrollTop / docHeight * 100) + '%';
     });
 
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
     let articleReadFired = false;
     window.addEventListener('scroll', () => {
       if (articleReadFired) return;
@@ -459,6 +579,7 @@
       }
     });
   </script>
+  <script type="module" src="/comments/comments.js"></script>
 
 </body>
 </html>

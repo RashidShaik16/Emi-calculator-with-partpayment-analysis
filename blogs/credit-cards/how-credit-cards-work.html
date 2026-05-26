@@ -32,8 +32,65 @@
     "publisher": { "@type": "Organization", "name": "KnowYourEMI", "url": "https://knowyouremi.in" },
     "image": "https://www.knowyouremi.in/og-image.jpg",
     "datePublished": "2026-05-01T00:00:00+05:30",
-    "dateModified": "2026-05-10T00:00:00+05:30",
+    "dateModified": "2026-05-25T00:00:00+05:30",
     "url": "https://knowyouremi.in/blogs/credit-cards/how-credit-cards-work.html"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What happens if I pay only the minimum due on my credit card?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You lose the interest-free grace period on your entire outstanding balance. The bank charges interest at 36 to 42 percent annually on the full statement amount from the statement date, not just the unpaid portion."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the grace period on a credit card?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The grace period is the time between your statement date and payment due date, typically 15 to 25 days. No interest is charged during this period - but only if you pay the full outstanding amount. Carrying any balance removes the grace period entirely."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to use a credit card for online shopping in India?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, credit cards are safer than debit cards for online purchases. If a fraudulent transaction happens, the money is not immediately taken from your bank account and you can dispute the charge. Most banks offer zero liability on fraudulent transactions reported promptly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does credit card interest rate compare to personal loan interest rate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Credit card interest rates in India are typically 36 to 42 percent per year, much higher than personal loan rates of 10 to 24 percent. If you carry a large credit card balance for more than two months, a personal loan to clear it is usually the smarter financial move."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many credit cards should I have?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One or two cards is recommended for beginners. Multiple cards can maximize rewards across spending categories but only if you can pay all of them in full every month. Each new application causes a hard inquiry that temporarily lowers your credit score."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between a credit card and a debit card?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A debit card spends money you already have. A credit card spends money the bank lends you, repaid later. Credit cards offer grace periods, rewards, and fraud protection that debit cards typically do not, but can lead to debt if not managed carefully."
+        }
+      }
+    ]
   }
   </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -263,6 +320,44 @@
       transition: width 0.1s linear;
       box-shadow: 0 0 8px rgba(37, 99, 235, 0.6);
     }
+
+    /* ── FAQ Accordion ── */
+    .faq-list { margin-top: 1.5rem; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+    .faq-item { border-bottom: 1px solid #f1f5f9; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: #f9fafb;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #111827;
+      text-align: left;
+      transition: background 0.15s;
+    }
+    .faq-question:hover { background: #f3f4f6; }
+    .faq-icon { font-size: 1.2rem; color: #1e3a8a; flex-shrink: 0; transition: transform 0.2s; font-weight: 400; }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-answer p {
+      padding: 0 1.25rem 1rem;
+      font-size: 0.92rem;
+      color: #374151;
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item.open .faq-answer { max-height: 400px; }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -311,7 +406,7 @@
   </nav>
 
   <!-- ARTICLE -->
-  <main class="max-w-2xl mx-auto px-4 py-12">
+  <main class="max-w-3xl mx-auto px-4 py-12">
 
     <p class="text-xs text-gray-400 mb-6">
       <a href="../../" class="hover:text-blue-600">Home</a>
@@ -540,6 +635,144 @@
           The product has not changed. The behaviour around it is what makes all the difference.
         </p>
 
+        <h2>Types of Credit Cards in India</h2>
+
+        <p>
+          Not all credit cards are the same. Banks design different cards for different spending patterns. Picking the wrong one means leaving rewards on the table every month.
+        </p>
+
+        <div class="rules-list">
+          <div class="rule-item">
+            <span class="rule-icon">01</span>
+            <span><strong>Cashback cards</strong> - give you a percentage of your spending back as cash or statement credit. Best for people who want simplicity without tracking reward points. Examples include HDFC Millennia and SBI SimplySave.</span>
+          </div>
+          <div class="rule-item">
+            <span class="rule-icon">02</span>
+            <span><strong>Rewards points cards</strong> - accumulate points on every spend that can be redeemed for vouchers, products, or flight miles. Better value than cashback if you redeem smartly. Examples include HDFC Regalia and Axis Magnus.</span>
+          </div>
+          <div class="rule-item">
+            <span class="rule-icon">03</span>
+            <span><strong>Travel cards</strong> - designed for frequent flyers. Come with lounge access, air miles, and lower or zero forex markup. Only worth it if you travel at least 4 to 6 times a year. Examples include Indigo HDFC and Air India SBI.</span>
+          </div>
+          <div class="rule-item">
+            <span class="rule-icon">04</span>
+            <span><strong>Fuel cards</strong> - offer surcharge waivers and extra rewards on fuel spends. Best for people spending Rs. 5,000 or more per month on fuel. Examples include BPCL SBI Card and HPCL Coral.</span>
+          </div>
+          <div class="rule-item">
+            <span class="rule-icon">05</span>
+            <span><strong>Lifetime free cards</strong> - no annual fee ever. Best for beginners or those who want a backup card with no ongoing cost. Examples include IDFC FIRST Millennia and SBI SimplyClick.</span>
+          </div>
+        </div>
+
+        <p>
+          The best card is the one that matches how you actually spend money, not the one with the most impressive-sounding benefits on paper.
+        </p>
+
+        <h2>How Credit Card Interest Is Actually Calculated</h2>
+
+        <p>
+          Most people think the interest rate on a credit card applies only to the unpaid amount at the end of the month. It does not work that way. The calculation is more expensive than it looks.
+        </p>
+
+        <div class="example-box">
+          <span class="example-label">Example - Interest on a Partial Payment</span>
+          <div class="example-body">
+            <p>Say your statement shows Rs. 50,000 outstanding. You pay Rs. 45,000 and leave Rs. 5,000 unpaid.</p>
+            <p>Most people expect to pay interest only on the Rs. 5,000 balance.</p>
+            <p>What actually happens: the bank charges interest on the entire Rs. 50,000 from the statement date, not just the unpaid Rs. 5,000. This is because the grace period is lost the moment you do not pay the full amount.</p>
+            <p>At 3.5 percent per month (42 percent annual), interest on Rs. 50,000 for one month is Rs. 1,750. Not Rs. 175 as most people assume.</p>
+            <p>This is why partial payments are far more expensive than they appear.</p>
+          </div>
+        </div>
+
+        <p>
+          If you are carrying a balance right now and want to see exactly how long it takes to pay off and how much total interest you will pay, use the <a href="../../calculators/credit-card-payoff/" class="text-blue-600 font-semibold hover:underline">Credit Card Payoff Calculator</a> - it breaks it down month by month.
+        </p>
+
+        <h2>Credit Utilization and Your Credit Score</h2>
+
+        <p>
+          Credit utilization is the percentage of your total available credit that you are currently using. It is one of the most heavily weighted factors in your credit score calculation, second only to payment history.
+        </p>
+
+        <p>
+          If your credit limit is Rs. 2,00,000 across all cards and you have Rs. 80,000 outstanding, your utilization is 40 percent. Most credit bureaus consider anything above 30 percent as a signal of financial stress, even if you pay the full amount every month.
+        </p>
+
+        <div class="callout">
+          High utilization reduces your credit score even if you never miss a payment. If you regularly spend close to your limit, request a limit increase from your bank rather than letting your utilization stay high. A higher limit with the same spending brings your utilization ratio down immediately.
+        </div>
+
+        <p>
+          Checking your credit score regularly is a good habit. Your score directly affects your eligibility for loans and the interest rate you get. Want to know what loan amount you qualify for based on your current income and credit profile? Try the <a href="../../calculators/eligibility/" class="text-blue-600 font-semibold hover:underline">Loan Eligibility Calculator</a>.
+        </p>
+
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>What happens if I pay only the minimum due on my credit card?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>You lose the interest-free grace period on your entire outstanding balance, not just the unpaid portion. The bank charges interest at 36 to 42 percent annually on the full statement amount from the statement date. Over time, interest compounds and the total amount owed grows faster than your minimum payments reduce it.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>What is the grace period on a credit card?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>The grace period is the time between your statement date and your payment due date, typically 15 to 25 days. During this period, no interest is charged on purchases - but only if you pay the full outstanding amount. If you carry any balance from the previous month, there is no grace period and interest starts from the date of each transaction.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>Is it safe to use a credit card for online shopping in India?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, credit cards are generally safer than debit cards for online purchases. If a fraudulent transaction happens, the money is not immediately taken from your bank account and you can dispute the charge. Most banks offer zero liability on fraudulent transactions reported within a reasonable time. Always enable transaction alerts and check your statement regularly.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>How does credit card interest rate compare to personal loan interest rate?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Credit card interest rates in India are typically 36 to 42 percent per year, significantly higher than personal loan rates of 10 to 24 percent. If you are carrying a large credit card balance for more than two months, taking a personal loan to clear it is usually the smarter financial move.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>How many credit cards should I have?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>One or two cards is recommended for beginners. Multiple cards can maximize rewards across spending categories but only if you can pay all of them in full every month. Each new application also causes a hard inquiry on your credit report which temporarily lowers your score.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>What is the difference between a credit card and a debit card?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>A debit card spends money you already have in your bank account. A credit card spends money the bank lends you, which you repay later. Credit cards offer a grace period, rewards, and fraud protection that debit cards typically do not. However, credit cards can lead to debt if not managed carefully, while debit cards are limited to your available balance.</p>
+            </div>
+          </div>
+
+        </div>
+
       </section>
 
       <!-- CTA -->
@@ -563,6 +796,9 @@
     </article>
 
   </main>
+
+  <!-- Comments section -->
+  <div id="knowyouremi-comments"></div>
 
   <!-- FOOTER -->
   <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-16">
@@ -607,6 +843,13 @@
       document.getElementById('progressBar').style.width = (scrollTop / docHeight * 100) + '%';
     });
 
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
     let articleReadFired = false;
     window.addEventListener('scroll', () => {
       if (articleReadFired) return;
@@ -623,6 +866,7 @@
       }
     });
   </script>
+  <script type="module" src="/comments/comments.js"></script>
 
 </body>
 </html>

@@ -32,8 +32,49 @@
     "publisher": { "@type": "Organization", "name": "KnowYourEMI", "url": "https://knowyouremi.in" },
     "image": "https://www.knowyouremi.in/og-image.jpg",
     "datePublished": "2026-05-01T00:00:00+05:30",
-    "dateModified": "2026-05-10T00:00:00+05:30",
+    "dateModified": "2026-05-25T00:00:00+05:30",
     "url": "https://knowyouremi.in/blogs/strategy/when-to-make-part-payment.html"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Should I make a part payment or invest the money instead?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compare the effective interest rate on your loan with the expected post-tax return on your investment. For loans above 12 to 14 percent like personal loans or credit cards, repayment almost always wins over any safe investment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do first - clear emergency fund or make a part payment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Emergency fund first, always. A part payment is a one-way door - once the money goes toward the loan, you cannot easily get it back. Build at least 3 to 6 months of expenses as a liquid reserve before making any significant prepayment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it better to reduce EMI or reduce tenure when making a part payment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Reducing tenure saves more total interest and closes the loan faster. Reducing EMI gives you more monthly cash flow. If your income is stable, reducing tenure is the mathematically superior choice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I make multiple part payments on the same loan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, most lenders allow multiple part payments as long as each meets the minimum threshold. Each payment reduces the outstanding principal and lowers future interest. Spreading payments across different months works just as well as a single large payment."
+        }
+      }
+    ]
   }
   </script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -227,6 +268,18 @@
       transition: width 0.1s linear;
       box-shadow: 0 0 8px rgba(37, 99, 235, 0.6);
     }
+
+    /* FAQ Accordion */
+    .faq-list { margin-top: 1.5rem; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+    .faq-item { border-bottom: 1px solid #f1f5f9; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: #f9fafb; border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #111827; text-align: left; transition: background 0.15s; }
+    .faq-question:hover { background: #f3f4f6; }
+    .faq-icon { font-size: 1.2rem; color: #1e3a8a; flex-shrink: 0; transition: transform 0.2s; font-weight: 400; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-answer p { padding: 0 1.25rem 1rem; font-size: 0.92rem; color: #374151; line-height: 1.75; margin-bottom: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item.open .faq-answer { max-height: 400px; }
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -275,7 +328,7 @@
   </nav>
 
   <!-- ARTICLE -->
-  <main class="max-w-2xl mx-auto px-4 py-12">
+  <main class="max-w-4xl mx-auto px-4 py-12">
 
     <p class="text-xs text-gray-400 mb-6">
       <a href="../../" class="hover:text-blue-600">Home</a>
@@ -446,7 +499,54 @@
         If you have not yet read about how much a part payment can actually save you, <a href="./benefits-of-part-payment.html" class="related-link">the previous article covers that with real numbers.</a>
       </p>
 
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Should I make a part payment or invest the money instead?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Compare the effective interest rate on your loan with the expected post-tax return on your investment. If your home loan is at 8.5 percent and your FD returns 7 percent post-tax, the loan repayment wins. If you are investing in equity with a long-term return expectation of 12 percent, the investment may be better. For loans above 12 to 14 percent like personal loans or credit cards, repayment almost always wins over any safe investment.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What should I do first - clear emergency fund or make a part payment?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Emergency fund first, always. A part payment is a one-way door - once the money goes toward the loan, you cannot easily get it back. If an unexpected expense hits and you have no liquid savings, you may end up taking a more expensive loan to cover it, defeating the purpose of the part payment. Build at least 3 to 6 months of expenses as a liquid reserve before making any significant prepayment.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Is it better to reduce EMI or reduce tenure when making a part payment?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Reducing tenure saves more total interest and closes the loan faster. Reducing EMI gives you more monthly cash flow. If your income is stable and you do not need the extra monthly cash, reducing tenure is the mathematically superior choice. If you are under cash flow pressure or want flexibility for other goals, reducing EMI makes more practical sense.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I make multiple part payments on the same loan?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, most lenders allow multiple part payments over the course of the loan as long as each payment meets the minimum threshold. Each payment reduces the outstanding principal and lowers future interest. Spreading part payments across different months as funds become available works just as well as a single large payment - sometimes better if done early enough in the tenure.</p>
+          </div>
+        </div>
+
+      </div>
+
     </section>
+
 
     <!-- CTA -->
     <div class="cta-box">
@@ -460,6 +560,9 @@
     </p>
 
     </article>
+
+    <!-- Comments -->
+    <div id="knowyouremi-comments"></div>
 
   </main>
 
@@ -506,6 +609,13 @@
       document.getElementById('progressBar').style.width = (scrollTop / docHeight * 100) + '%';
     });
 
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
     let articleReadFired = false;
     window.addEventListener('scroll', () => {
       if (articleReadFired) return;
@@ -522,6 +632,7 @@
       }
     });
   </script>
+  <script type="module" src="/comments/comments.js"></script>
 
 </body>
 </html>
