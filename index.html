@@ -227,7 +227,7 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
                     <a href="./calculators/balance-transfer/" class="hover:text-yellow-300">Balance Transfer</a>
-                    <a href="./calculators/eligibility/" class="hover:text-yellow-300">Check Eligibility</a>
+                    <a href="./calculators/eligibility/" class="hover:text-yellow-300">Eligibility Calculator</a>
                     <a href="./calculators/float-rate-home-loan/" class="hover:text-yellow-300">Floating Rate Home Loan</a>
                     <a href="./calculators/credit-card-payoff/" class="hover:text-yellow-300">Credit Card Payoff</a>
                     <a href="#faq-section" class="hover:text-yellow-300">FAQs</a>
@@ -243,7 +243,7 @@
             <!-- Mobile Menu (hidden by default) -->
             <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-gradient-to-r from-blue-600 to-indigo-600">
                     <a href="./calculators/balance-transfer/" class="hover:text-yellow-300">Balance Transfer</a>
-                    <a href="./calculators/eligibility/" class="hover:text-yellow-300">Check Eligibility</a>
+                    <a href="./calculators/eligibility/" class="hover:text-yellow-300">Eligibility Calculator</a>
                     <a href="./calculators/float-rate-home-loan/" class="hover:text-yellow-300">Floating Rate Home Loan</a>
                     <a href="./calculators/credit-card-payoff/" class="hover:text-yellow-300">Credit Card Payoff</a>
                     <a href="#faq-section" class="hover:text-yellow-300">FAQs</a>
@@ -549,7 +549,48 @@
             </div>
 
 
-            <!-- Sponsored Offers Section -->
+
+            <!-- Fibe Personal Loan Banner — always visible, independent -->
+            <div id="fibeBanner" class="mt-6 px-1">
+                <div class="max-w-2xl mx-auto">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Sponsored</span>
+                        <div class="flex-1 h-px bg-gray-200"></div>
+                        <span class="text-xs text-gray-300 italic">Affiliate links</span>
+                    </div>
+                    <div style="border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#2d1b69 0%,#11998e 100%);padding:24px 28px;">
+                        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+                            <div style="flex:1;min-width:200px;">
+                                <div style="display:flex;gap:6px;margin-bottom:10px;">
+                                    <span style="width:10px;height:10px;border-radius:50%;background:#f97316;display:inline-block;"></span>
+                                    <span style="width:10px;height:10px;border-radius:50%;background:#22c55e;display:inline-block;"></span>
+                                    <span style="width:10px;height:10px;border-radius:50%;background:#a855f7;display:inline-block;"></span>
+                                </div>
+                                <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:6px;">Personal Loan</div>
+                                <div style="font-size:20px;font-weight:800;color:#fff;margin-bottom:4px;">Fibe Personal Loan</div>
+                                <div style="font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:16px;line-height:1.5;">Instant loan up to Rs. 5,00,000. 100% digital, paperless. Approval in 60 seconds.</div>
+                                <a href="https://track.vcommission.com/click?campaign_id=13145&pub_id=129417"
+                                   rel="nofollow sponsored" target="_blank"
+                                   onclick="if(typeof gtag==='function'){gtag('event','personal_loan_affiliate',{offer_name:'Fibe Personal Loan',loan_type:'personal',page_path:location.pathname})}"
+                                   style="display:inline-block;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;background:#fff;color:#2d1b69;box-shadow:0 2px 8px rgba(0,0,0,0.15);">Apply Now &rarr;</a>
+                            </div>
+                            <div style="flex-shrink:0;background:rgba(255,255,255,0.1);border-radius:12px;padding:14px 18px;min-width:190px;">
+                                <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:10px;">Who Can Apply</div>
+                                <div style="display:flex;flex-direction:column;gap:7px;">
+                                    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#fff;"><span style="color:#22c55e;font-size:14px;flex-shrink:0;">&#10003;</span>Salaried professionals only</div>
+                                    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#fff;"><span style="color:#22c55e;font-size:14px;flex-shrink:0;">&#10003;</span>Monthly salary above Rs. 21,000</div>
+                                    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#fff;"><span style="color:#22c55e;font-size:14px;flex-shrink:0;">&#10003;</span>Age 21 to 55 years</div>
+                                    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#fff;"><span style="color:#22c55e;font-size:14px;flex-shrink:0;">&#10003;</span>CIBIL score above 682</div>
+                                    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#fff;"><span style="color:#22c55e;font-size:14px;flex-shrink:0;">&#10003;</span>Loan: Rs. 20,000 to Rs. 5,00,000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-2 text-center">We may earn a small commission if you apply through these links, at no extra cost to you.</p>
+                </div>
+            </div>
+
+            <!-- Sponsored Offers Section — CC carousel only -->
             <div id="sponsoredOffers" class="hidden mt-6 px-1">
                 <div class="max-w-2xl mx-auto">
                 <div class="flex items-center gap-2 mb-3">
@@ -1179,7 +1220,7 @@
         // Sponsored offers data per loan type
         const sponsoredOffers = {
             personal: [
-                // Personal loan offers temporarily disabled — switching to Cuelinks
+                // Fibe personal loan shown in separate always-visible banner above
             ],
             home: [
                 // Add home loan offers here when available
@@ -1233,7 +1274,12 @@
 
         function renderSponsoredOffers(loanType) {
             var section = document.getElementById('sponsoredOffers');
+            var fibe = document.getElementById('fibeBanner');
             var offers = sponsoredOffers[loanType] || [];
+
+            // Show/hide Fibe banner based on loan type
+            if (fibe) fibe.style.display = loanType === 'personal' ? 'block' : 'none';
+
             if (offers.length === 0) { section.classList.add('hidden'); return; }
             section.classList.remove('hidden');
             initOffersCarousel(offers, loanType);
@@ -1335,8 +1381,16 @@
 
     function startTimer() { clearInterval(timer); timer = setInterval(function() { offersGoTo(idx + 1); }, 6000); }
     function stopTimer()  { clearInterval(timer); timer = null; }
+    window.stopOffersTimer = stopTimer;
 
     window.initOffersCarousel = function(offers, loanType) {
+        // Restore buttons in case they were hidden by Fibe single banner
+        var prevBtn = document.getElementById('offersPrev');
+        var nextBtn = document.getElementById('offersNext');
+        var dotsEl  = document.getElementById('offersDots');
+        if (prevBtn) prevBtn.style.display = 'flex';
+        if (nextBtn) nextBtn.style.display = 'flex';
+        if (dotsEl)  dotsEl.style.display  = 'flex';
         _offers = offers;
         _loanType = loanType;
         total = offers.length;
