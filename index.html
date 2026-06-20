@@ -1155,8 +1155,8 @@
         </div>
         </section>
 
-        <!-- Feedback Toast -->
-        <div id="feedbackToast" 
+        <!-- Original feedback toast left in place but unused/hidden — driven by scripts/feedback-toast.js which we are not modifying -->
+        <!-- <div id="feedbackToast" 
             class="hidden fixed bottom-10 left-1/2 -translate-x-1/2 w-96 bg-white text-gray-800 rounded-xl shadow-xl px-4 py-3 flex items-center justify-between gap-3 text-sm sm:text-base z-50 transition-all duration-700 ease-in-out translate-y-20" style="border:1px solid #e5e7eb;">
 
             <div class="flex items-center gap-2">
@@ -1172,32 +1172,63 @@
                 </button>
                 <button id="closeToastBtn" class="text-gray-400 hover:text-gray-600 text-lg font-bold leading-none">&times;</button>
             </div>
-        </div>
+        </div> -->
 
+        <!-- PWA install popup -->
+        <div id="installPopup" class="fixed top-5 right-5 bg-white rounded-2xl border border-gray-100 z-50 opacity-0 transition-opacity duration-700 overflow-hidden"
+             style="width: 300px; max-width: 75vw; box-shadow:0 10px 35px rgba(0,0,0,0.14);">
 
-        <div id="installPopup" class="fixed top-0 inset-x-0 bg-white shadow-lg border-b border-gray-200 p-4 z-50 hidden opacity-0 transition-opacity duration-700">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm text-gray-700">
-
-                <!-- Left side: Text -->
-                <div class="text-center sm:text-left leading-tight">
-                📱 <strong>Install KnowYourEMI</strong><br>
-                Add to your Home Screen for quick access.
+            <!-- character + headline -->
+            <div class="flex items-end gap-2.5 pt-3 px-2 pl-3">
+                <img src="./assets/divi-install.png" alt="" style="width:92px;" class="flex-shrink-0 rounded-xl -mb-0.5" />
+                <div class="pb-2">
+                    <h3 class="text-[15px] font-bold text-gray-900 leading-snug">Add KnowYourEMI to your Home Screen</h3>
+                    <p class="text-xs text-gray-500 mt-1 leading-snug">Open it like an app, no searching again.</p>
                 </div>
+            </div>
 
-                <!-- Right side: Buttons -->
-                <div class="flex justify-center sm:justify-end gap-2">
+            <!-- buttons -->
+            <div class="px-4 pb-4 pt-2 flex items-center gap-2.5">
                 <button id="addShortCutBtn"
-                    class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg">
+                    class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-sm font-bold py-2 rounded-lg shadow hover:from-blue-700 hover:to-indigo-800 transition">
                     Add Shortcut
                 </button>
                 <button id="closeShortCutBtn"
-                    class="text-gray-500 hover:text-gray-700 text-xs px-3 py-1.5">
-                    Maybe Later
+                    class="text-xs text-gray-400 hover:text-gray-600 font-medium whitespace-nowrap px-1">
+                    Maybe later
                 </button>
-                </div>
-
             </div>
         </div>
+
+        <!-- Leave a comment popup -->
+        <div id="commentPopup"
+             class="fixed bottom-5 right-5 bg-white rounded-2xl border border-gray-100 z-50 hidden opacity-0 transition-opacity duration-700 overflow-hidden"
+             style="width: 300px; max-width:75vw; box-shadow:0 10px 35px rgba(0,0,0,0.14);">
+
+            <!-- character + headline -->
+            <div class="flex items-center gap-2.5 pt-3 px-2 pl-3">
+                <div class="w-[108px] h-[124px] flex-shrink-0 rounded-xl overflow-hidden">
+                    <img src="./assets/divi-comment.png" alt="" class="w-full h-full object-cover" style="width: 92px; object-position:50% 16%;" />
+                </div>
+                <div>
+                    <h3 class="text-[15px] font-bold text-gray-900 leading-snug">Found this helpful?</h3>
+                    <p class="text-xs text-gray-500 mt-1 leading-snug">We'd love to hear what you think.</p>
+                </div>
+            </div>
+
+            <!-- buttons -->
+            <div class="px-4 pb-4 pt-3 flex items-center gap-2.5">
+                <button id="commentPopupBtn"
+                    class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-sm font-bold py-2 rounded-lg shadow hover:from-blue-700 hover:to-indigo-800 transition">
+                    Leave a Comment
+                </button>
+                <button id="commentPopupClose"
+                    class="text-xs text-gray-400 hover:text-gray-600 font-medium whitespace-nowrap px-1">
+                    Maybe later
+                </button>
+            </div>
+        </div>
+
 
       
 
