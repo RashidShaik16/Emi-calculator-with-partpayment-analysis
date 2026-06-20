@@ -245,9 +245,7 @@ if (downloadBtn) {
 }
 
 
-// ============================================================
-// WHATSAPP SHARE
-// ============================================================
+// Whatsapp share
 const whatsappShareBtn = document.getElementById("whatsappShareBtn");
 if (whatsappShareBtn) {
   whatsappShareBtn.addEventListener("click", () => {
@@ -1029,7 +1027,7 @@ function showPopup() {
   if (localStorage.getItem('pwaInstalled') === 'true') return;
   // Don't show if comment popup is already visible — keeps things from feeling crowded on small screens
   if (commentPopup && !commentPopup.classList.contains('hidden')) {
-    popupTimer = setTimeout(showPopup, 3000);
+    popupTimer = setTimeout(showPopup, 6000);
     return;
   }
 
@@ -1161,16 +1159,16 @@ if (commentPopup && commentPopupBtn && commentPopupClose) {
       }
     }, 100);
 
-    // 30s cooldown before reappearing
-    commentPopupDelay = 30000;
+    // 50s cooldown before reappearing
+    commentPopupDelay = 50000;
     scheduleCommentPopup(commentPopupDelay);
   });
 
   commentPopupClose.addEventListener('click', () => {
     clearTimeout(commentPopupTimer);
     commentPopup.classList.add('hidden');
-    // 30s cooldown before reappearing
-    commentPopupDelay = 30000;
+    // 40s cooldown before reappearing
+    commentPopupDelay = 50000;
     scheduleCommentPopup(commentPopupDelay);
   });
 }
