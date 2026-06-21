@@ -19,7 +19,7 @@
       border-bottom: 1px solid #e5e7eb;
       padding: 28px 0;
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: auto 1fr auto;
       gap: 16px;
       align-items: start;
       text-decoration: none;
@@ -52,6 +52,62 @@
     .tag-credit    { background: #fce7f3; color: #9d174d; }
     .tag-homeloan  { background: #ede9fe; color: #4c1d95; }
     .tag-invest    { background: #fef9c3; color: #713f12; }
+
+    /* Category icon badges, sit beside each article row */
+    .cat-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .cat-icon svg { width: 18px; height: 18px; }
+    .cat-icon-basics    { background: #dbeafe; color: #1e40af; }
+    .cat-icon-interest  { background: #fef3c7; color: #92400e; }
+    .cat-icon-strategy  { background: #d1fae5; color: #065f46; }
+    .cat-icon-credit    { background: #fce7f3; color: #9d174d; }
+    .cat-icon-homeloan  { background: #ede9fe; color: #4c1d95; }
+    .cat-icon-invest    { background: #fef9c3; color: #713f12; }
+
+    /* Featured / hero article card */
+    .featured-card {
+      background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+      border-radius: 18px;
+      padding: 32px 28px;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .featured-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(30,58,138,0.28);
+    }
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .featured-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fde047;
+      margin-bottom: 14px;
+    }
 
     .hero-stripe {
       background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
@@ -226,6 +282,41 @@
   <!-- ARTICLE LIST -->
   <main class="max-w-3xl mx-auto px-4 py-12">
 
+    <!-- FEATURED ARTICLE -->
+    <a href="./credit-cards/credit-card-debt-trap.html"
+       class="featured-card"
+       onclick="trackArticle('Featured: Credit Card Debt Trap')">
+      <div style="position:relative; z-index:1;">
+        <span class="featured-label">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.39 7.26H22l-6.19 4.5L18.18 21 12 16.5 5.82 21l2.37-7.24L2 9.26h7.61z"/></svg>
+          Editor's Pick
+        </span>
+        <h2 class="blog-title-font text-xl md:text-2xl font-bold text-white leading-snug mb-2">
+          How a Credit Card Slowly Becomes a Debt Trap
+        </h2>
+        <p class="text-blue-200 text-sm leading-relaxed mb-4 max-w-lg">
+          Not a textbook explanation. A real, personal account of what I learned the hard way about credit cards, and what I wish someone had told me earlier.
+        </p>
+        <div class="flex items-center gap-3 text-xs text-blue-300">
+          <span class="bg-white bg-opacity-15 px-2.5 py-1 rounded-full font-semibold">Credit Cards</span>
+          <span>14 min read</span>
+          <span class="text-yellow-300 font-semibold">Read the story →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- ABOUT THE AUTHOR — moved up, right after the featured piece -->
+    <div class="flex items-start gap-4 mb-12 pb-10" style="border-bottom: 1px solid #e5e7eb;">
+      <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-800 to-indigo-700 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">R</div>
+      <div>
+        <p class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-1">Written by</p>
+        <p class="font-semibold text-gray-900 text-sm">Rashid Shaik</p>
+        <p class="text-gray-500 text-sm leading-relaxed mt-1">
+          Over 10 years of hands-on experience dealing with loans, understanding how interest works, and figuring out what banks never bother to explain clearly. Every article here is written the way he would explain it to someone sitting across the table.
+        </p>
+      </div>
+    </div>
+
     <p class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-4">All Articles</p>
 
     <!-- Filter Pills -->
@@ -246,6 +337,9 @@
          class="article-row fade-in block"
          data-tag="basics"
          onclick="trackArticle('How EMI Is Calculated')">
+        <div class="cat-icon cat-icon-basics">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        </div>
         <div>
           <span class="tag tag-basics">Basics</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -265,6 +359,9 @@
          class="article-row fade-in block"
          data-tag="interest-rates"
          onclick="trackArticle('Flat vs Reducing Rate of Interest')">
+        <div class="cat-icon cat-icon-interest">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7l10 10M7 7a2 2 0 11-4 0 2 2 0 014 0zM17 17a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        </div>
         <div>
           <span class="tag tag-interest">Interest Rates</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -284,6 +381,9 @@
          class="article-row fade-in block"
          data-tag="strategy"
          onclick="trackArticle('Benefits of Part Payment on Your Loan')">
+        <div class="cat-icon cat-icon-strategy">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+        </div>
         <div>
           <span class="tag tag-strategy">Strategy</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -303,6 +403,9 @@
          class="article-row fade-in block"
          data-tag="strategy"
          onclick="trackArticle('When to Make a Part Payment and When Not To')">
+        <div class="cat-icon cat-icon-strategy">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        </div>
         <div>
           <span class="tag tag-strategy">Strategy</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -322,6 +425,9 @@
          class="article-row fade-in block"
          data-tag="credit-cards"
          onclick="trackArticle('What Are Credit Cards and How Do They Work')">
+        <div class="cat-icon cat-icon-credit">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+        </div>
         <div>
           <span class="tag tag-credit">Credit Cards</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -341,6 +447,9 @@
          class="article-row fade-in block"
          data-tag="credit-cards"
          onclick="trackArticle('Credit Card Personal Experience')">
+        <div class="cat-icon cat-icon-credit">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+        </div>
         <div>
           <span class="tag tag-credit">Credit Cards</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -360,6 +469,9 @@
          class="article-row fade-in block"
          data-tag="credit-cards"
          onclick="trackArticle('Why Paying Minimum Due Can Cost You Maximum')">
+        <div class="cat-icon cat-icon-credit">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+        </div>
         <div>
           <span class="tag tag-credit">Credit Cards</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -378,6 +490,9 @@
          class="article-row fade-in block"
          data-tag="home-loan"
          onclick="trackArticle('What Is Floating Rate of Interest in Home Loans')">
+        <div class="cat-icon cat-icon-homeloan">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        </div>
         <div>
           <span class="tag tag-homeloan">Home Loan</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -397,6 +512,9 @@
          class="article-row fade-in block"
          data-tag="basics"
          onclick="trackArticle('Why Credit Score Matters When Taking a Loan')">
+        <div class="cat-icon cat-icon-basics">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        </div>
         <div>
           <span class="tag tag-basics">Basics</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -416,6 +534,9 @@
          class="article-row fade-in block"
          data-tag="investments"
          onclick="trackArticle('What Is SIP')">
+        <div class="cat-icon cat-icon-invest">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8L13 15l-4-4-6 6"/></svg>
+        </div>
         <div>
           <span class="tag tag-invest">Investments</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -435,6 +556,9 @@
          class="article-row fade-in block"
          data-tag="investments"
          onclick="trackArticle('Why SIP for Long Term Growth')">
+        <div class="cat-icon cat-icon-invest">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8L13 15l-4-4-6 6"/></svg>
+        </div>
         <div>
           <span class="tag tag-invest">Investments</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -454,6 +578,9 @@
          class="article-row fade-in block"
          data-tag="investments"
          onclick="trackArticle('What Is FD and RD')">
+        <div class="cat-icon cat-icon-invest">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8L13 15l-4-4-6 6"/></svg>
+        </div>
         <div>
           <span class="tag tag-invest">Investments</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -473,6 +600,9 @@
          class="article-row fade-in block"
          data-tag="investments"
          onclick="trackArticle('SIP vs Regular FD')">
+        <div class="cat-icon cat-icon-invest">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8L13 15l-4-4-6 6"/></svg>
+        </div>
         <div>
           <span class="tag tag-invest">Investments</span>
           <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
@@ -494,23 +624,6 @@
 
     </div>
   </main>
-
-
-  <!-- ABOUT THE AUTHOR -->
-  <section class="max-w-3xl mx-auto px-4 pb-4">
-    <div style="border-top: 1px solid #e5e7eb; padding-top: 40px;">
-      <p class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-4">About the Author</p>
-      <div class="flex items-start gap-4">
-        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-800 to-indigo-700 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">R</div>
-        <div>
-          <p class="font-semibold text-gray-900 text-sm">Rashid Shaik</p>
-          <p class="text-gray-500 text-sm leading-relaxed mt-1">
-            Rashid has over 10 years of hands-on experience dealing with loans, understanding how interest works, and figuring out what banks never bother to explain clearly. KnowYourEMI was built from that experience. Every article here is written the way he would explain it to someone sitting across the table.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- FEEDBACK FORM -->
   <section id="feedback-section" class="max-w-3xl mx-auto px-4 pb-16 mt-10">
