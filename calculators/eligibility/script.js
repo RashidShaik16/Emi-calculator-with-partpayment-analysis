@@ -264,13 +264,26 @@
       return `<span class="score-badge ${m.cls}">${range} &nbsp; ${m.label}</span>`;
     }
 
+    // ── Minimum salary by loan type, reflecting standard bank-grade lending criteria ──
+    const minSalaryByType = { home: 25000, personal: 20000, car: 20000 };
+    const loanTypeLabels  = { home: 'Home Loan', personal: 'Personal Loan', car: 'Car Loan' };
+
     // ── Validate inputs ───────────────────────────────────────────
     function validate() {
       let valid = true;
 
+      const loanType = document.getElementById('loanType').value;
+      // Use the loan-type-specific minimum if a type is already selected,
+      // otherwise fall back to the lowest threshold across all types so we
+      // don't block on salary before the user has even picked a loan type.
+      const minSalary = loanType && minSalaryByType[loanType]
+        ? minSalaryByType[loanType]
+        : Math.min(...Object.values(minSalaryByType));
+
       const salary = parseInt(document.getElementById('salary').value);
       const salaryErr = document.getElementById('salary-error');
-      if (!salary || salary < 5000 || salary > 10000000) {
+      if (!salary || salary < minSalary || salary > 10000000) {
+        salaryErr.textContent = 'Please enter a valid salary (min Rs. ' + minSalary.toLocaleString('en-IN') + (loanType ? ' for ' + loanTypeLabels[loanType] : '') + ')';
         salaryErr.classList.add('visible');
         document.getElementById('salary').classList.add('error');
         valid = false;
@@ -282,11 +295,31 @@
       const obligations = document.getElementById('obligations').value;
       const obligationsVal = obligations === '' ? 0 : parseInt(obligations);
       const obErr = document.getElementById('obligations-error');
-      if (isNaN(obligationsVal) || obligationsVal < 0 || obligationsVal >= salary) {
+
+      // Basic sanity: obligations cannot be negative or exceed total salary
+      let obligationsInvalid = isNaN(obligationsVal) || obligationsVal < 0 || (salary && obligationsVal >= salary);
+
+      // Deeper check: even if obligations are technically less than salary,
+      // they can still consume the entire FOIR-based EMI capacity for this
+      // loan type, leaving zero or negative room for a new loan. Only run
+      // this check once a loan type is selected, since FOIR is type-specific.
+      if (!obligationsInvalid && salary && loanType && foirByType[loanType]) {
+        const maxEmiForType = Math.floor(salary * foirByType[loanType]);
+        if (maxEmiForType - obligationsVal <= 0) {
+          obligationsInvalid = true;
+          obErr.textContent = 'Your existing EMIs already use up your full ' + Math.round(foirByType[loanType] * 100) + '% FOIR limit for a ' + loanTypeLabels[loanType].toLowerCase() + '. There is no room left for a new EMI.';
+        }
+      }
+
+      if (obligationsInvalid) {
+        if (obErr.textContent === 'Cannot be more than your salary' || !obErr.textContent) {
+          obErr.textContent = 'Cannot be more than your salary';
+        }
         obErr.classList.add('visible');
         document.getElementById('obligations').classList.add('error');
         valid = false;
       } else {
+        obErr.textContent = 'Cannot be more than your salary'; // reset to default for next validation pass
         obErr.classList.remove('visible');
         document.getElementById('obligations').classList.remove('error');
       }
@@ -302,7 +335,6 @@
         document.getElementById('age').classList.remove('error');
       }
 
-      const loanType = document.getElementById('loanType').value;
       const ltErr = document.getElementById('loanType-error');
       if (!loanType) {
         ltErr.classList.add('visible');
@@ -358,8 +390,51 @@
       const emiCapacity = maxEMI - obligations;
       const tenureMonths = tenureYrs * 12;
 
-      const loanTypeLabels = { home: 'Home Loan', personal: 'Personal Loan', car: 'Car Loan' };
       const roi = roiMatrix[loanType][creditScore];
+
+      // ── Safety net: even though validate() already checks this, never let
+      // a zero or negative EMI capacity flow into the loan amount formula.
+      // This guards against any future change to validate() accidentally
+      // letting an invalid combination through.
+      if (emiCapacity <= 0) {
+        document.getElementById('resultSubtitle').textContent = loanTypeLabels[loanType] + ' eligibility result';
+        const resLoanType = document.getElementById('res-loanType');
+        resLoanType.textContent = loanTypeLabels[loanType];
+        resLoanType.className = 'result-value';
+
+        document.getElementById('res-emiCapacity').textContent = 'Rs. 0 / month';
+        document.getElementById('res-emiCapacity').className = 'result-value';
+        document.getElementById('res-rate').textContent = '—';
+        document.getElementById('res-rate').className = 'result-value';
+        document.getElementById('res-loanRange').textContent = 'Not eligible';
+        document.getElementById('res-loanRange').className = 'result-value';
+        document.getElementById('res-tenure').textContent = tenureYrs + (tenureYrs === 1 ? ' Year' : ' Years');
+        document.getElementById('res-tenure').className = 'result-value';
+        document.getElementById('res-foir').textContent = Math.round(foir * 100) + '%';
+        document.getElementById('res-foir').className = 'result-value';
+        document.getElementById('res-score').innerHTML = scoreBadge(creditScore);
+        document.getElementById('res-score').className = 'result-value';
+
+        const rejPanel = document.getElementById('rejectionPanel');
+        rejPanel.classList.add('visible');
+        document.getElementById('rejectionMsg').textContent =
+          'Based on your salary of Rs. ' + salary.toLocaleString('en-IN') + ' and existing obligations of Rs. ' +
+          obligations.toLocaleString('en-IN') + ' per month, you have no remaining EMI capacity under the ' +
+          Math.round(foir * 100) + '% FOIR limit for a ' + loanTypeLabels[loanType].toLowerCase() + '. ' +
+          'Banks are very unlikely to approve a new loan in this situation. ' +
+          'Reducing or clearing existing EMIs first would meaningfully improve your eligibility.';
+
+        document.getElementById('resultNote').style.display = 'none';
+        const heroEl = document.getElementById('eligibility-hero');
+        if (heroEl) heroEl.style.display = 'none';
+
+        const panel = document.getElementById('resultPanel');
+        panel.classList.remove('animate-in');
+        void panel.offsetWidth;
+        panel.classList.add('animate-in');
+        panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
 
       // Populate basic fields
       const resLoanType = document.getElementById('res-loanType');

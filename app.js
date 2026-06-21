@@ -245,7 +245,9 @@ if (downloadBtn) {
 }
 
 
-// Whatsapp share
+// ============================================================
+// WHATSAPP SHARE
+// ============================================================
 const whatsappShareBtn = document.getElementById("whatsappShareBtn");
 if (whatsappShareBtn) {
   whatsappShareBtn.addEventListener("click", () => {
@@ -1013,53 +1015,58 @@ if ('serviceWorker' in navigator) {
     .catch((err) => console.log('Service Worker failed:', err));
 }
 
-// PWA installation setup
+// ============================================================
+// PWA INSTALL POPUP
+// First appearance: 30s after page load.
+// After dismissal (Install clicked, declined, or Maybe Later): the 30s
+// timer is restarted from the moment of dismissal, not before.
+// Fully independent of the comment popup — no shared state.
+// ============================================================
 
 let deferredPrompt;
 const popup = document.getElementById('installPopup');
 const addShortCutBtn = document.getElementById('addShortCutBtn');
 const closeShortCutBtn = document.getElementById('closeShortCutBtn');
 let popupTimer;
-let popupDelay = 30000; // initial 30 sec
+const PWA_POPUP_DELAY = 30000; // 30s, used both for first show and every reappearance
 
-// Function to show popup with fade-in animation
 function showPopup() {
   if (localStorage.getItem('pwaInstalled') === 'true') return;
-  // Don't show if comment popup is already visible — keeps things from feeling crowded on small screens
-  if (commentPopup && !commentPopup.classList.contains('hidden')) {
-    popupTimer = setTimeout(showPopup, 6000);
-    return;
-  }
-
   popup.classList.remove('hidden');
-  popup.classList.add('opacity-0'); // start transparent
-
-  // Smooth fade-in using Tailwind transition classes
+  popup.classList.add('opacity-0');
   popup.classList.add('transition-opacity', 'duration-700');
 
   setTimeout(() => {
     popup.classList.remove('opacity-0');
     popup.classList.add('opacity-100');
-  }, 50); // small delay to trigger transition
+  }, 50);
 }
 
-// Function to schedule popup with given delay
-function schedulePopup(delay) {
+function schedulePwaPopup(delay) {
   clearTimeout(popupTimer);
-  popupTimer = setTimeout(() => showPopup(), delay);
+  popupTimer = setTimeout(showPopup, delay);
+}
+
+function dismissPwaPopup() {
+  clearTimeout(popupTimer);
+  popup.classList.add('hidden');
+  popup.classList.remove('opacity-100');
+  popup.classList.add('opacity-0');
+  // Timer for the next appearance starts now, from the moment of dismissal
+  schedulePwaPopup(PWA_POPUP_DELAY);
 }
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  // First show after 30 seconds
-  schedulePopup(popupDelay);
 });
+
+// First appearance — 30s after load, regardless of beforeinstallprompt firing
+schedulePwaPopup(PWA_POPUP_DELAY);
 
 addShortCutBtn.addEventListener('click', async () => {
   clearTimeout(popupTimer);
   popup.classList.add('hidden');
-
 
   if (deferredPrompt) {
     deferredPrompt.prompt();
@@ -1067,10 +1074,8 @@ addShortCutBtn.addEventListener('click', async () => {
 
     if (outcome === 'accepted') {
       console.log('User accepted A2HS prompt');
-      // Remember if app was installed
       localStorage.setItem('pwaInstalled', 'true');
 
-          // 🔹 GA4 event: track only successful PWA installation
       if (typeof gtag !== 'undefined') {
         gtag('event', 'app_installed', {
           event_category: 'PWA',
@@ -1078,45 +1083,54 @@ addShortCutBtn.addEventListener('click', async () => {
           value: 1
         });
       }
-
+      // Installed — no need to schedule another appearance
     } else {
       console.log('User dismissed A2HS prompt');
-      // 30s cooldown before reappearing
-      popupDelay = 30000;
-      schedulePopup(popupDelay);
+      schedulePwaPopup(PWA_POPUP_DELAY);
     }
 
     deferredPrompt = null;
+  } else {
+    // No native prompt available (e.g. already installed, or browser doesn't support it) — just reschedule
+    schedulePwaPopup(PWA_POPUP_DELAY);
   }
 });
 
-closeShortCutBtn.addEventListener('click', () => {
-  clearTimeout(popupTimer);
-  popup.classList.add('hidden');
-  // 30s cooldown before reappearing
-  popupDelay = 30000;
-  schedulePopup(popupDelay);
-});
+closeShortCutBtn.addEventListener('click', dismissPwaPopup);
 
 
 // ============================================================
-// COMMENT NUDGE POPUP — independent timer, same pattern as PWA popup
-// Appears 45s after load (30s + 15s offset from PWA popup), then on a
-// 30s cooldown after each dismissal. Does not touch feedbackToast.
+// COMMENT NUDGE POPUP
+// First appearance: 45s after page load.
+// After dismissal: the 30s timer is restarted from the moment of dismissal.
+// Fully independent of the PWA popup — no shared state, no localStorage
+// flags that depend on the PWA install status.
+// Skips showing if the comments section is already close to the viewport
+// (within 100px), since there's no point nudging someone who's already there.
 // ============================================================
 
 const commentPopup      = document.getElementById('commentPopup');
 const commentPopupBtn   = document.getElementById('commentPopupBtn');
 const commentPopupClose = document.getElementById('commentPopupClose');
 let commentPopupTimer;
-let commentPopupDelay = 45000; // initial 45 sec
+const COMMENT_POPUP_FIRST_DELAY = 45000; // 45s for the very first appearance only
+const COMMENT_POPUP_DELAY       = 30000; // 30s for every appearance after a dismissal
+
+function isCommentsSectionNearView() {
+  const anchor = document.getElementById('comments-anchor');
+  if (!anchor) return false;
+  const rect = anchor.getBoundingClientRect();
+  // "Near view" = within 100px of the viewport (above or below), or already inside it
+  return rect.top < window.innerHeight + 100 && rect.bottom > -100;
+}
 
 function showCommentPopup() {
   if (!commentPopup) return;
-  if (localStorage.getItem('kye_comment_popup_dismissed_session') === 'true') return;
-  // Don't show if install popup is already visible — keeps things from feeling crowded on small screens
-  if (popup && !popup.classList.contains('hidden')) {
-    commentPopupTimer = setTimeout(showCommentPopup, 3000);
+
+  // If the comments section is already close to view, skip this attempt
+  // and check again shortly rather than showing an unnecessary nudge.
+  if (isCommentsSectionNearView()) {
+    commentPopupTimer = setTimeout(showCommentPopup, 5000);
     return;
   }
 
@@ -1132,16 +1146,27 @@ function showCommentPopup() {
 
 function scheduleCommentPopup(delay) {
   clearTimeout(commentPopupTimer);
-  commentPopupTimer = setTimeout(() => showCommentPopup(), delay);
+  commentPopupTimer = setTimeout(showCommentPopup, delay);
+}
+
+function dismissCommentPopup() {
+  clearTimeout(commentPopupTimer);
+  commentPopup.classList.add('hidden');
+  commentPopup.classList.remove('opacity-100');
+  commentPopup.classList.add('opacity-0');
+  // Timer for the next appearance starts now, from the moment of dismissal
+  scheduleCommentPopup(COMMENT_POPUP_DELAY);
 }
 
 if (commentPopup && commentPopupBtn && commentPopupClose) {
-  // First show after 45 seconds
-  scheduleCommentPopup(commentPopupDelay);
+  // First appearance — 45s after load
+  scheduleCommentPopup(COMMENT_POPUP_FIRST_DELAY);
 
   commentPopupBtn.addEventListener('click', () => {
     clearTimeout(commentPopupTimer);
     commentPopup.classList.add('hidden');
+    commentPopup.classList.remove('opacity-100');
+    commentPopup.classList.add('opacity-0');
 
     if (typeof gtag === 'function') {
       gtag('event', 'comment_popup_clicked', {
@@ -1150,7 +1175,6 @@ if (commentPopup && commentPopupBtn && commentPopupClose) {
       });
     }
 
-    // Scroll to comments, same behavior as the existing feedback toast
     setTimeout(() => {
       const c = document.getElementById('comments-anchor');
       if (c) {
@@ -1159,18 +1183,11 @@ if (commentPopup && commentPopupBtn && commentPopupClose) {
       }
     }, 100);
 
-    // 50s cooldown before reappearing
-    commentPopupDelay = 50000;
-    scheduleCommentPopup(commentPopupDelay);
+    // Timer for the next appearance starts now, from the moment of dismissal
+    scheduleCommentPopup(COMMENT_POPUP_DELAY);
   });
 
-  commentPopupClose.addEventListener('click', () => {
-    clearTimeout(commentPopupTimer);
-    commentPopup.classList.add('hidden');
-    // 40s cooldown before reappearing
-    commentPopupDelay = 50000;
-    scheduleCommentPopup(commentPopupDelay);
-  });
+  commentPopupClose.addEventListener('click', dismissCommentPopup);
 }
 
 
