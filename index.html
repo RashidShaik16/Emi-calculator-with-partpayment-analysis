@@ -215,6 +215,184 @@
             transform: translate(-50%, 100%);
             opacity: 0;
             }
+
+        /* --- Rotating pill animation --- */
+        .rotate-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          background: rgba(255,255,255,0.18);
+          border-radius: 999px;
+          padding: 5px 18px 5px 14px;
+          overflow: hidden;
+        }
+        .live-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #4ade80;
+          flex-shrink: 0;
+          box-shadow: 0 0 0 0 rgba(74,222,128,0.6);
+          animation: pill-pulse-dot 1.8s ease-in-out infinite;
+        }
+        @keyframes pill-pulse-dot {
+          0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.6); }
+          70%  { box-shadow: 0 0 0 8px rgba(74,222,128,0); }
+          100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+        }
+        .rotate-window {
+          position: relative;
+          height: 17px;
+          width: 100%;
+        }
+        .rotate-item {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          text-align: center;
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: #ffffff;
+          white-space: nowrap;
+        }
+        .rotate-item.enter {
+          animation: pill-enter-up 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .rotate-item.exit {
+          animation: pill-exit-up 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes pill-enter-up {
+          0%   { opacity: 0; transform: translateY(70%); }
+          60%  { opacity: 1; }
+          100% { opacity: 1; transform: translateY(0%); }
+        }
+        @keyframes pill-exit-up {
+          0%   { opacity: 1; transform: translateY(0%); }
+          40%  { opacity: 0; }
+          100% { opacity: 0; transform: translateY(-70%); }
+        }
+        /* --- End rotating pill animation --- */
+
+        /* ============================================================
+           LOAN TYPE ICON ANIMATIONS
+           Affects: .icon-stage, .icon-personal, .icon-home,
+                    .icon-car, .icon-credit and their is-active states.
+           Independent block — safe to edit or remove without touching
+           anything else.
+           ============================================================ */
+
+        .loan-type-btn {
+          transition: background-color 0.25s ease, color 0.25s ease, transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .loan-type-btn.active {
+          animation: lti-settle-in 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes lti-settle-in {
+          0%   { transform: scale(0.94); }
+          60%  { transform: scale(1.035); }
+          100% { transform: scale(1); }
+        }
+        .loan-type-btn:active { transform: scale(0.97); }
+
+        .icon-stage {
+          position: relative;
+          width: 30px;
+          height: 30px;
+          margin-bottom: 4px;
+          overflow: hidden;
+        }
+        .icon-stage svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* --- CAR: drives off screen and returns --- */
+        .icon-car.is-active svg {
+          animation: lti-car-drive 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+        }
+        @keyframes lti-car-drive {
+          0%   { transform: translateX(0);    opacity: 1; }
+          38%  { transform: translateX(34px); opacity: 1; }
+          45%  { transform: translateX(34px); opacity: 0; }
+          52%  { transform: translateX(-34px);opacity: 0; }
+          60%  { transform: translateX(-34px);opacity: 1; }
+          100% { transform: translateX(0);    opacity: 1; }
+        }
+
+        /* --- HOME: roof drops down and settles onto base --- */
+        .icon-home { position: relative; }
+        .icon-home .house-base { position: absolute; inset: 0; }
+        .icon-home .house-roof { position: absolute; inset: 0; transform-origin: 50% 100%; }
+        .icon-home.is-active .house-roof {
+          animation: lti-roof-drop 2.3s cubic-bezier(0.34, 1.4, 0.64, 1) infinite;
+        }
+        @keyframes lti-roof-drop {
+          0%   { transform: translateY(-9px);                       opacity: 0; }
+          35%  { transform: translateY(-9px);                       opacity: 0; }
+          55%  { transform: translateY(0.5px) scale(1.06, 0.92);   opacity: 1; }
+          70%  { transform: translateY(0);                          opacity: 1; }
+          100% { transform: translateY(0);                          opacity: 1; }
+        }
+
+        /* --- PERSONAL: note slides out of wallet and back --- */
+        .icon-personal { position: relative; }
+        .icon-personal .note {
+          position: absolute;
+          left: 50%; top: 44%;
+          width: 14px; height: 8px;
+          margin-left: -7px;
+          border-radius: 1.5px;
+          background: #86efac;
+          border: 1px solid #15803d;
+          opacity: 0;
+        }
+        .icon-personal .note::after {
+          content: '';
+          position: absolute;
+          top: 50%; left: 50%;
+          width: 4px; height: 4px;
+          margin: -2px 0 0 -2px;
+          border-radius: 50%;
+          border: 1px solid #15803d;
+        }
+        .icon-personal.is-active .note {
+          animation: lti-note-slide 2.2s cubic-bezier(0.34, 1.4, 0.64, 1) infinite;
+        }
+        @keyframes lti-note-slide {
+          0%   { transform: translateY(2px) scale(0.7);  opacity: 0; }
+          8%   { opacity: 1; }
+          35%  { transform: translateY(-11px) scale(1);  opacity: 1; }
+          55%  { transform: translateY(-11px) scale(1);  opacity: 1; }
+          75%  { transform: translateY(2px) scale(0.85); opacity: 1; }
+          90%  { opacity: 0; }
+          100% { transform: translateY(2px) scale(0.7);  opacity: 0; }
+        }
+        .icon-personal.is-active .wallet-body {
+          animation: lti-wallet-flex 2.2s ease-in-out infinite;
+          transform-origin: 50% 100%;
+        }
+        @keyframes lti-wallet-flex {
+          0%, 8% { transform: scaleY(1);   }
+          20%    { transform: scaleY(0.9); }
+          35%    { transform: scaleY(1);   }
+          100%   { transform: scaleY(1);   }
+        }
+
+        /* --- CREDIT CARD: quick 3D flip --- */
+        .icon-credit { perspective: 200px; }
+        .icon-credit svg { transform-style: preserve-3d; }
+        .icon-credit.is-active svg {
+          animation: lti-card-flip 2.4s cubic-bezier(0.45, 0, 0.3, 1) infinite;
+        }
+        @keyframes lti-card-flip {
+          0%   { transform: rotateY(0deg);   }
+          30%  { transform: rotateY(180deg); }
+          45%  { transform: rotateY(180deg); }
+          75%  { transform: rotateY(360deg); }
+          100% { transform: rotateY(360deg); }
+        }
+
+        /* === End loan type icon animations === */
         </style>
 
           <!-- Google AdSense -->
@@ -258,7 +436,10 @@
         <!-- PAGE HERO HEADER -->
         <div class="bg-gradient-to-r from-blue-800 to-indigo-900 py-14 px-4">
           <div class="max-w-7xl mx-auto px-4">
-            <span class="inline-block bg-white bg-opacity-20 text-white text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-3">Free Calculator</span>
+            <div class="rotate-pill mb-3" id="rotatePill">
+              <span class="live-dot"></span>
+              <div class="rotate-window" id="rotateWindow"></div>
+            </div>
             <h1 class="text-2xl md:text-3xl font-bold text-white" style="font-family:'Lora',serif;">EMI Calculator - Plan Your Loan Before You Sign.</h1>
             <p class="text-sm text-blue-200 mt-2 max-w-xl">Calculate your monthly EMI, see the full amortization schedule, model part payments, and understand the real cost of your loan. No sign-ups, no hidden conditions.</p>
           </div>
@@ -279,40 +460,48 @@
                             <!-- Personal Loan -->
                             <button type="button" data-type="personal"
                             class="loan-type-btn active bg-blue-800 text-white rounded-xl py-2 font-medium flex flex-col items-center justify-center hover:scale-[1.02] transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0 6a9 9 0 100-18 9 9 0 000 18z" />
-                            </svg>
+                            <span class="icon-stage icon-personal is-active">
+                                <span class="note"></span>
+                                <svg class="wallet-body" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12V7H5a2 2 0 010-4h14v4M3 5v14a2 2 0 002 2h16v-5M18 12a2 2 0 100 4 2 2 0 000-4z"/>
+                                </svg>
+                            </span>
                             Personal Loan
                             </button>
 
                             <!-- Home Loan -->
                             <button type="button" data-type="home"
                             class="loan-type-btn bg-gray-100 text-gray-800 rounded-xl py-2 font-medium flex flex-col items-center justify-center hover:scale-[1.02] transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l9-9 9 9M4 10v10h16V10" />
-                            </svg>
+                            <span class="icon-stage icon-home">
+                                <svg class="house-base" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 10v10h16V10" />
+                                </svg>
+                                <svg class="house-roof" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9" />
+                                </svg>
+                            </span>
                             Home Loan
                             </button>
 
                             <!-- Car Loan -->
                             <button type="button" data-type="car"
                             class="loan-type-btn bg-gray-100 text-gray-800 rounded-xl py-2 font-medium flex flex-col items-center justify-center hover:scale-[1.02] transition">
-                            <!-- 🚗 Side view car SVG -->
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="w-9 h-9 mb-1" fill="currentColor">
-                                <path d="M54 24H46l-4.2-7a3 3 0 0 0-2.6-1.5H16.8a3 3 0 0 0-2.7 1.7L10 24H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2a8 8 0 1 0 16 0h16a8 8 0 1 0 16 0h2a2 2 0 0 0 2-2V26a2 2 0 0 0-2-2ZM16 18h22.7L42 24H14ZM12 38a4 4 0 1 1 4-4 4 4 0 0 1-4 4Zm36 0a4 4 0 1 1 4-4 4 4 0 0 1-4 4Z"/>
-                            </svg>
+                            <span class="icon-stage icon-car">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="currentColor">
+                                  <path d="M54 24H46l-4.2-7a3 3 0 0 0-2.6-1.5H16.8a3 3 0 0 0-2.7 1.7L10 24H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2a8 8 0 1 0 16 0h16a8 8 0 1 0 16 0h2a2 2 0 0 0 2-2V26a2 2 0 0 0-2-2ZM16 18h22.7L42 24H14ZM12 38a4 4 0 1 1 4-4 4 4 0 0 1-4 4Zm36 0a4 4 0 1 1 4-4 4 4 0 0 1-4 4Z"/>
+                                </svg>
+                            </span>
                             Car Loan
                             </button>
 
                             <!-- Credit Card Loan -->
                             <button type="button" data-type="credit"
                             class="loan-type-btn bg-gray-100 text-gray-800 rounded-xl py-2 font-medium flex flex-col items-center justify-center hover:scale-[1.02] transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2 7h20v10H2V7zm2 4h16M2 10h20M6 15h4" />
-                            </svg>
+                            <span class="icon-stage icon-credit">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 7h20v10H2V7zm2 4h16M2 10h20M6 15h4" />
+                                </svg>
+                            </span>
                             Loan on Credit Card
                             </button>
 
@@ -1456,5 +1645,88 @@
     };
 })();
 </script>
+
+
+<script>
+// Loan type icon animation
+(function () {
+  document.querySelectorAll('.loan-type-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      /* remove is-active from all icon stages */
+      document.querySelectorAll('.icon-stage').forEach(function (s) {
+        s.classList.remove('is-active');
+      });
+      /* add is-active to the icon stage inside the clicked button */
+      btn.querySelectorAll('.icon-stage').forEach(function (s) {
+        s.classList.add('is-active');
+      });
+      /* re-trigger the settle-in bounce on the button */
+      btn.classList.remove('active');
+      void btn.offsetWidth; /* reflow */
+      btn.classList.add('active');
+    });
+  });
+})();
+</script>
+
+<script>
+/* --- Rotating pill --- */
+(function () {
+  var features = [
+    "Free Calculator",
+    "No Ads, No Sign-Up",
+    "Download as PDF",
+    "32,000+ Users Served",
+    "Supports Part Payments"
+  ];
+
+  var pillEl   = document.getElementById('rotatePill');
+  var windowEl = document.getElementById('rotateWindow');
+  if (!pillEl || !windowEl) return;
+
+  var index = 0;
+
+  function createItem(text, cls) {
+    var el = document.createElement('div');
+    el.className = 'rotate-item ' + cls;
+    el.textContent = text;
+    return el;
+  }
+
+  /* Size the pill once to fit the longest phrase, then lock it */
+  function setFixedWidth() {
+    var probe = document.createElement('span');
+    probe.style.cssText = 'visibility:hidden;position:absolute;white-space:nowrap;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;';
+    document.body.appendChild(probe);
+    var max = 0;
+    features.forEach(function (t) {
+      probe.textContent = t;
+      var w = probe.getBoundingClientRect().width;
+      if (w > max) max = w;
+    });
+    document.body.removeChild(probe);
+    pillEl.style.width = (max + 36 + 13) + 'px';
+  }
+
+  setFixedWidth();
+
+  var currentEl = createItem(features[0], 'enter');
+  windowEl.appendChild(currentEl);
+
+  function rotate() {
+    var nextIndex = (index + 1) % features.length;
+    var outEl = currentEl;
+    var inEl  = createItem(features[nextIndex], 'enter');
+    windowEl.appendChild(inEl);
+    outEl.classList.remove('enter');
+    outEl.classList.add('exit');
+    setTimeout(function () { outEl.remove(); currentEl = inEl; index = nextIndex; }, 450);
+  }
+
+  setInterval(rotate, 2500);
+})();
+/* --- End rotating pill --- */
+</script>
+
 </body>
 </html>
