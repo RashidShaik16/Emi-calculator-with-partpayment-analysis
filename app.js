@@ -1262,27 +1262,28 @@ if (commentPopup && commentPopupBtn && commentPopupClose) {
   }
  
  
-  // ---------- 1. Count-up on result cards ----------
- 
-  const resultEls = ['monthlyEmi', 'totalInterest', 'totalPayment'].map(function (id) {
-    return document.getElementById(id);
-  }).filter(Boolean);
- 
-  resultEls.forEach(function (el) {
-    const mutObs = new MutationObserver(function () {
-      const val = parseRupee(el.textContent);
-      if (val <= 0) return;
-      // Disconnect before animating so the count-up's own DOM writes
-      // don't re-trigger this observer and cause an infinite loop.
-      mutObs.disconnect();
-      countUpWhenVisible(el, val, function onDone() {
-        // Reconnect once animation is fully done
-        mutObs.observe(el, { childList: true, characterData: true, subtree: true });
-      });
+ // ---------- 1. Count-up on result cards ----------
+
+const resultEls = ['monthlyEmi', 'totalInterest', 'totalPayment'].map(function (id) {
+  return document.getElementById(id);
+}).filter(Boolean);
+
+resultEls.forEach(function (el) {
+  el._kyeTarget = 0; // store intended target separately
+
+  const mutObs = new MutationObserver(function () {
+    const val = parseRupee(el.textContent);
+    if (val <= 0) return;
+    if (val === el._kyeTarget) return; // same value, skip
+    el._kyeTarget = val;
+
+    mutObs.disconnect();
+    countUpWhenVisible(el, val, function onDone() {
+      mutObs.observe(el, { childList: true, characterData: true, subtree: true });
     });
-    mutObs.observe(el, { childList: true, characterData: true, subtree: true });
   });
- 
+  mutObs.observe(el, { childList: true, characterData: true, subtree: true });
+});
  
   // ---------- 2. Fade-in stagger on amortization year blocks ----------
  
