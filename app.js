@@ -1053,7 +1053,7 @@ function dismissPwaPopup() {
   popup.classList.remove('opacity-100');
   popup.classList.add('opacity-0');
   // Timer for the next appearance starts now, from the moment of dismissal
-  schedulePwaPopup(PWA_POPUP_DELAY);
+  schedulePwaPopup(40000);
 }
 
 window.addEventListener('beforeinstallprompt', (e) => {
@@ -1113,8 +1113,8 @@ const commentPopup      = document.getElementById('commentPopup');
 const commentPopupBtn   = document.getElementById('commentPopupBtn');
 const commentPopupClose = document.getElementById('commentPopupClose');
 let commentPopupTimer;
-const COMMENT_POPUP_FIRST_DELAY = 45000; // 45s for the very first appearance only
-const COMMENT_POPUP_DELAY       = 30000; // 30s for every appearance after a dismissal
+const COMMENT_POPUP_FIRST_DELAY = 50000; // 50s for the very first appearance only
+const COMMENT_POPUP_DELAY       = 40000; // 40s for every appearance after a dismissal
 
 function isCommentsSectionNearView() {
   const anchor = document.getElementById('comments-anchor');
