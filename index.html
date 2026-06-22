@@ -733,13 +733,17 @@
             </div>
 
             <!-- part payments savings -->
-            <div id="savingsHighlight" class="hidden mx-auto mt-6 p-4 rounded-lg bg-gradient-to-r from-blue-200 to-indigo-300 shadow-md text-center md:w-1/2">
+            <!-- == MARCHING BORDER WRAPPER (independent) == -->
+            <div id="savingsHighlight" class="hidden mx-auto mt-6 md:w-1/2" style="padding:2px;border-radius:12px;background:#e2e8f0;">
+                <div class="p-4 bg-white shadow-md text-center" style="border-radius:9px;">
                     <p class="text-gray-700 text-base font-bold">You save</p>
                     <p id="savingsAmount" class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-pink-600 animate-pulse">
                         ₹0
                     </p>
                     <p id="savingsDetail" class="text-sm text-gray-700 mt-2 font-bold"></p>
+                </div>
             </div>
+            <!-- == End marching border wrapper == -->
 
 
 

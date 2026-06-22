@@ -1191,3 +1191,166 @@ if (commentPopup && commentPopupBtn && commentPopupClose) {
 }
 
 
+
+
+
+// count animations and stagger animations function
+
+ 
+(function () {
+ 
+  // ---------- helpers ----------
+ 
+  function parseRupee(text) {
+    return parseInt(text.replace(/[₹,]/g, ''), 10) || 0;
+  }
+ 
+  function countUp(el, targetValue, onDone) {
+    if (el._kyeRaf) cancelAnimationFrame(el._kyeRaf);
+    const DURATION = 900;
+    const start    = performance.now();
+ 
+    function step(now) {
+      const progress = Math.min((now - start) / DURATION, 1);
+      const eased    = 1 - Math.pow(1 - progress, 3);
+      const current  = Math.round(eased * targetValue);
+      el.textContent = '₹' + current.toLocaleString('en-IN');
+      if (progress < 1) {
+        el._kyeRaf = requestAnimationFrame(step);
+      } else {
+        el.textContent = '₹' + targetValue.toLocaleString('en-IN');
+        if (typeof onDone === 'function') onDone();
+      }
+    }
+    el._kyeRaf = requestAnimationFrame(step);
+  }
+ 
+  function countUpWhenVisible(el, targetValue, onDone) {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      countUp(el, targetValue, onDone);
+      return;
+    }
+    if (el._kyeVisObs) el._kyeVisObs.disconnect();
+    const obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          obs.disconnect();
+          countUp(el, targetValue, onDone);
+        }
+      });
+    }, { threshold: 0.3 });
+    el._kyeVisObs = obs;
+    obs.observe(el);
+  }
+ 
+  function fadeInWhenVisible(el) {
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(14px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+ 
+    const obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          obs.disconnect();
+          el.style.opacity   = '1';
+          el.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    obs.observe(el);
+  }
+ 
+ 
+  // ---------- 1. Count-up on result cards ----------
+ 
+  const resultEls = ['monthlyEmi', 'totalInterest', 'totalPayment'].map(function (id) {
+    return document.getElementById(id);
+  }).filter(Boolean);
+ 
+  resultEls.forEach(function (el) {
+    const mutObs = new MutationObserver(function () {
+      const val = parseRupee(el.textContent);
+      if (val <= 0) return;
+      // Disconnect before animating so the count-up's own DOM writes
+      // don't re-trigger this observer and cause an infinite loop.
+      mutObs.disconnect();
+      countUpWhenVisible(el, val, function onDone() {
+        // Reconnect once animation is fully done
+        mutObs.observe(el, { childList: true, characterData: true, subtree: true });
+      });
+    });
+    mutObs.observe(el, { childList: true, characterData: true, subtree: true });
+  });
+ 
+ 
+  // ---------- 2. Fade-in stagger on amortization year blocks ----------
+ 
+  const accordion = document.getElementById('amortizationAccordion');
+  if (accordion) {
+    const mutObs2 = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        m.addedNodes.forEach(function (node) {
+          if (node.nodeType === 1) {
+            fadeInWhenVisible(node);
+          }
+        });
+      });
+    });
+    mutObs2.observe(accordion, { childList: true });
+  }
+ 
+})();
+ 
+// === End scroll-triggered animations ===
+ 
+
+
+// Marching border on savings results card
+
+(function () {
+  const el = document.getElementById('savingsHighlight');
+  if (!el) return;
+ 
+  const SPEED = 3000;
+  const SEG   = 0.22;
+  let rafId   = null;
+  let start   = null;
+ 
+  function march(ts) {
+    if (!start) start = ts;
+    const prog   = ((ts - start) % SPEED) / SPEED;
+    const deg    = prog * 360;
+    const segDeg = SEG * 360;
+    const end    = deg + segDeg;
+ 
+    // Absolute degree stops so multicolor spreads visibly across the segment
+    el.style.background = `conic-gradient(from 0deg,
+      transparent              ${deg}deg,
+      #1e40af                  ${deg + segDeg * 0.1}deg,
+      #4f46e5                  ${deg + segDeg * 0.4}deg,
+      #7c3aed                  ${deg + segDeg * 0.7}deg,
+      #1e40af                  ${end - segDeg * 0.1}deg,
+      transparent              ${end}deg,
+      transparent              360deg)`;
+ 
+    rafId = requestAnimationFrame(march);
+  }
+ 
+  function stop() {
+    cancelAnimationFrame(rafId);
+    rafId = null;
+    start = null;
+    el.style.background = '#e2e8f0';
+  }
+ 
+  // Watch for hidden/visible class toggle
+  new MutationObserver(function () {
+    if (el.classList.contains('hidden')) {
+      stop();
+    } else if (!rafId) {
+      rafId = requestAnimationFrame(march);
+    }
+  }).observe(el, { attributes: true, attributeFilter: ['class'] });
+})();
+// === End marching border animation ==
