@@ -192,6 +192,9 @@ if (downloadBtn) {
       return;
     }
 
+    // Prevent double-click while animating
+    if (downloadBtn.disabled) return;
+
     // read current loan inputs (these vars exist inside DOMContentLoaded)
     const loanAmount = Number(loanInput.value);
     const interestRate = Number(rateInput.value);
@@ -224,12 +227,68 @@ if (downloadBtn) {
       disbursalValue: disbursalValue,
       originalInterest: originalTotalInterest,
       newInterest: newTotalInterest,
-      loanType: currentLoanType 
-
+      loanType: currentLoanType
     };
 
+    // ── PDF BUTTON ANIMATION ─────────────────────────────────────────────
+    // Save original button content so we can restore it cleanly
+    const originalHTML    = downloadBtn.innerHTML;
+    const originalClasses = downloadBtn.className;
 
-    pdfGenerator(dataForPdf, partPayments, loanInfo);
+    // Phase 1 — spinner while jsPDF generates
+    downloadBtn.disabled  = true;
+    downloadBtn.innerHTML = `
+      <svg class="animate-spin w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+      </svg>
+      <span>Generating...</span>
+    `;
+    downloadBtn.className = 'flex items-center gap-2 bg-blue-400 text-white px-4 py-2 rounded-lg font-semibold cursor-not-allowed transition-all duration-300';
+
+    // Generate PDF — wrapped in setTimeout so the spinner renders first
+    setTimeout(() => {
+      try {
+        pdfGenerator(dataForPdf, partPayments, loanInfo);
+      } catch (e) {
+        // If PDF generation throws, restore button and surface error
+        downloadBtn.innerHTML = originalHTML;
+        downloadBtn.className = originalClasses;
+        downloadBtn.disabled  = false;
+        console.error('PDF generation failed:', e);
+        return;
+      }
+
+      // Phase 2 — green tick + success text
+      downloadBtn.innerHTML = `
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>Downloaded!</span>
+      `;
+      downloadBtn.className = 'flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300';
+
+      // Phase 3 — fade back to original after 2.5s
+      setTimeout(() => {
+        downloadBtn.style.transition = 'opacity 0.4s ease';
+        downloadBtn.style.opacity    = '0';
+        setTimeout(() => {
+          downloadBtn.innerHTML        = originalHTML;
+          downloadBtn.className        = originalClasses;
+          downloadBtn.style.opacity    = '0';
+          downloadBtn.disabled         = false;
+          // Fade back in
+          requestAnimationFrame(() => {
+            downloadBtn.style.transition = 'opacity 0.4s ease';
+            downloadBtn.style.opacity    = '1';
+            setTimeout(() => { downloadBtn.style.transition = ''; }, 400);
+          });
+        }, 400);
+      }, 2500);
+
+    }, 60); // 60ms — enough for spinner to paint before heavy PDF work starts
+    // ── END PDF BUTTON ANIMATION ─────────────────────────────────────────
 
     // Fire GA4 event for PDF download
     if (typeof gtag === "function") {
@@ -240,7 +299,7 @@ if (downloadBtn) {
         client: window.KYE_CLIENT || "main"
       });
     }
-    
+
   });
 }
 
@@ -453,9 +512,21 @@ function updateResults() {
   loanDisplay.textContent = '₹' + P.toLocaleString('en-IN');
   rateDisplay.textContent = annualRate.toFixed(2) + '%';
   tenureDisplay.textContent = N;
-  monthlyEmiEl.textContent = '₹' + Math.round(emi).toLocaleString('en-IN');
-  totalInterestEl.textContent = '₹' + Math.round(originalTotalInterest).toLocaleString('en-IN');
-  totalPaymentEl.textContent = '₹' + Math.round(totalPayment).toLocaleString('en-IN');
+
+  // ── KYE COUNT-UP WIRING ──────────────────────────────────────────────────
+  // _kyeCountUp is exposed by the animation block below (outside DOMContentLoaded).
+  // We pass the exact calculated values directly — no DOM reading, no race condition.
+  if (window._kyeCountUp) {
+    window._kyeCountUp(monthlyEmiEl,    Math.round(emi),                   null);
+    window._kyeCountUp(totalInterestEl, Math.round(originalTotalInterest), null);
+    window._kyeCountUp(totalPaymentEl,  Math.round(totalPayment),          null);
+  } else {
+    // Fallback: animations not loaded yet (e.g. very first paint)
+    monthlyEmiEl.textContent    = '₹' + Math.round(emi).toLocaleString('en-IN');
+    totalInterestEl.textContent = '₹' + Math.round(originalTotalInterest).toLocaleString('en-IN');
+    totalPaymentEl.textContent  = '₹' + Math.round(totalPayment).toLocaleString('en-IN');
+  }
+  // ── END KYE COUNT-UP WIRING ──────────────────────────────────────────────
 
   // --- Render amortization with part-payments applied ---
   renderAmortization(schedule);
@@ -1240,3 +1311,96 @@ if (commentPopup && commentPopupBtn && commentPopupClose) {
   }).observe(el, { attributes: true, attributeFilter: ['class'] });
 })();
 // === End marching border animation ==
+
+
+// ============================================================
+// KYE SCROLL-TRIGGERED ANIMATIONS
+// Self-contained IIFE — no changes needed to any other code.
+// Exposes window._kyeCountUp so updateResults() can trigger
+// count-up with the exact calculated value (no DOM reading).
+// Accordion fade-in is fully internal — driven by MutationObserver
+// watching for newly added year blocks.
+// To remove all animations: delete this entire block.
+// ============================================================
+(function () {
+
+  // ---------- helpers ----------
+
+  function countUp(el, targetValue, onDone) {
+    if (el._kyeRaf) cancelAnimationFrame(el._kyeRaf);
+    const DURATION = 900;
+    const start    = performance.now();
+
+    function step(now) {
+      const progress = Math.min((now - start) / DURATION, 1);
+      const eased    = 1 - Math.pow(1 - progress, 3);
+      const current  = Math.round(eased * targetValue);
+      el.textContent = '₹' + current.toLocaleString('en-IN');
+      if (progress < 1) {
+        el._kyeRaf = requestAnimationFrame(step);
+      } else {
+        el.textContent = '₹' + targetValue.toLocaleString('en-IN');
+        if (typeof onDone === 'function') onDone();
+      }
+    }
+    el._kyeRaf = requestAnimationFrame(step);
+  }
+
+  function countUpWhenVisible(el, targetValue, onDone) {
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      countUp(el, targetValue, onDone);
+      return;
+    }
+    if (el._kyeVisObs) el._kyeVisObs.disconnect();
+    const obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          obs.disconnect();
+          countUp(el, targetValue, onDone);
+        }
+      });
+    }, { threshold: 0.3 });
+    el._kyeVisObs = obs;
+    obs.observe(el);
+  }
+
+  // ---------- 1. Expose count-up for updateResults() wiring ----------
+  window._kyeCountUp = countUpWhenVisible;
+
+  // ---------- 2. Fade-in stagger on amortization year blocks ----------
+
+  function fadeInWhenVisible(el) {
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(14px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+
+    const obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          obs.disconnect();
+          el.style.opacity   = '1';
+          el.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    obs.observe(el);
+  }
+
+  const accordion = document.getElementById('amortizationAccordion');
+  if (accordion) {
+    const accObs = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        m.addedNodes.forEach(function (node) {
+          if (node.nodeType === 1) {
+            fadeInWhenVisible(node);
+          }
+        });
+      });
+    });
+    accObs.observe(accordion, { childList: true });
+  }
+
+})();
+// === End KYE scroll-triggered animations ===
