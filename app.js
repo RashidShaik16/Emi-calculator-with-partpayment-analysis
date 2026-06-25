@@ -1404,3 +1404,292 @@ if (commentPopup && commentPopupBtn && commentPopupClose) {
 
 })();
 // === End KYE scroll-triggered animations ===
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// KYE RESULT CARD
+// Self-contained IIFE. Reads loan data from the existing global variables
+// (originalTotalInterest, newTotalInterest, partPayments, dataForPdf,
+//  currentLoanType) and DOM inputs — zero changes to any other logic.
+//
+// Depends on: html2canvas (loaded in index.html before app.js)
+//
+// To remove this feature entirely:
+//   1. Delete this entire block
+//   2. Delete the resultCardBtn in index.html buttons row
+//   3. Delete the kye-result-card-modal in index.html
+//   4. Remove the html2canvas <script> tag from index.html
+// ════════════════════════════════════════════════════════════════════════════
+(function () {
+
+  // ── Element refs ──────────────────────────────────────────────────────────
+  const openBtn   = document.getElementById('resultCardBtn');
+  const modal     = document.getElementById('kye-result-card-modal');
+  const closeBtn  = document.getElementById('kye-rc-close');
+  const card      = document.getElementById('kye-result-card');
+  const dlBtn     = document.getElementById('kye-rc-download');
+  const shareBtn  = document.getElementById('kye-rc-share');
+  const caption   = document.getElementById('kye-rc-caption');
+
+  // Card field refs
+  const rcEmi        = document.getElementById('kye-rc-emi');
+  const rcAmount     = document.getElementById('kye-rc-amount');
+  const rcRate       = document.getElementById('kye-rc-rate');
+  const rcTenure     = document.getElementById('kye-rc-tenure');
+  const rcInt        = document.getElementById('kye-rc-interest');
+  const rcPPSec      = document.getElementById('kye-rc-pp-section');
+  const rcPPDet      = document.getElementById('kye-rc-pp-detail');
+  const rcPPSaved    = document.getElementById('kye-rc-pp-saved');
+  const rcPPMon      = document.getElementById('kye-rc-pp-months');
+  const rcPPNewI     = document.getElementById('kye-rc-pp-newint');
+  const rcPPTenureRow = document.getElementById('kye-rc-pp-tenure-row');
+  const rcPPEmiRow   = document.getElementById('kye-rc-pp-emi-row');
+  const rcPPNewEmi   = document.getElementById('kye-rc-pp-newemi');
+
+  if (!openBtn || !modal || !card) return; // guard: elements not in DOM
+
+  // ── Helpers ───────────────────────────────────────────────────────────────
+  function fmt(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
+
+  // ── Populate card with current loan data ──────────────────────────────────
+  function populateCard() {
+    const loanInput   = document.getElementById('loanAmountInput');
+    const rateInput   = document.getElementById('interestRateInput');
+    const tenureInput = document.getElementById('tenureInput');
+
+    const P           = Number(loanInput?.value   || 0);
+    const annualRate  = parseFloat(rateInput?.value || 0);
+    const N           = parseInt(tenureInput?.value || 0, 10);
+
+    // EMI — recalculate cleanly (same formula used in updateResults)
+    const r   = (annualRate / 12) / 100;
+    const emi = r === 0 ? P / N : P * r * Math.pow(1 + r, N) / (Math.pow(1 + r, N) - 1);
+
+    // Populate main fields
+    rcEmi.textContent    = fmt(Math.round(emi));
+    rcAmount.textContent = fmt(P);
+    rcRate.textContent   = annualRate.toFixed(2) + '%';
+    rcTenure.textContent = N + ' months';
+    rcInt.textContent    = fmt(originalTotalInterest);  // global from app.js
+
+    // Part payments section
+    const hasPP = Array.isArray(partPayments) && partPayments.length > 0;  // global
+    rcPPSec.style.display = hasPP ? 'block' : 'none';
+
+    if (hasPP) {
+      const interestSaved = originalTotalInterest - newTotalInterest;  // globals
+      const schedule      = dataForPdf || [];                          // global
+      const tenureReduced = N - schedule.length;
+
+      // Build compact part payments table — max 5 rows
+      const MAX_PP = 5;
+      const shownPPs  = partPayments.slice(0, MAX_PP);
+      const hiddenCount = partPayments.length - shownPPs.length;
+
+      let ppTableHTML = '<table style="width:100%;border-collapse:collapse;margin-bottom:2px;">';
+      shownPPs.forEach(function (pp) {
+        const matchRow = schedule.find(function (m) { return m.serial === pp.month; });
+        let dateLabel = '';
+        if (matchRow) {
+          const mName = new Date(matchRow.year, matchRow.month - 1).toLocaleString('default', { month: 'short' });
+          dateLabel = mName + ' ' + matchRow.year;
+        }
+        ppTableHTML +=
+          '<tr>' +
+            '<td style="font-size:11px;color:rgba(187,247,208,0.8);padding:2px 0;">' + dateLabel + '</td>' +
+            '<td style="font-size:11px;font-weight:700;color:#86efac;text-align:right;padding:2px 0;">' + fmt(pp.amount) + '</td>' +
+          '</tr>';
+      });
+      ppTableHTML += '</table>';
+      if (hiddenCount > 0) {
+        ppTableHTML += '<p style="font-size:10px;color:rgba(187,247,208,0.6);margin:2px 0 0;">and ' + hiddenCount + ' more payment' + (hiddenCount > 1 ? 's' : '') + '</p>';
+      }
+      rcPPDet.innerHTML = ppTableHTML;
+      rcPPSaved.textContent = fmt(interestSaved);
+      rcPPNewI.textContent  = fmt(newTotalInterest);
+
+      // Determine which option was used — check the last part payment's option
+      const lastOption = partPayments[partPayments.length - 1].option;
+
+      if (lastOption === 'reduceEmi') {
+        // Show New EMI row, hide Tenure Reduced row
+        rcPPTenureRow.style.display = 'none';
+        rcPPEmiRow.style.display    = 'flex';
+
+        // New EMI = EMI recalculated on remaining balance after last part payment
+        // Best approximation: use the last month's EMI from the schedule
+        const lastMonth = schedule[schedule.length - 1];
+        const newEmiVal = lastMonth ? lastMonth.emi : 0;
+        rcPPNewEmi.textContent = fmt(Math.round(newEmiVal));
+
+      } else {
+        // reduceTenure — show Tenure Reduced row, hide New EMI row
+        rcPPTenureRow.style.display = 'flex';
+        rcPPEmiRow.style.display    = 'none';
+        rcPPMon.textContent = tenureReduced + ' months';
+      }
+    }
+  }
+
+  // ── Render card to canvas via html2canvas ─────────────────────────────────
+  function renderCardToCanvas() {
+    return html2canvas(card, {
+      scale:           2,         // retina quality
+      useCORS:         true,
+      backgroundColor: null,      // transparent — card has its own bg
+      logging:         false
+    });
+  }
+
+  // ── Open modal ────────────────────────────────────────────────────────────
+  function openModal() {
+    populateCard();
+    caption.textContent  = '';
+    modal.style.display  = 'flex';
+    // Slight entrance animation
+    modal.style.opacity  = '0';
+    requestAnimationFrame(function () {
+      modal.style.transition = 'opacity 0.25s ease';
+      modal.style.opacity    = '1';
+    });
+
+    // GA4 — loan card opened
+    if (typeof gtag === 'function') {
+      gtag('event', 'loan_card_clicked', {
+        event_category: 'engagement',
+        event_label: 'loan_card',
+        client: window.KYE_CLIENT || 'main'
+      });
+    }
+  }
+
+  // ── Close modal ───────────────────────────────────────────────────────────
+  function closeModal() {
+    modal.style.transition = 'opacity 0.2s ease';
+    modal.style.opacity    = '0';
+    setTimeout(function () {
+      modal.style.display = 'none';
+      modal.style.opacity = '1';   // reset for next open
+    }, 200);
+  }
+
+  // ── Download as image ─────────────────────────────────────────────────────
+  function downloadImage() {
+    caption.textContent = 'Generating image...';
+    dlBtn.style.opacity = '0.5';
+    dlBtn.style.pointerEvents = 'none';
+
+    renderCardToCanvas().then(function (canvas) {
+      canvas.toBlob(function (blob) {
+        const url  = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = 'KnowYourEMI-LoanPlan.png';
+        link.href     = url;
+        link.click();
+        URL.revokeObjectURL(url);
+
+        // GA4 — loan card downloaded
+        if (typeof gtag === 'function') {
+          gtag('event', 'loan_card_downloaded', {
+            event_category: 'engagement',
+            event_label: 'loan_card',
+            client: window.KYE_CLIENT || 'main'
+          });
+        }
+
+        caption.textContent       = 'Image saved!';
+        dlBtn.style.opacity       = '1';
+        dlBtn.style.pointerEvents = '';
+        setTimeout(function () { caption.textContent = ''; }, 2500);
+      });
+    }).catch(function (err) {
+      caption.textContent       = 'Could not generate image.';
+      dlBtn.style.opacity       = '1';
+      dlBtn.style.pointerEvents = '';
+      console.error('KYE Result Card: html2canvas error', err);
+    });
+  }
+
+  // ── Share as image (Web Share API) ────────────────────────────────────────
+  function shareImage() {
+    // Check if Web Share API supports file sharing (mobile browsers)
+    if (!navigator.canShare) {
+      // Desktop fallback — just download instead
+      caption.textContent = 'Sharing not supported here — saving instead.';
+      setTimeout(function () { caption.textContent = ''; downloadImage(); }, 1200);
+      return;
+    }
+
+    caption.textContent         = 'Preparing to share...';
+    shareBtn.style.opacity      = '0.5';
+    shareBtn.style.pointerEvents = 'none';
+
+    renderCardToCanvas().then(function (canvas) {
+      canvas.toBlob(function (blob) {
+        const file = new File([blob], 'KnowYourEMI-LoanPlan.png', { type: 'image/png' });
+
+        if (!navigator.canShare({ files: [file] })) {
+          // Files not supported — fall back to download
+          caption.textContent         = 'Image sharing not supported — saving instead.';
+          shareBtn.style.opacity      = '1';
+          shareBtn.style.pointerEvents = '';
+          setTimeout(function () { caption.textContent = ''; downloadImage(); }, 1200);
+          return;
+        }
+
+        navigator.share({
+          files:  [file],
+          title:  'My Loan Plan — KnowYourEMI',
+          text:   'Calculated my EMI on knowyouremi.in'
+        }).then(function () {
+          caption.textContent = 'Shared!';
+          setTimeout(function () { caption.textContent = ''; }, 2000);
+
+          // GA4 — loan card shared
+          if (typeof gtag === 'function') {
+            gtag('event', 'loan_card_shared', {
+              event_category: 'engagement',
+              event_label: 'loan_card',
+              client: window.KYE_CLIENT || 'main'
+            });
+          }
+        }).catch(function (err) {
+          if (err.name !== 'AbortError') {
+            caption.textContent = 'Share cancelled.';
+            setTimeout(function () { caption.textContent = ''; }, 2000);
+          } else {
+            caption.textContent = '';
+          }
+        }).finally(function () {
+          shareBtn.style.opacity      = '1';
+          shareBtn.style.pointerEvents = '';
+        });
+
+      }, 'image/png');
+    }).catch(function (err) {
+      caption.textContent         = 'Could not generate image.';
+      shareBtn.style.opacity      = '1';
+      shareBtn.style.pointerEvents = '';
+      console.error('KYE Result Card: html2canvas error', err);
+    });
+  }
+
+  // ── Event listeners ───────────────────────────────────────────────────────
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  dlBtn.addEventListener('click', downloadImage);
+  shareBtn.addEventListener('click', shareImage);
+
+  // Close on backdrop click
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) closeModal();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+  });
+
+})();
+// ════════════════════════════════════════════════════════════════════════════
+// === End KYE Result Card ===
