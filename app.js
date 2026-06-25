@@ -1554,8 +1554,9 @@ if (commentPopup && commentPopupBtn && commentPopupClose) {
     });
 
     // GA4 — loan card opened
-    if (typeof gtag === 'function') {
-      gtag('event', 'loan_card_clicked', {
+    // Use window.gtag to ensure we always reach the global, not a closure copy
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'loan_card_clicked', {
         event_category: 'engagement',
         event_label: 'loan_card',
         client: window.KYE_CLIENT || 'main'
@@ -1589,8 +1590,8 @@ if (commentPopup && commentPopupBtn && commentPopupClose) {
         URL.revokeObjectURL(url);
 
         // GA4 — loan card downloaded
-        if (typeof gtag === 'function') {
-          gtag('event', 'loan_card_downloaded', {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'loan_card_downloaded', {
             event_category: 'engagement',
             event_label: 'loan_card',
             client: window.KYE_CLIENT || 'main'
@@ -1637,6 +1638,15 @@ if (commentPopup && commentPopupBtn && commentPopupClose) {
           return;
         }
 
+        // GA4 — fire before navigator.share because iOS .then() is unreliable
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'loan_card_shared', {
+            event_category: 'engagement',
+            event_label: 'loan_card',
+            client: window.KYE_CLIENT || 'main'
+          });
+        }
+
         navigator.share({
           files:  [file],
           title:  'My Loan Plan — KnowYourEMI',
@@ -1644,15 +1654,6 @@ if (commentPopup && commentPopupBtn && commentPopupClose) {
         }).then(function () {
           caption.textContent = 'Shared!';
           setTimeout(function () { caption.textContent = ''; }, 2000);
-
-          // GA4 — loan card shared
-          if (typeof gtag === 'function') {
-            gtag('event', 'loan_card_shared', {
-              event_category: 'engagement',
-              event_label: 'loan_card',
-              client: window.KYE_CLIENT || 'main'
-            });
-          }
         }).catch(function (err) {
           if (err.name !== 'AbortError') {
             caption.textContent = 'Share cancelled.';
