@@ -17,33 +17,58 @@
 
     .article-row {
       border-bottom: 1px solid #e5e7eb;
-      padding: 28px 0;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 16px;
-      align-items: start;
+      padding: 24px 0;
+      display: block;
       text-decoration: none;
-      transition: background 0.15s;
+      transition: opacity 0.15s;
     }
     .article-row:first-child { padding-top: 0; }
     .article-row:last-child { border-bottom: none; }
     .article-row:hover .article-title { color: #1d4ed8; }
-    .article-row:hover .read-arrow { transform: translateX(4px); }
+    .article-row:hover .read-more { color: #1d4ed8; }
 
-    .read-arrow {
-      transition: transform 0.2s ease;
-      display: inline-block;
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 7px;
+    }
+
+    .article-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.4;
+      margin-bottom: 6px;
+      transition: color 0.15s;
+    }
+
+    .article-desc {
+      font-size: 0.9rem;
+      color: #6b7280;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .read-more {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #9ca3af;
+      transition: color 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .tag {
       display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
       padding: 2px 8px;
       border-radius: 4px;
-      margin-bottom: 8px;
     }
 
     .tag-basics    { background: #dbeafe; color: #1e40af; }
@@ -53,23 +78,11 @@
     .tag-homeloan  { background: #ede9fe; color: #4c1d95; }
     .tag-invest    { background: #fef9c3; color: #713f12; }
 
-    /* Category icon badges, sit beside each article row */
-    .cat-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+    .read-time {
+      font-size: 0.72rem;
+      color: #9ca3af;
+      font-weight: 500;
     }
-    .cat-icon svg { width: 18px; height: 18px; }
-    .cat-icon-basics    { background: #dbeafe; color: #1e40af; }
-    .cat-icon-interest  { background: #fef3c7; color: #92400e; }
-    .cat-icon-strategy  { background: #d1fae5; color: #065f46; }
-    .cat-icon-credit    { background: #fce7f3; color: #9d174d; }
-    .cat-icon-homeloan  { background: #ede9fe; color: #4c1d95; }
-    .cat-icon-invest    { background: #fef9c3; color: #713f12; }
 
     /* Featured / hero article card */
     .featured-card {
@@ -231,7 +244,7 @@
     "name": "Rashid Shaik",
     "url": "https://knowyouremi.in",
     "email": "hello@knowyouremi.in",
-    "description": "Founder of KnowYourEMI. Over 10 years of personal experience with loans, credit cards, and investments. Writes from real experience, not textbooks.",
+    "description": "Creator of KnowYourEMI. Writes from real personal experience with loans, credit cards, and investments. Not a finance professional. Someone who learned what banks never explain clearly.",
     "knowsAbout": ["EMI", "Home Loans", "Credit Cards", "Personal Finance", "Mutual Funds", "SIP", "Fixed Deposits"],
     "sameAs": []
   }
@@ -274,7 +287,7 @@
     <div class="max-w-3xl mx-auto">
       <span class="inline-block bg-white bg-opacity-20 text-white text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-3">Free Resources</span>
       <h1 class="text-2xl md:text-3xl font-bold text-white" style="font-family:'Lora',serif;">Financial Clarity. Without the Jargon.</h1>
-      <p class="text-sm text-blue-200 mt-2 max-w-xl">Practical articles about loans, EMIs, credit cards and interest rates. Written the way a friend who works in finance would explain it to you.</p>
+      <p class="text-blue-200 mt-2 max-w-xl" style="font-size:0.9375rem;line-height:1.75;">Practical articles about loans, EMIs, credit cards and interest rates. Written the way a friend who works in finance would explain it to you.</p>
     </div>
   </div>
 
@@ -294,7 +307,7 @@
         <h2 class="blog-title-font text-xl md:text-2xl font-bold text-white leading-snug mb-2">
           How a Credit Card Slowly Becomes a Debt Trap
         </h2>
-        <p class="text-blue-200 text-sm leading-relaxed mb-4 max-w-lg">
+        <p class="text-blue-200 mb-4 max-w-lg" style="font-size:0.9375rem;line-height:1.75;">
           Not a textbook explanation. A real, personal account of what I learned the hard way about credit cards, and what I wish someone had told me earlier.
         </p>
         <div class="flex items-center gap-3 text-xs text-blue-300">
@@ -305,14 +318,20 @@
       </div>
     </a>
 
-    <!-- ABOUT THE AUTHOR — moved up, right after the featured piece -->
+    <!-- ABOUT THE AUTHOR -->
     <div class="flex items-start gap-4 mb-12 pb-10" style="border-bottom: 1px solid #e5e7eb;">
-      <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-800 to-indigo-700 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">R</div>
+      <img
+        src="../assets/author.jpeg"
+        alt="Rashid Shaik"
+        style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;"
+        onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex';"
+      />
+      <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-800 to-indigo-700 items-center justify-center text-white font-bold text-lg flex-shrink-0" style="display:none;">R</div>
       <div>
         <p class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-1">Written by</p>
         <p class="font-semibold text-gray-900 text-sm">Rashid Shaik</p>
-        <p class="text-gray-500 text-sm leading-relaxed mt-1">
-          Over 10 years of hands-on experience dealing with loans, understanding how interest works, and figuring out what banks never bother to explain clearly. Every article here is written the way he would explain it to someone sitting across the table.
+        <p class="text-gray-500 mt-1" style="font-size:0.9375rem;line-height:1.75;">
+          Not a finance professional but someone who took loans without reading the fine print, carried credit card balances longer than he should have, and learned what banks never explain upfront. Every article here comes from that experience, not a textbook knowledge.
         </p>
       </div>
     </div>
@@ -334,287 +353,184 @@
 
       <!-- Article 1 -->
       <a href="./basics/how-emi-is-calculated.html"
-         class="article-row fade-in block"
+         class="article-row fade-in"
          data-tag="basics"
          onclick="trackArticle('How EMI Is Calculated')">
-        <div class="cat-icon cat-icon-basics">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-        </div>
-        <div>
+        <div class="article-meta">
           <span class="tag tag-basics">Basics</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            How EMI Is Calculated
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            Most people pay their EMI every month without really knowing what they are paying for. 
-            This breaks down the formula and makes it click.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">5 min read</p>
+          <span class="read-time">5 min read</span>
         </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">How EMI Is Calculated</div>
+        <div class="article-desc">Most people pay their EMI every month without really knowing what they are paying for. This breaks down the formula and makes it click.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
       <!-- Article 2 -->
       <a href="./interest-rates/flat-vs-reducing-rate.html"
-         class="article-row fade-in block"
+         class="article-row fade-in"
          data-tag="interest-rates"
          onclick="trackArticle('Flat vs Reducing Rate of Interest')">
-        <div class="cat-icon cat-icon-interest">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7l10 10M7 7a2 2 0 11-4 0 2 2 0 014 0zM17 17a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-        </div>
-        <div>
+        <div class="article-meta">
           <span class="tag tag-interest">Interest Rates</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            Flat vs Reducing Rate of Interest
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            Two loans, same interest rate on paper. But one costs you significantly more. 
-            Understanding this difference can save you a lot of money.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">6 min read</p>
+          <span class="read-time">6 min read</span>
         </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">Flat vs Reducing Rate of Interest</div>
+        <div class="article-desc">Two loans, same interest rate on paper. But one costs you significantly more. Understanding this difference can save you a lot of money.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
       <!-- Article 3 -->
       <a href="./strategy/benefits-of-part-payment.html"
-         class="article-row fade-in block"
+         class="article-row fade-in"
          data-tag="strategy"
          onclick="trackArticle('Benefits of Part Payment on Your Loan')">
-        <div class="cat-icon cat-icon-strategy">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-        </div>
-        <div>
+        <div class="article-meta">
           <span class="tag tag-strategy">Strategy</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            Benefits of Part Payment on Your Loan
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            A bonus at work, a tax refund, a little extra cash. Most people spend it.
-            Here is what happens when you put even a part of it towards your loan instead.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">5 min read</p>
+          <span class="read-time">5 min read</span>
         </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">Benefits of Part Payment on Your Loan</div>
+        <div class="article-desc">A bonus at work, a tax refund, a little extra cash. Most people spend it. Here is what happens when you put even a part of it towards your loan instead.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
       <!-- Article 4 -->
       <a href="./strategy/when-to-make-part-payment.html"
-         class="article-row fade-in block"
+         class="article-row fade-in"
          data-tag="strategy"
          onclick="trackArticle('When to Make a Part Payment and When Not To')">
-        <div class="cat-icon cat-icon-strategy">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-        </div>
-        <div>
+        <div class="article-meta">
           <span class="tag tag-strategy">Strategy</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            When to Make a Part Payment and When Not To
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            Part payment is not always the smartest move. Sometimes holding that money makes
-            more sense. This helps you figure out which situation you are actually in.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">7 min read</p>
+          <span class="read-time">7 min read</span>
         </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">When to Make a Part Payment and When Not To</div>
+        <div class="article-desc">Part payment is not always the smartest move. Sometimes holding that money makes more sense. This helps you figure out which situation you are actually in.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
       <!-- Article 5 -->
       <a href="./credit-cards/how-credit-cards-work.html"
-         class="article-row fade-in block"
+         class="article-row fade-in"
          data-tag="credit-cards"
          onclick="trackArticle('What Are Credit Cards and How Do They Work')">
-        <div class="cat-icon cat-icon-credit">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-        </div>
-        <div>
+        <div class="article-meta">
           <span class="tag tag-credit">Credit Cards</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            What Are Credit Cards and How Do They Actually Work
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            Beyond the rewards and cashback. Understanding how credit cards make money 
-            and what that means for how you should use yours.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">8 min read</p>
+          <span class="read-time">8 min read</span>
         </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">What Are Credit Cards and How Do They Actually Work</div>
+        <div class="article-desc">Beyond the rewards and cashback. Understanding how credit cards make money and what that means for how you should use yours.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
-      <!-- Article 6 - placeholder for personal experience blog -->
+      <!-- Article 6 -->
       <a href="./credit-cards/credit-card-debt-trap.html"
-         class="article-row fade-in block"
+         class="article-row fade-in"
          data-tag="credit-cards"
          onclick="trackArticle('Credit Card Personal Experience')">
-        <div class="cat-icon cat-icon-credit">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-        </div>
-        <div>
+        <div class="article-meta">
           <span class="tag tag-credit">Credit Cards</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            How a Credit Card Can Slowly Becomes a Debt Trap
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            Not a textbook explanation. Just a real account of what I learned the hard way 
-            about credit cards and what I wish someone had told me earlier.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">14 min read</p>
+          <span class="read-time">14 min read</span>
         </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
-      </a>
-
-      <!-- Article: Minimum Due Trap -->
-      <a href="./credit-cards/minimum-due-trap.html"
-         class="article-row fade-in block"
-         data-tag="credit-cards"
-         onclick="trackArticle('Why Paying Minimum Due Can Cost You Maximum')">
-        <div class="cat-icon cat-icon-credit">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-        </div>
-        <div>
-          <span class="tag tag-credit">Credit Cards</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            Why Paying the Minimum Due Can Cost You the Maximum
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            Paying the minimum feels responsible. But at 36 to 45 percent annual interest, a 50,000 balance can take over 8 years to clear and cost you 1.5 lakh in total.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">8 min read</p>
-        </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">How a Credit Card Can Slowly Become a Debt Trap</div>
+        <div class="article-desc">Not a textbook explanation. A real account of what I learned the hard way about credit cards and what I wish someone had told me earlier.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
       <!-- Article 7 -->
-      <a href="./home-loans/floating-rate-home-loans.html"
-         class="article-row fade-in block"
-         data-tag="home-loan"
-         onclick="trackArticle('What Is Floating Rate of Interest in Home Loans')">
-        <div class="cat-icon cat-icon-homeloan">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <a href="./credit-cards/minimum-due-trap.html"
+         class="article-row fade-in"
+         data-tag="credit-cards"
+         onclick="trackArticle('Why Paying Minimum Due Can Cost You Maximum')">
+        <div class="article-meta">
+          <span class="tag tag-credit">Credit Cards</span>
+          <span class="read-time">8 min read</span>
         </div>
-        <div>
-          <span class="tag tag-homeloan">Home Loan</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            What Is Floating Rate of Interest in Home Loans
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            Your EMI stays the same but your tenure quietly grows. Or the bank sends you a 
-            letter saying your EMI just went up. Here is why that happens.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">7 min read</p>
-        </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">Why Paying the Minimum Due Can Cost You the Maximum</div>
+        <div class="article-desc">Paying the minimum feels responsible. But at 36 to 45 percent annual interest, a 50,000 balance can take over 8 years to clear and cost you 1.5 lakh in total.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
       <!-- Article 8 -->
-      <a href="./basics/why-credit-score-matters.html"
-         class="article-row fade-in block"
-         data-tag="basics"
-         onclick="trackArticle('Why Credit Score Matters When Taking a Loan')">
-        <div class="cat-icon cat-icon-basics">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      <a href="./home-loans/floating-rate-home-loans.html"
+         class="article-row fade-in"
+         data-tag="home-loan"
+         onclick="trackArticle('What Is Floating Rate of Interest in Home Loans')">
+        <div class="article-meta">
+          <span class="tag tag-homeloan">Home Loan</span>
+          <span class="read-time">7 min read</span>
         </div>
-        <div>
-          <span class="tag tag-basics">Basics</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            Why Your Credit Score Matters When Taking a Loan
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            A 750 and a 680 can mean a difference of lakhs over a loan's lifetime. 
-            This explains what the score actually is and why banks care so much about it.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">6 min read</p>
-        </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">What Is Floating Rate of Interest in Home Loans</div>
+        <div class="article-desc">Your EMI stays the same but your tenure quietly grows. Or the bank sends you a letter saying your EMI just went up. Here is why that happens.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
       <!-- Article 9 -->
-      <a href="./investments/what-is-sip.html"
-         class="article-row fade-in block"
-         data-tag="investments"
-         onclick="trackArticle('What Is SIP')">
-        <div class="cat-icon cat-icon-invest">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8L13 15l-4-4-6 6"/></svg>
+      <a href="./basics/why-credit-score-matters.html"
+         class="article-row fade-in"
+         data-tag="basics"
+         onclick="trackArticle('Why Credit Score Matters When Taking a Loan')">
+        <div class="article-meta">
+          <span class="tag tag-basics">Basics</span>
+          <span class="read-time">6 min read</span>
         </div>
-        <div>
-          <span class="tag tag-invest">Investments</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            What Is SIP and How Does It Work
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            A Systematic Investment Plan is one of the simplest ways to build wealth over time.
-            Here is what it actually is and why so many people swear by it.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">7 min read</p>
-        </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">Why Your Credit Score Matters When Taking a Loan</div>
+        <div class="article-desc">A 750 and a 680 can mean a difference of lakhs over a loan's lifetime. This explains what the score actually is and why banks care so much about it.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
       <!-- Article 10 -->
-      <a href="./investments/why-sip-is-best-for-long-term.html"
-         class="article-row fade-in block"
+      <a href="./investments/what-is-sip.html"
+         class="article-row fade-in"
          data-tag="investments"
-         onclick="trackArticle('Why SIP for Long Term Growth')">
-        <div class="cat-icon cat-icon-invest">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8L13 15l-4-4-6 6"/></svg>
-        </div>
-        <div>
+         onclick="trackArticle('What Is SIP')">
+        <div class="article-meta">
           <span class="tag tag-invest">Investments</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            Why SIP Is One of the Best Decisions for Long Term Growth
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            Compounding is powerful but only if you give it enough time. This explains why 
-            starting a SIP early matters more than the amount you start with.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">7 min read</p>
+          <span class="read-time">7 min read</span>
         </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">What Is SIP and How Does It Work</div>
+        <div class="article-desc">A Systematic Investment Plan is one of the simplest ways to build wealth over time. Here is what it actually is and why so many people swear by it.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
       <!-- Article 11 -->
-      <a href="./investments/what-is-fd-and-rd.html"
-         class="article-row fade-in block"
+      <a href="./investments/why-sip-is-best-for-long-term.html"
+         class="article-row fade-in"
          data-tag="investments"
-         onclick="trackArticle('What Is FD and RD')">
-        <div class="cat-icon cat-icon-invest">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8L13 15l-4-4-6 6"/></svg>
-        </div>
-        <div>
+         onclick="trackArticle('Why SIP for Long Term Growth')">
+        <div class="article-meta">
           <span class="tag tag-invest">Investments</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            What Is FD and RD? And Which One Should You Pick
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            Fixed Deposits and Recurring Deposits are two of the safest saving tools in India.
-            They work differently and suit different situations.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">6 min read</p>
+          <span class="read-time">7 min read</span>
         </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">Why SIP Is One of the Best Decisions for Long Term Growth</div>
+        <div class="article-desc">Compounding is powerful but only if you give it enough time. This explains why starting a SIP early matters more than the amount you start with.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
       <!-- Article 12 -->
+      <a href="./investments/what-is-fd-and-rd.html"
+         class="article-row fade-in"
+         data-tag="investments"
+         onclick="trackArticle('What Is FD and RD')">
+        <div class="article-meta">
+          <span class="tag tag-invest">Investments</span>
+          <span class="read-time">6 min read</span>
+        </div>
+        <div class="article-title">What Is FD and RD? And Which One Should You Pick</div>
+        <div class="article-desc">Fixed Deposits and Recurring Deposits are two of the safest saving tools in India. They work differently and suit different situations.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
+      </a>
+
+      <!-- Article 13 -->
       <a href="./investments/sip-vs-fixed-deposit.html"
-         class="article-row fade-in block"
+         class="article-row fade-in"
          data-tag="investments"
          onclick="trackArticle('SIP vs Regular FD')">
-        <div class="cat-icon cat-icon-invest">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8L13 15l-4-4-6 6"/></svg>
-        </div>
-        <div>
+        <div class="article-meta">
           <span class="tag tag-invest">Investments</span>
-          <h2 class="article-title blog-title-font text-lg font-semibold text-gray-900 leading-snug mb-2 transition-colors duration-150">
-            SIP vs Fixed Deposit: Where Should Your Money Go
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            Both are popular. Both have their place. But they are not for the same goals.
-            This breaks down which one makes sense for your situation.
-          </p>
-          <p class="text-xs text-gray-400 mt-3">8 min read</p>
+          <span class="read-time">8 min read</span>
         </div>
-        <div class="text-blue-600 text-lg font-bold pt-1 read-arrow flex-shrink-0">→</div>
+        <div class="article-title">SIP vs Fixed Deposit: Where Should Your Money Go</div>
+        <div class="article-desc">Both are popular. Both have their place. But they are not for the same goals. This breaks down which one makes sense for your situation.</div>
+        <span class="read-more">Read article <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
       </a>
 
       <!-- Empty state -->
