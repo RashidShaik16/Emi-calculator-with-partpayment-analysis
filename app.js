@@ -1099,7 +1099,7 @@ const popup = document.getElementById('installPopup');
 const addShortCutBtn = document.getElementById('addShortCutBtn');
 const closeShortCutBtn = document.getElementById('closeShortCutBtn');
 let popupTimer;
-const PWA_POPUP_DELAY = 30000; // 30s, used both for first show and every reappearance
+const PWA_POPUP_DELAY = 35000; // 35s, used both for first show and every reappearance
 
 function showPopup() {
   if (localStorage.getItem('pwaInstalled') === 'true') return;
@@ -1184,7 +1184,7 @@ const commentPopup      = document.getElementById('commentPopup');
 const commentPopupBtn   = document.getElementById('commentPopupBtn');
 const commentPopupClose = document.getElementById('commentPopupClose');
 let commentPopupTimer;
-const COMMENT_POPUP_FIRST_DELAY = 50000; // 50s for the very first appearance only
+const COMMENT_POPUP_FIRST_DELAY = 55000; // 55s for the very first appearance only
 const COMMENT_POPUP_DELAY       = 40000; // 40s for every appearance after a dismissal
 
 function isCommentsSectionNearView() {
