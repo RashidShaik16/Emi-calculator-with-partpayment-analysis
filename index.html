@@ -745,6 +745,33 @@
             </div>
             <!-- == End marching border wrapper == -->
 
+            <!-- Part payment contextual article links — hidden, revealed by JS after savings card shows -->
+            <div id="partPaymentArticleLinks" class="hidden mx-auto mt-4 md:w-1/2" style="opacity:0;transition:opacity 0.6s ease;">
+              <p style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6b7280;text-align:center;margin-bottom:8px;">Go deeper on part payments</p>
+              <div class="flex flex-col sm:flex-row gap-2">
+                <a href="./blogs/strategy/benefits-of-part-payment.html"
+                   class="flex-1 flex items-center gap-2 rounded-xl px-4 py-3 transition"
+                   style="background:#eff6ff;border:1px solid #bfdbfe;text-decoration:none;">
+                  <span style="font-size:1.1rem;">💰</span>
+                  <div>
+                    <p style="font-size:0.7rem;font-weight:700;color:#1e40af;margin:0;">Benefits of Part Payment</p>
+                    <p style="font-size:0.65rem;color:#6b7280;margin:0;">How much it actually saves you</p>
+                  </div>
+                  <span style="margin-left:auto;font-size:0.7rem;color:#3b82f6;font-weight:700;">Read →</span>
+                </a>
+                <a href="./blogs/strategy/when-to-make-part-payment.html"
+                   class="flex-1 flex items-center gap-2 rounded-xl px-4 py-3 transition"
+                   style="background:#f0fdf4;border:1px solid #bbf7d0;text-decoration:none;">
+                  <span style="font-size:1.1rem;">📅</span>
+                  <div>
+                    <p style="font-size:0.7rem;font-weight:700;color:#065f46;margin:0;">When to Make a Part Payment</p>
+                    <p style="font-size:0.65rem;color:#6b7280;margin:0;">And when it's not worth it</p>
+                  </div>
+                  <span style="margin-left:auto;font-size:0.7rem;color:#16a34a;font-weight:700;">Read →</span>
+                </a>
+              </div>
+            </div>
+
 
 
             <!-- Fibe Personal Loan Banner — always visible, independent -->
@@ -847,6 +874,22 @@
                 </div>
             </section>
 
+            <!-- Contextual article nudge: How EMI is calculated -->
+            <div class="mt-4 rounded-2xl overflow-hidden" style="background:#0f172a;">
+              <div class="px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div>
+                  <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#60a5fa;">Basics</span>
+                  <p class="text-white font-semibold text-sm mt-0.5">Want to understand how this EMI is actually calculated?</p>
+                  <p style="color:#94a3b8;font-size:0.75rem;margin-top:2px;">The formula, the math, and why tenure affects total interest more than most people realise.</p>
+                </div>
+                <a href="./blogs/basics/how-emi-is-calculated.html"
+                   class="flex-shrink-0 font-bold text-xs px-4 py-2 rounded-lg transition whitespace-nowrap"
+                   style="background:#facc15;color:#1e293b;">
+                  Read Article →
+                </a>
+              </div>
+            </div>
+
             <!-- Other Calculators -->
             <section class="bg-white shadow-lg rounded-2xl py-10 px-6 mt-10">
               <h2 class="text-2xl font-bold text-center mb-8">Explore Other Calculators</h2>
@@ -931,56 +974,174 @@
 
 
 
-            <!-- Why Use Our Calculator -->
-            <section id="why-use" class="bg-white shadow-lg rounded-2xl overflow-hidden mt-10">
+            <!-- How to use our Calculator -->
+            <section id="why-use" class="rounded-2xl overflow-hidden shadow-md mt-10">
+              <!-- Header band -->
+              <div class="bg-gradient-to-r from-blue-800 to-indigo-900 px-6 py-5">
+                <h2 class="text-white font-bold text-lg">How to Use This Calculator</h2>
+                <p class="text-blue-200 text-xs mt-1">A complete guide to every field and feature on this page</p>
+              </div>
 
-                <div class="px-6 py-5 border-b border-gray-100">
-                    <h2 class="text-2xl font-bold text-center mb-8">Why Use Our Calculators ?</h2>
-                    <!-- <p class="text-gray-400 text-xs mt-1">Built for Indian borrowers who want real answers, not just numbers</p> -->
+              <div class="bg-white px-6 py-8 space-y-8">
+
+                <!-- Step 1 -->
+                <div>
+                  <div class="flex items-center gap-3 mb-3">
+                    <span class="w-7 h-7 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">1</span>
+                    <h3 class="text-base font-bold text-gray-800">Select your loan type</h3>
+                  </div>
+                  <p class="text-base text-gray-600 leading-relaxed pl-10">
+                    Start by choosing one of the four loan types: <strong>Personal Loan</strong>, <strong>Home Loan</strong>, <strong>Car Loan</strong>, or <strong>Loan on Credit Card</strong>. This matters because each type has different interest rate ranges, tenure limits, and rules. Credit card loans, for instance, attract 18% GST on the interest component and do not allow part payments. The calculator automatically accounts for these differences the moment you switch the type.
+                  </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+                <hr class="border-gray-100" />
 
-                    <div class="p-6 hover:bg-blue-50 transition group">
-                        <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center mb-4 group-hover:bg-blue-200 transition">
-                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-sm font-bold text-gray-800 mb-1">Accurate EMI Calculation</h3>
-                        <p class="text-xs text-gray-500 leading-relaxed">Standard reducing balance formula. Same method your bank uses. No guesswork.</p>
-                    </div>
-
-                    <div class="p-6 hover:bg-blue-50 transition group">
-                        <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center mb-4 group-hover:bg-blue-200 transition">
-                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-sm font-bold text-gray-800 mb-1">Part-Payment Simulation</h3>
-                        <p class="text-xs text-gray-500 leading-relaxed">Add prepayments at any month. See exact interest saved and months removed instantly.</p>
-                    </div>
-
-                    <div class="p-6 hover:bg-blue-50 transition group">
-                        <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center mb-4 group-hover:bg-blue-200 transition">
-                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17v3a1 1 0 001 1h16a1 1 0 001-1v-3"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-sm font-bold text-gray-800 mb-1">Downloadable PDF Schedule</h3>
-                        <p class="text-xs text-gray-500 leading-relaxed">Export your full amortization schedule as a clean PDF. Useful for records and bank discussions.</p>
-                    </div>
-
+                <!-- Step 2 -->
+                <div>
+                  <div class="flex items-center gap-3 mb-3">
+                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">2</span>
+                    <h3 class="text-base font-bold text-gray-800">Enter your loan amount</h3>
+                  </div>
+                  <p class="text-base text-gray-600 leading-relaxed pl-10">
+                    Enter the principal amount your bank disburses to you, not the total you will repay. You can type the amount directly into the input box or drag the slider from ₹10,000 up to ₹50,00,000. The results update instantly as you adjust. Use the amount from your loan sanction letter for the most accurate output.
+                  </p>
                 </div>
 
-                <div class="border-t border-gray-100 px-6 py-6 bg-gray-50">
-                    <p class="text-sm text-gray-600 leading-relaxed mb-3">
-                        Most EMI calculators stop at telling you the monthly instalment. Ours goes further. The real question most borrowers have is not just what their EMI is but <span class="font-semibold text-blue-700">how quickly they can close the loan if they make extra payments</span> and how much interest that saves them.
-                    </p>
-                    <p class="text-sm text-gray-600 leading-relaxed">
-                        You can simulate multiple part payments at any month, switch between reducing tenure or reducing EMI, and see the full revised schedule side by side. The kind of clarity that used to require a spreadsheet or a bank visit, now available in seconds, free, with no sign-ups.
-                    </p>
+                <hr class="border-gray-100" />
+
+                <!-- Step 3 -->
+                <div>
+                  <div class="flex items-center gap-3 mb-3">
+                    <span class="w-7 h-7 rounded-full bg-green-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">3</span>
+                    <h3 class="text-base font-bold text-gray-800">Enter the rate of interest (reducing balance)</h3>
+                  </div>
+                  <p class="text-base text-gray-600 leading-relaxed pl-10">
+                    This calculator uses the <strong>reducing balance method</strong>, which is the standard method used by all banks and NBFCs in India for EMI loans. Enter the annual interest rate from your sanction letter, typically between 8% and 24% for most loan types. Avoid confusing this with a flat rate; flat rates are higher on paper but calculated differently. If your lender quoted a flat rate, do not enter it here directly as the EMI will be overstated.
+                  </p>
                 </div>
+
+                <hr class="border-gray-100" />
+
+                <!-- Step 4 -->
+                <div>
+                  <div class="flex items-center gap-3 mb-3">
+                    <span class="w-7 h-7 rounded-full bg-purple-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">4</span>
+                    <h3 class="text-base font-bold text-gray-800">Set the tenure in months</h3>
+                  </div>
+                  <p class="text-base text-gray-600 leading-relaxed pl-10">
+                    Enter how long you want to repay the loan, in months. The slider runs from 6 to 60 months. A longer tenure lowers your monthly EMI but significantly increases the total interest you pay over the life of the loan. A shorter tenure means a higher monthly commitment but far less interest overall. Use this slider to find the balance between a comfortable EMI and the least total cost.
+                  </p>
+                </div>
+
+                <hr class="border-gray-100" />
+
+                <!-- Step 5 -->
+                <div>
+                  <div class="flex items-center gap-3 mb-3">
+                    <span class="w-7 h-7 rounded-full bg-yellow-500 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">5</span>
+                    <h3 class="text-base font-bold text-gray-800">Add charges if applicable</h3>
+                  </div>
+                  <p class="text-base text-gray-600 leading-relaxed pl-10 mb-4">
+                    Most loans carry upfront charges that add to your real cost. Enter these in the Charges section to see the true picture.
+                  </p>
+                  <div class="pl-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="border-l-4 border-indigo-400 pl-4 py-1">
+                      <p class="text-sm font-bold text-gray-800 mb-1">Processing Fee (%)</p>
+                      <p class="text-sm text-gray-500 leading-relaxed">Charged by the lender for processing your application. Typically 0.5% to 2% of the loan amount. Enter 0 if your lender is waiving it. The calculator shows this as a rupee amount and adds it to your total cost.</p>
+                    </div>
+                    <div class="border-l-4 border-blue-400 pl-4 py-1">
+                      <p class="text-sm font-bold text-gray-800 mb-1">GST (%)</p>
+                      <p class="text-sm text-gray-500 leading-relaxed">GST at 18% applies on the processing fee for most loans. For credit card loans, 18% GST also applies on the interest component and is charged to your monthly statement on top of the EMI. The calculator flags this separately.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="border-gray-100" />
+
+                <!-- Step 6 -->
+                <div>
+                  <div class="flex items-center gap-3 mb-3">
+                    <span class="w-7 h-7 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">6</span>
+                    <h3 class="text-base font-bold text-gray-800">Read your results and simulate part payments</h3>
+                  </div>
+                  <p class="text-base text-gray-600 leading-relaxed pl-10 mb-4">
+                    The results panel shows your <strong>monthly EMI</strong>, <strong>total interest payable</strong>, and <strong>total payment</strong>, along with a pie chart showing how much of your repayment goes toward interest versus principal. The loan summary card below it shows a full breakdown including processing fee, GST, total credit (what you receive), and total debits (what you pay back).
+                  </p>
+                  <p class="text-base text-gray-600 leading-relaxed pl-10">
+                    To simulate a part payment, expand any year in the amortization schedule below, click <strong>Pay</strong> on the month you plan to make the payment, and enter the lump sum amount. The calculator instantly shows you the revised schedule, how much interest you save, and how many months get cut from your tenure. You can add multiple part payments across different months and see the combined impact.
+                  </p>
+                </div>
+
+              </div>
+
+              <!-- Disclaimer band -->
+              <div class="bg-amber-50 border-t border-amber-200 px-6 py-3 flex items-start gap-2">
+                <svg class="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                </svg>
+                <p class="text-sm text-amber-700">Results are based on standard reducing balance formula. Actual EMI may vary slightly based on your lender's internal rounding and disbursement date. Always confirm with your bank before signing.</p>
+              </div>
+            </section>
+
+            <!-- Article reading list -->
+            <section style="background:linear-gradient(to right,#1e40af,#312e81);border-radius:1.25rem;overflow:hidden;margin-top:2.5rem;">
+
+              <div style="padding:1.5rem 1.75rem 1.25rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;border-bottom:1px solid rgba(255,255,255,0.1);">
+                <div>
+                  <h2 style="font-family:'Lora',Georgia,serif;font-size:1.2rem;font-weight:700;color:#ffffff;margin:0;line-height:1.3;">Worth reading before you sign</h2>
+                  <p style="font-size:0.78rem;color:#a5b4fc;margin:5px 0 0;">Four short reads that put real context behind your numbers</p>
+                </div>
+                <a href="./blogs/" style="font-size:0.72rem;font-weight:700;color:#facc15;text-decoration:none;white-space:nowrap;flex-shrink:0;letter-spacing:0.03em;">See all articles ↗</a>
+              </div>
+
+              <div style="padding:0 1.75rem;">
+
+                <a href="./blogs/basics/how-emi-is-calculated.html"
+                   style="display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;">
+                  <span style="font-size:1.4rem;font-weight:900;color:rgba(250,204,21,0.85);flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">01</span>
+                  <div style="flex:1;min-width:0;">
+                    <span style="display:inline-block;font-size:0.67rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:#dbeafe;color:#1e40af;margin-bottom:4px;">Basics</span>
+                    <p style="font-size:0.88rem;font-weight:700;color:#ffffff;margin:0 0 2px;line-height:1.3;">How EMI is Calculated</p>
+                    <p style="font-size:0.73rem;color:#a5b4fc;margin:0;line-height:1.5;">The reducing balance formula your bank uses, explained with real examples</p>
+                  </div>
+                  <svg style="flex-shrink:0;" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="./blogs/interest-rates/flat-vs-reducing-rate.html"
+                   style="display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;">
+                  <span style="font-size:1.4rem;font-weight:900;color:rgba(250,204,21,0.85);flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">02</span>
+                  <div style="flex:1;min-width:0;">
+                    <span style="display:inline-block;font-size:0.67rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:#fef3c7;color:#92400e;margin-bottom:4px;">Interest Rates</span>
+                    <p style="font-size:0.88rem;font-weight:700;color:#ffffff;margin:0 0 2px;line-height:1.3;">Flat Rate vs Reducing Rate</p>
+                    <p style="font-size:0.73rem;color:#a5b4fc;margin:0;line-height:1.5;">Why the rate that looks cheaper on paper often ends up costing you more</p>
+                  </div>
+                  <svg style="flex-shrink:0;" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="./blogs/strategy/benefits-of-part-payment.html"
+                   style="display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;">
+                  <span style="font-size:1.4rem;font-weight:900;color:rgba(250,204,21,0.85);flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">03</span>
+                  <div style="flex:1;min-width:0;">
+                    <span style="display:inline-block;font-size:0.67rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:#d1fae5;color:#065f46;margin-bottom:4px;">Strategy</span>
+                    <p style="font-size:0.88rem;font-weight:700;color:#ffffff;margin:0 0 2px;line-height:1.3;">Benefits of Part Payment on Your Loan</p>
+                    <p style="font-size:0.73rem;color:#a5b4fc;margin:0;line-height:1.5;">Why making a part payment early saves far more than making one later</p>
+                  </div>
+                  <svg style="flex-shrink:0;" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="./blogs/basics/why-credit-score-matters.html"
+                   style="display:flex;align-items:center;gap:1rem;padding:1rem 0;text-decoration:none;">
+                  <span style="font-size:1.4rem;font-weight:900;color:rgba(250,204,21,0.85);flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">04</span>
+                  <div style="flex:1;min-width:0;">
+                    <span style="display:inline-block;font-size:0.67rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:#dbeafe;color:#1e40af;margin-bottom:4px;">Basics</span>
+                    <p style="font-size:0.88rem;font-weight:700;color:#ffffff;margin:0 0 2px;line-height:1.3;">Why Your Credit Score Matters When Taking a Loan</p>
+                    <p style="font-size:0.73rem;color:#a5b4fc;margin:0;line-height:1.5;">Your score does not just affect approval. It directly changes the interest rate you get</p>
+                  </div>
+                  <svg style="flex-shrink:0;" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </a>
+
+              </div>
 
             </section>
 
@@ -1515,7 +1676,7 @@
         </div>
         <!-- ═══ END KYE RESULT CARD MODAL ═══ -->
 
-        <div id="installPopup" class="fixed top-5 right-5 bg-white rounded-2xl border border-gray-100 z-50 opacity-0 transition-opacity duration-700 overflow-hidden"
+        <div id="installPopup" class="fixed hidden top-5 right-5 bg-white rounded-2xl border border-gray-100 z-50 opacity-0 transition-opacity duration-700 overflow-hidden"
              style="width: 300px; max-width: 75vw; box-shadow:0 10px 35px rgba(0,0,0,0.14);">
 
             <!-- character + headline -->
@@ -1884,5 +2045,23 @@
 /* --- End rotating pill --- */
 </script>
 
+  <!-- Reveal part payment article links shortly after savings card appears -->
+  <script>
+    (function() {
+      var savings = document.getElementById('savingsHighlight');
+      var links = document.getElementById('partPaymentArticleLinks');
+      if (!savings || !links) return;
+      var observer = new MutationObserver(function() {
+        if (!savings.classList.contains('hidden')) {
+          setTimeout(function() {
+            links.classList.remove('hidden');
+            setTimeout(function() { links.style.opacity = '1'; }, 30);
+          }, 800);
+          observer.disconnect();
+        }
+      });
+      observer.observe(savings, { attributes: true, attributeFilter: ['class'] });
+    })();
+  </script>
 </body>
 </html>
