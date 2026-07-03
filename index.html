@@ -255,7 +255,7 @@
           font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: #ffffff;
+          color: #FFFFFF;
           white-space: nowrap;
         }
         .rotate-item.enter {
@@ -408,12 +408,12 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
-                    <a href="./calculators/balance-transfer/" class="hover:text-yellow-300">Balance Transfer</a>
-                    <a href="./calculators/eligibility/" class="hover:text-yellow-300">Eligibility Calculator</a>
-                    <a href="./calculators/float-rate-home-loan/" class="hover:text-yellow-300">Floating Rate Home Loan</a>
-                    <a href="./calculators/credit-card-payoff/" class="hover:text-yellow-300">Credit Card Payoff</a>
-                    <a href="#faq-section" class="hover:text-yellow-300">FAQs</a>
-                    <a href="./blogs/" class="hover:text-yellow-300">Blogs</a>
+                    <a href="./calculators/balance-transfer/" class="hover:text-yellow-300 transition-colors">Balance Transfer</a>
+                    <a href="./calculators/eligibility/" class="hover:text-yellow-300 transition-colors">Eligibility Calculator</a>
+                    <a href="./calculators/float-rate-home-loan/" class="hover:text-yellow-300 transition-colors">Floating Rate Home Loan</a>
+                    <a href="./calculators/credit-card-payoff/" class="hover:text-yellow-300 transition-colors">Credit Card Payoff</a>
+                    <a href="#faq-section" class="hover:text-yellow-300 transition-colors">FAQs</a>
+                    <a href="./blogs/" class="hover:text-yellow-300 transition-colors">Blogs</a>
                 </div>
 
                 <!-- Hamburger Button -->
@@ -424,24 +424,38 @@
 
             <!-- Mobile Menu (hidden by default) -->
             <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 px-4 pb-4 bg-gradient-to-r from-blue-600 to-indigo-600">
-                    <a href="./calculators/balance-transfer/" class="hover:text-yellow-300">Balance Transfer</a>
-                    <a href="./calculators/eligibility/" class="hover:text-yellow-300">Eligibility Calculator</a>
-                    <a href="./calculators/float-rate-home-loan/" class="hover:text-yellow-300">Floating Rate Home Loan</a>
-                    <a href="./calculators/credit-card-payoff/" class="hover:text-yellow-300">Credit Card Payoff</a>
-                    <a href="#faq-section" class="hover:text-yellow-300">FAQs</a>
-                    <a href="./blogs/" class="hover:text-yellow-300">Blogs</a>
+                    <a href="./calculators/balance-transfer/" class="hover:text-yellow-300 transition-colors">Balance Transfer</a>
+                    <a href="./calculators/eligibility/" class="hover:text-yellow-300 transition-colors">Eligibility Calculator</a>
+                    <a href="./calculators/float-rate-home-loan/" class="hover:text-yellow-300 transition-colors">Floating Rate Home Loan</a>
+                    <a href="./calculators/credit-card-payoff/" class="hover:text-yellow-300 transition-colors">Credit Card Payoff</a>
+                    <a href="#faq-section" class="hover:text-yellow-300 transition-colors">FAQs</a>
+                    <a href="./blogs/" class="hover:text-yellow-300 transition-colors">Blogs</a>
             </div>
         </nav>
 
         <!-- PAGE HERO HEADER -->
-        <div class="bg-gradient-to-r from-blue-800 to-indigo-900 py-14 px-4">
+        <div class="bg-gradient-to-r from-blue-800 to-indigo-900 py-16 px-4">
           <div class="max-w-7xl mx-auto px-4">
-            <div class="rotate-pill mb-3" id="rotatePill">
+            <div class="rotate-pill mb-4" id="rotatePill">
               <span class="live-dot"></span>
               <div class="rotate-window" id="rotateWindow"></div>
             </div>
-            <h1 class="text-2xl md:text-3xl font-bold text-white" style="font-family:'Lora',serif;">EMI Calculator - Plan Your Loan Before You Sign.</h1>
-            <p class="text-sm text-blue-200 mt-2 max-w-xl">Calculate your monthly EMI, see the full amortization schedule, model part payments, and understand the real cost of your loan. No sign-ups, no hidden conditions.</p>
+            <h1 class="text-3xl md:text-4xl font-bold text-white leading-tight" style="font-family:'Lora',serif;">EMI Calculator: Know the real cost of your loan before you sign.</h1>
+            <p class="text-sm md:text-base text-blue-200 mt-3 max-w-2xl">Calculate your EMI, model part payments, and see the full amortization schedule. No sign-ups, no hidden conditions.</p>
+            <div class="flex flex-wrap gap-2 mt-6">
+              <span class="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium text-white" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:8px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Part-payment modelling
+              </span>
+              <span class="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium text-white" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:8px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Full amortization schedule
+              </span>
+              <span class="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium text-white" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:8px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Real interest cost
+              </span>
+              <span class="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium text-white" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:8px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>PDF &amp; image export
+              </span>
+            </div>
           </div>
         </div>
 
@@ -874,29 +888,13 @@
                 </div>
             </section>
 
-            <!-- Contextual article nudge: How EMI is calculated -->
-            <div class="mt-4 rounded-2xl overflow-hidden" style="background:#0f172a;">
-              <div class="px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <div>
-                  <span style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#60a5fa;">Basics</span>
-                  <p class="text-white font-semibold text-sm mt-0.5">Want to understand how this EMI is actually calculated?</p>
-                  <p style="color:#94a3b8;font-size:0.75rem;margin-top:2px;">The formula, the math, and why tenure affects total interest more than most people realise.</p>
-                </div>
-                <a href="./blogs/basics/how-emi-is-calculated.html"
-                   class="flex-shrink-0 font-bold text-xs px-4 py-2 rounded-lg transition whitespace-nowrap"
-                   style="background:#facc15;color:#1e293b;">
-                  Read Article →
-                </a>
-              </div>
-            </div>
-
             <!-- Other Calculators -->
             <section class="bg-white shadow-lg rounded-2xl py-10 px-6 mt-10">
               <h2 class="text-2xl font-bold text-center mb-8">Explore Other Calculators</h2>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
                 <!-- Eligibility nudge -->
-                <div class="bg-gradient-to-r from-blue-800 to-indigo-900 rounded-2xl p-5 flex items-center gap-4 shadow-md">
+                <div class="bg-white border border-gray-200 rounded-2xl p-5 flex items-center gap-4 shadow-sm">
                   <!-- Icon: person with checkmark -->
                   <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background:#059669;">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -904,17 +902,17 @@
                     </svg>
                   </div>
                   <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-white mb-0.5">Loan Eligibility Check</p>
-                    <p class="text-xs text-indigo-200 leading-relaxed">See how much loan you may qualify for based on your income and expenses.</p>
+                    <p class="text-sm font-semibold text-gray-900 mb-0.5">Loan Eligibility Check</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">See how much loan you may qualify for based on your income and expenses.</p>
                   </div>
                   <a href="./calculators/eligibility/"
-                    class="flex-shrink-0 bg-yellow-400 text-blue-900 text-xs font-bold px-4 py-2 rounded-lg hover:bg-yellow-300 transition whitespace-nowrap">
+                    class="flex-shrink-0 text-blue-900 text-xs font-bold px-4 py-2 rounded-lg transition whitespace-nowrap" style="background:#FCDC4D;" onmouseover="this.style.background='#f5ce2e'" onmouseout="this.style.background='#FCDC4D'">
                     Try it &rarr;
                   </a>
                 </div>
 
                 <!-- Floating rate nudge -->
-                <div class="bg-gradient-to-r from-blue-800 to-indigo-900 rounded-2xl p-5 flex items-center gap-4 shadow-md">
+                <div class="bg-white border border-gray-200 rounded-2xl p-5 flex items-center gap-4 shadow-sm">
                   <!-- Icon: house with rate arrow -->
                   <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background:#0284c7;">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -922,18 +920,18 @@
                     </svg>
                   </div>
                   <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-white mb-0.5">Floating Rate Home Loan Simulator</p>
-                    <p class="text-xs text-indigo-200 leading-relaxed">Simulate how RBI rate changes and part payments affect your EMI and tenure.</p>
+                    <p class="text-sm font-semibold text-gray-900 mb-0.5">Floating Rate Home Loan Simulator</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">Simulate how RBI rate changes and part payments affect your EMI and tenure.</p>
                   </div>
                   <a href="./calculators/float-rate-home-loan/"
-                    class="flex-shrink-0 bg-yellow-400 text-blue-900 text-xs font-bold px-4 py-2 rounded-lg hover:bg-yellow-300 transition whitespace-nowrap">
+                    class="flex-shrink-0 text-blue-900 text-xs font-bold px-4 py-2 rounded-lg transition whitespace-nowrap" style="background:#FCDC4D;" onmouseover="this.style.background='#f5ce2e'" onmouseout="this.style.background='#FCDC4D'">
                     Try it &rarr;
                   </a>
                 </div>
 
                 <!-- Credit Card Payoff nudge -->
-                <div class="relative bg-gradient-to-r from-blue-800 to-indigo-900 rounded-2xl p-5 flex items-center gap-4 shadow-md">
-                  <span class="absolute -top-2.5 left-4 bg-yellow-400 text-blue-900 text-xs font-extrabold px-2.5 py-0.5 rounded-full tracking-wide shadow-sm">Must Try</span>
+                <div class="relative bg-white border border-gray-200 rounded-2xl p-5 flex items-center gap-4 shadow-sm">
+                  <span class="absolute -top-2.5 left-4 text-blue-900 text-xs font-extrabold px-2.5 py-0.5 rounded-full tracking-wide shadow-sm" style="background:#FCDC4D;">Must Try</span>
                   <!-- Icon: credit card -->
                   <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background:#e11d48;">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -941,18 +939,18 @@
                     </svg>
                   </div>
                   <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-white mb-0.5">Credit Card Payoff Calculator</p>
-                    <p class="text-xs text-indigo-200 leading-relaxed">See your balance clear month by month. Add purchases, skip a payment, watch the real cost.</p>
+                    <p class="text-sm font-semibold text-gray-900 mb-0.5">Credit Card Payoff Calculator</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">See your balance clear month by month. Add purchases, skip a payment, watch the real cost.</p>
                   </div>
                   <a href="./calculators/credit-card-payoff/"
-                    class="flex-shrink-0 bg-yellow-400 text-blue-900 text-xs font-bold px-4 py-2 rounded-lg hover:bg-yellow-300 transition whitespace-nowrap">
+                    class="flex-shrink-0 text-blue-900 text-xs font-bold px-4 py-2 rounded-lg transition whitespace-nowrap" style="background:#FCDC4D;" onmouseover="this.style.background='#f5ce2e'" onmouseout="this.style.background='#FCDC4D'">
                     Try it &rarr;
                   </a>
                 </div>
 
                 <!-- Balance Transfer nudge -->
-                <div class="relative bg-gradient-to-r from-blue-800 to-indigo-900 rounded-2xl p-5 flex items-center gap-4 shadow-md">
-                  <span class="absolute -top-2.5 left-4 bg-yellow-400 text-blue-900 text-xs font-extrabold px-2.5 py-0.5 rounded-full tracking-wide shadow-sm">Must Try</span>
+                <div class="relative bg-white border border-gray-200 rounded-2xl p-5 flex items-center gap-4 shadow-sm">
+                  <span class="absolute -top-2.5 left-4 text-blue-900 text-xs font-extrabold px-2.5 py-0.5 rounded-full tracking-wide shadow-sm" style="background:#FCDC4D;">Must Try</span>
                   <!-- Icon: transfer arrows -->
                   <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background:#7c3aed;">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -960,11 +958,11 @@
                     </svg>
                   </div>
                   <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-white mb-0.5">Loan Balance Transfer Calculator</p>
-                    <p class="text-xs text-indigo-200 leading-relaxed">Thinking of switching lenders? See the exact savings or cost before you make the move.</p>
+                    <p class="text-sm font-semibold text-gray-900 mb-0.5">Loan Balance Transfer Calculator</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">Thinking of switching lenders? See the exact savings or cost before you make the move.</p>
                   </div>
                   <a href="./calculators/balance-transfer/"
-                    class="flex-shrink-0 bg-yellow-400 text-blue-900 text-xs font-bold px-4 py-2 rounded-lg hover:bg-yellow-300 transition whitespace-nowrap">
+                    class="flex-shrink-0 text-blue-900 text-xs font-bold px-4 py-2 rounded-lg transition whitespace-nowrap" style="background:#FCDC4D;" onmouseover="this.style.background='#f5ce2e'" onmouseout="this.style.background='#FCDC4D'">
                     Try it &rarr;
                   </a>
                 </div>
@@ -974,132 +972,126 @@
 
 
 
-            <!-- How to use our Calculator -->
-            <section id="why-use" class="rounded-2xl overflow-hidden shadow-md mt-10">
-              <!-- Header band -->
-              <div class="bg-gradient-to-r from-blue-800 to-indigo-900 px-6 py-5">
-                <h2 class="text-white font-bold text-lg">How to Use This Calculator</h2>
-                <p class="text-blue-200 text-xs mt-1">A complete guide to every field and feature on this page</p>
-              </div>
+            <!-- Understanding EMI: educational section -->
+            <section class="bg-white shadow-lg rounded-2xl py-10 px-6 mt-10">
 
-              <div class="bg-white px-6 py-8 space-y-8">
+              <h2 class="text-2xl font-bold text-center mb-2">Understanding Your Loan</h2>
+              <p class="text-sm text-gray-500 text-center mb-10 max-w-2xl mx-auto">The concepts behind the numbers this calculator gives you, explained simply.</p>
 
-                <!-- Step 1 -->
-                <div>
-                  <div class="flex items-center gap-3 mb-3">
-                    <span class="w-7 h-7 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">1</span>
-                    <h3 class="text-base font-bold text-gray-800">Select your loan type</h3>
+              <!-- Sub-article 1: What is an EMI -->
+              <article class="mb-12">
+                <h3 class="text-xl font-bold text-gray-900 mb-4" style="font-family:'Lora',serif;">What is an EMI, and how is it calculated?</h3>
+                <p class="text-base text-gray-600 leading-relaxed mb-4">An <strong>Equated Monthly Instalment (EMI)</strong> is the fixed amount you pay your lender every month until a loan is fully repaid. Each instalment covers two parts: a portion of the amount you borrowed (the principal) and the interest charged on the balance you still owe. The total EMI stays constant every month, but the split changes over time. In the early months most of your EMI goes toward interest; as the outstanding balance falls, more of each payment goes toward the principal.</p>
+
+                <div style="background:linear-gradient(to right,#1e40af,#312e81);border-radius:12px;padding:1.5rem;margin:1.5rem 0;">
+                  <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#FCDC4D;margin:0 0 12px;text-align:center;">The EMI Formula</p>
+                  <p style="font-family:'Courier New',monospace;font-size:1.1rem;color:#ffffff;margin:0 0 14px;text-align:center;letter-spacing:0.5px;">EMI = P &times; r &times; (1+r)<sup>n</sup> &divide; [(1+r)<sup>n</sup> &minus; 1]</p>
+                  <div style="display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:center;font-size:0.8rem;color:#a5b4fc;">
+                    <span><strong style="color:#fff;">P</strong> = principal (loan amount)</span>
+                    <span><strong style="color:#fff;">r</strong> = monthly interest rate</span>
+                    <span><strong style="color:#fff;">n</strong> = tenure in months</span>
                   </div>
-                  <p class="text-base text-gray-600 leading-relaxed pl-10">
-                    Start by choosing one of the four loan types: <strong>Personal Loan</strong>, <strong>Home Loan</strong>, <strong>Car Loan</strong>, or <strong>Loan on Credit Card</strong>. This matters because each type has different interest rate ranges, tenure limits, and rules. Credit card loans, for instance, attract 18% GST on the interest component and do not allow part payments. The calculator automatically accounts for these differences the moment you switch the type.
-                  </p>
                 </div>
 
-                <hr class="border-gray-100" />
+                <p class="text-base text-gray-600 leading-relaxed mb-4">Here <strong>r</strong> is the monthly interest rate, which is simply your annual rate divided by 12. So a 12% annual rate works out to exactly 1% per month.</p>
 
-                <!-- Step 2 -->
-                <div>
-                  <div class="flex items-center gap-3 mb-3">
-                    <span class="w-7 h-7 rounded-full bg-indigo-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">2</span>
-                    <h3 class="text-base font-bold text-gray-800">Enter your loan amount</h3>
-                  </div>
-                  <p class="text-base text-gray-600 leading-relaxed pl-10">
-                    Enter the principal amount your bank disburses to you, not the total you will repay. You can type the amount directly into the input box or drag the slider from ₹10,000 up to ₹50,00,000. The results update instantly as you adjust. Use the amount from your loan sanction letter for the most accurate output.
-                  </p>
-                </div>
-
-                <hr class="border-gray-100" />
-
-                <!-- Step 3 -->
-                <div>
-                  <div class="flex items-center gap-3 mb-3">
-                    <span class="w-7 h-7 rounded-full bg-green-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">3</span>
-                    <h3 class="text-base font-bold text-gray-800">Enter the rate of interest (reducing balance)</h3>
-                  </div>
-                  <p class="text-base text-gray-600 leading-relaxed pl-10">
-                    This calculator uses the <strong>reducing balance method</strong>, which is the standard method used by all banks and NBFCs in India for EMI loans. Enter the annual interest rate from your sanction letter, typically between 8% and 24% for most loan types. Avoid confusing this with a flat rate; flat rates are higher on paper but calculated differently. If your lender quoted a flat rate, do not enter it here directly as the EMI will be overstated.
-                  </p>
-                </div>
-
-                <hr class="border-gray-100" />
-
-                <!-- Step 4 -->
-                <div>
-                  <div class="flex items-center gap-3 mb-3">
-                    <span class="w-7 h-7 rounded-full bg-purple-600 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">4</span>
-                    <h3 class="text-base font-bold text-gray-800">Set the tenure in months</h3>
-                  </div>
-                  <p class="text-base text-gray-600 leading-relaxed pl-10">
-                    Enter how long you want to repay the loan, in months. The slider runs from 6 to 60 months. A longer tenure lowers your monthly EMI but significantly increases the total interest you pay over the life of the loan. A shorter tenure means a higher monthly commitment but far less interest overall. Use this slider to find the balance between a comfortable EMI and the least total cost.
-                  </p>
-                </div>
-
-                <hr class="border-gray-100" />
-
-                <!-- Step 5 -->
-                <div>
-                  <div class="flex items-center gap-3 mb-3">
-                    <span class="w-7 h-7 rounded-full bg-yellow-500 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">5</span>
-                    <h3 class="text-base font-bold text-gray-800">Add charges if applicable</h3>
-                  </div>
-                  <p class="text-base text-gray-600 leading-relaxed pl-10 mb-4">
-                    Most loans carry upfront charges that add to your real cost. Enter these in the Charges section to see the true picture.
-                  </p>
-                  <div class="pl-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="border-l-4 border-indigo-400 pl-4 py-1">
-                      <p class="text-sm font-bold text-gray-800 mb-1">Processing Fee (%)</p>
-                      <p class="text-sm text-gray-500 leading-relaxed">Charged by the lender for processing your application. Typically 0.5% to 2% of the loan amount. Enter 0 if your lender is waiving it. The calculator shows this as a rupee amount and adds it to your total cost.</p>
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 my-5">
+                  <p class="text-sm font-bold mb-3" style="color:#1e3a8a;text-transform:uppercase;letter-spacing:0.05em;">A Worked Example</p>
+                  <p class="text-base text-gray-600 leading-relaxed mb-4">Suppose you borrow <strong>&#8377;5,00,000</strong> at <strong>12% per year</strong> for <strong>5 years (60 months)</strong>. Putting those into the formula gives:</p>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white border border-gray-200 rounded-lg p-3">
+                      <p class="text-xs text-gray-500 mb-1">Monthly EMI</p>
+                      <p class="text-lg font-bold" style="color:#1e3a8a;">&#8377;11,122</p>
                     </div>
-                    <div class="border-l-4 border-blue-400 pl-4 py-1">
-                      <p class="text-sm font-bold text-gray-800 mb-1">GST (%)</p>
-                      <p class="text-sm text-gray-500 leading-relaxed">GST at 18% applies on the processing fee for most loans. For credit card loans, 18% GST also applies on the interest component and is charged to your monthly statement on top of the EMI. The calculator flags this separately.</p>
+                    <div class="bg-white border border-gray-200 rounded-lg p-3">
+                      <p class="text-xs text-gray-500 mb-1">Total interest paid</p>
+                      <p class="text-lg font-bold" style="color:#1e3a8a;">&#8377;1,67,333</p>
                     </div>
                   </div>
+                  <p class="text-sm text-gray-500 leading-relaxed mt-3">Over 60 months you repay &#8377;6,67,333 in total, of which &#8377;1,67,333 is interest on top of the &#8377;5,00,000 you borrowed.</p>
                 </div>
 
-                <hr class="border-gray-100" />
-
-                <!-- Step 6 -->
-                <div>
-                  <div class="flex items-center gap-3 mb-3">
-                    <span class="w-7 h-7 rounded-full bg-red-500 text-white text-xs flex items-center justify-center font-bold flex-shrink-0">6</span>
-                    <h3 class="text-base font-bold text-gray-800">Read your results and simulate part payments</h3>
+                <p class="text-base text-gray-600 leading-relaxed mt-5 mb-3"><strong>Three things change your EMI:</strong></p>
+                <div class="grid gap-3" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
+                  <div class="border border-gray-200 rounded-lg p-4" style="border-top:3px solid #1e3a8a;">
+                    <p class="text-sm font-bold text-gray-900 mb-1">Principal</p>
+                    <p class="text-sm text-gray-500 leading-relaxed">A larger loan amount raises your EMI in direct proportion. Double the loan, double the EMI.</p>
                   </div>
-                  <p class="text-base text-gray-600 leading-relaxed pl-10 mb-4">
-                    The results panel shows your <strong>monthly EMI</strong>, <strong>total interest payable</strong>, and <strong>total payment</strong>, along with a pie chart showing how much of your repayment goes toward interest versus principal. The loan summary card below it shows a full breakdown including processing fee, GST, total credit (what you receive), and total debits (what you pay back).
-                  </p>
-                  <p class="text-base text-gray-600 leading-relaxed pl-10">
-                    To simulate a part payment, expand any year in the amortization schedule below, click <strong>Pay</strong> on the month you plan to make the payment, and enter the lump sum amount. The calculator instantly shows you the revised schedule, how much interest you save, and how many months get cut from your tenure. You can add multiple part payments across different months and see the combined impact.
-                  </p>
+                  <div class="border border-gray-200 rounded-lg p-4" style="border-top:3px solid #059669;">
+                    <p class="text-sm font-bold text-gray-900 mb-1">Interest Rate</p>
+                    <p class="text-sm text-gray-500 leading-relaxed">A higher rate increases both your monthly EMI and the total interest you pay across the loan.</p>
+                  </div>
+                  <div class="border border-gray-200 rounded-lg p-4" style="border-top:3px solid #d97706;">
+                    <p class="text-sm font-bold text-gray-900 mb-1">Tenure</p>
+                    <p class="text-sm text-gray-500 leading-relaxed">A longer tenure lowers the monthly EMI but increases total interest, because you owe for longer.</p>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Sub-article 2: Flat vs Reducing -->
+              <article class="mb-12 pt-10 border-t border-gray-100">
+                <h3 class="text-xl font-bold text-gray-900 mb-4" style="font-family:'Lora',serif;">Flat rate vs reducing balance: why it matters</h3>
+                <p class="text-base text-gray-600 leading-relaxed mb-4">Two lenders can both advertise "12% interest" and yet charge you very different amounts, because they calculate that 12% in different ways. This is the single most important thing to understand before signing a loan.</p>
+                <p class="text-base text-gray-600 leading-relaxed mb-4">Under the <strong>reducing balance</strong> method, interest each month is charged only on the amount you still owe. As you pay down the loan, the balance shrinks, so the interest portion of every EMI gets smaller. This is the method banks and NBFCs use for genuine EMI loans, and it is what this calculator uses.</p>
+                <p class="text-base text-gray-600 leading-relaxed mb-4">Under a <strong>flat rate</strong>, interest is charged on the full original loan amount for the entire tenure, regardless of how much you have already repaid. It sounds simpler, and the headline rate often looks lower, but you end up paying interest even on money you have already given back.</p>
+
+                <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:1.25rem 1.5rem;margin-top:1.25rem;">
+                  <p class="text-sm font-bold mb-2" style="color:#92400e;">The difference in real numbers</p>
+                  <p class="text-base leading-relaxed" style="color:#78350f;margin:0;">On the same &#8377;5,00,000 loan at 12% for 5 years, a flat rate charges &#8377;3,00,000 in interest. Reducing balance charges only &#8377;1,67,333. That is a difference of more than <strong>&#8377;1,32,000</strong> on a single mid-sized loan, for the exact same headline rate. Always ask a lender which method they use before comparing offers.</p>
+                </div>
+              </article>
+
+              <!-- Sub-article 3: Part payments -->
+              <article class="mb-12 pt-10 border-t border-gray-100">
+                <h3 class="text-xl font-bold text-gray-900 mb-4" style="font-family:'Lora',serif;">What is a part payment, and how does it help?</h3>
+                <p class="text-base text-gray-600 leading-relaxed mb-4">A <strong>part payment</strong> (also called part-prepayment) is a lump sum you pay toward your loan over and above your regular EMI. Because interest is charged on your outstanding balance, paying down that balance early means every future month is calculated on a smaller amount, so you save interest for the entire remaining tenure.</p>
+                <p class="text-base text-gray-600 leading-relaxed mb-4">When you make a part payment, you usually get two choices: <strong>reduce your EMI</strong> and keep the same tenure, or <strong>keep the same EMI</strong> and finish the loan sooner. Keeping the EMI the same and shortening the tenure almost always saves more interest, because you clear the debt faster.</p>
+
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 my-5">
+                  <p class="text-sm font-bold mb-3" style="color:#1e3a8a;text-transform:uppercase;letter-spacing:0.05em;">A Worked Example</p>
+                  <p class="text-base text-gray-600 leading-relaxed mb-4">Take the same &#8377;5,00,000 loan at 12% for 5 years, with an EMI of &#8377;11,122. Now imagine you make a one-time <strong>&#8377;1,00,000 part payment after month 6</strong> and keep the EMI unchanged:</p>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white border border-gray-200 rounded-lg p-3">
+                      <p class="text-xs text-gray-500 mb-1">Interest saved</p>
+                      <p class="text-lg font-bold" style="color:#059669;">&#8377;59,967</p>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-3">
+                      <p class="text-xs text-gray-500 mb-1">Loan finishes</p>
+                      <p class="text-lg font-bold" style="color:#059669;">14 months early</p>
+                    </div>
+                  </div>
+                  <p class="text-sm text-gray-500 leading-relaxed mt-3">Instead of paying &#8377;1,67,333 in total interest over 60 months, you pay &#8377;1,07,366 and clear the loan in 46 months. You can simulate exactly this using the part payment option in the schedule above.</p>
                 </div>
 
-              </div>
+                <p class="text-base text-gray-600 leading-relaxed">One thing to check first: some lenders charge a prepayment penalty, especially on fixed-rate loans. Floating-rate home loans in India usually allow part payments with no penalty, but always confirm the terms with your lender before planning around it.</p>
+              </article>
 
-              <!-- Disclaimer band -->
-              <div class="bg-amber-50 border-t border-amber-200 px-6 py-3 flex items-start gap-2">
-                <svg class="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
-                </svg>
-                <p class="text-sm text-amber-700">Results are based on standard reducing balance formula. Actual EMI may vary slightly based on your lender's internal rounding and disbursement date. Always confirm with your bank before signing.</p>
-              </div>
+              <!-- Sub-article 4: Processing fee and GST -->
+              <article class="pt-10 border-t border-gray-100">
+                <h3 class="text-xl font-bold text-gray-900 mb-4" style="font-family:'Lora',serif;">The costs beyond your EMI</h3>
+                <p class="text-base text-gray-600 leading-relaxed mb-4">Your EMI is not the only thing you pay. Two common charges add to the real cost of a loan, and both are built into this calculator so your total is realistic.</p>
+                <p class="text-base text-gray-600 leading-relaxed mb-4">The <strong>processing fee</strong> is a one-time charge for handling your application, usually 0.5% to 2% of the loan amount. On a &#8377;5,00,000 loan, a 1% fee is &#8377;5,000, deducted upfront so you receive slightly less than the sanctioned amount.</p>
+                <p class="text-base text-gray-600 leading-relaxed"><strong>GST</strong> at 18% applies on the processing fee itself. For credit card loans specifically, 18% GST also applies on the interest component of every EMI and is added to your monthly statement, which is why credit card borrowing costs noticeably more than a regular personal loan at the same rate.</p>
+              </article>
+
             </section>
 
             <!-- Article reading list -->
             <section style="background:linear-gradient(to right,#1e40af,#312e81);border-radius:1.25rem;overflow:hidden;margin-top:2.5rem;">
 
-              <div style="padding:1.5rem 1.75rem 1.25rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;border-bottom:1px solid rgba(255,255,255,0.1);">
+              <div style="padding:1.5rem 1.75rem 1.25rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;border-bottom:1px solid rgba(255,255,255,0.1);">
                 <div>
-                  <h2 style="font-family:'Lora',Georgia,serif;font-size:1.2rem;font-weight:700;color:#ffffff;margin:0;line-height:1.3;">Worth reading before you sign</h2>
-                  <p style="font-size:0.78rem;color:#a5b4fc;margin:5px 0 0;">Four short reads that put real context behind your numbers</p>
+                  <h2 style="font-family:'Lora',Georgia,serif;font-size:1.5rem;font-weight:700;color:#ffffff;margin:0;line-height:1.3;">Our Most Popular Articles</h2>
+                  <p style="font-size:0.78rem;color:#a5b4fc;margin:5px 0 0;">Short reads that put real context behind your numbers</p>
                 </div>
-                <a href="./blogs/" style="font-size:0.72rem;font-weight:700;color:#facc15;text-decoration:none;white-space:nowrap;flex-shrink:0;letter-spacing:0.03em;">See all articles ↗</a>
+                <a href="./blogs/" style="font-size:0.72rem;font-weight:700;color:#1e3a8a;background:#FCDC4D;padding:8px 16px;border-radius:8px;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:background 0.15s;" onmouseover="this.style.background='#f5ce2e'" onmouseout="this.style.background='#FCDC4D'">See all articles →</a>
               </div>
 
               <div style="padding:0 1.75rem;">
 
                 <a href="./blogs/basics/how-emi-is-calculated.html"
                    style="display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;">
-                  <span style="font-size:1.4rem;font-weight:900;color:rgba(250,204,21,0.85);flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">01</span>
+                  <span style="font-size:1.4rem;font-weight:900;color:#FCDC4D;flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">01</span>
                   <div style="flex:1;min-width:0;">
                     <span style="display:inline-block;font-size:0.67rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:#dbeafe;color:#1e40af;margin-bottom:4px;">Basics</span>
                     <p style="font-size:0.88rem;font-weight:700;color:#ffffff;margin:0 0 2px;line-height:1.3;">How EMI is Calculated</p>
@@ -1110,7 +1102,7 @@
 
                 <a href="./blogs/interest-rates/flat-vs-reducing-rate.html"
                    style="display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;">
-                  <span style="font-size:1.4rem;font-weight:900;color:rgba(250,204,21,0.85);flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">02</span>
+                  <span style="font-size:1.4rem;font-weight:900;color:#FCDC4D;flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">02</span>
                   <div style="flex:1;min-width:0;">
                     <span style="display:inline-block;font-size:0.67rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:#fef3c7;color:#92400e;margin-bottom:4px;">Interest Rates</span>
                     <p style="font-size:0.88rem;font-weight:700;color:#ffffff;margin:0 0 2px;line-height:1.3;">Flat Rate vs Reducing Rate</p>
@@ -1121,7 +1113,7 @@
 
                 <a href="./blogs/strategy/benefits-of-part-payment.html"
                    style="display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;">
-                  <span style="font-size:1.4rem;font-weight:900;color:rgba(250,204,21,0.85);flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">03</span>
+                  <span style="font-size:1.4rem;font-weight:900;color:#FCDC4D;flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">03</span>
                   <div style="flex:1;min-width:0;">
                     <span style="display:inline-block;font-size:0.67rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:#d1fae5;color:#065f46;margin-bottom:4px;">Strategy</span>
                     <p style="font-size:0.88rem;font-weight:700;color:#ffffff;margin:0 0 2px;line-height:1.3;">Benefits of Part Payment on Your Loan</p>
@@ -1130,9 +1122,20 @@
                   <svg style="flex-shrink:0;" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                 </a>
 
+                <a href="./blogs/strategy/debt-consolidation.html"
+                   style="display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;">
+                  <span style="font-size:1.4rem;font-weight:900;color:#FCDC4D;flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">04</span>
+                  <div style="flex:1;min-width:0;">
+                    <span style="display:inline-block;font-size:0.67rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:#d1fae5;color:#065f46;margin-bottom:4px;">Strategy</span>
+                    <p style="font-size:0.88rem;font-weight:700;color:#ffffff;margin:0 0 2px;line-height:1.3;">Debt Consolidation: Combining Multiple Loans</p>
+                    <p style="font-size:0.73rem;color:#a5b4fc;margin:0;line-height:1.5;">When merging your loans into one actually helps, and when it quietly costs you more</p>
+                  </div>
+                  <svg style="flex-shrink:0;" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </a>
+
                 <a href="./blogs/basics/why-credit-score-matters.html"
                    style="display:flex;align-items:center;gap:1rem;padding:1rem 0;text-decoration:none;">
-                  <span style="font-size:1.4rem;font-weight:900;color:rgba(250,204,21,0.85);flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">04</span>
+                  <span style="font-size:1.4rem;font-weight:900;color:#FCDC4D;flex-shrink:0;width:2.2rem;line-height:1;text-align:right;">05</span>
                   <div style="flex:1;min-width:0;">
                     <span style="display:inline-block;font-size:0.67rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:#dbeafe;color:#1e40af;margin-bottom:4px;">Basics</span>
                     <p style="font-size:0.88rem;font-weight:700;color:#ffffff;margin:0 0 2px;line-height:1.3;">Why Your Credit Score Matters When Taking a Loan</p>
@@ -1322,7 +1325,7 @@
                 <!-- Final Words -->
                 <div class="mt-5 rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
                     <div class="bg-gradient-to-r from-blue-800 to-indigo-900 px-6 py-4 flex items-center gap-3">
-                        <svg class="w-5 h-5 text-yellow-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 flex-shrink-0" style="color:#FCDC4D;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                         </svg>
                         <h3 class="font-bold text-white text-base" style="font-family:'Lora',serif;">Handle Credit Wisely</h3>
@@ -1448,9 +1451,9 @@
             <!-- Bottom bar -->
               <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
                 <span>© <span id="year"></span> knowyouremi.in | All rights reserved.</span>
-                <a href="./pages/about.html" class="underline hover:text-yellow-300">About</a> |
-                <a href="./pages/privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
-                <a href="./pages/terms-and-conditions.html" class="underline hover:text-yellow-300">Terms & Conditions</a>
+                <a href="./pages/about.html" class="underline hover:text-yellow-300 transition-colors">About</a> |
+                <a href="./pages/privacy-policy.html" class="underline hover:text-yellow-300 transition-colors">Privacy Policy</a> |
+                <a href="./pages/terms-and-conditions.html" class="underline hover:text-yellow-300 transition-colors">Terms & Conditions</a>
             </div>
         </footer>
 
@@ -1993,7 +1996,7 @@
     "No Ads, No Sign-Up",
     "Download as PDF",
     "Download as Image",
-    "37,000+ Users Served",
+    "38,000+ Users Served",
     "Supports Part Payments"
   ];
 
@@ -2030,17 +2033,47 @@
   var currentEl = createItem(features[0], 'enter');
   windowEl.appendChild(currentEl);
 
+  var timerId = null;
+
   function rotate() {
     var nextIndex = (index + 1) % features.length;
-    var outEl = currentEl;
     var inEl  = createItem(features[nextIndex], 'enter');
+
+    // Defensive cleanup: remove any stale items left behind (e.g. after a
+    // background tab was throttled), keeping only the current outgoing one.
+    Array.prototype.slice.call(windowEl.children).forEach(function (child) {
+      if (child !== currentEl) child.remove();
+    });
+
+    var outEl = currentEl;
     windowEl.appendChild(inEl);
     outEl.classList.remove('enter');
     outEl.classList.add('exit');
-    setTimeout(function () { outEl.remove(); currentEl = inEl; index = nextIndex; }, 450);
+    setTimeout(function () { if (outEl.parentNode) outEl.remove(); currentEl = inEl; index = nextIndex; }, 450);
   }
 
-  setInterval(rotate, 1800);
+  function startRotation() {
+    if (timerId === null) timerId = setInterval(rotate, 2000);
+  }
+  function stopRotation() {
+    if (timerId !== null) { clearInterval(timerId); timerId = null; }
+  }
+
+  // Pause while the tab is hidden; on return, snap to a single clean item
+  // then resume, so throttled timers can't stack overlapping text.
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      stopRotation();
+    } else {
+      Array.prototype.slice.call(windowEl.children).forEach(function (child) {
+        if (child !== currentEl) child.remove();
+      });
+      if (currentEl) { currentEl.classList.remove('exit'); currentEl.classList.add('enter'); }
+      startRotation();
+    }
+  });
+
+  startRotation();
 })();
 /* --- End rotating pill --- */
 </script>
