@@ -226,6 +226,18 @@
           70%  { box-shadow: 0 0 0 10px currentColor; opacity: 0; }
           100% { box-shadow: 0 0 0 0 currentColor; opacity: 0; }
         }
+        @media (max-width: 640px) {
+          .kye-calc-card { display: grid; grid-template-columns: auto 1fr; column-gap: 18px; row-gap: 10px; align-items: start; padding: 14px 16px; margin-left: -8px; margin-right: -8px; }
+          .kye-calc-card > .kye-calc-icon { grid-column: 1; grid-row: 1 / 3; align-self: center; }
+          .kye-calc-card > .flex-1 { grid-column: 2; grid-row: 1; }
+          .kye-calc-card > a { grid-column: 2 / -1; grid-row: 2; justify-self: stretch; width: 100%; box-sizing: border-box; text-align: center; }
+        }
+        .kye-hero-pills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 10px; }
+        .kye-hero-pills > span { justify-content: center; text-align: center; }
+        @media (min-width: 768px) {
+          .kye-hero-pills { grid-template-columns: repeat(2, max-content); width: fit-content; gap: 10px 14px; }
+          .kye-hero-pills > span { justify-content: flex-start; text-align: left; }
+        }
         .kye-feature-window { position: relative; height: 15px; overflow: hidden; margin-top: 3px; }
         .kye-feature-item {
           position: absolute;
@@ -472,7 +484,7 @@
             </div>
             <h1 class="text-3xl md:text-4xl font-bold text-white leading-tight" style="font-family:'Lora',serif;">EMI Calculator: Know the real cost of your loan before you sign.</h1>
             <p class="text-sm md:text-base text-blue-200 mt-3 max-w-2xl">Calculate your EMI, model part payments, and see the full amortization schedule. No sign-ups, no hidden conditions.</p>
-            <div class="flex flex-wrap gap-2 mt-6">
+            <div class="kye-hero-pills mt-6">
               <span class="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium text-white" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:8px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Part-payment modelling
               </span>
@@ -913,7 +925,7 @@
                 </div>
             </section>
 
-            <!--Explore Other Calculators - direct commit -->
+            <!-- Other Calculators -->
             <section class="bg-white shadow-lg rounded-2xl py-10 px-6 mt-10">
               <h2 class="text-2xl font-bold text-center mb-8">Explore Other Calculators</h2>
               <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -958,7 +970,6 @@
 
                 <!-- Credit Card Payoff nudge -->
                 <div class="kye-calc-card relative bg-white border border-gray-200 rounded-2xl p-5 flex items-center gap-4 shadow-sm">
-                  <span class="absolute -top-2.5 left-4 text-blue-900 text-xs font-extrabold px-2.5 py-0.5 rounded-full tracking-wide shadow-sm" style="background:#FCDC4D;">Must Try</span>
                   <!-- Icon: credit card -->
                   <div class="kye-calc-icon flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background:#e11d48;color:#e11d48;">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="position:relative;z-index:1;">
@@ -966,7 +977,10 @@
                     </svg>
                   </div>
                   <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-gray-900 mb-0.5">Credit Card Payoff Calculator</p>
+                    <div class="flex items-center gap-2 mb-0.5">
+                      <p class="text-sm font-semibold text-gray-900 m-0">Credit Card Payoff Calculator</p>
+                      <span class="flex-shrink-0 text-blue-900 font-bold rounded-full" style="background:#FCDC4D;font-size:10px;line-height:1;padding:3px 8px;">Popular</span>
+                    </div>
                     <p class="text-xs text-gray-500 leading-relaxed">See your balance clear month by month. Add purchases, skip a payment, watch the real cost.</p>
                     <div class="kye-feature-window" id="kyeFeatCreditCard"></div>
                   </div>
@@ -978,7 +992,6 @@
 
                 <!-- Balance Transfer nudge -->
                 <div class="kye-calc-card relative bg-white border border-gray-200 rounded-2xl p-5 flex items-center gap-4 shadow-sm">
-                  <span class="absolute -top-2.5 left-4 text-blue-900 text-xs font-extrabold px-2.5 py-0.5 rounded-full tracking-wide shadow-sm" style="background:#FCDC4D;">Must Try</span>
                   <!-- Icon: transfer arrows -->
                   <div class="kye-calc-icon flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background:#7c3aed;color:#7c3aed;">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="position:relative;z-index:1;">
@@ -986,7 +999,10 @@
                     </svg>
                   </div>
                   <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-gray-900 mb-0.5">Loan Balance Transfer Calculator</p>
+                    <div class="flex items-center gap-2 mb-0.5">
+                      <p class="text-sm font-semibold text-gray-900 m-0">Loan Balance Transfer Calculator</p>
+                      <span class="flex-shrink-0 text-blue-900 font-bold rounded-full" style="background:#FCDC4D;font-size:10px;line-height:1;padding:3px 8px;">Popular</span>
+                    </div>
                     <p class="text-xs text-gray-500 leading-relaxed">Thinking of switching lenders? See the exact savings or cost before you make the move.</p>
                     <div class="kye-feature-window" id="kyeFeatBalanceTransfer"></div>
                   </div>
@@ -2167,24 +2183,34 @@
         }
       };
 
+      var controllers = [];
+
       Object.keys(sets).forEach(function (id) {
         var el = document.getElementById(id);
         if (!el) return;
         var color = sets[id].color;
         var items = sets[id].items;
         var idx = 0;
+        var timerId = null;
+        var currentEl = null;
 
         function renderFirst() {
-          var span = document.createElement('div');
-          span.className = 'kye-feature-item';
-          span.style.color = color;
-          span.textContent = items[idx];
-          el.appendChild(span);
+          currentEl = document.createElement('div');
+          currentEl.className = 'kye-feature-item';
+          currentEl.style.color = color;
+          currentEl.textContent = items[idx];
+          el.appendChild(currentEl);
         }
         renderFirst();
 
-        setInterval(function () {
-          var current = el.firstChild;
+        function tick() {
+          // Defensive cleanup: remove any stale items left behind (e.g. after a
+          // background tab was throttled), keeping only the current outgoing one.
+          Array.prototype.slice.call(el.children).forEach(function (child) {
+            if (child !== currentEl) child.remove();
+          });
+
+          var current = currentEl;
           if (current) {
             current.style.transform = 'translateY(-15px)';
             current.style.opacity = '0';
@@ -2197,6 +2223,7 @@
           next.style.transform = 'translateY(15px)';
           next.style.opacity = '0';
           el.appendChild(next);
+          currentEl = next;
           requestAnimationFrame(function () {
             requestAnimationFrame(function () {
               next.style.transform = 'translateY(0)';
@@ -2206,7 +2233,39 @@
           setTimeout(function () {
             if (current && current.parentNode) current.remove();
           }, 520);
-        }, 2400);
+        }
+
+        function startRotation() {
+          if (timerId === null) timerId = setInterval(tick, 2400);
+        }
+        function stopRotation() {
+          if (timerId !== null) { clearInterval(timerId); timerId = null; }
+        }
+
+        startRotation();
+        controllers.push({
+          start: startRotation,
+          stop: stopRotation,
+          sync: function () {
+            Array.prototype.slice.call(el.children).forEach(function (child) {
+              if (child !== currentEl) child.remove();
+            });
+            if (currentEl) {
+              currentEl.style.transform = 'translateY(0)';
+              currentEl.style.opacity = '1';
+            }
+          }
+        });
+      });
+
+      // Pause while the tab is hidden; on return, snap each card to a single
+      // clean item then resume, so throttled timers can't stack overlapping text.
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+          controllers.forEach(function (c) { c.stop(); });
+        } else {
+          controllers.forEach(function (c) { c.sync(); c.start(); });
+        }
       });
     })();
   </script>
