@@ -1099,7 +1099,7 @@ const popup = document.getElementById('installPopup');
 const addShortCutBtn = document.getElementById('addShortCutBtn');
 const closeShortCutBtn = document.getElementById('closeShortCutBtn');
 let popupTimer;
-const PWA_POPUP_DELAY = 35000; // 35s, used both for first show and every reappearance
+const PWA_POPUP_DELAY = 40000; // 40s, used both for first show and every reappearance
 
 function showPopup() {
   if (localStorage.getItem('pwaInstalled') === 'true') return;
@@ -1124,7 +1124,7 @@ function dismissPwaPopup() {
   popup.classList.remove('opacity-100');
   popup.classList.add('opacity-0');
   // Timer for the next appearance starts now, from the moment of dismissal
-  schedulePwaPopup(45000);
+  schedulePwaPopup(60000);
 }
 
 window.addEventListener('beforeinstallprompt', (e) => {
@@ -1132,7 +1132,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
   deferredPrompt = e;
 });
 
-// First appearance — 35s after load, regardless of beforeinstallprompt firing
+// First appearance — 40s after load, regardless of beforeinstallprompt firing
 schedulePwaPopup(PWA_POPUP_DELAY);
 
 addShortCutBtn.addEventListener('click', async () => {
@@ -1185,7 +1185,7 @@ const commentPopupBtn   = document.getElementById('commentPopupBtn');
 const commentPopupClose = document.getElementById('commentPopupClose');
 let commentPopupTimer;
 const COMMENT_POPUP_FIRST_DELAY = 60000; // 60s for the very first appearance only
-const COMMENT_POPUP_DELAY       = 60000; // 60s for every appearance after a dismissal
+const COMMENT_POPUP_DELAY       = 90000; // 90s for every appearance after a dismissal
 
 function isCommentsSectionNearView() {
   const anchor = document.getElementById('comments-anchor');
