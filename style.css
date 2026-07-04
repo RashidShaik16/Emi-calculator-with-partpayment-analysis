@@ -253,4 +253,80 @@
           to { opacity: 1; transform: translateX(0); }
         }
         /* === End popular articles reveal animation === */
+
+        /* =========================================================
+           MOBILE MENU UNROLL ANIMATION — self-contained block
+           Panel grows down from the top edge with a slight vertical
+           stretch, like a carpet unrolling, rather than a plain
+           fade or slide. No dependency on any other rule here.
+        ========================================================= */
+        .kye-mobilemenu-panel {
+          max-height: 0;
+          opacity: 0;
+          transform: scaleY(0.85);
+          transform-origin: top;
+          transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                      opacity 0.3s ease;
+        }
+        .kye-mobilemenu-panel.kye-menu-open {
+          max-height: 480px;
+          opacity: 1;
+          transform: scaleY(1);
+        }
+        .kye-mobilemenu-row {
+          transition: background 0.15s ease;
+        }
+        .kye-mobilemenu-row:hover {
+          background: #f8fafc;
+        }
+        .kye-mobilemenu-row:active {
+          background: #f3f4f6;
+        }
+        /* === End mobile menu unroll animation === */
+
+        /* =========================================================
+           HAMBURGER TO X MORPH — self-contained block
+           Three bars that rotate and fade into an X when the menu
+           is open, driven by a class toggled from the same script
+           that already manages the menu's open/close state.
+        ========================================================= */
+        .kye-hamburger {
+          width: 22px;
+          height: 16px;
+          position: relative;
+          display: inline-block;
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+        }
+        .kye-hamburger:focus-visible {
+          outline: 2px solid #FCDC4D;
+          outline-offset: 3px;
+        }
+        .kye-hamburger-bar {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: #ffffff;
+          border-radius: 2px;
+          transition: transform 0.3s ease, opacity 0.2s ease, top 0.3s ease;
+        }
+        .kye-hamburger-bar:nth-child(1) { top: 0; }
+        .kye-hamburger-bar:nth-child(2) { top: 7px; }
+        .kye-hamburger-bar:nth-child(3) { top: 14px; }
+        .kye-hamburger.kye-menu-icon-open .kye-hamburger-bar:nth-child(1) {
+          top: 7px;
+          transform: rotate(45deg);
+        }
+        .kye-hamburger.kye-menu-icon-open .kye-hamburger-bar:nth-child(2) {
+          opacity: 0;
+        }
+        .kye-hamburger.kye-menu-icon-open .kye-hamburger-bar:nth-child(3) {
+          top: 7px;
+          transform: rotate(-45deg);
+        }
+        /* === End hamburger to X morph === */
         
