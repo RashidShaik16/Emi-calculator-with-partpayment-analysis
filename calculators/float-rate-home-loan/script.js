@@ -23,6 +23,10 @@ const totalPaymentWithEventsEl  = document.getElementById("totalPaymentWithEvent
 const summaryTotalInterestEl    = document.getElementById("summaryTotalInterest");
 const summaryTotalRepaymentEl   = document.getElementById("summaryTotalRepayment");
 
+const monthlyEmiHighlightEl      = document.getElementById("monthlyEmiHighlight");
+const totalInterestHighlightEl   = document.getElementById("totalInterestHighlight");
+const totalRepaymentHighlightEl  = document.getElementById("totalRepaymentHighlight");
+
 const savingsHighlight = document.getElementById("savingsHighlight");
 const savingsAmount    = document.getElementById("savingsAmount");
 const savingsDetail    = document.getElementById("savingsDetail");
@@ -258,14 +262,27 @@ function updateResults() {
   originalTotalInterest = basePay - P;
 
   // Summary card
-  monthlyEmiEl.textContent              = "₹" + Math.round(baseEmi).toLocaleString("en-IN");
   summaryLoanAmountEl.textContent       = "₹" + P.toLocaleString("en-IN");
   summaryRateEl.textContent             = rate.toFixed(2) + "% p.a.";
   summaryTenureEl.textContent           = N + " months (" + (N / 12).toFixed(1) + " yrs)";
   summaryLoanAmountCreditEl.textContent = "₹" + P.toLocaleString("en-IN");
   totalPaymentEl.textContent            = "₹" + Math.round(basePay).toLocaleString("en-IN");
-  summaryTotalInterestEl.textContent    = "₹" + Math.round(originalTotalInterest).toLocaleString("en-IN");
-  summaryTotalRepaymentEl.textContent   = "₹" + Math.round(basePay).toLocaleString("en-IN");
+
+  if (window._kyeCountUp) {
+    window._kyeCountUp(monthlyEmiEl,            Math.round(baseEmi),               null);
+    window._kyeCountUp(summaryTotalInterestEl,  Math.round(originalTotalInterest), null);
+    window._kyeCountUp(summaryTotalRepaymentEl, Math.round(basePay),               null);
+    window._kyeCountUp(monthlyEmiHighlightEl,     Math.round(baseEmi),               null);
+    window._kyeCountUp(totalInterestHighlightEl,  Math.round(originalTotalInterest), null);
+    window._kyeCountUp(totalRepaymentHighlightEl, Math.round(basePay),               null);
+  } else {
+    monthlyEmiEl.textContent              = "₹" + Math.round(baseEmi).toLocaleString("en-IN");
+    summaryTotalInterestEl.textContent    = "₹" + Math.round(originalTotalInterest).toLocaleString("en-IN");
+    summaryTotalRepaymentEl.textContent   = "₹" + Math.round(basePay).toLocaleString("en-IN");
+    if (monthlyEmiHighlightEl)     monthlyEmiHighlightEl.textContent     = "₹" + Math.round(baseEmi).toLocaleString("en-IN");
+    if (totalInterestHighlightEl)  totalInterestHighlightEl.textContent  = "₹" + Math.round(originalTotalInterest).toLocaleString("en-IN");
+    if (totalRepaymentHighlightEl) totalRepaymentHighlightEl.textContent = "₹" + Math.round(basePay).toLocaleString("en-IN");
+  }
 
   // Amortization with events
   const schedule = generateAmortization(P, rate, N, events);
@@ -757,7 +774,7 @@ const popup = document.getElementById('installPopup');
 const addShortCutBtn = document.getElementById('addShortCutBtn');
 const closeShortCutBtn = document.getElementById('closeShortCutBtn');
 let popupTimer;
-let popupDelay = 15000;
+let popupDelay = 40000;
 
 function showPopup() {
   if (localStorage.getItem('pwaInstalled') === 'true') return;
@@ -790,7 +807,7 @@ addShortCutBtn.addEventListener('click', async () => {
     if (outcome === 'accepted') {
       localStorage.setItem('pwaInstalled', 'true');
     } else {
-      popupDelay = 30000;
+      popupDelay = 60000;
       schedulePopup(popupDelay);
     }
     deferredPrompt = null;
@@ -800,6 +817,6 @@ addShortCutBtn.addEventListener('click', async () => {
 closeShortCutBtn.addEventListener('click', () => {
   clearTimeout(popupTimer);
   popup.classList.add('hidden');
-  popupDelay = 30000;
+  popupDelay = 60000;
   schedulePopup(popupDelay);
 });

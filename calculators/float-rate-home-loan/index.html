@@ -204,6 +204,85 @@
       font-weight: 800;
       box-shadow: 0 2px 6px rgba(37,99,235,0.3);
     }
+
+    /* =========================================================
+       HERO PILL + CHIPS — self-contained block, ported from
+       the homepage. No dependency on any other rule in this
+       stylesheet or on script.js; safe to remove entirely.
+    ========================================================= */
+    .rotate-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 999px;
+      padding: 5px 18px 5px 14px;
+      overflow: hidden;
+    }
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(74,222,128,0.6);
+      animation: pill-pulse-dot 1.8s ease-in-out infinite;
+    }
+    @keyframes pill-pulse-dot {
+      0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.6); }
+      70%  { box-shadow: 0 0 0 8px rgba(74,222,128,0); }
+      100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+    }
+    .rotate-window {
+      position: relative;
+      height: 17px;
+      width: 100%;
+    }
+    .rotate-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+    .rotate-item.enter {
+      animation: pill-enter-up 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .rotate-item.exit {
+      animation: pill-exit-up 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    @keyframes pill-enter-up {
+      0%   { opacity: 0; transform: translateY(70%); }
+      60%  { opacity: 1; }
+      100% { opacity: 1; transform: translateY(0%); }
+    }
+    @keyframes pill-exit-up {
+      0%   { opacity: 1; transform: translateY(0%); }
+      40%  { opacity: 0; }
+      100% { opacity: 0; transform: translateY(-70%); }
+    }
+    .kye-hero-pills { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+    .kye-hero-pills > span { justify-content: flex-start; text-align: left; }
+    /* === End hero pill + chips === */
+
+    /* =========================================================
+       HERO ILLUSTRATION — self-contained block
+       House with orbiting feature pills, desktop/tablet only.
+       No dependency on any other rule in this stylesheet or on
+       any script; safe to remove entirely by deleting this CSS
+       block and the markup block that uses these classes.
+    ========================================================= */
+    @keyframes kye-hero-orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes kye-hero-counter-orbit { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+    .kye-hero-orbit-group { transform-origin: 155px 160px; animation: kye-hero-orbit 14s linear infinite; }
+    .kye-hero-orbit-badge { animation: kye-hero-counter-orbit 14s linear infinite; }
+    /* === End hero illustration === */
   </style>
 
   <!-- Google tag (gtag.js) -->
@@ -223,17 +302,29 @@
 <div id="progressBar"></div>
 
 <!-- ===== PWA INSTALL BANNER ===== -->
-<div id="installPopup" class="fixed top-0 inset-x-0 bg-white shadow-lg border-b border-gray-200 p-4 z-50 hidden opacity-0 transition-opacity duration-700">
-  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm text-gray-700">
-    <div class="text-center sm:text-left leading-tight">
-      &#128241; <strong>Install KnowYourEMI</strong><br>
-      Add to your Home Screen for quick access.
+<div id="installPopup" class="fixed hidden top-5 right-5 bg-white rounded-2xl border border-gray-100 z-50 opacity-0 transition-opacity duration-700 overflow-hidden"
+     style="width: 300px; max-width: 75vw; box-shadow:0 10px 35px rgba(0,0,0,0.14);">
+
+    <!-- character + headline -->
+    <div class="flex items-end gap-2.5 pt-3 px-2 pl-3">
+        <img src="../../assets/divi-install.png" alt="" style="width:92px;" class="flex-shrink-0 rounded-xl -mb-0.5" />
+        <div class="pb-2">
+            <h3 class="text-[15px] font-bold text-gray-900 leading-snug">Add KnowYourEMI to your Home Screen</h3>
+            <p class="text-xs text-gray-500 mt-1 leading-snug">Open it like an app, no searching again.</p>
+        </div>
     </div>
-    <div class="flex justify-center sm:justify-end gap-2">
-      <button id="addShortCutBtn" class="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg">Add Shortcut</button>
-      <button id="closeShortCutBtn" class="text-gray-500 hover:text-gray-700 text-xs px-3 py-1.5">Maybe Later</button>
+
+    <!-- buttons -->
+    <div class="px-4 pb-4 pt-2 flex items-center gap-2.5">
+        <button id="addShortCutBtn"
+            class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-sm font-bold py-2 rounded-lg shadow hover:from-blue-700 hover:to-indigo-800 transition">
+            Add Shortcut
+        </button>
+        <button id="closeShortCutBtn"
+            class="text-xs text-gray-400 hover:text-gray-600 font-medium whitespace-nowrap px-1">
+            Maybe later
+        </button>
     </div>
-  </div>
 </div>
 
 <!-- ===== NAVBAR ===== -->
@@ -267,7 +358,8 @@
 
 <!-- PAGE HEADER -->
 <div class="bg-gradient-to-r from-blue-800 to-indigo-900 py-14 px-4 mb-10">
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-6xl mx-auto flex items-center gap-8">
+    <div class="flex-1 min-w-0">
     <!-- Breadcrumb -->
     <nav aria-label="Breadcrumb" class="mb-3">
       <ol class="flex items-center gap-1.5 text-xs text-blue-300" style="list-style:none;margin:0;padding:0;">
@@ -278,9 +370,67 @@
         <li><span class="text-white font-medium">Floating Rate Home Loan Simulator</span></li>
       </ol>
     </nav>
-    <span class="inline-block bg-white bg-opacity-20 text-white text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-3">Free Calculator</span>
-    <h1 class="text-2xl md:text-3xl font-bold text-white" style="font-family:'Lora',serif;">Floating Rate Home Loan Simulator - See Your Loan React to Rate Changes.</h1>
-    <p class="text-sm text-blue-200 mt-2 max-w-xl">Simulate how interest rate changes and part payments affect your home loan. Model multiple events over the loan life and compare original vs revised schedule.</p>
+    <div class="rotate-pill mb-3" id="rotatePill">
+      <span class="live-dot"></span>
+      <div class="rotate-window" id="rotateWindow"></div>
+    </div>
+    <h1 class="font-bold text-white" style="font-family:'Lora',serif;">
+      <span class="block" style="color:#FCDC4D;font-size:clamp(1.25rem, 1rem + 1.1vw, 1.875rem);">Floating Rate Home Loan Simulator</span>
+      <span class="block mt-1" style="font-size:clamp(1.5rem, 1.05rem + 2vw, 2.5rem);">See how your loan reacts to rate changes.</span>
+    </h1>
+    <p class="text-blue-200 mt-2" style="font-size:clamp(0.85rem, 0.75rem + 0.4vw, 1rem); max-width: 42rem;">Simulate how interest rate changes and part payments affect your home loan. Model multiple events over the loan life and compare original vs revised schedule.</p>
+    <div class="kye-hero-pills mt-5">
+      <span class="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium text-white" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:8px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Rate change simulation
+      </span>
+      <span class="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium text-white" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:8px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Part-payment modelling
+      </span>
+      <span class="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium text-white" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:8px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Reduce EMI or tenure
+      </span>
+      <span class="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium text-white" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:8px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>PDF report export
+      </span>
+    </div>
+    </div>
+
+    <!-- Hero illustration: house with orbiting feature pills. Hidden below md (tablet); visible md and up. -->
+    <div class="hidden lg:flex flex-shrink-0 items-center justify-center" style="width:320px;">
+      <svg width="100%" viewBox="0 0 320 320" style="max-width:290px;">
+        <path d="M100 155 L155 105 L210 155 V215 H100 Z" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" opacity="0.95"/>
+        <rect x="138" y="177" width="34" height="38" rx="3" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="165" cy="196" r="1.8" fill="#ffffff"/>
+        <line x1="100" y1="155" x2="210" y2="155" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.95"/>
+
+        <g class="kye-hero-orbit-group">
+          <g transform="translate(155,50)">
+            <g class="kye-hero-orbit-badge">
+              <rect x="-38" y="-13" width="76" height="26" rx="13" fill="#FCDC4D"/>
+              <text y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Rate %</text>
+            </g>
+          </g>
+          <g transform="translate(265,160)">
+            <g class="kye-hero-orbit-badge">
+              <rect x="-38" y="-13" width="76" height="26" rx="13" fill="#059669"/>
+              <text y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Part pay</text>
+            </g>
+          </g>
+          <g transform="translate(155,270)">
+            <g class="kye-hero-orbit-badge">
+              <rect x="-38" y="-13" width="76" height="26" rx="13" fill="#7c3aed"/>
+              <text y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Tenure</text>
+            </g>
+          </g>
+          <g transform="translate(45,160)">
+            <g class="kye-hero-orbit-badge">
+              <rect x="-38" y="-13" width="76" height="26" rx="13" fill="#0284c7"/>
+              <text y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">PDF</text>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
   </div>
 </div>
 
@@ -341,11 +491,42 @@
           <span>360 mo</span>
         </div>
       </div>
+
+      <!-- Feature tip -->
+      <div class="flex items-start gap-2 p-3 mt-6 text-sm rounded-lg bg-blue-50 text-blue-700 border border-blue-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-0.5 flex-shrink-0 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p>You can simulate a rate change or add a part payment anytime. Both are available directly in the Amortization Schedule below using Add Event.</p>
+      </div>
+
+      <!-- Insurance note -->
+      <div class="flex items-start gap-2 p-3 mt-3 text-sm rounded-lg bg-amber-50 text-amber-800 border border-amber-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-0.5 flex-shrink-0 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+        </svg>
+        <p>Note: This calculator does not include loan insurance costs. We plan to add this soon.</p>
+      </div>
     </section>
 
     <!-- RIGHT: Summary card -->
     <section class="bg-white rounded-2xl shadow-md p-6 flex flex-col justify-between">
       <div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center mb-6">
+          <div class="p-4 bg-blue-100 rounded-lg">
+            <p class="text-xs text-gray-500">Monthly EMI</p>
+            <p id="monthlyEmiHighlight" class="text-lg font-bold text-blue-700">&#8377;-</p>
+          </div>
+          <div class="p-4 bg-red-100 rounded-lg">
+            <p class="text-xs text-gray-500">Total Interest</p>
+            <p id="totalInterestHighlight" class="text-lg font-bold text-red-700">&#8377;-</p>
+          </div>
+          <div class="p-4 bg-purple-100 rounded-lg">
+            <p class="text-xs text-gray-500">Total Repayment</p>
+            <p id="totalRepaymentHighlight" class="text-lg font-bold text-purple-700">&#8377;-</p>
+          </div>
+        </div>
+
         <h2 class="text-lg font-bold text-blue-800 border-b pb-2 mb-4">Loan Summary</h2>
 
         <!-- Loan detail rows -->
@@ -883,22 +1064,31 @@
 
 <!-- ===== FEEDBACK POPUP ===== -->
 <div id="feedbackPopup"
-  class="hidden fixed z-40 cursor-pointer"
-  style="bottom: 80px; right: 16px; max-width: 220px;"
-  onclick="document.getElementById('feedback-section').scrollIntoView({behavior:'smooth'}); document.getElementById('feedbackPopup').classList.add('hidden');">
-  <div class="bg-white border border-gray-200 rounded-2xl shadow-xl p-4 flex items-start gap-3" style="box-shadow: 0 8px 32px rgba(37,99,235,0.15);">
-    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-      </svg>
+  class="hidden fixed bottom-20 right-5 bg-white rounded-2xl border border-gray-100 z-40 overflow-hidden"
+  style="width: 300px; max-width: 75vw; box-shadow:0 10px 35px rgba(0,0,0,0.14);">
+
+    <!-- character + headline -->
+    <div class="flex items-center gap-2.5 pt-3 px-2 pl-3">
+        <div class="w-[108px] h-[124px] flex-shrink-0 rounded-xl overflow-hidden">
+            <img src="../../assets/divi-comment.png" alt="" class="w-full h-full object-cover" style="width: 92px; object-position:50% 16%;" />
+        </div>
+        <div>
+            <h3 class="text-[15px] font-bold text-gray-900 leading-snug">Found this helpful?</h3>
+            <p class="text-xs text-gray-500 mt-1 leading-snug">We'd love to hear what you think.</p>
+        </div>
     </div>
-    <div class="min-w-0">
-      <p class="text-sm font-bold text-gray-800 leading-tight">Share your feedback</p>
-      <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Help us improve this simulator</p>
+
+    <!-- buttons -->
+    <div class="px-4 pb-4 pt-3 flex items-center gap-2.5">
+        <button onclick="document.getElementById('knowyouremi-comments').scrollIntoView({behavior:'smooth'}); document.getElementById('feedbackPopup').classList.add('hidden');"
+            class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-sm font-bold py-2 rounded-lg shadow hover:from-blue-700 hover:to-indigo-800 transition">
+            Comment Now
+        </button>
+        <button onclick="document.getElementById('feedbackPopup').classList.add('hidden'); if(window.scheduleFeedbackPopup) window.scheduleFeedbackPopup(90000);"
+            class="text-xs text-gray-400 hover:text-gray-600 font-medium whitespace-nowrap px-1">
+            Maybe later
+        </button>
     </div>
-    <button onclick="event.stopPropagation(); document.getElementById('feedbackPopup').classList.add('hidden'); if(window.scheduleFeedbackPopup) window.scheduleFeedbackPopup(30000);"
-      class="text-gray-300 hover:text-gray-500 text-base leading-none flex-shrink-0 ml-1">&times;</button>
-  </div>
 </div>
 
 <!-- ===== SCRIPTS ===== -->
@@ -920,15 +1110,15 @@
     document.getElementById("progressBar").style.width = pct + "%";
   });
 
-  // ---- Feedback Popup ----
-  // Show after 30s, reappear every 30s after dismiss until user scrolls to form
+  // ---- Comment Popup ----
+  // Show after 60s, reappear every 90s after dismiss until user scrolls to comments
   const feedbackPopup = document.getElementById("feedbackPopup");
   let feedbackPopupTimer;
 
   window.showFeedbackPopup = function() {
-    const form = document.getElementById("feedback-section");
-    if (!form) return;
-    const rect = form.getBoundingClientRect();
+    const target = document.getElementById("knowyouremi-comments");
+    if (!target) return;
+    const rect = target.getBoundingClientRect();
     if (rect.top < window.innerHeight + 100) return;
     feedbackPopup.classList.remove("hidden");
     feedbackPopup.style.opacity = "0";
@@ -941,13 +1131,13 @@
     feedbackPopupTimer = setTimeout(window.showFeedbackPopup, delay);
   };
 
-  window.scheduleFeedbackPopup(30000);
+  window.scheduleFeedbackPopup(60000);
 
-  // Hide popup when user scrolls near feedback section
+  // Hide popup when user scrolls near the comments section
   window.addEventListener("scroll", () => {
-    const form = document.getElementById("feedback-section");
-    if (!form) return;
-    const rect = form.getBoundingClientRect();
+    const target = document.getElementById("knowyouremi-comments");
+    if (!target) return;
+    const rect = target.getBoundingClientRect();
     if (rect.top < window.innerHeight + 100) {
       feedbackPopup.classList.add("hidden");
       clearTimeout(feedbackPopupTimer);
@@ -959,6 +1149,157 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 <script src="./pdfGenerator.js"></script>
+  <!-- =========================================================
+       COUNT-UP NUMBER ANIMATION — self-contained block
+       Exposes window._kyeCountUp so script.js can animate a
+       number counting up to its final value instead of setting
+       text instantly. No dependency on any other script or on
+       script.js's internals — script.js just calls this function
+       with an element and a target number. Safe to remove by
+       deleting this block; script.js's calls are already guarded
+       with "if (window._kyeCountUp)" so nothing breaks if this
+       is removed later.
+  ========================================================= -->
+  <script>
+  (function () {
+    function countUp(el, targetValue, onDone) {
+      if (el._kyeRaf) cancelAnimationFrame(el._kyeRaf);
+      const DURATION = 900;
+      const start    = performance.now();
+
+      function step(now) {
+        const progress = Math.min((now - start) / DURATION, 1);
+        const eased    = 1 - Math.pow(1 - progress, 3);
+        const current  = Math.round(eased * targetValue);
+        el.textContent = '₹' + current.toLocaleString('en-IN');
+        if (progress < 1) {
+          el._kyeRaf = requestAnimationFrame(step);
+        } else {
+          el.textContent = '₹' + targetValue.toLocaleString('en-IN');
+          if (typeof onDone === 'function') onDone();
+        }
+      }
+      el._kyeRaf = requestAnimationFrame(step);
+    }
+
+    function countUpWhenVisible(el, targetValue, onDone) {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        countUp(el, targetValue, onDone);
+        return;
+      }
+      if (el._kyeVisObs) el._kyeVisObs.disconnect();
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            obs.disconnect();
+            countUp(el, targetValue, onDone);
+          }
+        });
+      }, { threshold: 0.3 });
+      el._kyeVisObs = obs;
+      obs.observe(el);
+    }
+
+    window._kyeCountUp = countUpWhenVisible;
+  })();
+  </script>
+  <!-- === End count-up number animation === -->
+
+  <!-- =========================================================
+       ROTATING HERO PILL — self-contained block, ported from
+       the homepage (same tab-throttle-safe logic). No dependency
+       on any other script; safe to remove entirely.
+  ========================================================= -->
+  <script>
+  (function () {
+    var features = [
+      "Free Calculator",
+      "No Ads, No Sign-Up",
+      "Simulates Rate Changes",
+      "Supports Part Payments",
+      "Download as PDF"
+    ];
+
+    var pillEl   = document.getElementById('rotatePill');
+    var windowEl = document.getElementById('rotateWindow');
+    if (!pillEl || !windowEl) return;
+
+    var index = 0;
+
+    function createItem(text, cls) {
+      var el = document.createElement('div');
+      el.className = 'rotate-item ' + cls;
+      el.textContent = text;
+      return el;
+    }
+
+    /* Size the pill once to fit the longest phrase, then lock it */
+    function setFixedWidth() {
+      var probe = document.createElement('span');
+      probe.style.cssText = 'visibility:hidden;position:absolute;white-space:nowrap;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;';
+      document.body.appendChild(probe);
+      var max = 0;
+      features.forEach(function (t) {
+        probe.textContent = t;
+        var w = probe.getBoundingClientRect().width;
+        if (w > max) max = w;
+      });
+      document.body.removeChild(probe);
+      pillEl.style.width = (max + 36 + 13) + 'px';
+    }
+
+    setFixedWidth();
+
+    var currentEl = createItem(features[0], 'enter');
+    windowEl.appendChild(currentEl);
+
+    var timerId = null;
+
+    function rotate() {
+      var nextIndex = (index + 1) % features.length;
+      var inEl  = createItem(features[nextIndex], 'enter');
+
+      // Defensive cleanup: remove any stale items left behind (e.g. after a
+      // background tab was throttled), keeping only the current outgoing one.
+      Array.prototype.slice.call(windowEl.children).forEach(function (child) {
+        if (child !== currentEl) child.remove();
+      });
+
+      var outEl = currentEl;
+      windowEl.appendChild(inEl);
+      outEl.classList.remove('enter');
+      outEl.classList.add('exit');
+      setTimeout(function () { if (outEl.parentNode) outEl.remove(); currentEl = inEl; index = nextIndex; }, 450);
+    }
+
+    function startRotation() {
+      if (timerId === null) timerId = setInterval(rotate, 2000);
+    }
+    function stopRotation() {
+      if (timerId !== null) { clearInterval(timerId); timerId = null; }
+    }
+
+    // Pause while the tab is hidden; on return, snap to a single clean item
+    // then resume, so throttled timers can't stack overlapping text.
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        stopRotation();
+      } else {
+        Array.prototype.slice.call(windowEl.children).forEach(function (child) {
+          if (child !== currentEl) child.remove();
+        });
+        if (currentEl) { currentEl.classList.remove('exit'); currentEl.classList.add('enter'); }
+        startRotation();
+      }
+    });
+
+    startRotation();
+  })();
+  </script>
+  <!-- === End rotating hero pill === -->
+
 <script src="./script.js"></script>
 
 <!-- EmailJS + reCAPTCHA -->
