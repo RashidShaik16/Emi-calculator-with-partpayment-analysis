@@ -328,4 +328,50 @@
           transform: rotate(-45deg);
         }
         /* === End hamburger to X morph === */
-        
+
+        /* =========================================================
+           HERO CALCULATOR ILLUSTRATION — self-contained block
+           Buttons that appear to press one at a time, and result
+           pills that rise from the screen, fade in then fade out.
+           Desktop/tablet only. No dependency on any other rule in
+           this stylesheet or on any script; safe to remove entirely
+           by deleting this CSS block and the markup block that
+           uses these classes.
+        ========================================================= */
+        @keyframes kye-hero-calc-btn-press {
+          0%, 100% { fill-opacity: 0.12; transform: scale(1); }
+          40% { fill-opacity: 0.12; transform: scale(1); }
+          55% { fill-opacity: 0.9; transform: scale(0.88); }
+          75% { fill-opacity: 0.12; transform: scale(1); }
+        }
+        .kye-hero-calc-key {
+          fill: #ffffff;
+          stroke: #ffffff;
+          stroke-width: 1.2;
+          stroke-opacity: 0.5;
+          transform-box: fill-box;
+          transform-origin: center;
+        }
+        .kye-hero-calc-k1 { animation: kye-hero-calc-btn-press 4s ease-in-out infinite; }
+        .kye-hero-calc-k2 { animation: kye-hero-calc-btn-press 4s ease-in-out infinite 0.5s; }
+        .kye-hero-calc-k3 { animation: kye-hero-calc-btn-press 4s ease-in-out infinite 2.5s; }
+        .kye-hero-calc-k4 { animation: kye-hero-calc-btn-press 4s ease-in-out infinite 1.4s; }
+        .kye-hero-calc-k5 { animation: kye-hero-calc-btn-press 4s ease-in-out infinite 3.1s; }
+        .kye-hero-calc-k6 { animation: kye-hero-calc-btn-press 4s ease-in-out infinite 0.8s; }
+        .kye-hero-calc-k7 { animation: kye-hero-calc-btn-press 4s ease-in-out infinite 1.9s; }
+        .kye-hero-calc-k8 { animation: kye-hero-calc-btn-press 4s ease-in-out infinite 3.5s; }
+        .kye-hero-calc-k9 { animation: kye-hero-calc-btn-press 4s ease-in-out infinite 1.6s; }
+
+        @keyframes kye-hero-calc-float-up {
+          0%   { opacity: 0; transform: translate(0,0); }
+          6%   { opacity: 0.15; }
+          25%  { opacity: 1; }
+          35%  { transform: translate(var(--kye-dx,0), -55px); }
+          100% { opacity: 0; transform: translate(var(--kye-dx,0), -150px); }
+        }
+        .kye-hero-calc-pill { opacity: 0; animation-fill-mode: backwards; will-change: transform, opacity; }
+        .kye-hero-calc-pill1 { animation: kye-hero-calc-float-up 6s ease-out infinite; }
+        .kye-hero-calc-pill2 { animation: kye-hero-calc-float-up 6s ease-out infinite 1.5s; }
+        .kye-hero-calc-pill3 { animation: kye-hero-calc-float-up 6s ease-out infinite 3s; }
+        .kye-hero-calc-pill4 { animation: kye-hero-calc-float-up 6s ease-out infinite 4.5s; }
+        /* === End hero calculator illustration === */

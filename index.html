@@ -282,14 +282,15 @@
 
         <!-- PAGE HERO HEADER -->
         <div class="bg-gradient-to-r from-blue-800 to-indigo-900 py-16 px-4">
-          <div class="max-w-7xl mx-auto px-4">
+          <div class="max-w-7xl mx-auto px-4 flex items-center gap-8">
+            <div class="flex-1 min-w-0">
             <div class="rotate-pill mb-4" id="rotatePill">
               <span class="live-dot"></span>
               <div class="rotate-window" id="rotateWindow"></div>
             </div>
             <h1 class="font-bold text-white leading-tight" style="font-family:'Lora',serif;">
               <span class="block" style="color:#FCDC4D;font-size:clamp(1.25rem, 1rem + 1.1vw, 1.875rem);">EMI Calculator</span>
-              <span class="block mt-1" style="font-size:clamp(1.5rem, 1.05rem + 2vw, 2.5rem);">Know the real cost of your loan before you sign.</span>
+              <span class="block mt-1" style="font-size:clamp(1.5rem, 1.05rem + 2vw, 2.5rem);">The only calculator you ever need to plan your loans.</span>
             </h1>
             <p class="text-blue-200 mt-3 max-w-2xl" style="font-size:clamp(0.875rem, 0.8rem + 0.25vw, 1rem);">Calculate your EMI, model part payments, and see the full amortization schedule. No sign-ups, no hidden conditions.</p>
             <div class="kye-hero-pills mt-6">
@@ -305,6 +306,46 @@
               <span class="inline-flex items-center gap-1.5 text-xs md:text-sm font-medium text-white" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);padding:5px 12px;border-radius:8px;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>PDF &amp; image export
               </span>
+            </div>
+            </div>
+
+            <!-- Hero illustration: calculator with pressing buttons and floating result pills. Hidden below lg; visible lg and up. -->
+            <div class="hidden lg:flex flex-shrink-0 items-center justify-center" style="width:380px;">
+              <svg width="100%" viewBox="0 0 320 340" style="max-width:340px;">
+
+                <g class="kye-hero-calc-pill kye-hero-calc-pill1" style="--kye-dx:-30px;" transform-origin="150 118">
+                  <rect x="90" y="105" width="100" height="24" rx="12" fill="#FCDC4D"/>
+                  <text x="140" y="121" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1e3a8a">&#8377;24,567 EMI</text>
+                </g>
+                <g class="kye-hero-calc-pill kye-hero-calc-pill2" style="--kye-dx:25px;" transform-origin="185 118">
+                  <rect x="130" y="105" width="110" height="24" rx="12" fill="#059669"/>
+                  <text x="185" y="121" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff">&#8377;5,00,000 Loan</text>
+                </g>
+                <g class="kye-hero-calc-pill kye-hero-calc-pill3" style="--kye-dx:-15px;" transform-origin="145 118">
+                  <rect x="110" y="105" width="70" height="24" rx="12" fill="#0284c7"/>
+                  <text x="145" y="121" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff">8.5% ROI</text>
+                </g>
+                <g class="kye-hero-calc-pill kye-hero-calc-pill4" style="--kye-dx:10px;" transform-origin="155 118">
+                  <rect x="115" y="105" width="80" height="24" rx="12" fill="#7c3aed"/>
+                  <text x="155" y="121" text-anchor="middle" font-size="10.5" font-weight="700" fill="#ffffff">24 Months</text>
+                </g>
+
+                <rect x="120" y="105" width="70" height="115" rx="10" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-width="3.2" stroke-linejoin="round"/>
+                <rect x="130" y="116" width="50" height="24" rx="3" fill="#0f2a6b" stroke="#ffffff" stroke-width="2"/>
+                <text x="155" y="133" text-anchor="middle" font-size="10" font-weight="700" fill="#FCDC4D">&#8377;24,567</text>
+
+                <rect class="kye-hero-calc-key kye-hero-calc-k1" x="132.5" y="149" width="11" height="11" rx="2.5"/>
+                <rect class="kye-hero-calc-key kye-hero-calc-k2" x="149.5" y="149" width="11" height="11" rx="2.5"/>
+                <rect class="kye-hero-calc-key kye-hero-calc-k3" x="166.5" y="149" width="11" height="11" rx="2.5"/>
+                <rect class="kye-hero-calc-key kye-hero-calc-k4" x="132.5" y="164" width="11" height="11" rx="2.5"/>
+                <rect class="kye-hero-calc-key kye-hero-calc-k5" x="149.5" y="164" width="11" height="11" rx="2.5"/>
+                <rect class="kye-hero-calc-key kye-hero-calc-k6" x="166.5" y="164" width="11" height="11" rx="2.5"/>
+                <rect class="kye-hero-calc-key kye-hero-calc-k7" x="132.5" y="179" width="11" height="11" rx="2.5"/>
+                <rect class="kye-hero-calc-key kye-hero-calc-k8" x="149.5" y="179" width="11" height="11" rx="2.5"/>
+                <rect class="kye-hero-calc-key kye-hero-calc-k9" x="166.5" y="179" width="11" height="11" rx="2.5"/>
+
+                <rect x="130" y="200" width="50" height="9" rx="4.5" fill="none" stroke="#ffffff" stroke-width="2.2"/>
+              </svg>
             </div>
           </div>
         </div>
