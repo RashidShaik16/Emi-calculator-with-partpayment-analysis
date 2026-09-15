@@ -4,5 +4,5 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-Sitemap: https://www.knowyouremi.in/sitemap.xml
+Sitemap: https://knowyouremi.in/sitemap.xml
 
