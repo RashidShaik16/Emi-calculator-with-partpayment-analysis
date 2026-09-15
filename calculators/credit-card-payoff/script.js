@@ -20,6 +20,7 @@ let purchases            = {};   // { i: amount }
 let globalType           = 'pay';
 let pendingPurchaseMonth = null;
 let chartInstance        = null;
+let scheduleCapped       = false;
 
 // ── UTILS ────────────────────────────────────────────────────────────────────
 const inr     = n => '&#8377;' + Math.round(n).toLocaleString('en-IN');
@@ -53,7 +54,7 @@ function bindSlider(rangeId, numId, dispId, fmt) {
 // Only 'pay' and 'min' are available globally. 'skip' is row-only.
 const hintText = {
   pay: 'Every month pays your set amount (₹ entered above). Change individual months in the schedule.',
-  min: 'Every month pays minimum due only (5% of balance or ₹200). Payoff takes much longer — try it to see why.',
+  min: 'Every month pays minimum due only (5% of balance or ₹200). Payoff takes much longer - try it to see why.',
 };
 
 function setGlobalType(type, btn) {
@@ -111,8 +112,10 @@ function computeSchedule() {
   const balance = parseFloat(document.getElementById('inp-balance-num').value) || 0;
   const payment = parseFloat(document.getElementById('inp-payment-num').value) || 0;
   const rate    = parseFloat(document.getElementById('inp-rate').value)         || 3.75;
+  const GST_RATE = 0.18;
 
   scheduleData = [];
+  scheduleCapped = false;
   clearScheduleWarning();
 
   // ── EDGE CASE: Zero or missing balance ───────────────────────────────────
@@ -123,84 +126,118 @@ function computeSchedule() {
     clearInputError('inp-balance-num');
   }
 
-  // ── EDGE CASE: Payment >= balance (pointless calculation) ────────────────
-  // Only applies when global type is 'pay' — min/skip don't use this payment
-  if (globalType === 'pay' && payment >= balance) {
-    showInputError('inp-payment-num', 'Monthly payment equals or exceeds your balance. Your card will be cleared in month 1 — no schedule needed.');
+  // A payment equal to or greater than the current balance is valid.
+  // Interest and GST are calculated first, then the payment is applied.
+  // The principal balance is tracked separately from interest, GST and fees.
+  if (globalType === 'pay' && payment <= 0) {
+    showInputError('inp-payment-num', 'Please enter a monthly payment amount greater than ₹0.');
     return;
   } else {
     clearInputError('inp-payment-num');
   }
 
-  // ── EDGE CASE: Zero payment with 'pay' type = infinite loop risk ─────────
-  if (globalType === 'pay' && payment <= 0) {
-    showInputError('inp-payment-num', 'Please enter a monthly payment amount greater than ₹0.');
-    return;
-  }
-
   let bal = balance;
+  let chargeBalance = 0; // Unpaid interest, GST and fees. Never earns interest itself.
   const MAX_MONTHS = 600;
   let hitCap = false;
 
-  for (let i = 0; i < MAX_MONTHS && bal > 0; i++) {
+  for (let i = 0; i < MAX_MONTHS && (bal > 0 || chargeBalance > 0); i++) {
     const ov       = overrides[i];
     const type     = ov ? ov.type : globalType;
     const purchase = purchases[i] || 0;
     const opening  = bal;
+
+    // Interest is charged only on the underlying outstanding balance.
+    // Unpaid interest, GST and fees are tracked separately and never earn interest.
     const interest = opening * (rate / 100);
+    const gstOnInterest = interest * GST_RATE;
     let lateFee = 0, paid = 0;
 
     if (type === 'skip') {
       paid    = 0;
       lateFee = lateFeeGST(opening);
     } else if (type === 'min') {
-      paid = Math.min(minDue(opening), opening + interest);
+      paid = Math.min(minDue(opening), opening + chargeBalance + interest + gstOnInterest);
     } else {
-      // 'pay' — use override amount if set, else global default payment
+      // 'pay' - use override amount if set, else global default payment
       const amt = ov ? ov.amount : payment;
-      // ── EDGE CASE: Row override amount = 0 with type 'pay' ──────────────
-      // Treat as skip — balance grows, late fee applies
+      // A zero row payment is treated as a skipped payment.
       if (amt <= 0) {
         paid    = 0;
         lateFee = lateFeeGST(opening);
       } else {
-        paid = Math.min(amt, opening + interest);
+        paid = Math.min(amt, opening + chargeBalance + interest + gstOnInterest);
       }
     }
 
-    const toPrincipal = Math.max(0, paid - interest);
-    let closing = opening + interest + lateFee - paid + purchase;
-    if (closing < 0.5) closing = 0;
+    // Allocate payment to the current month's interest and GST first, then
+    // previously unpaid charges, then the underlying principal. Issuer
+    // allocation rules can vary, so this remains a simplified planning model.
+    let remainingPayment = paid;
+    const interestPaid = Math.min(remainingPayment, interest);
+    remainingPayment -= interestPaid;
+
+    const gstInterestPaid = Math.min(remainingPayment, gstOnInterest);
+    remainingPayment -= gstInterestPaid;
+
+    const priorChargesPaid = Math.min(remainingPayment, chargeBalance);
+    remainingPayment -= priorChargesPaid;
+
+    const toPrincipal = Math.min(remainingPayment, opening);
+    const closing = Math.max(0, opening - toPrincipal + purchase);
+
+    // Carry unpaid charges forward separately. They do not become principal
+    // and do not generate interest or GST again in this model.
+    chargeBalance = Math.max(
+      0,
+      chargeBalance + interest + gstOnInterest + lateFee
+        - interestPaid - gstInterestPaid - priorChargesPaid
+    );
+
+    // Remove tiny floating-point residues so a fully paid schedule ends cleanly.
+    const roundedChargeBalance = Math.round(chargeBalance * 100) / 100;
+    const roundedClosing = Math.round(closing * 100) / 100;
+    chargeBalance = roundedChargeBalance < 0.01 ? 0 : roundedChargeBalance;
+    const finalClosing = roundedClosing < 0.01 ? 0 : roundedClosing;
 
     scheduleData.push({
       month: i + 1,
       opening,
       interest,
+      gstOnInterest,
       purchase,
       lateFee,
       payment: paid,
+      interestPaid,
+      gstInterestPaid,
       toPrincipal,
-      closing,
+      chargeBalance,
+      closing: finalClosing,
+      totalOutstanding: finalClosing + chargeBalance,
       type,
       amount: ov ? ov.amount : payment
     });
 
-    bal = closing;
+    bal = finalClosing;
 
     // Check if we're near the cap
-    if (i === MAX_MONTHS - 1 && bal > 0) hitCap = true;
+    if (i === MAX_MONTHS - 1 && (bal > 0 || chargeBalance > 0)) {
+      hitCap = true;
+      scheduleCapped = true;
+    }
   }
 
   // ── EDGE CASE: Payment barely covers interest (schedule never ends) ───────
   if (hitCap) {
-    showScheduleWarning('At this payment amount, the balance takes over 50 years to clear. Try increasing your monthly payment — even a small increase makes a big difference.');
+    showScheduleWarning('At this payment amount, the balance takes over 50 years to clear. Try increasing your monthly payment - even a small increase makes a big difference.');
   }
 
-  // ── EDGE CASE: Payment barely above interest — show a nudge ──────────────
+  // ── EDGE CASE: Payment barely above interest - show a nudge ──────────────
   if (!hitCap && scheduleData.length > 0 && globalType === 'pay') {
     const firstInterest = scheduleData[0].interest;
-    if (payment > 0 && payment < firstInterest * 1.1 && payment < balance) {
-      showScheduleWarning('Your payment is barely above the monthly interest of ' + inrText(firstInterest) + '. Very little goes to principal each month — consider paying more to clear this faster.');
+    const firstCharges = scheduleData[0].interest + scheduleData[0].gstOnInterest;
+    if (payment > 0 && payment < firstCharges * 1.1 && payment < balance) {
+      showScheduleWarning('Your payment is barely above the monthly interest and GST charges of ' + inrText(firstCharges) + '. Very little goes to principal each month - consider paying more to clear this faster.');
     }
   }
 }
@@ -211,29 +248,36 @@ function renderSummary() {
   const rate      = parseFloat(document.getElementById('inp-rate').value);
   const months    = scheduleData.length;
   const totalInt  = scheduleData.reduce((s, r) => s + r.interest, 0);
+  const totalGST  = scheduleData.reduce((s, r) => s + r.gstOnInterest, 0);
   const totalFee  = scheduleData.reduce((s, r) => s + r.lateFee,  0);
   const totalPaid = scheduleData.reduce((s, r) => s + r.payment,  0);
 
-  // Static fields — no count-up needed
+  // Static fields - no count-up needed
   document.getElementById('s-balance').innerHTML  = inr(balance);
   document.getElementById('s-rate').textContent   = rate.toFixed(2) + '% / mo  (' + (rate * 12).toFixed(1) + '% p.a.)';
 
-  // Months — count up the number part
+  // Months - count up the number part
   const monthsEl = document.getElementById('s-months');
-  const monthSuffix = months >= 12 ? ' months  (' + Math.floor(months / 12) + ' yr ' + (months % 12) + ' mo)' : ' months';
-  ccCountUp(monthsEl, months, '', monthSuffix, 900);
+  if (scheduleCapped) {
+    monthsEl.textContent = '600+ months (50+ years)';
+  } else {
+    const monthSuffix = months >= 12 ? ' months  (' + Math.floor(months / 12) + ' yr ' + (months % 12) + ' mo)' : ' months';
+    ccCountUp(monthsEl, months, '', monthSuffix, 900);
+  }
 
-  // Money fields — count up
+  // Money fields - count up
   const intEl   = document.getElementById('s-interest');
+  const gstEl   = document.getElementById('s-gst-interest');
   const feeEl   = document.getElementById('s-fees');
   const totEl   = document.getElementById('s-total');
   const extEl   = document.getElementById('s-extra');
 
   // Set final values immediately for reference, then animate
   setTimeout(() => ccCountUp(intEl, totalInt,             'Rs.', '', 1100), 80);
-  setTimeout(() => ccCountUp(feeEl, totalFee,             'Rs.', '', 900),  160);
-  setTimeout(() => ccCountUp(totEl, totalPaid,            'Rs.', '', 1300), 240);
-  setTimeout(() => ccCountUp(extEl, totalInt + totalFee,  'Rs.', '', 1200), 320);
+  setTimeout(() => ccCountUp(gstEl, totalGST,             'Rs.', '', 900),  160);
+  setTimeout(() => ccCountUp(feeEl, totalFee,              'Rs.', '', 900),  240);
+  setTimeout(() => ccCountUp(totEl, totalPaid,             'Rs.', '', 1300), 320);
+  setTimeout(() => ccCountUp(extEl, totalInt + totalGST + totalFee, 'Rs.', '', 1200), 400);
 }
 
 // ── SCROLL-TRIGGERED CHART ────────────────────────────────────────────────────
@@ -243,10 +287,10 @@ function observeChart() {
   if (!canvas) return;
   if (chartObserver) chartObserver.disconnect();
 
-  // Destroy existing chart and clear — wait for scroll to re-render
+  // Destroy existing chart and clear - wait for scroll to re-render
   if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
 
-  // Check if canvas is already visible — if so defer until user scrolls away and back
+  // Check if canvas is already visible - if so defer until user scrolls away and back
   const rect = canvas.getBoundingClientRect();
   const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
@@ -272,7 +316,7 @@ function observeChart() {
       const r = canvas.getBoundingClientRect();
       const nowVisible = r.top < window.innerHeight && r.bottom > 0;
       if (!nowVisible) {
-        // Left viewport — now observe for re-entry
+        // Left viewport - now observe for re-entry
         window.removeEventListener('scroll', scrollHandler);
         canvas.dataset.chartPending = 'true';
         chartObserver.observe(canvas);
@@ -390,6 +434,9 @@ function renderTable() {
     // Interest
     const tdI = makeTd(inr(row.interest), 'text-right text-red-500 font-medium');
 
+    // GST on interest
+    const tdG = makeTd(inr(row.gstOnInterest), 'text-right text-red-400');
+
     // Purchase
     const tdP = document.createElement('td');
     tdP.className = 'px-4 py-2.5 text-right whitespace-nowrap';
@@ -433,7 +480,7 @@ function renderTable() {
     const dis = row.type !== 'pay'  ? 'disabled' : '';
     const amt = Math.round(row.amount || defAmt);
 
-    // Purchase button always rendered to lock column width — just invisible when purchase exists
+    // Purchase button always rendered to lock column width - just invisible when purchase exists
     const purchaseBtnCls = row.purchase > 0 ? 'btn-add-purchase' : 'btn-add-purchase';
     const purchaseBtnStyle = row.purchase > 0 ? 'style="opacity:0;pointer-events:none;"' : '';
 
@@ -447,7 +494,7 @@ function renderTable() {
         <button class="btn-add-purchase" ${purchaseBtnStyle} onclick="openPurchaseModal(${i})">+ Purchase</button>
       </div>`;
 
-    [tdM, tdO, tdI, tdP, tdF, tdPay, tdPrin, tdC, tdCtrl].forEach(c => tr.appendChild(c));
+    [tdM, tdO, tdI, tdG, tdP, tdF, tdPay, tdPrin, tdC, tdCtrl].forEach(c => tr.appendChild(c));
     tbody.appendChild(tr);
   });
 }
@@ -469,10 +516,10 @@ function setRowType(i, type, btn) {
 function setRowAmount(i, val) {
   let amt = parseFloat(val);
 
-  // ── EDGE CASE: Negative value — clamp to 0 ───────────────────────────────
+  // ── EDGE CASE: Negative value - clamp to 0 ───────────────────────────────
   if (isNaN(amt) || amt < 0) amt = 0;
 
-  // ── EDGE CASE: type is 'pay' but amount is 0 — warn user ─────────────────
+  // ── EDGE CASE: type is 'pay' but amount is 0 - warn user ─────────────────
   if (amt === 0) {
     const currentType = overrides[i] ? overrides[i].type : globalType;
     if (currentType === 'pay') {
@@ -560,7 +607,7 @@ function downloadPDF() {
 
   const { jsPDF } = window.jspdf;
   const fmt = n => 'Rs.' + Math.round(n).toLocaleString('en-IN');
-  // Portrait + pt units — mirrors pdfGenerator.js to avoid jsPDF.f3 errors
+  // Portrait + pt units - mirrors pdfGenerator.js to avoid jsPDF.f3 errors
   const doc = new jsPDF('p', 'pt', 'a4');
 
   const pageWidth  = doc.internal.pageSize.getWidth();
@@ -570,6 +617,7 @@ function downloadPDF() {
   const rate      = parseFloat(document.getElementById('inp-rate').value)         || 3.75;
   const months    = scheduleData.length;
   const totalInt  = scheduleData.reduce((s, r) => s + r.interest, 0);
+  const totalGST  = scheduleData.reduce((s, r) => s + r.gstOnInterest, 0);
   const totalFee  = scheduleData.reduce((s, r) => s + r.lateFee,  0);
   const totalPaid = scheduleData.reduce((s, r) => s + r.payment,  0);
 
@@ -610,9 +658,10 @@ function downloadPDF() {
     ['Monthly Interest Rate',       rate.toFixed(2) + '%  (' + (rate * 12).toFixed(1) + '% p.a.)'],
     ['Months to Pay Off',           months + ' months' + (months >= 12 ? '  (' + Math.floor(months / 12) + ' yr ' + (months % 12) + ' mo)' : '')],
     ['Total Interest Paid',         fmt(totalInt)],
-    ['Late Fees (incl. 18% GST)',   fmt(totalFee)],
-    ['Total Amount Paid',           fmt(totalPaid)],
-    ['Extra Paid (beyond balance)', fmt(totalInt + totalFee)]
+    ['GST on Interest (18%)',        fmt(totalGST)],
+    ['Late Fees (incl. 18% GST)',    fmt(totalFee)],
+    ['Total Amount Paid',            fmt(totalPaid)],
+    ['Extra Paid (beyond balance)',  fmt(totalInt + totalGST + totalFee)]
   ];
 
   const labelX = 60;
@@ -640,11 +689,12 @@ function downloadPDF() {
   // ── AUTOTABLE ──────────────────────────────────────────────────────────
   doc.autoTable({
     startY: startY,
-    head: [['Month', 'Opening', 'Interest', 'Purchase', 'Late Fee', 'Payment', 'To Principal', 'Closing', 'Type']],
+    head: [['Month', 'Opening', 'Interest', 'GST', 'Purchase', 'Late Fee', 'Payment', 'To Principal', 'Closing', 'Type']],
     body: scheduleData.map(function(r) { return [
       'M' + r.month,
       fmt(r.opening),
       fmt(r.interest),
+      fmt(r.gstOnInterest),
       r.purchase > 0 ? fmt(r.purchase) : '--',
       r.lateFee   > 0 ? fmt(r.lateFee)  : '--',
       r.type === 'skip' ? 'SKIPPED' : fmt(r.payment),
@@ -657,12 +707,12 @@ function downloadPDF() {
     bodyStyles:        { fontSize: 7, textColor: [55, 65, 81] },
     alternateRowStyles:{ fillColor: [249, 250, 251] },
     columnStyles: {
-      0: { halign: 'center', cellWidth: 35 },
+      0: { halign: 'center', cellWidth: 30 },
       1: { halign: 'right' }, 2: { halign: 'right' },
       3: { halign: 'right' }, 4: { halign: 'right' },
       5: { halign: 'right' }, 6: { halign: 'right' },
-      7: { halign: 'right', fontStyle: 'bold' },
-      8: { halign: 'center', cellWidth: 45 }
+      7: { halign: 'right' }, 8: { halign: 'right', fontStyle: 'bold' },
+      9: { halign: 'center', cellWidth: 42 }
     },
     margin: { left: 40, right: 40 },
     didParseCell: function(data) {
@@ -675,7 +725,7 @@ function downloadPDF() {
       } else if (r.type === 'min') {
         data.cell.styles.fillColor = [255, 253, 235];
       }
-      if (data.column.index === 7 && r.closing <= 0) {
+      if (data.column.index === 8 && r.closing <= 0) {
         data.cell.styles.textColor = [22, 163, 74];
         data.cell.styles.fontStyle = 'bold';
       }
@@ -690,7 +740,7 @@ function downloadPDF() {
     doc.setTextColor(150, 150, 150);
     doc.setFont('helvetica', 'normal');
     doc.text(
-      'Late fees: standard Indian bank slabs + 18% GST. Monthly compounding. Actual charges vary by bank.',
+      'Late fees: illustrative slabs + 18% GST. Monthly interest model. Actual charges vary by bank.',
       40, pageHeight - 18
     );
     doc.text(
@@ -756,6 +806,10 @@ function renderCards() {
         <div class="card-cell">
           <span class="card-cell-label">Interest</span>
           <span class="card-cell-value" style="color:#ef4444;">${inrText(row.interest)}</span>
+        </div>
+        <div class="card-cell">
+          <span class="card-cell-label">GST on Interest</span>
+          <span class="card-cell-value" style="color:#ef4444;">${inrText(row.gstOnInterest)}</span>
         </div>
         <div class="card-cell">
           <span class="card-cell-label">Payment</span>
@@ -882,19 +936,11 @@ document.addEventListener('DOMContentLoaded', function () {
   bindSlider('inp-payment-range', 'inp-payment-num', 'disp-payment',
     v => '&#8377;' + Math.round(v).toLocaleString('en-IN'));
 
-  // ── EDGE CASE: Clamp payment to be less than balance on blur ─────────────
-  // We don't clamp on every keystroke (too jarring) — only on blur/change
+  // The payment slider can be higher than the balance. The calculation caps
+  // the actual payment at the amount due, so a large payment can correctly
+  // produce a one-month payoff instead of being blocked by the UI.
   function clampPaymentToBalance() {
-    if (globalType !== 'pay') return;  // min/skip modes don't use this
-    const balance = parseFloat(document.getElementById('inp-balance-num').value) || 0;
-    const payment = parseFloat(document.getElementById('inp-payment-num').value) || 0;
-    if (balance > 0 && payment >= balance) {
-      // Don't auto-correct silently — let computeSchedule show the error
-      // but prevent the slider from going above balance - 1
-      document.getElementById('inp-payment-range').max = Math.max(balance - 1, 500);
-    } else {
-      document.getElementById('inp-payment-range').max = 200000;
-    }
+    document.getElementById('inp-payment-range').max = 200000;
   }
 
   document.getElementById('inp-balance-num').addEventListener('change', clampPaymentToBalance);
