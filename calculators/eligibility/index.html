@@ -1,678 +1,785 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="theme-color" content="#2563eb">
 
-  <!-- SEO -->
-  <title>Loan Eligibility Calculator with Credit Score | KnowYourEMI</title>
-  <meta name="description" content="Check how much home loan, personal loan or car loan you are eligible for based on your salary, age, existing EMIs and credit score. Get a realistic loan range with expected interest rate." />
-  <meta name="keywords" content="loan eligibility calculator, home loan eligibility, personal loan eligibility, credit score loan, FOIR calculator, maximum loan amount, KnowYourEMI" />
-  <link rel="canonical" href="https://www.knowyouremi.in/calculators/eligibility/" />
+<html class="scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://cdn.jsdelivr.net" rel="preconnect"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="#2563eb" name="theme-color"/>
+    <!-- SEO -->
+    <title>Loan Eligibility Calculator: How Much Loan Can You Get? | KnowYourEMI</title>
+    <meta content="Use this loan eligibility calculator to estimate how much you can borrow based on salary, existing EMIs, age, loan type, tenure and credit score." name="description"/>
+    <meta content="loan eligibility calculator, how much loan can I get, loan eligibility based on salary, loan amount eligibility, personal loan eligibility calculator, home loan eligibility, maximum loan eligibility, check loan eligibility, FOIR calculator, loan eligibility calculator India, KnowYourEMI" name="keywords">
+    <link href="https://knowyouremi.in/calculators/eligibility/" rel="canonical"/>
+    <!-- Open Graph -->
+    <meta content="Loan Eligibility Calculator: How Much Loan Can You Get? | KnowYourEMI" property="og:title"/>
+    <meta content="Use this loan eligibility calculator to estimate how much you can borrow based on salary, existing EMIs, age, loan type, tenure and credit score." property="og:description"/>
+    <meta content="https://knowyouremi.in/calculators/eligibility/" property="og:url"/>
+    <meta content="website" property="og:type"/>
+    <meta content="https://www.knowyouremi.in/og-image.jpg" property="og:image"/>
+    <meta content="en_IN" property="og:locale"/>
+    <meta content="KnowYourEMI" property="og:site_name"/>
+    <!-- Twitter -->
+    <meta content="summary_large_image" name="twitter:card"/>
+    <meta content="Loan Eligibility Calculator | KnowYourEMI" name="twitter:title"/>
+    <meta content="Estimate how much loan you may qualify for based on salary, existing EMIs, age, tenure and credit score." name="twitter:description"/>
+    <meta content="https://www.knowyouremi.in/og-image.jpg" name="twitter:image"/>
+    <!-- Favicon -->
+    <link href="../../favicon.png" rel="icon" type="image/x-icon"/>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Loan Eligibility Calculator",
+      "url": "https://knowyouremi.in/calculators/eligibility/",
+      "logo": "https://www.knowyouremi.in/logo-112x112.jpg",
+      "description": "Estimate your eligible loan amount using salary, existing EMIs, age, loan type, tenure and credit score.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "inLanguage": "en",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "featureList": [
+        "Salary and existing EMI based eligibility estimate",
+        "Home, personal and car loan scenarios",
+        "FOIR and available EMI breakdown",
+        "Credit score based rate range",
+        "Estimated maximum loan amount"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://knowyouremi.in/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Loan Eligibility Calculator",
+          "item": "https://knowyouremi.in/calculators/eligibility/"
+        }
+      ]
+    }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+    <style>
+        body { font-family: 'Inter', sans-serif; color: #1f2937; }
+        .lora { font-family: 'Lora', Georgia, serif; }
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Loan Eligibility Calculator with Credit Score | KnowYourEMI" />
-  <meta property="og:description" content="Find out how much loan you can get based on your income, age, credit score and obligations. Free, no sign-up required." />
-  <meta property="og:url" content="https://www.knowyouremi.in/calculators/eligibility/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://www.knowyouremi.in/og-image.jpg" />
-  <meta property="og:locale" content="en_IN" />
-  <meta property="og:site_name" content="KnowYourEMI" />
+        .input-field {
+          width: 100%;
+          border: 1.5px solid #e5e7eb;
+          border-radius: 10px;
+          padding: 11px 14px;
+          font-size: 0.95rem;
+          font-family: 'Inter', sans-serif;
+          color: #111827;
+          background: white;
+          transition: border-color 0.15s, box-shadow 0.15s;
+          outline: none;
+          appearance: none;
+        }
+        .input-field:focus {
+          border-color: #2563eb;
+          box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+        .input-field.error {
+          border-color: #ef4444;
+          box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+        }
+        .input-label {
+          display: block;
+          font-size: 0.82rem;
+          font-weight: 600;
+          color: #374151;
+          margin-bottom: 6px;
+        }
+        .input-hint {
+          font-size: 0.75rem;
+          color: #9ca3af;
+          margin-top: 4px;
+        }
+        .error-msg {
+          font-size: 0.75rem;
+          color: #ef4444;
+          margin-top: 4px;
+          display: none;
+        }
+        .error-msg.visible { display: block; }
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Loan Eligibility Calculator | KnowYourEMI" />
-  <meta name="twitter:description" content="Check your loan eligibility based on salary, credit score and age. Free calculator by KnowYourEMI." />
-  <meta name="twitter:image" content="https://www.knowyouremi.in/og-image.jpg" />
+        .calc-btn {
+          width: 100%;
+          /* background: linear-gradient(135deg, #1e3a8a, #312e81); */
+          color: white;
+          border: none;
+          border-radius: 10px;
+          padding: 14px;
+          font-size: 1rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: opacity 0.15s, transform 0.1s;
+          letter-spacing: 0.02em;
+        }
+        .calc-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+        .calc-btn:active { transform: translateY(0); }
 
-  <!-- Favicon -->
-  <link rel="icon" href="../../favicon.png" type="image/x-icon" />
+        /* Result panel */
+        .result-panel {
+          background: white;
+          border: 1px solid #e5e7eb;
+          border-radius: 16px;
+          overflow: hidden;
+        }
+        .result-header {
+          /* background: linear-gradient(135deg, #1e3a8a, #312e81); */
+          padding: 20px 24px;
+          color: white;
+        }
+        .result-body { padding: 24px; }
 
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Loan Eligibility Calculator",
-    "url": "https://www.knowyouremi.in/calculators/eligibility/",
-    "logo": "https://www.knowyouremi.in/logo-112x112.jpg",
-    "description": "Check your home loan, personal loan or car loan eligibility based on salary, credit score, age and existing EMI obligations.",
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "All",
-    "inLanguage": "en",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "INR"
-    }
-  }
-  </script>
+        .result-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          padding: 13px 0;
+          border-bottom: 1px solid #f1f5f9;
+          gap: 12px;
+        }
+        .result-row:last-child { border-bottom: none; }
+        .result-label {
+          font-size: 0.85rem;
+          color: #6b7280;
+          line-height: 1.4;
+          flex: 1;
+        }
+        .result-value {
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #111827;
+          text-align: right;
+          flex-shrink: 0;
+        }
+        .result-value.highlight { color: #1d4ed8; font-size: 1.05rem; }
+        .result-value.dash { color: #d1d5db; font-weight: 400; }
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.knowyouremi.in/" },
-      { "@type": "ListItem", "position": 2, "name": "Loan Eligibility Calculator", "item": "https://www.knowyouremi.in/calculators/eligibility/" }
-    ]
-  }
-  </script>
+        /* Result note - clean, no generic box */
+        .result-note {
+          margin-top: 20px;
+          padding-top: 18px;
+          border-top: 1px solid #f1f5f9;
+          font-size: 0.88rem;
+          color: #4b5563;
+          line-height: 1.8;
+        }
+        .result-note .note-row {
+          display: flex;
+          justify-content: space-between;
+          gap: 8px;
+          padding: 5px 0;
+          font-size: 0.83rem;
+        }
+        .result-note .note-label { color: #9ca3af; }
+        .result-note .note-val { font-weight: 600; color: #1e3a8a; }
+        .result-note .note-summary {
+          margin-top: 10px;
+          padding-top: 10px;
+          border-top: 1px dashed #e5e7eb;
+          font-size: 0.85rem;
+          color: #374151;
+          line-height: 1.75;
+        }
 
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+        .rejection-panel {
+          background: #fff1f2;
+          border: 1px solid #fecdd3;
+          border-radius: 12px;
+          padding: 18px 20px;
+          margin-top: 16px;
+          display: none;
+        }
+        .rejection-panel.visible { display: block; }
 
-  <style>
-    body { font-family: 'Inter', sans-serif; color: #1f2937; }
-    .lora { font-family: 'Lora', Georgia, serif; }
+        .score-badge {
+          display: inline-block;
+          padding: 3px 10px;
+          border-radius: 999px;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+        }
+        .badge-poor    { background: #fee2e2; color: #b91c1c; }
+        .badge-fair    { background: #fef3c7; color: #92400e; }
+        .badge-good    { background: #dbeafe; color: #1d4ed8; }
+        .badge-great   { background: #d1fae5; color: #065f46; }
 
-    .input-field {
-      width: 100%;
-      border: 1.5px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 11px 14px;
-      font-size: 0.95rem;
-      font-family: 'Inter', sans-serif;
-      color: #111827;
-      background: white;
-      transition: border-color 0.15s, box-shadow 0.15s;
-      outline: none;
-      appearance: none;
-    }
-    .input-field:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
-    }
-    .input-field.error {
-      border-color: #ef4444;
-      box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
-    }
-    .input-label {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #374151;
-      margin-bottom: 6px;
-    }
-    .input-hint {
-      font-size: 0.75rem;
-      color: #9ca3af;
-      margin-top: 4px;
-    }
-    .error-msg {
-      font-size: 0.75rem;
-      color: #ef4444;
-      margin-top: 4px;
-      display: none;
-    }
-    .error-msg.visible { display: block; }
+        /* Mini article */
+        .mini-article h2 {
+          font-family: 'Lora', Georgia, serif;
+          font-size: 1.2rem;
+          font-weight: 700;
+          color: #1e3a8a;
+          margin-top: 2.5rem;
+          margin-bottom: 0.6rem;
+        }
+        .mini-article p {
+          font-size: 0.95rem;
+          line-height: 1.85;
+          color: #4b5563;
+          margin-bottom: 1rem;
+        }
 
-    .calc-btn {
-      width: 100%;
-      /* background: linear-gradient(135deg, #1e3a8a, #312e81); */
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 14px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.15s, transform 0.1s;
-      letter-spacing: 0.02em;
-    }
-    .calc-btn:hover { opacity: 0.92; transform: translateY(-1px); }
-    .calc-btn:active { transform: translateY(0); }
+        .mini-article{
+          padding: 8px;
+        }
+        .mini-article strong { color: #111827; }
 
-    /* Result panel */
-    .result-panel {
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    .result-header {
-      /* background: linear-gradient(135deg, #1e3a8a, #312e81); */
-      padding: 20px 24px;
-      color: white;
-    }
-    .result-body { padding: 24px; }
+        .section-divider {
+          border: none;
+          border-top: 1px solid #e5e7eb;
+          margin: 48px 0;
+        }
 
-    .result-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 13px 0;
-      border-bottom: 1px solid #f1f5f9;
-      gap: 12px;
-    }
-    .result-row:last-child { border-bottom: none; }
-    .result-label {
-      font-size: 0.85rem;
-      color: #6b7280;
-      line-height: 1.4;
-      flex: 1;
-    }
-    .result-value {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #111827;
-      text-align: right;
-      flex-shrink: 0;
-    }
-    .result-value.highlight { color: #1d4ed8; font-size: 1.05rem; }
-    .result-value.dash { color: #d1d5db; font-weight: 400; }
+        .progress-bar {
+          position: fixed;
+          top: 0; left: 0;
+          height: 4px;
+          background: linear-gradient(90deg, #2563eb, #818cf8);
+          width: 0%;
+          z-index: 9999;
+          transition: width 0.1s linear;
+          box-shadow: 0 0 8px rgba(37,99,235,0.5);
+        }
 
-    /* Result note - clean, no generic box */
-    .result-note {
-      margin-top: 20px;
-      padding-top: 18px;
-      border-top: 1px solid #f1f5f9;
-      font-size: 0.88rem;
-      color: #4b5563;
-      line-height: 1.8;
-    }
-    .result-note .note-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 5px 0;
-      font-size: 0.83rem;
-    }
-    .result-note .note-label { color: #9ca3af; }
-    .result-note .note-val { font-weight: 600; color: #1e3a8a; }
-    .result-note .note-summary {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px dashed #e5e7eb;
-      font-size: 0.85rem;
-      color: #374151;
-      line-height: 1.75;
-    }
+        @keyframes fadeSlideUp {
+          from { opacity: 0; transform: translateY(12px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeSlideUp 0.35s ease forwards; }
 
-    .rejection-panel {
-      background: #fff1f2;
-      border: 1px solid #fecdd3;
-      border-radius: 12px;
-      padding: 18px 20px;
-      margin-top: 16px;
-      display: none;
-    }
-    .rejection-panel.visible { display: block; }
-
-    .score-badge {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-    .badge-poor    { background: #fee2e2; color: #b91c1c; }
-    .badge-fair    { background: #fef3c7; color: #92400e; }
-    .badge-good    { background: #dbeafe; color: #1d4ed8; }
-    .badge-great   { background: #d1fae5; color: #065f46; }
-
-    /* Mini article */
-    .mini-article h2 {
-      font-family: 'Lora', Georgia, serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #1e3a8a;
-      margin-top: 2.5rem;
-      margin-bottom: 0.6rem;
-    }
-    .mini-article p {
-      font-size: 0.95rem;
-      line-height: 1.85;
-      color: #4b5563;
-      margin-bottom: 1rem;
-    }
-
-    .mini-article{
-      padding: 8px;
-    }
-    .mini-article strong { color: #111827; }
-
-    .section-divider {
-      border: none;
-      border-top: 1px solid #e5e7eb;
-      margin: 48px 0;
-    }
-
-    .progress-bar {
-      position: fixed;
-      top: 0; left: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #2563eb, #818cf8);
-      width: 0%;
-      z-index: 9999;
-      transition: width 0.1s linear;
-      box-shadow: 0 0 8px rgba(37,99,235,0.5);
-    }
-
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .animate-in { animation: fadeSlideUp 0.35s ease forwards; }
-
-    select.input-field {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
-    }
-  </style>
-
-  <!-- Google tag -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EM8B59T3F5"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-EM8B59T3F5');
-    window.addEventListener('load', function() {
-      gtag('event', 'eligibility_page_visited', {
-        event_category: 'engagement',
-        event_label: 'advanced_eligibility_page'
-      });
-    });
-  </script>
+        select.input-field {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 14px center;
+          padding-right: 36px;
+        }
+    </style>
+    <!-- Google tag -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EM8B59T3F5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EM8B59T3F5');
+        window.addEventListener('load', function() {
+          gtag('event', 'eligibility_page_visited', {
+            event_category: 'engagement',
+            event_label: 'advanced_eligibility_page'
+          });
+        });
+    </script>
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1421587914478838"
-     crossorigin="anonymous"></script>
-</head>
-
-<body class="bg-gray-50 text-gray-800 scroll-smooth">
-
-  <div class="progress-bar" id="progressBar"></div>
-
-<!-- ===== NAVBAR ===== -->
-<nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-    <a href="../../">
-      <img class="w-20 inline-block" src="../../logo.png" alt="KnowYourEMI logo" width="80" height="40" fetchpriority="high" />
-    </a>
-    <div class="hidden md:flex space-x-6 text-sm font-medium">
-      <a href="../../" class="block py-2 hover:text-yellow-300">EMI Calculator</a>
-    <a href="../balance-transfer/" class="block py-2 hover:text-yellow-300">Balance Transfer</a>
-    <a href="../float-rate-home-loan/" class="block py-2 hover:text-yellow-300">Floating Rate Home Loan</a>
-    <a href="../credit-card-payoff/" class="block py-2 hover:text-yellow-300">Credit Card Payoff</a>
-    <a href="../../blogs/" class="block py-2 hover:text-yellow-300">Blog</a>
-    </div>
-    <button id="menu-toggle" class="md:hidden focus:outline-none">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-  </div>
-  <div id="mobile-menu" class="hidden md:hidden bg-indigo-900 px-4 pb-4 space-y-2 text-sm">
-    <a href="../../" class="block py-2 hover:text-yellow-300">EMI Calculator</a>
-    <a href="../balance-transfer/" class="block py-2 hover:text-yellow-300">Balance Transfer</a>
-    <a href="../float-rate-home-loan/" class="block py-2 hover:text-yellow-300">Floating Rate Home Loan</a>
-    <a href="../credit-card-payoff/" class="block py-2 hover:text-yellow-300">Credit Card Payoff</a>
-    <a href="../../blogs/" class="block py-2 hover:text-yellow-300">Blog</a>
-  </div>
-</nav>
-
-  <!-- PAGE HEADER -->
-  <div class="bg-gradient-to-r from-blue-800 to-indigo-900 py-14 px-4">
-    <div class="max-w-4xl mx-auto">
-      <!-- Breadcrumb -->
-      <nav aria-label="Breadcrumb" class="mb-3">
-        <ol class="flex items-center gap-1.5 text-xs text-blue-300" style="list-style:none;margin:0;padding:0;">
-          <li><a href="../../" class="hover:text-white transition">Home</a></li>
-          <li class="opacity-50">/</li>
-          <li><span class="text-blue-200">Calculators</span></li>
-          <li class="opacity-50">/</li>
-          <li><span class="text-white font-medium">Loan Eligibility Calculator</span></li>
-        </ol>
-      </nav>
-      <span class="inline-block bg-white bg-opacity-20 text-white text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-3">Free Calculator</span>
-      <h1 class="text-2xl md:text-3xl font-bold text-white" style="font-family:'Lora',serif;">Loan Eligibility Calculator - Know How Much You Can Borrow.</h1>
-      <p class="text-sm text-blue-200 mt-2 max-w-xl">Enter your income, existing EMIs, and expenses. See the maximum loan amount a bank is likely to approve for home, personal, and car loans.</p>
-    </div>
-  </div>
-
-  <main class="max-w-4xl mx-auto px-1 py-10">
-
-    <!-- INPUT FORM -->
-    <section class="bg-white shadow-lg rounded-2xl p-6 mb-6">
-      <h2 class="text-lg font-semibold mb-5 text-gray-800">Your Details</h2>
-
-      <div class="grid sm:grid-cols-2 gap-x-5">
-
-        <div class="mb-5">
-          <label class="input-label" for="salary">Net Monthly Salary (Rs.)</label>
-          <input class="input-field" type="text" id="salary" inputmode="numeric" placeholder="e.g. 60000" maxlength="10" autocomplete="off">
-          <p class="input-hint">Take-home salary after all deductions</p>
-          <p class="error-msg" id="salary-error">Please enter a valid salary</p>
-        </div>
-
-        <div class="mb-5">
-          <label class="input-label" for="obligations">Existing EMI Obligations (Rs.)</label>
-          <input class="input-field" type="text" id="obligations" inputmode="numeric" placeholder="0 if none" maxlength="10" autocomplete="off">
-          <p class="input-hint">Total of all current loan EMIs per month</p>
-          <p class="error-msg" id="obligations-error">Cannot be more than your salary</p>
-        </div>
-
-        <div class="mb-5">
-          <label class="input-label" for="age">Your Age (Years)</label>
-          <input class="input-field" type="text" id="age" inputmode="numeric" placeholder="e.g. 32" maxlength="2" autocomplete="off">
-          <p class="input-hint">Between 21 and 58</p>
-          <p class="error-msg" id="age-error">Age must be between 21 and 58</p>
-        </div>
-
-        <div class="mb-5">
-          <label class="input-label" for="loanType">Loan Type</label>
-          <select class="input-field" id="loanType">
-            <option value="">Select loan type</option>
-            <option value="home">Home Loan</option>
-            <option value="personal">Personal Loan</option>
-            <option value="car">Car Loan</option>
-          </select>
-          <p class="error-msg" id="loanType-error">Please select a loan type</p>
-        </div>
-
-        <div class="mb-5">
-          <label class="input-label" for="tenure">Preferred Tenure</label>
-          <select class="input-field" id="tenure">
-            <option value="">Select loan type first</option>
-          </select>
-          <p class="input-hint" id="tenure-hint">Options adjust based on loan type and age</p>
-          <p class="error-msg" id="tenure-error">Please select a tenure</p>
-        </div>
-
-        <div class="mb-5">
-          <label class="input-label" for="creditScore">Credit Score Range</label>
-          <select class="input-field" id="creditScore">
-            <option value="">Select your range</option>
-            <option value="300-600">300 to 600 (Poor)</option>
-            <option value="600-650">600 to 650 (Below Average)</option>
-            <option value="650-700">650 to 700 (Fair)</option>
-            <option value="700-750">700 to 750 (Good)</option>
-            <option value="750-800">750 to 800 (Very Good)</option>
-            <option value="800-900">800 to 900 (Excellent)</option>
-          </select>
-          <p class="input-hint">Check on CIBIL website or apps like OneScore</p>
-          <p class="error-msg" id="creditScore-error">Please select a credit score range</p>
-        </div>
-
-      </div>
-
-      <button class="bg-gradient-to-r from-blue-800 to-indigo-900 calc-btn" id="calcBtn" onclick="calculateEligibility()">Check My Eligibility</button>
-    </section>
-
-    <!-- RESULT PANEL -->
-    <section>
-      <div class="result-panel" id="resultPanel">
-        <div class="result-header bg-gradient-to-r from-blue-800 to-indigo-900">
-          <p class="text-xs font-semibold tracking-widest uppercase text-indigo-300 mb-1">Eligibility Result</p>
-          <p class="text-sm text-gray-300" id="resultSubtitle">Fill in your details and click Calculate</p>
-        </div>
-        <div class="result-body">
-
-          <div class="grid sm:grid-cols-2 gap-x-6">
-            <div class="result-row">
-              <span class="result-label">Loan Type</span>
-              <span class="result-value dash" id="res-loanType">--</span>
-            </div>
-            <div class="result-row">
-              <span class="result-label">EMI Capacity<br><span style="font-size:0.75rem;color:#9ca3af;">After existing obligations</span></span>
-              <span class="result-value dash" id="res-emiCapacity">--</span>
-            </div>
-            <div class="result-row">
-              <span class="result-label">Expected Interest Rate</span>
-              <span class="result-value dash highlight" id="res-rate">--</span>
-            </div>
-            <div class="result-row">
-              <span class="result-label">Maximum Eligible Loan<br><span style="font-size:0.75rem;color:#9ca3af;">Based on rate range</span></span>
-              <span class="result-value dash highlight" id="res-loanRange">--</span>
-            </div>
-            <div class="result-row">
-              <span class="result-label">Tenure Considered</span>
-              <span class="result-value dash" id="res-tenure">--</span>
-            </div>
-            <div class="result-row">
-              <span class="result-label">FOIR Used</span>
-              <span class="result-value dash" id="res-foir">--</span>
-            </div>
-            <div class="result-row" style="grid-column: 1 / -1;">
-              <span class="result-label">Credit Score Band</span>
-              <span class="result-value dash" id="res-score">--</span>
-            </div>
-          </div>
-
-          <!-- Clean result note - no box, just structured text -->
-          <div class="result-note" id="resultNote" style="display:none;">
-            <div class="note-row">
-              <span class="note-label">Salary x FOIR</span>
-              <span class="note-val" id="note-maxEmi">--</span>
-            </div>
-            <div class="note-row">
-              <span class="note-label">Less existing obligations</span>
-              <span class="note-val" id="note-obligations">--</span>
-            </div>
-            <div class="note-row">
-              <span class="note-label">Available EMI for new loan</span>
-              <span class="note-val" id="note-available">--</span>
-            </div>
-            <p class="note-summary" id="note-summary"></p>
-          </div>
-
-          <!-- Low score panel -->
-          <div class="rejection-panel" id="rejectionPanel">
-            <p class="font-semibold text-red-800 text-sm mb-2">Low Credit Score Warning</p>
-            <p class="text-sm text-red-700 leading-relaxed" id="rejectionMsg"></p>
-          </div>
-
-        </div>
-      </div>
-
-      <p class="text-xs text-gray-400 mt-4 leading-relaxed">
-        This is an estimate based on standard banking guidelines. Actual loan approval depends on the lender's internal policies, your full credit report, employment verification, and other factors. This tool does not guarantee loan approval.
-      </p>
-
-      <!-- Sponsored Offers -->
-      <div id="sponsoredOffers" class="hidden mt-6" style="overflow-x:visible">
-        <div class="flex items-center gap-2 mb-3">
-          <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Sponsored</span>
-          <div class="flex-1 h-px bg-gray-200"></div>
-          <span class="text-xs text-gray-300 italic">Affiliate links</span>
-        </div>
-        <div id="offersStrip" style="display:flex;gap:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:none">
-        </div>
-        <p class="text-gray-400 text-xs mt-2 text-center">We may earn a small commission if you apply through these links, at no extra cost to you.</p>
-      </div>
-
-    </section>
-
-    <!-- Comments Section -->
-    <!-- <div id="knowyouremi-comments" class="mt-8"></div> -->
-
-    <!-- MINI ARTICLE -->
-    <hr class="section-divider">
-
-    <article class="mini-article">
-
-      <p class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-2">How This Works</p>
-      <h2 style="margin-top:0;">What Goes Into Calculating Your Loan Eligibility</h2>
-
-      <p>
-        When a bank decides how much to lend you, they do not just look at your salary and multiply it by some number. They look at multiple factors together and the final amount is a result of all of them working in combination. This calculator uses the same core parameters that most banks in India rely on.
-      </p>
-
-      <h2>FOIR: The Most Important Number Most People Have Never Heard Of</h2>
-
-      <p>
-        FOIR stands for Fixed Obligation to Income Ratio. It is the percentage of your monthly income that a bank is willing to let go towards loan repayments. Most banks set this between 40 and 55 percent depending on the loan type.
-      </p>
-      <p>
-        For a home loan, banks typically allow up to 55 percent FOIR because it is a secured loan against a property. For a personal loan, which has no collateral, the threshold is tighter at around 45 percent. Car loans sit around 50 percent.
-      </p>
-      <p>
-        If your net salary is Rs. 60,000 and the bank applies a 55 percent FOIR for a home loan, your total monthly loan obligation ceiling is Rs. 33,000. If you already pay Rs. 8,000 in another EMI, the remaining available EMI for the new loan is Rs. 25,000. That available EMI is what determines your maximum eligible loan amount.
-      </p>
-
-      <h2>How Credit Score Changes Your Interest Rate</h2>
-
-      <p>
-        Your credit score does not just affect whether you get approved. It directly affects what interest rate the bank offers you. A person with a score of 780 applying for a home loan might get 8.5 percent. The same person with a score of 665 might be offered 9.8 percent or higher.
-      </p>
-      <p>
-        That difference in rate, compounded over 20 years on a large home loan, can amount to several lakhs in extra interest. This is why improving your credit score before applying for a major loan is one of the most financially impactful things you can do.
-      </p>
-
-      <h2>Why Your Age Affects the Eligible Tenure</h2>
-
-      <p>
-        Banks cap your loan tenure based on your retirement age, typically assumed to be 60 for salaried individuals. If you are 45 years old and apply for a home loan, the maximum tenure most banks will offer is 15 years. A shorter tenure means a higher EMI for the same loan amount, which reduces the loan amount you are eligible for at your income level.
-      </p>
-
-      <h2>Why This Is a Range and Not a Fixed Number</h2>
-
-      <p>
-        The result shows a range because the interest rate itself is a range. Within any credit score band, different banks offer slightly different rates based on their internal policies, your relationship with the bank, and current market conditions. The lower end of the loan range corresponds to the higher end of the rate range and vice versa.
-      </p>
-
-      <h2>What This Calculator Does Not Account For</h2>
-
-      <p>
-        This tool gives you a well-informed estimate. But there are factors it cannot capture. Your employer's reputation, your existing relationship with the bank, any negative marks on your credit report beyond the score range, and self-employment income which banks evaluate differently from salaried income. Use this as a starting point before walking into a bank.
-      </p>
-
-    </article>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
-    <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div>
-        <h3 class="text-lg font-semibold mb-3">About KnowYourEMI</h3>
-        <p class="text-sm text-gray-200 leading-relaxed">KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility, and evaluate balance transfers transparently. No sign-ups, no hidden conditions.</p>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="../../" class="hover:underline">EMI Calculator</a></li>
-          <li><a href="../../#balanceTransfer" class="hover:underline">Balance Transfer Calculator</a></li>
-          <li><a href="./" class="hover:underline">Loan Eligibility</a></li>
-          <li><a href="../../#faq-section" class="hover:underline">FAQs</a></li>
-          <li><a href="../../#feedback-section" class="hover:underline">Feedback</a></li>
-          <li><a href="../../blogs/" class="hover:underline">Blog</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold mb-3">Contact</h3>
-        <p class="text-sm text-gray-200 mb-2">📧 <a href="mailto:hello@knowyouremi.in" class="underline hover:text-gray-100">hello@knowyouremi.in</a></p>
-        <p class="text-sm text-gray-200">More tools and articles coming soon.</p>
-      </div>
-    </div>
-    <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
-      <span>© <span id="year"></span> knowyouremi.in | All rights reserved.</span>
-      <a href="../../pages/about.html" class="underline hover:text-yellow-300">About</a> |
-      <a href="../../pages/privacy-policy.html" class="underline hover:text-yellow-300">Privacy Policy</a> |
-      <a href="../../pages/terms-and-conditions.html" class="underline hover:text-yellow-300">Terms & Conditions</a>
-    </div>
-  </footer>
-
-  <script src="./script.js"></script>
-
-  <script>
-    const eligibilityOffers = [
-      // Personal loan offers temporarily disabled — switching to Cuelinks
-    ];
-
-    function showEligibilityOffers() {
-      const loanType = document.getElementById('loanType').value;
-      const section  = document.getElementById('sponsoredOffers');
-      const strip    = document.getElementById('offersStrip');
-      if (loanType !== 'personal' || eligibilityOffers.length === 0) { section.classList.add('hidden'); return; }
-      strip.innerHTML = eligibilityOffers.map(o => `
-        <a href="${o.href}" rel="nofollow sponsored" target="_blank"
-           onclick="if(typeof gtag==='function'){gtag('event','affiliate_click',{offer_name:'${o.name}',loan_type:'personal_eligibility',page_path:location.pathname})}"
-           class="flex-shrink-0 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group"
-           style="min-width:230px;max-width:270px;flex:0 0 auto;text-decoration:none;scroll-snap-align:start;border-top:1px solid #f3f4f6;border-right:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6;border-left:4px solid ${o.accentColor}">
-          <div class="flex-shrink-0 w-10 h-10 rounded-xl ${o.color} flex items-center justify-center shadow-sm">
-            <span class="${o.textColor} font-black text-sm">${o.initials}</span>
-          </div>
-          <div class="flex-1 min-w-0">
-            <p class="text-sm font-bold text-gray-800 truncate leading-tight">${o.name}</p>
-            <p class="text-xs font-semibold mt-0.5" style="color:${o.accentColor}">${o.detail}</p>
-          </div>
-          <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center" style="background:${o.accentColor}">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </div>
-        </a>
-      `).join('');
-      section.classList.remove('hidden');
+    <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1421587914478838"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Loan Eligibility Calculator: How Much Loan Can You Get? | KnowYourEMI",
+      "url": "https://knowyouremi.in/calculators/eligibility/",
+      "description": "Use this loan eligibility calculator to estimate how much you can borrow based on salary, existing EMIs, age, loan type, tenure and credit score.",
+      "dateModified": "2026-09-17",
+      "inLanguage": "en-IN"
     }
-
-    // Watch resultNote — only fires after validation passes and results are shown
-    // Timer starts from that moment: 2000ms count-up + 5000ms reading = 7000ms
-    let offersTimer = null;
-    const resultNoteEl = document.getElementById('resultNote');
-    const offerObserver = new MutationObserver(function() {
-      if (resultNoteEl.style.display === 'block') {
-        clearTimeout(offersTimer);
-        offersTimer = setTimeout(function() {
-          showEligibilityOffers();
-          const section = document.getElementById('sponsoredOffers');
-          if (section && !section.classList.contains('hidden')) {
-            section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            setTimeout(startAutoScroll, 500);
+    </script>
+    <style>
+        .eligibility-intro {
+          background: white;
+          border: 1px solid #e5e7eb;
+          border-radius: 16px;
+          padding: 20px 22px;
+          margin-bottom: 20px;
+        }
+        .eligibility-intro p {
+          font-size: 0.94rem;
+          line-height: 1.8;
+          color: #4b5563;
+          margin: 0;
+        }
+        .factor-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 10px;
+          margin-top: 16px;
+        }
+        .factor-item {
+          border: 1px solid #eef2f7;
+          border-radius: 12px;
+          padding: 12px;
+          background: #f8fafc;
+        }
+        .factor-item strong {
+          display: block;
+          font-size: 0.8rem;
+          color: #1f2937;
+          margin-bottom: 3px;
+        }
+        .factor-item span {
+          display: block;
+          font-size: 0.74rem;
+          color: #6b7280;
+          line-height: 1.5;
+        }
+        .guide-lead {
+          font-size: 1rem !important;
+          color: #374151 !important;
+        }
+        .method-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+          margin: 14px 0 8px;
+        }
+        .method-card {
+          border: 1px solid #e5e7eb;
+          border-radius: 12px;
+          padding: 14px 16px;
+          background: #f8fafc;
+        }
+        .method-card strong { display:block; margin-bottom:4px; }
+        .method-card span { color:#6b7280; font-size:0.86rem; line-height:1.65; }
+        .eligibility-table-wrap { overflow-x:auto; margin:14px 0 8px; }
+        .eligibility-table { width:100%; border-collapse:collapse; font-size:0.88rem; }
+        .eligibility-table th, .eligibility-table td { padding:11px 12px; border:1px solid #e5e7eb; text-align:left; vertical-align:top; }
+        .eligibility-table th { background:#f8fafc; color:#374151; font-weight:700; }
+        .eligibility-table td { color:#4b5563; line-height:1.55; }
+        .example-box {
+          border-left: 4px solid #2563eb;
+          background: #eff6ff;
+          border-radius: 10px;
+          padding: 15px 17px;
+          margin: 14px 0 8px;
+          color: #374151;
+          line-height: 1.75;
+          font-size: 0.9rem;
+        }
+        .example-box strong { color:#1e3a8a; }
+        .faq-list { margin-top: 10px; }
+        .faq-list details { border-bottom:1px solid #e5e7eb; padding:0; }
+        .faq-list summary { cursor:pointer; list-style:none; padding:15px 0; font-weight:700; color:#1f2937; font-size:0.94rem; }
+        .faq-list summary::-webkit-details-marker { display:none; }
+        .faq-list summary::after { content:'+'; float:right; color:#2563eb; font-size:1.1rem; }
+        .faq-list details[open] summary::after { content:'-'; }
+        .faq-list .faq-answer { padding:0 0 15px; color:#4b5563; font-size:0.9rem; line-height:1.8; }
+        .source-note { font-size:0.78rem !important; color:#6b7280 !important; line-height:1.7 !important; }
+        .related-tools {
+          margin-top: 26px;
+          padding: 16px 18px;
+          border: 1px solid #e5e7eb;
+          border-radius: 12px;
+          background: #f8fafc;
+        }
+        .related-tools a { color:#1d4ed8; font-weight:600; text-decoration:underline; }
+        @media (max-width: 700px) {
+          .factor-grid, .method-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+          .factor-grid, .method-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Should I enter gross salary or take-home salary?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use the income figure that best matches what you can consistently use for monthly loan repayment. If your salary structure includes deductions or variable components, the lender may use a different income figure when assessing your application."
           }
-        }, 7000);
-      } else {
-        // Results reset — hide offers immediately
-        clearTimeout(offersTimer);
-        document.getElementById('sponsoredOffers').classList.add('hidden');
-      }
-    });
-    offerObserver.observe(resultNoteEl, { attributes: true, attributeFilter: ['style'] });
-
-    // Auto-scroll offers strip every 3 seconds
-    let autoScrollInterval = null;
-    let currentCard = 0;
-
-    function startAutoScroll() {
-      const strip = document.getElementById('offersStrip');
-      if (!strip) return;
-      clearInterval(autoScrollInterval);
-      currentCard = 0;
-
-      autoScrollInterval = setInterval(function() {
-        const cards = strip.querySelectorAll('a');
-        if (!cards.length) return;
-        currentCard = (currentCard + 1) % cards.length;
-        // Scroll only within the strip — does not affect page scroll position
-        const targetLeft = cards[currentCard].offsetLeft - strip.offsetLeft;
-        strip.scrollTo({ left: targetLeft, behavior: 'smooth' });
-      }, 3000);
-
-      // Pause on hover/touch
-      strip.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
-      strip.addEventListener('touchstart', () => clearInterval(autoScrollInterval), { passive: true });
-      strip.addEventListener('mouseleave', startAutoScroll);
-      strip.addEventListener('touchend', startAutoScroll, { passive: true });
+        },
+        {
+          "@type": "Question",
+          "name": "What should I include as existing loan obligations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the monthly EMIs or fixed loan obligations you are already paying. The calculator uses this amount to reduce the EMI capacity available for the new loan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a co-applicant change my home loan eligibility?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It can. A lender may consider a co-applicant's income and existing obligations when assessing a joint application. This calculator does not separately model a co-applicant, so its result is based only on the details you enter for yourself."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a longer loan tenure change the eligible loan amount?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. For the same EMI capacity and interest rate, a longer tenure generally allows the modeled EMI to support a larger principal amount because repayment is spread over more months. The available tenure also depends on the loan type and the assumptions built into this calculator."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why can two people with the same salary get different loan offers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Income is only one part of a lending assessment. Existing liabilities, credit history, requested loan terms, income stability and the lender's own policies can lead to different eligibility amounts or interest rates for borrowers with similar salaries."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documents may a lender use to verify my income?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depending on the loan and borrower profile, a lender may ask for documents such as salary slips, bank statements, income tax records or other proof of income. The exact requirements vary by lender and loan type."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can self-employed borrowers use this calculator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can use it as a rough planning tool if you can enter a consistent monthly income figure, but the calculator does not separately model self-employed income, business expenses or lender-specific income assessment methods."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I do after checking my estimated eligibility?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use the estimate as a starting point, then compare the actual interest rate, processing charges, tenure, total repayment and lender requirements before applying. A lender's final assessment may differ from the calculator result."
+          }
+        }
+      ]
     }
+    </script>
+  </head>
 
-    // Hide offers when loan type changes
-    document.getElementById('loanType').addEventListener('change', function() {
-      clearTimeout(offersTimer);
-      clearInterval(autoScrollInterval);
-      document.getElementById('sponsoredOffers').classList.add('hidden');
-    });
-  </script>
+  <body class="bg-gray-50 text-gray-800 scroll-smooth">
+    <div class="progress-bar" id="progressBar"></div>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="../../">
+      <img alt="KnowYourEMI logo" class="w-20 inline-block" fetchpriority="high" height="40" src="../../logo.png" width="80"/>
+      </a>
+      <div class="hidden md:flex space-x-6 text-sm font-medium">
+      <a class="block py-2 hover:text-yellow-300" href="../../">EMI Calculator</a>
+      <a class="block py-2 hover:text-yellow-300" href="../balance-transfer/">Balance Transfer</a>
+      <a class="block py-2 hover:text-yellow-300" href="../float-rate-home-loan/">Floating Rate Home Loan</a>
+      <a class="block py-2 hover:text-yellow-300" href="../credit-card-payoff/">Credit Card Payoff</a>
+      <a class="block py-2 hover:text-yellow-300" href="../../blogs/">Blog</a>
+      </div>
+      <button class="md:hidden focus:outline-none" id="menu-toggle">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+      <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      </button>
+      </div>
+      <div class="hidden md:hidden bg-indigo-900 px-4 pb-4 space-y-2 text-sm" id="mobile-menu">
+      <a class="block py-2 hover:text-yellow-300" href="../../">EMI Calculator</a>
+      <a class="block py-2 hover:text-yellow-300" href="../balance-transfer/">Balance Transfer</a>
+      <a class="block py-2 hover:text-yellow-300" href="../float-rate-home-loan/">Floating Rate Home Loan</a>
+      <a class="block py-2 hover:text-yellow-300" href="../credit-card-payoff/">Credit Card Payoff</a>
+      <a class="block py-2 hover:text-yellow-300" href="../../blogs/">Blog</a>
+      </div>
+    </nav>
 
-  <!-- <script type="module" src="/comments/comments.js"></script> -->
+    <!-- PAGE HEADER -->
+    <div class="bg-gradient-to-r from-blue-800 to-indigo-900 py-14 px-4">
+    <div class="max-w-4xl mx-auto">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-3">
+      <ol class="flex items-center gap-1.5 text-xs text-blue-300" style="list-style:none;margin:0;padding:0;">
+      <li><a class="hover:text-white transition" href="../../">Home</a></li>
+      <li class="opacity-50">/</li>
+      <li><span class="text-blue-200">Calculators</span></li>
+      <li class="opacity-50">/</li>
+      <li><span class="text-white font-medium">Loan Eligibility Calculator</span></li>
+      </ol>
+    </nav>
+    <span class="inline-block bg-white bg-opacity-20 text-white text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-3">Free Calculator</span>
+    <h1 class="text-2xl md:text-3xl font-bold text-white" style="font-family:'Lora',serif;">Loan Eligibility Calculator: How Much Loan Can You Get?</h1>
+    <p class="text-sm text-blue-200 mt-2 max-w-xl">Estimate your eligible loan amount using your salary, existing EMIs, age, loan type, tenure and credit score. See your available EMI capacity and an estimated loan range.</p>
+    </div>
+    </div>
+    <main class="max-w-4xl mx-auto px-1 py-10">
+      <!-- INPUT FORM -->
+      <section class="eligibility-intro"><h2 class="text-lg font-semibold mb-2 text-gray-800">What this loan eligibility calculator checks</h2><p>Loan eligibility is mainly about repayment capacity. Your salary matters, but so do your existing EMIs, the loan type, tenure, age and credit score. Enter the details below to see how those inputs affect the amount this calculator estimates you may be able to borrow.</p><div class="factor-grid"><div class="factor-item"><strong>Salary</strong><span>Your take-home monthly income</span></div><div class="factor-item"><strong>Existing EMIs</strong><span>Current monthly loan obligations</span></div><div class="factor-item"><strong>Loan details</strong><span>Type and preferred tenure</span></div><div class="factor-item"><strong>Credit profile</strong><span>Age and credit score range</span></div></div></section><section class="bg-white shadow-lg rounded-2xl p-6 mb-6">
+      <h2 class="text-lg font-semibold mb-5 text-gray-800">Your Details</h2>
+      <div class="grid sm:grid-cols-2 gap-x-5">
+      <div class="mb-5">
+      <label class="input-label" for="salary">Net Monthly Salary (₹)</label>
+      <input autocomplete="off" class="input-field" id="salary" inputmode="numeric" maxlength="10" placeholder="e.g. 60000" type="text"/>
+      <p class="input-hint">Use your monthly take-home salary after deductions.</p>
+      <p class="error-msg" id="salary-error">Please enter a valid salary</p>
+      </div>
+      <div class="mb-5">
+      <label class="input-label" for="obligations">Existing EMI Obligations (₹)</label>
+      <input autocomplete="off" class="input-field" id="obligations" inputmode="numeric" maxlength="10" placeholder="0 if none" type="text"/>
+      <p class="input-hint">Add the total of your current loan EMIs each month. Enter 0 if you have none.</p>
+      <p class="error-msg" id="obligations-error">Cannot be more than your salary</p>
+      </div>
+      <div class="mb-5">
+      <label class="input-label" for="age">Your Age (Years)</label>
+      <input autocomplete="off" class="input-field" id="age" inputmode="numeric" maxlength="2" placeholder="e.g. 32" type="text"/>
+      <p class="input-hint">Enter your current age. The calculator accepts ages 21 to 58.</p>
+      <p class="error-msg" id="age-error">Age must be between 21 and 58</p>
+      </div>
+      <div class="mb-5">
+      <label class="input-label" for="loanType">Loan Type</label>
+      <select class="input-field" id="loanType">
+      <option value="">Select loan type</option>
+      <option value="home">Home Loan</option>
+      <option value="personal">Personal Loan</option>
+      <option value="car">Car Loan</option>
+      </select>
+      <p class="error-msg" id="loanType-error">Please select a loan type</p>
+      </div>
+      <div class="mb-5">
+      <label class="input-label" for="tenure">Preferred Tenure</label>
+      <select class="input-field" id="tenure">
+      <option value="">Select loan type first</option>
+      </select>
+      <p class="input-hint" id="tenure-hint">Options adjust based on loan type and age</p>
+      <p class="error-msg" id="tenure-error">Please select a tenure</p>
+      </div>
+      <div class="mb-5">
+      <label class="input-label" for="creditScore">Credit Score Range</label>
+      <select class="input-field" id="creditScore">
+      <option value="">Select your range</option>
+      <option value="300-600">300 to 600 (Poor)</option>
+      <option value="600-650">600 to 650 (Below Average)</option>
+      <option value="650-700">650 to 700 (Fair)</option>
+      <option value="700-750">700 to 750 (Good)</option>
+      <option value="750-800">750 to 800 (Very Good)</option>
+      <option value="800-900">800 to 900 (Excellent)</option>
+      </select>
+      <p class="input-hint">Select your current score band. The result uses a built-in rate range for that band.</p>
+      <p class="error-msg" id="creditScore-error">Please select a credit score range</p>
+      </div>
+      </div>
+      <button class="bg-gradient-to-r from-blue-800 to-indigo-900 calc-btn" id="calcBtn" onclick="calculateEligibility()">Check My Eligibility</button>
+      </section>
+      <!-- RESULT PANEL -->
+      <section>
+      <div class="result-panel" id="resultPanel">
+      <div class="result-header bg-gradient-to-r from-blue-800 to-indigo-900">
+      <p class="text-xs font-semibold tracking-widest uppercase text-indigo-300 mb-1">Eligibility Result</p>
+      <p class="text-sm text-gray-300" id="resultSubtitle">Fill in your details and click Calculate</p>
+      </div>
+      <div class="result-body">
+      <div class="grid sm:grid-cols-2 gap-x-6">
+      <div class="result-row">
+      <span class="result-label">Loan Type</span>
+      <span class="result-value dash" id="res-loanType">--</span>
+      </div>
+      <div class="result-row">
+      <span class="result-label">EMI Capacity<br/><span style="font-size:0.75rem;color:#9ca3af;">After existing obligations</span></span>
+      <span class="result-value dash" id="res-emiCapacity">--</span>
+      </div>
+      <div class="result-row">
+      <span class="result-label">Expected Interest Rate</span>
+      <span class="result-value dash highlight" id="res-rate">--</span>
+      </div>
+      <div class="result-row">
+      <span class="result-label">Maximum Eligible Loan<br/><span style="font-size:0.75rem;color:#9ca3af;">Based on rate range</span></span>
+      <span class="result-value dash highlight" id="res-loanRange">--</span>
+      </div>
+      <div class="result-row">
+      <span class="result-label">Tenure Considered</span>
+      <span class="result-value dash" id="res-tenure">--</span>
+      </div>
+      <div class="result-row">
+      <span class="result-label">FOIR Used</span>
+      <span class="result-value dash" id="res-foir">--</span>
+      </div>
+      <div class="result-row" style="grid-column: 1 / -1;">
+      <span class="result-label">Credit Score Band</span>
+      <span class="result-value dash" id="res-score">--</span>
+      </div>
+      </div>
+      <!-- Clean result note - no box, just structured text -->
+      <div class="result-note" id="resultNote" style="display:none;">
+      <div class="note-row">
+      <span class="note-label">Salary x FOIR</span>
+      <span class="note-val" id="note-maxEmi">--</span>
+      </div>
+      <div class="note-row">
+      <span class="note-label">Less existing obligations</span>
+      <span class="note-val" id="note-obligations">--</span>
+      </div>
+      <div class="note-row">
+      <span class="note-label">Available EMI for new loan</span>
+      <span class="note-val" id="note-available">--</span>
+      </div>
+      <p class="note-summary" id="note-summary"></p>
+      </div>
+      <!-- Low score panel -->
+      <div class="rejection-panel" id="rejectionPanel">
+      <p class="font-semibold text-red-800 text-sm mb-2">Low Credit Score Warning</p>
+      <p class="text-sm text-red-700 leading-relaxed" id="rejectionMsg"></p>
+      </div>
+      </div>
+      </div>
+      <p class="text-xs text-gray-400 mt-4 leading-relaxed">This is a planning estimate, not a loan approval. The calculation uses the inputs you provide and this tool's built-in FOIR and interest-rate assumptions. Actual lenders may use different criteria, rates, income definitions and credit policies.</p>
+      <!-- Sponsored Offers -->
+      <div class="hidden mt-6" id="sponsoredOffers" style="overflow-x:visible">
+      <div class="flex items-center gap-2 mb-3">
+      <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Sponsored</span>
+      <div class="flex-1 h-px bg-gray-200"></div>
+      <span class="text-xs text-gray-300 italic">Affiliate links</span>
+      </div>
+      <div id="offersStrip" style="display:flex;gap:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:none">
+      </div>
+      <p class="text-gray-400 text-xs mt-2 text-center">We may earn a small commission if you apply through these links, at no extra cost to you.</p>
+      </div>
+      </section>
+      <!-- Comments Section -->
+      <!-- <div id="knowyouremi-comments" class="mt-8"></div> -->
+      <!-- MINI ARTICLE -->
+      <hr class="section-divider"/>
+      <article class="mini-article"><p class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-2">How It Works</p><h2>How Is Loan Eligibility Calculated?</h2><p>A lender does not decide your maximum loan amount from salary alone. The basic question is: how much monthly repayment can you reasonably carry after considering your existing obligations? This calculator turns that idea into a simple estimate using your income, current EMIs, loan type, tenure and credit score.</p><p>The calculation first estimates a maximum EMI based on a FOIR assumption. Your existing EMIs are then deducted from that amount. The remaining EMI capacity is converted into an estimated loan amount using the selected tenure and the interest-rate range built into the calculator.</p><h2>How Much Loan Can I Get Based on My Salary?</h2><p>There is no single salary-to-loan multiplier that works for every borrower. Two people earning the same amount can have different eligibility if one already has large EMIs, chooses a shorter tenure, or has a different credit profile.</p><div class="example-box">Example: Suppose your take-home salary is <strong>₹60,000 per month</strong> and you already pay <strong>₹8,000 in existing EMIs</strong>. For a home loan, this calculator uses a 55% FOIR assumption, giving a total modeled EMI capacity of ₹33,000. After the existing ₹8,000 EMI, ₹25,000 remains for the new loan. With a 20-year tenure and the calculator's 750 to 800 score-band rate range, the modeled loan range is roughly ₹27.79 lakh to ₹28.81 lakh. This is an example of the calculator's method, not a lender quote.</div><h2>What Is FOIR and Why Does It Matter?</h2><p>FOIR stands for Fixed Obligation to Income Ratio. It is a way of expressing how much of your income can be committed to fixed loan repayments. The higher your existing EMI burden, the less room you have for another loan.</p><p>This calculator uses these FOIR assumptions:</p><tr></tr><div class="eligibility-table-wrap"><table class="eligibility-table"><tr><th>Loan type</th><th>FOIR used by this calculator</th></tr><tr><td>Home loan</td><td>55%</td></tr><tr><td>Personal loan</td><td>45%</td></tr><tr><td>Car loan</td><td>50%</td></tr></table></div><p class="source-note">These are calculator assumptions, not universal bank rules. Lenders can use different FOIR or repayment-capacity methods depending on the product and borrower profile. RBI guidance for home loans describes repayment capacity in terms of income, expenses, liabilities and other factors, which is why a simple salary multiplier should not be treated as a guaranteed approval rule.</p><h2>What Inputs Change Your Loan Eligibility?</h2><div class="method-grid"><div class="method-card"><strong>1. Net monthly salary</strong><span>Higher take-home income generally leaves more room for a new EMI. This calculator uses the salary you enter as the income base.</span></div><div class="method-card"><strong>2. Existing EMIs</strong><span>Current loan EMIs reduce the amount available for a new loan. This is one reason two people with the same salary can receive different estimates.</span></div><div class="method-card"><strong>3. Loan type</strong><span>Home, personal and car loans use different FOIR assumptions and different built-in rate ranges in this calculator.</span></div><div class="method-card"><strong>4. Tenure</strong><span>A longer tenure can support a larger loan for the same EMI capacity because repayment is spread across more months. It can also mean more total interest.</span></div><div class="method-card"><strong>5. Credit score band</strong><span>The selected score range changes the calculator's modeled interest-rate range. A lower modeled rate produces a higher loan amount for the same EMI capacity and tenure.</span></div><div class="method-card"><strong>6. Age</strong><span>Age affects the available tenure options. In this calculator, home-loan tenure is limited so the selected tenure does not extend beyond age 60.</span></div></div><h2>Why Does the Calculator Show a Loan Range?</h2><p>The result can show a range because the calculator uses a low and high interest-rate assumption for each loan type and credit score band. For the same EMI capacity, a lower interest rate supports a larger principal, while a higher rate supports a smaller principal.</p><p>The rate ranges are built into the calculator for estimation. They are not live offers from banks or NBFCs and should not be treated as current lender quotes. Your actual rate can depend on the lender, loan product, credit profile, income, employment and other underwriting factors.</p><h2>Home Loan vs Personal Loan vs Car Loan Eligibility</h2><p>The calculator supports three loan types because the repayment calculation can differ by product. A home loan generally allows a longer tenure in the model, while personal and car loans use shorter tenure ranges. The FOIR and interest-rate assumptions also change by loan type.</p><p>If you are comparing the same salary across different loan types, do not assume the eligible amount will be the same. The calculator is deliberately using different assumptions for each product.</p><h2>What This Calculator Does Not Tell You</h2><p>A calculator result is not a sanction letter. It does not verify your salary slips, bank statements, employment history, credit report details, property documents, lender-specific rules or the final rate offered to you. Self-employed applicants can also be assessed differently from salaried applicants.</p><p>Use the result as a starting point for planning. Before applying, compare the lender's eligibility criteria, interest rate, fees, tenure, prepayment terms and the documents required for your specific loan.</p><h2>Frequently Asked Questions</h2><div class="faq-list"><details><summary>Should I enter gross salary or take-home salary?</summary><div class="faq-answer">Use the income figure that best matches what you can consistently use for monthly loan repayment. If your salary structure includes deductions or variable components, the lender may use a different income figure when assessing your application.</div></details><details><summary>What should I include as existing loan obligations?</summary><div class="faq-answer">Enter the monthly EMIs or fixed loan obligations you are already paying. The calculator uses this amount to reduce the EMI capacity available for the new loan.</div></details><details><summary>Can a co-applicant change my home loan eligibility?</summary><div class="faq-answer">It can. A lender may consider a co-applicant's income and existing obligations when assessing a joint application. This calculator does not separately model a co-applicant, so its result is based only on the details you enter for yourself.</div></details><details><summary>Does a longer loan tenure change the eligible loan amount?</summary><div class="faq-answer">Yes. For the same EMI capacity and interest rate, a longer tenure generally allows the modeled EMI to support a larger principal amount because repayment is spread over more months. The available tenure also depends on the loan type and the assumptions built into this calculator.</div></details><details><summary>Why can two people with the same salary get different loan offers?</summary><div class="faq-answer">Income is only one part of a lending assessment. Existing liabilities, credit history, requested loan terms, income stability and the lender's own policies can lead to different eligibility amounts or interest rates for borrowers with similar salaries.</div></details><details><summary>What documents may a lender use to verify my income?</summary><div class="faq-answer">Depending on the loan and borrower profile, a lender may ask for documents such as salary slips, bank statements, income tax records or other proof of income. The exact requirements vary by lender and loan type.</div></details><details><summary>Can self-employed borrowers use this calculator?</summary><div class="faq-answer">You can use it as a rough planning tool if you can enter a consistent monthly income figure, but the calculator does not separately model self-employed income, business expenses or lender-specific income assessment methods.</div></details><details><summary>What should I do after checking my estimated eligibility?</summary><div class="faq-answer">Use the estimate as a starting point, then compare the actual interest rate, processing charges, tenure, total repayment and lender requirements before applying. A lender's final assessment may differ from the calculator result.</div></details></div><p class="font-semibold text-gray-800 mb-2">Useful next steps</p><div class="related-tools"><p>Once you know your estimated loan amount, use the <a href="../../">EMI Calculator</a> to compare monthly payments and total interest. If you want to understand the math behind EMI, read <a href="../../blogs/basics/how-emi-is-calculated.html">How EMI Is Calculated</a>. If your credit score is the part you want to improve or understand, see <a href="../../blogs/basics/why-credit-score-matters.html">Why Your Credit Score Matters</a></p></div><p cls="source-note">For general context, RBI describes loan eligibility in terms of repayment capacity and factors such as income, expenses, liabilities, income stability, tenure and interest rate. CIBIL also notes that lenders consider credit history and other borrower details when assessing loan applications.</p><p class="source-note"><a href="https://www.rbi.org.in/CommonPerson/english/scripts/FAQs.aspx?Id=701" rel="noopener" target="_blank">RBI: Housing Loans FAQ</a> | <a href="https://www.cibil.com/loan-approval-process" rel="noopener" target="_blank">CIBIL: Loan Approval Process</a></p></article>
+    </main>
 
-</body>
+    <!-- FOOTER -->
+    <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
+      <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+      <h3 class="text-lg font-semibold mb-3">About KnowYourEMI</h3>
+      <p class="text-sm text-gray-200 leading-relaxed">KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility, and evaluate balance transfers transparently. No sign-ups, no hidden conditions.</p>
+      </div>
+      <div>
+      <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+      <li><a class="hover:underline" href="../../">EMI Calculator</a></li>
+      <li><a class="hover:underline" href="../../#balanceTransfer">Balance Transfer Calculator</a></li>
+      <li><a class="hover:underline" href="./">Loan Eligibility</a></li>
+      <li><a class="hover:underline" href="../../blogs/">Loan Guides</a></li>
+      <li><a class="hover:underline" href="../../pages/about.html">About KnowYourEMI</a></li>
+      <li><a class="hover:underline" href="../../blogs/">Blog</a></li>
+      </ul>
+      </div>
+      <div>
+      <h3 class="text-lg font-semibold mb-3">Contact</h3>
+      <p class="text-sm text-gray-200 mb-2">📧 <a class="underline hover:text-gray-100" href="mailto:hello@knowyouremi.in">hello@knowyouremi.in</a></p>
+      <p class="text-sm text-gray-200">More tools and articles coming soon.</p>
+      </div>
+      </div>
+      <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
+      <span>© <span id="year"></span> knowyouremi.in | All rights reserved.</span>
+      <a class="underline hover:text-yellow-300" href="../../pages/about.html">About</a> |
+            <a class="underline hover:text-yellow-300" href="../../pages/privacy-policy.html">Privacy Policy</a> |
+            <a class="underline hover:text-yellow-300" href="../../pages/terms-and-conditions.html">Terms &amp; Conditions</a>
+      </div>
+    </footer>
+    <script src="./script.js"></script>
+    <script>
+        const eligibilityOffers = [
+          // Personal loan offers temporarily disabled - switching to Cuelinks
+        ];
+
+        function showEligibilityOffers() {
+          const loanType = document.getElementById('loanType').value;
+          const section  = document.getElementById('sponsoredOffers');
+          const strip    = document.getElementById('offersStrip');
+          if (loanType !== 'personal' || eligibilityOffers.length === 0) { section.classList.add('hidden'); return; }
+          strip.innerHTML = eligibilityOffers.map(o => `
+            <a href="${o.href}" rel="nofollow sponsored" target="_blank"
+              onclick="if(typeof gtag==='function'){gtag('event','affiliate_click',{offer_name:'${o.name}',loan_type:'personal_eligibility',page_path:location.pathname})}"
+              class="flex-shrink-0 flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group"
+              style="min-width:230px;max-width:270px;flex:0 0 auto;text-decoration:none;scroll-snap-align:start;border-top:1px solid #f3f4f6;border-right:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6;border-left:4px solid ${o.accentColor}">
+              <div class="flex-shrink-0 w-10 h-10 rounded-xl ${o.color} flex items-center justify-center shadow-sm">
+                <span class="${o.textColor} font-black text-sm">${o.initials}</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-bold text-gray-800 truncate leading-tight">${o.name}</p>
+                <p class="text-xs font-semibold mt-0.5" style="color:${o.accentColor}">${o.detail}</p>
+              </div>
+              <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center" style="background:${o.accentColor}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </a>
+          `).join('');
+          section.classList.remove('hidden');
+        }
+
+        // Watch resultNote - only fires after validation passes and results are shown
+        // Timer starts from that moment: 2000ms count-up + 5000ms reading = 7000ms
+        let offersTimer = null;
+        const resultNoteEl = document.getElementById('resultNote');
+        const offerObserver = new MutationObserver(function() {
+          if (resultNoteEl.style.display === 'block') {
+            clearTimeout(offersTimer);
+            offersTimer = setTimeout(function() {
+              showEligibilityOffers();
+              const section = document.getElementById('sponsoredOffers');
+              if (section && !section.classList.contains('hidden')) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                setTimeout(startAutoScroll, 500);
+              }
+            }, 7000);
+          } else {
+            // Results reset - hide offers immediately
+            clearTimeout(offersTimer);
+            document.getElementById('sponsoredOffers').classList.add('hidden');
+          }
+        });
+        offerObserver.observe(resultNoteEl, { attributes: true, attributeFilter: ['style'] });
+
+        // Auto-scroll offers strip every 3 seconds
+        let autoScrollInterval = null;
+        let currentCard = 0;
+
+        function startAutoScroll() {
+          const strip = document.getElementById('offersStrip');
+          if (!strip) return;
+          clearInterval(autoScrollInterval);
+          currentCard = 0;
+
+          autoScrollInterval = setInterval(function() {
+            const cards = strip.querySelectorAll('a');
+            if (!cards.length) return;
+            currentCard = (currentCard + 1) % cards.length;
+            // Scroll only within the strip - does not affect page scroll position
+            const targetLeft = cards[currentCard].offsetLeft - strip.offsetLeft;
+            strip.scrollTo({ left: targetLeft, behavior: 'smooth' });
+          }, 3000);
+
+          // Pause on hover/touch
+          strip.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+          strip.addEventListener('touchstart', () => clearInterval(autoScrollInterval), { passive: true });
+          strip.addEventListener('mouseleave', startAutoScroll);
+          strip.addEventListener('touchend', startAutoScroll, { passive: true });
+        }
+
+        // Hide offers when loan type changes
+        document.getElementById('loanType').addEventListener('change', function() {
+          clearTimeout(offersTimer);
+          clearInterval(autoScrollInterval);
+          document.getElementById('sponsoredOffers').classList.add('hidden');
+        });
+      </script>
+    <!-- <script type="module" src="/comments/comments.js"></script> -->
+  </body>
 </html>
