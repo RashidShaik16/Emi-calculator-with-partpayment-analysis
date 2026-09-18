@@ -84,7 +84,9 @@ observer.observe(existingLoansWrapper, { childList: true });
 // 🔒 Restrict month inputs to whole numbers only
   document.addEventListener("input", (e) => {
     const el = e.target;
-
+    if (el.classList.contains("oldLoanAmount")) {
+          el.value = el.value.replace(/-/g, "");
+        }
     // Tenure (months) — digits only while typing (no decimals)
   if (
     el.classList.contains("oldTenureMonths") ||
@@ -99,7 +101,7 @@ observer.observe(existingLoansWrapper, { childList: true });
     el.classList.contains("oldInterest") ||
     el.id === "newInterest"
   ) {
-
+    el.value = el.value.replace(/-/g, "");
     const parts = el.value.split(".");
     if (parts.length > 2) {
       // keep only the first dot
