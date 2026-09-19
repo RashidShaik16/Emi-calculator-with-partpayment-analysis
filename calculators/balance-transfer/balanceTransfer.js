@@ -101,7 +101,7 @@ observer.observe(existingLoansWrapper, { childList: true });
     el.classList.contains("oldInterest") ||
     el.id === "newInterest"
   ) {
-    el.value = el.value.replace(/-/g, "");
+    if (el.value.includes("-")) el.value = el.value.replace(/-/g, "");
     const parts = el.value.split(".");
     if (parts.length > 2) {
       // keep only the first dot
@@ -117,6 +117,7 @@ observer.observe(existingLoansWrapper, { childList: true });
 
   // ✅ EMIs Paid Restriction — cannot exceed (Tenure - 6)
   if (el.classList.contains("emisPaid")) {
+    el.value = el.value.replace(/[^\d]/g, "");
     const parent = el.closest(".existing-loan");
     const tenureInput = parent.querySelector(".oldTenureMonths");
 
