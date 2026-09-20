@@ -4,7 +4,7 @@
   <!-- Main Site -->
   <url>
     <loc>https://knowyouremi.in/</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -18,14 +18,14 @@
   </url>
   <url>
     <loc>https://knowyouremi.in/calculators/float-rate-home-loan/</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://knowyouremi.in/calculators/balance-transfer/</loc>
-    <lastmod>2026-05-17</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -38,7 +38,7 @@
   <!-- Static Pages -->
   <url>
     <loc>https://knowyouremi.in/pages/about.html</loc>
-    <lastmod>2026-05-10</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -72,7 +72,7 @@
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/basics/why-credit-score-matters.html</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -120,7 +120,7 @@
   </url>
   <url>
     <loc>https://knowyouremi.in/blogs/credit-cards/minimum-due-trap.html</loc>
-    <lastmod>2026-06-28</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -128,7 +128,7 @@
   <!-- Blog: Home Loan -->
   <url>
     <loc>https://knowyouremi.in/blogs/home-loans/floating-rate-home-loans.html</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
