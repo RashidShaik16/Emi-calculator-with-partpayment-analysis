@@ -152,70 +152,76 @@
     </head>
 
     <body class="bg-gray-50 text-gray-800 scroll-smooth">
-        <nav id="calculator" class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-40 relative">
-            <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center">
-                <!-- Logo / Title -->
-                <a href="./" class="text-xl font-bold"><img class="w-20 my-0 inline-block" src="./logo.png" alt="KnowYourEMI logo" width="80" height="40" fetchpriority="high"></a>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-6">
-                    <a href="./calculators/balance-transfer/" class="hover:text-yellow-300 transition-colors">Balance Transfer</a>
-                    <a href="./calculators/eligibility/" class="hover:text-yellow-300 transition-colors">Eligibility Calculator</a>
-                    <a href="./calculators/float-rate-home-loan/" class="hover:text-yellow-300 transition-colors">Floating Rate Home Loan</a>
-                    <a href="./calculators/credit-card-payoff/" class="hover:text-yellow-300 transition-colors">Credit Card Payoff</a>
-                    <a href="#faq-section" class="hover:text-yellow-300 transition-colors">FAQs</a>
-                    <a href="./blogs/" class="hover:text-yellow-300 transition-colors">Blogs</a>
-                </div>
+<!-- NAV:START -->
 
-                <!-- Hamburger Button -->
-                <button id="menu-toggle" class="md:hidden kye-hamburger" aria-label="Toggle menu" aria-expanded="false">
-                  <span class="kye-hamburger-bar"></span>
-                  <span class="kye-hamburger-bar"></span>
-                  <span class="kye-hamburger-bar"></span>
-                </button>
-            </div>
+<nav id="calculator" class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-40 relative"> 
+    <div class="max-w-7xl mx-auto px-4 py-5 flex justify-between items-center"> 
+        <!-- Logo / Title --> 
+        <a href="./" class="text-xl font-bold"><img class="w-20 my-0 inline-block" src="./logo.png" alt="KnowYourEMI logo" width="80" height="40" fetchpriority="high"></a> 
 
-            <!-- Mobile Menu (hidden by default) -->
-            <div id="mobile-menu" class="hidden md:hidden kye-mobilemenu-panel" style="background:#ffffff;border-radius:0 0 16px 16px;box-shadow:0 8px 20px rgba(0,0,0,0.14);overflow:hidden;">
-              <div style="padding:8px 6px 14px;">
-                <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#9ca3af;padding:8px 14px 2px;margin:0;">Calculators</p>
-                <a href="./calculators/balance-transfer/" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;">
-                  <div style="width:28px;height:28px;border-radius:8px;background:#7c3aed;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
-                  </div>
-                  <span style="font-size:0.82rem;color:#111827;font-weight:500;">Balance transfer</span>
-                </a>
-                <a href="./calculators/eligibility/" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;">
-                  <div style="width:28px;height:28px;border-radius:8px;background:#059669;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                  </div>
-                  <span style="font-size:0.82rem;color:#111827;font-weight:500;">Eligibility calculator</span>
-                </a>
-                <a href="./calculators/float-rate-home-loan/" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;">
-                  <div style="width:28px;height:28px;border-radius:8px;background:#0284c7;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                  </div>
-                  <span style="font-size:0.82rem;color:#111827;font-weight:500;">Floating rate home loan</span>
-                </a>
-                <a href="./calculators/credit-card-payoff/" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;">
-                  <div style="width:28px;height:28px;border-radius:8px;background:#e11d48;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-                  </div>
-                  <span style="font-size:0.82rem;color:#111827;font-weight:500;">Credit card payoff</span>
-                </a>
-                <div style="height:1px;background:#f0f0f0;margin:6px 14px;"></div>
-                <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#9ca3af;padding:6px 14px 2px;margin:0;">Resources</p>
-                <a href="#faq-section" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;">
-                  <svg style="width:16px;flex-shrink:0;color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.09 9a3 3 0 015.83 1c0 2-3 2-3 4"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5" stroke-linecap="round"/></svg>
-                  <span style="font-size:0.82rem;color:#111827;font-weight:500;">FAQs</span>
-                </a>
-                <a href="./blogs/" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;">
-                  <svg style="width:16px;flex-shrink:0;color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                  <span style="font-size:0.82rem;color:#111827;font-weight:500;">Blogs</span>
-                </a>
-              </div>
-            </div>
-        </nav>
+        <!-- Desktop Menu --> 
+        <div class="hidden md:flex space-x-6"> 
+            <a href="./calculators/balance-transfer/" class="hover:text-yellow-300 transition-colors">Balance Transfer</a> 
+            <a href="./calculators/eligibility/" class="hover:text-yellow-300 transition-colors">Eligibility Calculator</a> 
+            <a href="./calculators/float-rate-home-loan/" class="hover:text-yellow-300 transition-colors">Floating Rate Home Loan</a> 
+            <a href="./calculators/credit-card-payoff/" class="hover:text-yellow-300 transition-colors">Credit Card Payoff</a> 
+            
+            <a href="./blogs/" class="hover:text-yellow-300 transition-colors">Blogs</a> 
+        </div> 
+
+        <!-- Hamburger Button --> 
+        <button id="menu-toggle" class="md:hidden kye-hamburger" aria-label="Toggle menu" aria-expanded="false"> 
+          <span class="kye-hamburger-bar"></span> 
+          <span class="kye-hamburger-bar"></span> 
+          <span class="kye-hamburger-bar"></span> 
+        </button> 
+    </div> 
+
+    <!-- Mobile Menu (hidden by default) --> 
+    <div id="mobile-menu" class="hidden md:hidden kye-mobilemenu-panel" style="background:#ffffff;border-radius:0 0 16px 16px;box-shadow:0 8px 20px rgba(0,0,0,0.14);overflow:hidden;"> 
+      <div style="padding:8px 6px 14px;"> 
+        <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#9ca3af;padding:8px 14px 2px;margin:0;">Calculators</p> 
+        <a href="./calculators/balance-transfer/" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;"> 
+          <div style="width:28px;height:28px;border-radius:8px;background:#7c3aed;display:flex;align-items:center;justify-content:center;flex-shrink:0;"> 
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg> 
+          </div> 
+          <span style="font-size:0.82rem;color:#111827;font-weight:500;">Balance transfer</span> 
+        </a> 
+        <a href="./calculators/eligibility/" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;"> 
+          <div style="width:28px;height:28px;border-radius:8px;background:#059669;display:flex;align-items:center;justify-content:center;flex-shrink:0;"> 
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg> 
+          </div> 
+          <span style="font-size:0.82rem;color:#111827;font-weight:500;">Eligibility calculator</span> 
+        </a> 
+        <a href="./calculators/float-rate-home-loan/" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;"> 
+          <div style="width:28px;height:28px;border-radius:8px;background:#0284c7;display:flex;align-items:center;justify-content:center;flex-shrink:0;"> 
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001 1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg> 
+          </div> 
+          <span style="font-size:0.82rem;color:#111827;font-weight:500;">Floating rate home loan</span> 
+        </a> 
+        <a href="./calculators/credit-card-payoff/" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;"> 
+          <div style="width:28px;height:28px;border-radius:8px;background:#e11d48;display:flex;align-items:center;justify-content:center;flex-shrink:0;"> 
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg> 
+          </div> 
+          <span style="font-size:0.82rem;color:#111827;font-weight:500;">Credit card payoff</span> 
+        </a> 
+        <div style="height:1px;background:#f0f0f0;margin:6px 14px;"></div> 
+        <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#9ca3af;padding:6px 14px 2px;margin:0;">Resources</p> 
+        <a href="#faq-section" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;"> 
+          <svg style="width:16px;flex-shrink:0;color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.09 9a3 3 0 015.83 1c0 2-3 2-3 4"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5" stroke-linecap="round"/></svg> 
+          <span style="font-size:0.82rem;color:#111827;font-weight:500;">FAQs</span> 
+        </a> 
+        <a href="./blogs/" class="kye-mobilemenu-row" style="display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;"> 
+          <svg style="width:16px;flex-shrink:0;color:#6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg> 
+          <span style="font-size:0.82rem;color:#111827;font-weight:500;">Blogs</span> 
+        </a> 
+      </div> 
+    </div> 
+</nav>
+
+<!-- NAV:END -->
+
 
         <!-- PAGE HERO HEADER -->
         <div class="bg-gradient-to-r from-blue-800 to-indigo-900 py-16 px-4">
@@ -1187,56 +1193,151 @@
         </main>
 
 
-        <!-- Footer -->
-        <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
-            <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- FOOTER:START -->
 
-                <!-- About -->
-                <div>
-                <h3 class="text-lg font-semibold mb-3">About This Tool</h3>
-                <p class="text-sm text-gray-200 leading-relaxed">
-                    This EMI Calculator with Part Payment Analysis helps you plan loans smarter. 
-                    See how part payments save you interest and reduce tenure, all with clear visuals 
-                    and an interactive schedule.
+<footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+            <!-- Brand and purpose -->
+            <div class="lg:col-span-1">
+                <a href="https://knowyouremi.in/" class="inline-block text-xl font-bold tracking-tight hover:text-yellow-300 transition-colors">
+                    About this tool
+                </a>
+                <p class="mt-3 text-sm text-blue-100 leading-relaxed">
+                    Free loan and EMI calculators to help you understand monthly payments,
+                    total interest, loan eligibility, balance transfers and credit card payoff.
                 </p>
-                </div>
+                <p class="mt-4 text-xs text-blue-200 leading-relaxed">
+                    Calculations are estimates for financial planning. Actual lender terms,
+                    fees, rates and eligibility may vary.
+                </p>
+            </div>
 
-                <!-- Quick Links -->
-                <div>
-                <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+            <!-- Calculators -->
+            <div>
+                <h3 class="text-sm font-semibold uppercase tracking-wide text-blue-100 mb-4">
+                    Calculators
+                </h3>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="./calculators/balance-transfer/" class="hover:underline">Balance Transfer Calculator</a></li>
-                    <li><a href="./calculators/eligibility/" class="hover:underline">Check Eligibility</a></li>
-                    <li><a href="./calculators/float-rate-home-loan/" class="hover:underline">Floating Rate Home Loan</a></li>
-                    <li><a href="./calculators/credit-card-payoff/" class="hover:underline">Credit Card Payoff</a></li>
-                    <li><a href="#faq-section" class="hover:underline">FAQs</a></li>
-                    <li><a href="./blogs/" class="hover:underline">Blogs</a></li>
+                    <li>
+                        <a href="https://knowyouremi.in/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            EMI Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/calculators/eligibility/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Loan Eligibility Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/calculators/balance-transfer/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Balance Transfer Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/calculators/credit-card-payoff/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Credit Card Payoff Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/calculators/float-rate-home-loan/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Floating Rate Home Loan
+                        </a>
+                    </li>
                 </ul>
-                </div>
-
-                <!-- Contact -->
-                <div>
-                <h3 class="text-lg font-semibold mb-3">Contact</h3>
-                <p class="text-sm text-gray-200 mb-2">📧 Email: 
-                    <a href="mailto:rashidshaik.dev16@gmail.com" class="underline hover:text-gray-100">
-                    hello@knowyouremi.in
-                    </a>
-                </p>
-                <p class="text-sm text-gray-200">🌐 More features coming soon!</p>
-                </div>
             </div>
 
-            <!-- Bottom bar -->
-              <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
-                <span>© <span id="year"></span> knowyouremi.in | All rights reserved.</span>
-                <a href="./pages/about.html" class="underline hover:text-yellow-300 transition-colors">About</a> |
-                <a href="./pages/privacy-policy.html" class="underline hover:text-yellow-300 transition-colors">Privacy Policy</a> |
-                <a href="./pages/terms-and-conditions.html" class="underline hover:text-yellow-300 transition-colors">Terms & Conditions</a>
+            <!-- Guides -->
+            <div>
+                <h3 class="text-sm font-semibold uppercase tracking-wide text-blue-100 mb-4">
+                    Loan & Credit Guides
+                </h3>
+                <ul class="space-y-2 text-sm">
+                    <li>
+                        <a href="https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            How EMI Is Calculated
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/blogs/interest-rates/flat-vs-reducing-rate.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Flat vs Reducing Rate
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/blogs/strategy/when-to-make-part-payment.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            When to Make a Part Payment
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/blogs/basics/why-credit-score-matters.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Why Credit Score Matters
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/blogs/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            View All Guides
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </footer>
 
+            <!-- Company and support -->
+            <div>
+                <h3 class="text-sm font-semibold uppercase tracking-wide text-blue-100 mb-4">
+                    COMPANY
+                </h3>
+                <ul class="space-y-2 text-sm">
+                    <li>
+                        <a href="https://knowyouremi.in/pages/about.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            About
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/pages/privacy-policy.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Privacy Policy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/pages/terms-and-conditions.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Terms & Conditions
+                        </a>
+                    </li>
+                    <li>
+                        <span>Contact:</span>
+                    </li>
+                    <li>
+                        <a href="mailto:hello@knowyouremi.in" class="hover:text-yellow-300 hover:underline transition-colors">
+                            hello@knowyouremi.in
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-        <!-- Part Payment Modal -->
+        </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="bg-blue-950/60 border-t border-blue-500/30">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-blue-200">
+            <p class="text-center sm:text-left">
+                © <span data-kye-footer-year></span> KnowYourEMI. All rights reserved.
+            </p>
+            <p class="text-center sm:text-right">
+                Free calculators and financial education tools.
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.querySelectorAll("[data-kye-footer-year]").forEach(function (element) {
+        element.textContent = new Date().getFullYear();
+    });
+</script>
+
+<!-- FOOTER:END -->
+        
         <section id="partPaymentModal" 
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm z-50 hidden">
 
@@ -1308,25 +1409,6 @@
             </div>
         </div>
         </section>
-
-        <!-- Original feedback toast left in place but unused/hidden - driven by scripts/feedback-toast.js which we are not modifying -->
-        <!-- <div id="feedbackToast" 
-            class="hidden fixed bottom-10 left-1/2 -translate-x-1/2 w-96 bg-white text-gray-800 rounded-xl shadow-xl px-4 py-3 flex items-center justify-between gap-3 text-sm sm:text-base z-50 transition-all duration-700 ease-in-out translate-y-20" style="border:1px solid #e5e7eb;">
-
-            <div class="flex items-center gap-2">
-                <span style="font-size:1.2rem;">💬</span>
-                <span class="font-medium text-gray-700">Found this helpful? Leave a comment!</span>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <button id="toastFeedbackBtn" 
-                onclick="document.getElementById('feedbackToast').classList.add('hidden');setTimeout(function(){var c=document.getElementById('comments-anchor');if(c){var y=c.getBoundingClientRect().top+window.scrollY-70;window.scrollTo({top:y,behavior:'smooth'});}},100);"
-                class="bg-blue-600 text-white px-3 py-1 rounded-lg font-semibold hover:bg-blue-700 transition text-sm">
-                Leave a Comment
-                </button>
-                <button id="closeToastBtn" class="text-gray-400 hover:text-gray-600 text-lg font-bold leading-none">&times;</button>
-            </div>
-        </div> -->
 
         <!-- Loan card -->
         <div id="kye-result-card-modal"
@@ -1512,13 +1594,6 @@
         </div>
 
 
-      
-
-  <!-- Script -->
-    <script>
-        // Auto-update year
-        document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
    <!-- ═══ KYE RESULT CARD - html2canvas for image export ═══ -->
    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
    <!-- ═══ END KYE RESULT CARD SCRIPT ═══ -->

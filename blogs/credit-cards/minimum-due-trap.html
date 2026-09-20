@@ -291,352 +291,413 @@
     </script>
   </head>
   <body class="bg-gray-50">
-  <div class="progress-bar" id="progressBar">
-  </div>
-  <!-- NAVBAR -->
-  <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-40">
-  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-  <a href="../../">
-  <img alt="KnowYourEMI logo" class="w-20 inline-block" fetchpriority="high" height="40" src="../../logo.png" width="80"/>
-  </a>
-  <div class="hidden md:flex space-x-6 text-sm font-medium">
-  <a class="hover:text-yellow-300 transition" href="../../">
-        EMI Calculator
-      </a>
-  <a class="hover:text-yellow-300 transition" href="../../calculators/eligibility/">
-        Check Eligibility
-      </a>
-  <a class="hover:text-yellow-300 transition" href="../../calculators/float-rate-home-loan/">
-        Float Rate
-      </a>
-  <a class="hover:text-yellow-300 transition" href="../../calculators/credit-card-payoff/">
-        CC Payoff
-      </a>
-  <a class="hover:text-yellow-300 transition" href="../">
-        Blog
-      </a>
-  </div>
-  <button class="md:hidden text-white focus:outline-none" id="menu-toggle">
-  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-  <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-  </path>
-  </svg>
-  </button>
-  </div>
-  <div class="hidden md:hidden bg-indigo-900 px-4 pb-4 space-y-2 text-sm" id="mobile-menu">
-  <a class="block py-2 hover:text-yellow-300" href="../../">
-      EMI Calculator
-      </a>
-  <a class="block py-2 hover:text-yellow-300" href="../../calculators/eligibility/">
-      Check Eligibility
-      </a>
-  <a class="block py-2 hover:text-yellow-300" href="../../calculators/float-rate-home-loan/">
-      Float Rate
-      </a>
-  <a class="block py-2 hover:text-yellow-300" href="../../calculators/credit-card-payoff/">
-      CC Payoff
-      </a>
-  <a class="block py-2 hover:text-yellow-300" href="../">
-      Blog
-      </a>
-  </div>
-  </nav>
-  <!-- ARTICLE -->
-  <main class="max-w-3xl mx-auto px-4 py-12">
-  <p class="text-xs text-gray-400 mb-6">
-  <a class="hover:text-blue-600" href="../../">
-      Home
-      </a>
-       / 
-      <a class="hover:text-blue-600" href="../">
-      Blog
-      </a>
-       / 
-      <span class="text-gray-500">
-      Minimum Due on a Credit Card
-      </span>
-  </p>
-  <article>
-  <header>
-  <span class="tag">
-        Credit Cards
-      </span>
-  <h1 class="blog-title-font text-3xl md:text-4xl font-bold text-gray-900 mt-3 mb-4 leading-snug">Why Paying the Minimum Due on Your Credit Card Can Cost You the Maximum</h1>
-  <p class="text-sm text-gray-400 mb-6">By <strong class="text-gray-600">Rashid Shaik</strong> | 8 min read | Updated Sep 2026</p>
-  </header>
-  <div class="hero-image-wrap">
-  <img alt="Five-step illustration showing how paying only the minimum due on a credit card leads to a growing mountain of debt: you pay the minimum, most goes to interest, very little reduces the balance, debt lasts longer, and you end up paying much more" fetchpriority="high" height="768" loading="eager" src="images/minimum-due-trap.webp" width="1536"/>
-  </div>
-  <section class="article-body">
-  <p>The minimum due on your credit card statement is one of the most dangerous numbers in personal finance. Not because the number itself is wrong. It is there for a reason. The problem is how easy it is to look at that small number, pay it, and feel like the credit card problem is handled.</p>
-  <p>You are not careless if you have done this. Maybe the salary was tight that month. Maybe rent, bills and an unexpected expense arrived together. Paying the minimum feels like the responsible thing to do because at least you are paying something. The trouble starts when <strong>temporary relief quietly becomes your normal payment strategy.</strong></p>
-  <hr class="divider"/>
-  <h2>What the minimum due actually is</h2>
-  <p>Look at almost any credit card statement and you will see two numbers that matter immediately: the <strong>total amount due</strong> and the <strong>minimum amount due</strong>.</p>
-  <p>A common minimum-due formula used on Indian credit cards is around <strong>5% of the outstanding amount or ₹200, whichever is higher</strong>. Some cards use a different formula or include other statement components, so your statement is the final word.</p>
-  <p>So, as a simple illustration, if your card shows an outstanding balance of ₹50,000, a 5% minimum would be ₹2,500.</p>
-  <p>₹2,500 feels manageable. You pay it, the payment is recorded, and you move on with your month.</p>
-  <p>But here is the question that matters:</p>
-  <div class="callout"><strong>If you paid ₹2,500, how much of that ₹2,500 actually reduced your ₹50,000 balance?</strong></div>
-  <p>That is where the story gets interesting.</p>
-  <div class="formula-box">
-  <span class="label">What 3.75% monthly interest looks like on ₹50,000</span>
-  Month 1 interest alone = <span class="highlight">₹50,000 × 3.75% = ₹1,875</span><br/>
-  Illustrative payment = <span class="highlight">₹2,500</span><br/>
-  Amount left to reduce the balance = <span class="highlight">₹625</span><br/>
-  Balance after this simplified calculation = <span class="highlight">₹49,375</span>
-  </div>
-  <p>You paid ₹2,500. But in this simplified illustration, only ₹625 of that payment is left to reduce the balance after ₹1,875 of interest. That is the part many people do not notice when they look only at the minimum due. The real problem with the minimum payment on a credit card is not the payment itself. It is how little of that payment may actually reduce the principal once interest is taken out.</p>
-  <p>Credit card rates vary by card and issuer, but many cards in India carry relatively high revolving interest rates. That is why even a payment that feels decent can make surprisingly little progress against a large balance.</p>
-  <hr class="divider"/>
-  <h2>The mindset that makes it worse</h2>
-  <p>Here is how the first minimum payment usually happens.</p>
-  <p>You are short on cash. Salary came in, rent went out, something unexpected happened. The card balance is sitting there and the minimum due feels like a lifeline.</p>
-  <p><em>"I will pay this much now. Next month I will clear more."</em></p>
-  <p>Then next month arrives.</p>
-  <p>Things are not dramatically better. Maybe there are new expenses on the card. Maybe the previous balance is still sitting there. The minimum due is still payable, so you pay it again.</p>
-  <p>And then again.</p>
-  <div class="warning-box">
-  <span class="warning-label">The pattern nobody notices at first</span>
-  <div class="warning-body"><p>The problem is not paying the minimum once. Sometimes that is exactly what you need to do when cash flow is tight. The problem is when the minimum becomes the amount you plan to pay every month. At that point, you can spend a lot of time making payments without making much progress.</p></div>
-  </div>
-  <hr class="divider"/>
-  <h2>What happens if I pay only the minimum due?</h2>
-  <p>Let us keep the same ₹50,000 example. Assume you stop making new purchases and use a simplified 3.75% monthly rate. If you make a ₹2,500 payment in the first month, ₹1,875 is consumed by the illustrated interest and ₹625 reduces the balance.</p>
-  <div class="example-box">
-  <span class="example-label">A simple first-year picture</span>
-  <div class="example-body">
-  <p><strong>Starting balance:</strong> ₹50,000</p>
-  <p><strong>Illustrative monthly rate:</strong> 3.75%</p>
-  <p><strong>First payment:</strong> ₹2,500</p>
-  <p><strong>First-month interest:</strong> ₹1,875</p>
-  <p><strong>First-month reduction:</strong> ₹625</p>
-  <p>The exact month-by-month result depends on how your card calculates interest, how the minimum is calculated, payment dates, taxes and other statement items. The important lesson is simpler: <strong>the minimum payment is not the same thing as a fast payoff plan.</strong></p>
-  </div>
-  </div>
-  <p>And if you keep using the card while carrying the old balance, the problem can become even harder. You are reducing yesterday's balance while adding today's spending.</p>
-  <div class="inline-cta">
-  <p>Want to stop guessing? Enter your balance, interest rate and monthly payment in the calculator and see the payoff timeline month by month.</p>
-  <a href="../../calculators/credit-card-payoff/" onclick="if(typeof gtag==='function') gtag('event','cta_clicked',{event_category:'blog',event_label:'minimum-due-trap-inline'});">Open Credit Card Payoff Calculator</a>
-  </div>
-  <hr class="divider"/>
-  <h2>Why the minimum due feels harmless</h2>
-  <p>The minimum due is designed to keep your account from becoming overdue when you cannot clear the full bill. That is useful. It gives you breathing room during a difficult month. There is a genuine benefit to paying the minimum amount due when cash is tight: it can help you avoid falling behind on the payment obligation. The problem starts when a temporary solution becomes your normal repayment strategy.</p>
-  <p>The problem is that breathing room can easily become a permanent habit.</p>
-  <p>Think about the difference between these two statements:</p>
-  <div class="callout"><strong>"I paid my credit card bill."</strong><br/><br/><strong>"I cleared my credit card balance."</strong></div>
-  <p>They sound similar. Financially, they can mean completely different things.</p>
-  <p>If you pay the total amount due, you are generally clearing the statement balance. If you pay only the minimum, a much larger part of the balance can remain unpaid and continue into the next cycle.</p>
-  <p>That is why the minimum due should be treated as a <strong>safety net, not a target.</strong></p>
-  <hr class="divider"/>
-  <h2>The snowball effect when you keep spending</h2>
-  <p>The ₹50,000 example above assumes you stop using the card. Real life is usually messier.</p>
-  <p>You pay ₹2,500, then use the card for groceries. Then another payment comes up. Then a subscription renews. Then there is a medical bill or a travel expense. The old balance is still there while new purchases are joining it.</p>
-  <p>Now the minimum due can rise, the balance can stay stubbornly high, and the statement becomes harder to understand.</p>
-  <p>This is the point where people often say, <em>"But I have been paying every month. Why is the balance barely moving?"</em></p>
-  <p>Because making a payment and reducing the debt quickly are not the same thing.</p>
-  <div class="warning-box">
-  <span class="warning-label">The number you should watch</span>
-  <div class="warning-body"><p>Do not watch only the minimum due. Watch your <strong>outstanding balance, interest charged and actual payment</strong>. If the balance is barely moving, your current payment strategy is not doing enough, even if every payment is being made on time.</p></div>
-  </div>
-  <hr class="divider"/>
-  <h2>Minimum due vs total amount due</h2>
-  <p>This is one of the simplest ways to understand your statement.</p>
-  <div class="example-box">
-  <span class="example-label">Three payments, three very different outcomes</span>
-  <div class="example-body">
-  <p><strong>Pay the total amount due:</strong> You clear the statement balance and can retain the applicable interest-free benefit under your card's terms.</p>
-  <p><strong>Pay more than the minimum:</strong> You reduce the unpaid balance faster, but some balance can still remain.</p>
-  <p><strong>Pay only the minimum:</strong> You meet the minimum payment requirement, but most of the statement balance can remain unpaid.</p>
-  </div>
-  </div>
-  <p>The useful question is not simply, <strong>"Did I pay my bill?"</strong></p>
-  <p>It is, <strong>"How much of my balance did I actually clear?"</strong></p>
-  <hr class="divider"/>
-  <h2>Why did my minimum payment increase?</h2>
-  <p>If your minimum payment was ₹2,000 last month and ₹3,000 this month, it does not necessarily mean your bank suddenly changed the rule.</p>
-  <p>The minimum amount due can change because your outstanding balance changed. Interest, taxes, fees, EMI instalments and other statement components can also affect the amount depending on the card.</p>
-  <p>So yes, <strong>your minimum payment can go up</strong>. The exact formula depends on the card, which is why your statement or card terms are more useful than assuming every card uses the same calculation.</p>
-  <hr class="divider"/>
-  <h2>How much should I pay on my credit card?</h2>
-  <p>If you can comfortably afford it, paying the <strong>total amount due by the due date</strong> is the cleanest way to avoid carrying a revolving balance.</p>
-  <p>If you cannot pay the full amount, paying more than the minimum is usually the direction that makes the biggest difference to how quickly the balance comes down. The exact amount should still fit your budget and essential expenses.</p>
-  <p>Do not choose a payment simply because it is the smallest amount the statement allows. Choose a payment you can actually sustain while making meaningful progress on the balance.</p>
-  <hr class="divider"/>
-  <h2>Does paying the minimum affect your credit score?</h2>
-  <p>Paying the required minimum on time is very different from missing the payment. Paying on time helps you meet the payment obligation.</p>
-  <p>But there is another piece of the puzzle: <strong>credit utilization</strong>. Carrying a large balance can keep your utilization high, and CIBIL identifies payment history and credit utilization among the factors used in its score.</p>
-  <p>So paying the minimum may help you avoid a missed payment, but it does not make a large revolving balance disappear. If the balance stays high, your credit profile can still reflect that level of utilization.</p>
-  <hr class="divider"/>
-  <h2>The simple way out of the minimum-due cycle</h2>
-  <p>If you are already carrying a balance, you do not need a complicated strategy. You need a number you can stick to.</p>
-  <div class="rules-list">
-  <div class="rule-item"><span class="rule-icon">01</span><span><strong>Stop adding unnecessary new spending.</strong> The fastest way to make a revolving balance harder to clear is to keep adding to it.</span></div>
-  <div class="rule-item"><span class="rule-icon">02</span><span><strong>Pay more than the minimum whenever you can.</strong> Even a consistent extra amount can change the payoff timeline.</span></div>
-  <div class="rule-item"><span class="rule-icon">03</span><span><strong>Check whether your card offers EMI conversion.</strong> If it does, compare the interest rate, fees and total repayment before choosing it.</span></div>
-  <div class="rule-item"><span class="rule-icon">04</span><span><strong>Compare a balance transfer carefully.</strong> A lower rate can help, but transfer fees, promotional periods and the rate after the offer all matter.</span></div>
-  <div class="rule-item"><span class="rule-icon">05</span><span><strong>Use windfalls strategically.</strong> A bonus or other lump-sum amount can make a noticeable dent in a high-cost revolving balance.</span></div>
-  <div class="rule-item"><span class="rule-icon">06</span><span><strong>Give yourself a payoff number.</strong> Instead of saying "I will pay whatever the minimum is," decide what monthly amount you can actually commit to.</span></div>
-  </div>
-  <hr class="divider"/>
-  <h2>The mindset shift that actually helps</h2>
-  <p>People carrying a revolving credit card balance often do not need another lecture. They already know the balance is there.</p>
-  <p>What helps is seeing the number clearly.</p>
-  <p>How much do you owe right now? What rate are you paying? How much interest is being added? What happens if you pay ₹500 more every month? What happens if you pay ₹2,000 more?</p>
-  <p>Once those numbers are visible, the problem becomes much less mysterious.</p>
-  <div class="callout"><strong>The minimum due can keep you current. It does not necessarily get you out of debt quickly.</strong> Treat it as the floor, not the finish line.</div>
-  <p>If you have already read <a class="text-blue-600 hover:underline" href="how-credit-cards-work.html">how credit cards work</a> and how <a class="text-blue-600 hover:underline" href="credit-card-debt-trap.html">credit card debt can build over time</a>, the next step is simple: put your own numbers into the <a class="text-blue-600 font-semibold hover:underline" href="../../calculators/credit-card-payoff/">Credit Card Payoff Calculator</a> and see what your current payment is really doing.</p>
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-list">
-  <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>What is the minimum amount due on a credit card?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>A common formula is around 5% of the outstanding balance or ₹200, whichever is higher, but the exact minimum due varies by card and issuer. Check your statement for the amount that applies to you.</p></div></div>
-  <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>What happens if I pay only the minimum due?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>You can avoid treating the payment as overdue under the card's terms, but a large part of the balance can remain unpaid. If you do not clear the total amount due, the applicable interest-free benefit can be lost and interest can be charged according to the card's terms.</p></div></div>
-  <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>Does paying the minimum due cause credit card interest?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>If the total amount due is not cleared, the remaining balance can attract interest according to the card's disclosed rate and calculation method. Paying only the minimum does not make the rest of the balance interest-free.</p></div></div>
-  <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>How much should I pay on my credit card?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>If you can afford it, pay the total amount due by the due date. If you cannot, paying more than the minimum can reduce the unpaid balance faster. The payment should still fit your overall budget.</p></div></div>
-  <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>Why did my minimum credit card payment increase?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>Your minimum due can change when the outstanding balance or other statement components change. Interest, taxes, fees and EMI instalments can be part of the calculation depending on the card.</p></div></div>
-  <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>Does paying the minimum due affect my credit score?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>Paying the required minimum on time is different from missing a payment. However, carrying a high balance can keep your credit utilization high, and CIBIL identifies utilization as a factor in its score.</p></div></div>
-  <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>What is the difference between minimum due and total amount due?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>The total amount due is the statement amount shown as payable. The minimum amount due is the smaller payment required under your card's terms. Paying only the minimum does not clear the remaining balance.</p></div></div>
-  <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>Can I pay more than the minimum due?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>Yes. You can generally pay more than the minimum. A larger payment reduces the unpaid balance faster, subject to your card's payment terms.</p></div></div>
-  </div>
-  <p class="source-note"><strong>Primary references:</strong> <a href="https://www.rbi.org.in/" rel="noopener noreferrer" target="_blank">RBI credit card directions</a> and <a href="https://www.cibil.com/" rel="noopener noreferrer" target="_blank">TransUnion CIBIL guidance</a>.</p>
-  </section>
-  <!-- CTA -->
-  <div class="cta-box">
-  <p class="text-lg font-semibold blog-title-font">
-        See your exact payoff timeline
-      </p>
-  <p class="text-sm text-indigo-200 mt-2">
-        Enter your balance, interest rate, and what you can pay each month. The calculator shows you month by month exactly when you will be debt free and how much interest you will pay to get there.
-      </p>
-  <a href="../../calculators/credit-card-payoff/" onclick="if(typeof gtag==='function') gtag('event','cta_clicked',{event_category:'blog',event_label:'minimum-due-trap'});">
-        Open Credit Card Payoff Calculator
-      </a>
-  </div>
-  <p class="text-center mt-10 text-sm">
-  <a class="text-blue-600 hover:underline" href="../">
-        Back to all articles
-      </a>
-  </p>
-  <p class="feedback-nudge">
-      💬 Have a thought or a topic you want covered?
-      <a href="../#feedback-section">
-        Send us a message
-      </a>
-  </p>
-  </article>
-  </main>
-  <!-- Comments section -->
-  <div id="knowyouremi-comments">
-  </div>
-  <!-- FOOTER -->
-  <footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-16">
-  <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-  <div>
-  <h3 class="text-lg font-semibold mb-3">
-        About KnowYourEMI
-      </h3>
-  <p class="text-sm text-gray-200 leading-relaxed">
-        KnowYourEMI is a free financial calculator platform built to help you compare EMIs, check eligibility, and evaluate balance transfers transparently. No sign-ups, no hidden conditions.
-      </p>
-  </div>
-  <div>
-  <h3 class="text-lg font-semibold mb-3">
-        Quick Links
-      </h3>
-  <ul class="space-y-2 text-sm">
-  <li>
-  <a class="hover:underline" href="../../">
+    <div class="progress-bar" id="progressBar">
+    </div>
+    <!-- NAVBAR -->
+    <nav class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <a href="../../">
+    <img alt="KnowYourEMI logo" class="w-20 inline-block" fetchpriority="high" height="40" src="../../logo.png" width="80"/>
+    </a>
+    <div class="hidden md:flex space-x-6 text-sm font-medium">
+    <a class="hover:text-yellow-300 transition" href="../../">
           EMI Calculator
         </a>
-  </li>
-  <li>
-  <a class="hover:underline" href="../../calculators/eligibility/">
-          Loan Eligibility
+    <a class="hover:text-yellow-300 transition" href="../../calculators/eligibility/">
+          Check Eligibility
         </a>
-  </li>
-  <li>
-  <a class="hover:underline" href="../../calculators/balance-transfer/">
-          Balance Transfer
+    <a class="hover:text-yellow-300 transition" href="../../calculators/float-rate-home-loan/">
+          Float Rate
         </a>
-  </li>
-  <li>
-  <a class="hover:underline" href="../../calculators/float-rate-home-loan/">
-          Float Rate Simulator
+    <a class="hover:text-yellow-300 transition" href="../../calculators/credit-card-payoff/">
+          CC Payoff
         </a>
-  </li>
-  <li>
-  <a class="hover:underline" href="../../calculators/credit-card-payoff/">
-          CC Payoff Calculator
-        </a>
-  </li>
-  <li>
-  <a class="hover:underline" href="../">
+    <a class="hover:text-yellow-300 transition" href="../">
           Blog
         </a>
-  </li>
-  </ul>
-  </div>
-  <div>
-  <h3 class="text-lg font-semibold mb-3">
-        Contact
-      </h3>
-  <p class="text-sm text-gray-200 mb-2">
-        📧
-        <a class="underline hover:text-gray-100" href="mailto:hello@knowyouremi.in">
-        hello@knowyouremi.in
+    </div>
+    <button class="md:hidden text-white focus:outline-none" id="menu-toggle">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+    <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    </path>
+    </svg>
+    </button>
+    </div>
+    <div class="hidden md:hidden bg-indigo-900 px-4 pb-4 space-y-2 text-sm" id="mobile-menu">
+    <a class="block py-2 hover:text-yellow-300" href="../../">
+        EMI Calculator
         </a>
-  </p>
-  <p class="text-sm text-gray-200">
-        More tools and articles coming soon.
-      </p>
-  </div>
-  </div>
-  <div class="bg-blue-900 text-center py-3 text-xs text-gray-300 space-x-3">
-  <span>
-      ©
-      <span id="year">
-  </span>
-      knowyouremi.in | All rights reserved.
-      </span>
-  <a class="underline hover:text-yellow-300" href="../../pages/about.html">
-      About
-      </a>
-      |
-      <a class="underline hover:text-yellow-300" href="../../pages/privacy-policy.html">
-      Privacy Policy
-      </a>
-      |
-      <a class="underline hover:text-yellow-300" href="../../pages/terms-and-conditions.html">
-      Terms &amp; Conditions
-      </a>
-  </div>
-  </footer>
-  <script>
-    function toggleFaq(btn) {
-        const item = btn.closest('.faq-item');
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-        if (!isOpen) item.classList.add('open');
-      }
+    <a class="block py-2 hover:text-yellow-300" href="../../calculators/eligibility/">
+        Check Eligibility
+        </a>
+    <a class="block py-2 hover:text-yellow-300" href="../../calculators/float-rate-home-loan/">
+        Float Rate
+        </a>
+    <a class="block py-2 hover:text-yellow-300" href="../../calculators/credit-card-payoff/">
+        CC Payoff
+        </a>
+    <a class="block py-2 hover:text-yellow-300" href="../">
+        Blog
+        </a>
+    </div>
+    </nav>
+    <!-- ARTICLE -->
+    <main class="max-w-3xl mx-auto px-4 py-12">
+    <p class="text-xs text-gray-400 mb-6">
+    <a class="hover:text-blue-600" href="../../">
+        Home
+        </a>
+         / 
+        <a class="hover:text-blue-600" href="../">
+        Blog
+        </a>
+         / 
+        <span class="text-gray-500">
+        Minimum Due on a Credit Card
+        </span>
+    </p>
+    <article>
+    <header>
+    <span class="tag">
+          Credit Cards
+        </span>
+    <h1 class="blog-title-font text-3xl md:text-4xl font-bold text-gray-900 mt-3 mb-4 leading-snug">Why Paying the Minimum Due on Your Credit Card Can Cost You the Maximum</h1>
+    <p class="text-sm text-gray-400 mb-6">By <strong class="text-gray-600">Rashid Shaik</strong> | 8 min read | Updated Sep 2026</p>
+    </header>
+    <div class="hero-image-wrap">
+    <img alt="Five-step illustration showing how paying only the minimum due on a credit card leads to a growing mountain of debt: you pay the minimum, most goes to interest, very little reduces the balance, debt lasts longer, and you end up paying much more" fetchpriority="high" height="768" loading="eager" src="images/minimum-due-trap.webp" width="1536"/>
+    </div>
+    <section class="article-body">
+    <p>The minimum due on your credit card statement is one of the most dangerous numbers in personal finance. Not because the number itself is wrong. It is there for a reason. The problem is how easy it is to look at that small number, pay it, and feel like the credit card problem is handled.</p>
+    <p>You are not careless if you have done this. Maybe the salary was tight that month. Maybe rent, bills and an unexpected expense arrived together. Paying the minimum feels like the responsible thing to do because at least you are paying something. The trouble starts when <strong>temporary relief quietly becomes your normal payment strategy.</strong></p>
+    <hr class="divider"/>
+    <h2>What the minimum due actually is</h2>
+    <p>Look at almost any credit card statement and you will see two numbers that matter immediately: the <strong>total amount due</strong> and the <strong>minimum amount due</strong>.</p>
+    <p>A common minimum-due formula used on Indian credit cards is around <strong>5% of the outstanding amount or ₹200, whichever is higher</strong>. Some cards use a different formula or include other statement components, so your statement is the final word.</p>
+    <p>So, as a simple illustration, if your card shows an outstanding balance of ₹50,000, a 5% minimum would be ₹2,500.</p>
+    <p>₹2,500 feels manageable. You pay it, the payment is recorded, and you move on with your month.</p>
+    <p>But here is the question that matters:</p>
+    <div class="callout"><strong>If you paid ₹2,500, how much of that ₹2,500 actually reduced your ₹50,000 balance?</strong></div>
+    <p>That is where the story gets interesting.</p>
+    <div class="formula-box">
+    <span class="label">What 3.75% monthly interest looks like on ₹50,000</span>
+    Month 1 interest alone = <span class="highlight">₹50,000 × 3.75% = ₹1,875</span><br/>
+    Illustrative payment = <span class="highlight">₹2,500</span><br/>
+    Amount left to reduce the balance = <span class="highlight">₹625</span><br/>
+    Balance after this simplified calculation = <span class="highlight">₹49,375</span>
+    </div>
+    <p>You paid ₹2,500. But in this simplified illustration, only ₹625 of that payment is left to reduce the balance after ₹1,875 of interest. That is the part many people do not notice when they look only at the minimum due. The real problem with the minimum payment on a credit card is not the payment itself. It is how little of that payment may actually reduce the principal once interest is taken out.</p>
+    <p>Credit card rates vary by card and issuer, but many cards in India carry relatively high revolving interest rates. That is why even a payment that feels decent can make surprisingly little progress against a large balance.</p>
+    <hr class="divider"/>
+    <h2>The mindset that makes it worse</h2>
+    <p>Here is how the first minimum payment usually happens.</p>
+    <p>You are short on cash. Salary came in, rent went out, something unexpected happened. The card balance is sitting there and the minimum due feels like a lifeline.</p>
+    <p><em>"I will pay this much now. Next month I will clear more."</em></p>
+    <p>Then next month arrives.</p>
+    <p>Things are not dramatically better. Maybe there are new expenses on the card. Maybe the previous balance is still sitting there. The minimum due is still payable, so you pay it again.</p>
+    <p>And then again.</p>
+    <div class="warning-box">
+    <span class="warning-label">The pattern nobody notices at first</span>
+    <div class="warning-body"><p>The problem is not paying the minimum once. Sometimes that is exactly what you need to do when cash flow is tight. The problem is when the minimum becomes the amount you plan to pay every month. At that point, you can spend a lot of time making payments without making much progress.</p></div>
+    </div>
+    <hr class="divider"/>
+    <h2>What happens if I pay only the minimum due?</h2>
+    <p>Let us keep the same ₹50,000 example. Assume you stop making new purchases and use a simplified 3.75% monthly rate. If you make a ₹2,500 payment in the first month, ₹1,875 is consumed by the illustrated interest and ₹625 reduces the balance.</p>
+    <div class="example-box">
+    <span class="example-label">A simple first-year picture</span>
+    <div class="example-body">
+    <p><strong>Starting balance:</strong> ₹50,000</p>
+    <p><strong>Illustrative monthly rate:</strong> 3.75%</p>
+    <p><strong>First payment:</strong> ₹2,500</p>
+    <p><strong>First-month interest:</strong> ₹1,875</p>
+    <p><strong>First-month reduction:</strong> ₹625</p>
+    <p>The exact month-by-month result depends on how your card calculates interest, how the minimum is calculated, payment dates, taxes and other statement items. The important lesson is simpler: <strong>the minimum payment is not the same thing as a fast payoff plan.</strong></p>
+    </div>
+    </div>
+    <p>And if you keep using the card while carrying the old balance, the problem can become even harder. You are reducing yesterday's balance while adding today's spending.</p>
+    <div class="inline-cta">
+    <p>Want to stop guessing? Enter your balance, interest rate and monthly payment in the calculator and see the payoff timeline month by month.</p>
+    <a href="../../calculators/credit-card-payoff/" onclick="if(typeof gtag==='function') gtag('event','cta_clicked',{event_category:'blog',event_label:'minimum-due-trap-inline'});">Open Credit Card Payoff Calculator</a>
+    </div>
+    <hr class="divider"/>
+    <h2>Why the minimum due feels harmless</h2>
+    <p>The minimum due is designed to keep your account from becoming overdue when you cannot clear the full bill. That is useful. It gives you breathing room during a difficult month. There is a genuine benefit to paying the minimum amount due when cash is tight: it can help you avoid falling behind on the payment obligation. The problem starts when a temporary solution becomes your normal repayment strategy.</p>
+    <p>The problem is that breathing room can easily become a permanent habit.</p>
+    <p>Think about the difference between these two statements:</p>
+    <div class="callout"><strong>"I paid my credit card bill."</strong><br/><br/><strong>"I cleared my credit card balance."</strong></div>
+    <p>They sound similar. Financially, they can mean completely different things.</p>
+    <p>If you pay the total amount due, you are generally clearing the statement balance. If you pay only the minimum, a much larger part of the balance can remain unpaid and continue into the next cycle.</p>
+    <p>That is why the minimum due should be treated as a <strong>safety net, not a target.</strong></p>
+    <hr class="divider"/>
+    <h2>The snowball effect when you keep spending</h2>
+    <p>The ₹50,000 example above assumes you stop using the card. Real life is usually messier.</p>
+    <p>You pay ₹2,500, then use the card for groceries. Then another payment comes up. Then a subscription renews. Then there is a medical bill or a travel expense. The old balance is still there while new purchases are joining it.</p>
+    <p>Now the minimum due can rise, the balance can stay stubbornly high, and the statement becomes harder to understand.</p>
+    <p>This is the point where people often say, <em>"But I have been paying every month. Why is the balance barely moving?"</em></p>
+    <p>Because making a payment and reducing the debt quickly are not the same thing.</p>
+    <div class="warning-box">
+    <span class="warning-label">The number you should watch</span>
+    <div class="warning-body"><p>Do not watch only the minimum due. Watch your <strong>outstanding balance, interest charged and actual payment</strong>. If the balance is barely moving, your current payment strategy is not doing enough, even if every payment is being made on time.</p></div>
+    </div>
+    <hr class="divider"/>
+    <h2>Minimum due vs total amount due</h2>
+    <p>This is one of the simplest ways to understand your statement.</p>
+    <div class="example-box">
+    <span class="example-label">Three payments, three very different outcomes</span>
+    <div class="example-body">
+    <p><strong>Pay the total amount due:</strong> You clear the statement balance and can retain the applicable interest-free benefit under your card's terms.</p>
+    <p><strong>Pay more than the minimum:</strong> You reduce the unpaid balance faster, but some balance can still remain.</p>
+    <p><strong>Pay only the minimum:</strong> You meet the minimum payment requirement, but most of the statement balance can remain unpaid.</p>
+    </div>
+    </div>
+    <p>The useful question is not simply, <strong>"Did I pay my bill?"</strong></p>
+    <p>It is, <strong>"How much of my balance did I actually clear?"</strong></p>
+    <hr class="divider"/>
+    <h2>Why did my minimum payment increase?</h2>
+    <p>If your minimum payment was ₹2,000 last month and ₹3,000 this month, it does not necessarily mean your bank suddenly changed the rule.</p>
+    <p>The minimum amount due can change because your outstanding balance changed. Interest, taxes, fees, EMI instalments and other statement components can also affect the amount depending on the card.</p>
+    <p>So yes, <strong>your minimum payment can go up</strong>. The exact formula depends on the card, which is why your statement or card terms are more useful than assuming every card uses the same calculation.</p>
+    <hr class="divider"/>
+    <h2>How much should I pay on my credit card?</h2>
+    <p>If you can comfortably afford it, paying the <strong>total amount due by the due date</strong> is the cleanest way to avoid carrying a revolving balance.</p>
+    <p>If you cannot pay the full amount, paying more than the minimum is usually the direction that makes the biggest difference to how quickly the balance comes down. The exact amount should still fit your budget and essential expenses.</p>
+    <p>Do not choose a payment simply because it is the smallest amount the statement allows. Choose a payment you can actually sustain while making meaningful progress on the balance.</p>
+    <hr class="divider"/>
+    <h2>Does paying the minimum affect your credit score?</h2>
+    <p>Paying the required minimum on time is very different from missing the payment. Paying on time helps you meet the payment obligation.</p>
+    <p>But there is another piece of the puzzle: <strong>credit utilization</strong>. Carrying a large balance can keep your utilization high, and CIBIL identifies payment history and credit utilization among the factors used in its score.</p>
+    <p>So paying the minimum may help you avoid a missed payment, but it does not make a large revolving balance disappear. If the balance stays high, your credit profile can still reflect that level of utilization.</p>
+    <hr class="divider"/>
+    <h2>The simple way out of the minimum-due cycle</h2>
+    <p>If you are already carrying a balance, you do not need a complicated strategy. You need a number you can stick to.</p>
+    <div class="rules-list">
+    <div class="rule-item"><span class="rule-icon">01</span><span><strong>Stop adding unnecessary new spending.</strong> The fastest way to make a revolving balance harder to clear is to keep adding to it.</span></div>
+    <div class="rule-item"><span class="rule-icon">02</span><span><strong>Pay more than the minimum whenever you can.</strong> Even a consistent extra amount can change the payoff timeline.</span></div>
+    <div class="rule-item"><span class="rule-icon">03</span><span><strong>Check whether your card offers EMI conversion.</strong> If it does, compare the interest rate, fees and total repayment before choosing it.</span></div>
+    <div class="rule-item"><span class="rule-icon">04</span><span><strong>Compare a balance transfer carefully.</strong> A lower rate can help, but transfer fees, promotional periods and the rate after the offer all matter.</span></div>
+    <div class="rule-item"><span class="rule-icon">05</span><span><strong>Use windfalls strategically.</strong> A bonus or other lump-sum amount can make a noticeable dent in a high-cost revolving balance.</span></div>
+    <div class="rule-item"><span class="rule-icon">06</span><span><strong>Give yourself a payoff number.</strong> Instead of saying "I will pay whatever the minimum is," decide what monthly amount you can actually commit to.</span></div>
+    </div>
+    <hr class="divider"/>
+    <h2>The mindset shift that actually helps</h2>
+    <p>People carrying a revolving credit card balance often do not need another lecture. They already know the balance is there.</p>
+    <p>What helps is seeing the number clearly.</p>
+    <p>How much do you owe right now? What rate are you paying? How much interest is being added? What happens if you pay ₹500 more every month? What happens if you pay ₹2,000 more?</p>
+    <p>Once those numbers are visible, the problem becomes much less mysterious.</p>
+    <div class="callout"><strong>The minimum due can keep you current. It does not necessarily get you out of debt quickly.</strong> Treat it as the floor, not the finish line.</div>
+    <p>If you have already read <a class="text-blue-600 hover:underline" href="how-credit-cards-work.html">how credit cards work</a> and how <a class="text-blue-600 hover:underline" href="credit-card-debt-trap.html">credit card debt can build over time</a>, the next step is simple: put your own numbers into the <a class="text-blue-600 font-semibold hover:underline" href="../../calculators/credit-card-payoff/">Credit Card Payoff Calculator</a> and see what your current payment is really doing.</p>
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list">
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>What is the minimum amount due on a credit card?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>A common formula is around 5% of the outstanding balance or ₹200, whichever is higher, but the exact minimum due varies by card and issuer. Check your statement for the amount that applies to you.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>What happens if I pay only the minimum due?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>You can avoid treating the payment as overdue under the card's terms, but a large part of the balance can remain unpaid. If you do not clear the total amount due, the applicable interest-free benefit can be lost and interest can be charged according to the card's terms.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>Does paying the minimum due cause credit card interest?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>If the total amount due is not cleared, the remaining balance can attract interest according to the card's disclosed rate and calculation method. Paying only the minimum does not make the rest of the balance interest-free.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>How much should I pay on my credit card?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>If you can afford it, pay the total amount due by the due date. If you cannot, paying more than the minimum can reduce the unpaid balance faster. The payment should still fit your overall budget.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>Why did my minimum credit card payment increase?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>Your minimum due can change when the outstanding balance or other statement components change. Interest, taxes, fees and EMI instalments can be part of the calculation depending on the card.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>Does paying the minimum due affect my credit score?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>Paying the required minimum on time is different from missing a payment. However, carrying a high balance can keep your credit utilization high, and CIBIL identifies utilization as a factor in its score.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>What is the difference between minimum due and total amount due?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>The total amount due is the statement amount shown as payable. The minimum amount due is the smaller payment required under your card's terms. Paying only the minimum does not clear the remaining balance.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span>Can I pay more than the minimum due?</span><span class="faq-icon">+</span></button><div class="faq-answer"><p>Yes. You can generally pay more than the minimum. A larger payment reduces the unpaid balance faster, subject to your card's payment terms.</p></div></div>
+    </div>
+    <p class="source-note"><strong>Primary references:</strong> <a href="https://www.rbi.org.in/" rel="noopener noreferrer" target="_blank">RBI credit card directions</a> and <a href="https://www.cibil.com/" rel="noopener noreferrer" target="_blank">TransUnion CIBIL guidance</a>.</p>
+    </section>
+    <!-- CTA -->
+    <div class="cta-box">
+    <p class="text-lg font-semibold blog-title-font">
+          See your exact payoff timeline
+        </p>
+    <p class="text-sm text-indigo-200 mt-2">
+          Enter your balance, interest rate, and what you can pay each month. The calculator shows you month by month exactly when you will be debt free and how much interest you will pay to get there.
+        </p>
+    <a href="../../calculators/credit-card-payoff/" onclick="if(typeof gtag==='function') gtag('event','cta_clicked',{event_category:'blog',event_label:'minimum-due-trap'});">
+          Open Credit Card Payoff Calculator
+        </a>
+    </div>
+    <p class="text-center mt-10 text-sm">
+    <a class="text-blue-600 hover:underline" href="../">
+          Back to all articles
+        </a>
+    </p>
+    <p class="feedback-nudge">
+        💬 Have a thought or a topic you want covered?
+        <a href="../#feedback-section">
+          Send us a message
+        </a>
+    </p>
+    </article>
+    </main>
+    <!-- Comments section -->
+    <div id="knowyouremi-comments">
+    </div>
+    <!-- FOOTER:START -->
 
-      document.getElementById('menu-toggle').addEventListener('click', () => {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
-      });
-      document.getElementById('year').textContent = new Date().getFullYear();
-      window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        document.getElementById('progressBar').style.width = (scrollTop / docHeight * 100) + '%';
-      });
-      let fired = false;
-      window.addEventListener('scroll', () => {
-        if (fired) return;
-        if ((window.scrollY / (document.body.scrollHeight - window.innerHeight)) >= 0.8) {
-          fired = true;
-          if (typeof gtag === 'function') gtag('event', 'article_read', { event_category: 'blog', event_label: 'minimum-due-trap' });
+<footer class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+            <!-- Brand and purpose -->
+            <div class="lg:col-span-1">
+                <a href="https://knowyouremi.in/" class="inline-block text-xl font-bold tracking-tight hover:text-yellow-300 transition-colors">
+                    About this tool
+                </a>
+                <p class="mt-3 text-sm text-blue-100 leading-relaxed">
+                    Free loan and EMI calculators to help you understand monthly payments,
+                    total interest, loan eligibility, balance transfers and credit card payoff.
+                </p>
+                <p class="mt-4 text-xs text-blue-200 leading-relaxed">
+                    Calculations are estimates for financial planning. Actual lender terms,
+                    fees, rates and eligibility may vary.
+                </p>
+            </div>
+
+            <!-- Calculators -->
+            <div>
+                <h3 class="text-sm font-semibold uppercase tracking-wide text-blue-100 mb-4">
+                    Calculators
+                </h3>
+                <ul class="space-y-2 text-sm">
+                    <li>
+                        <a href="https://knowyouremi.in/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            EMI Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/calculators/eligibility/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Loan Eligibility Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/calculators/balance-transfer/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Balance Transfer Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/calculators/credit-card-payoff/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Credit Card Payoff Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/calculators/float-rate-home-loan/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Floating Rate Home Loan
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Guides -->
+            <div>
+                <h3 class="text-sm font-semibold uppercase tracking-wide text-blue-100 mb-4">
+                    Loan & Credit Guides
+                </h3>
+                <ul class="space-y-2 text-sm">
+                    <li>
+                        <a href="https://knowyouremi.in/blogs/basics/how-emi-is-calculated.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            How EMI Is Calculated
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/blogs/interest-rates/flat-vs-reducing-rate.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Flat vs Reducing Rate
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/blogs/strategy/when-to-make-part-payment.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            When to Make a Part Payment
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/blogs/basics/why-credit-score-matters.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Why Credit Score Matters
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/blogs/" class="hover:text-yellow-300 hover:underline transition-colors">
+                            View All Guides
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Company and support -->
+            <div>
+                <h3 class="text-sm font-semibold uppercase tracking-wide text-blue-100 mb-4">
+                    COMPANY
+                </h3>
+                <ul class="space-y-2 text-sm">
+                    <li>
+                        <a href="https://knowyouremi.in/pages/about.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            About
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/pages/privacy-policy.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Privacy Policy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://knowyouremi.in/pages/terms-and-conditions.html" class="hover:text-yellow-300 hover:underline transition-colors">
+                            Terms & Conditions
+                        </a>
+                    </li>
+                    <li>
+                        <span>Contact:</span>
+                    </li>
+                    <li>
+                        <a href="mailto:hello@knowyouremi.in" class="hover:text-yellow-300 hover:underline transition-colors">
+                            hello@knowyouremi.in
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="bg-blue-950/60 border-t border-blue-500/30">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-blue-200">
+            <p class="text-center sm:text-left">
+                © <span data-kye-footer-year></span> KnowYourEMI. All rights reserved.
+            </p>
+            <p class="text-center sm:text-right">
+                Free calculators and financial education tools.
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.querySelectorAll("[data-kye-footer-year]").forEach(function (element) {
+        element.textContent = new Date().getFullYear();
+    });
+</script>
+
+<!-- FOOTER:END -->
+    <script>
+      function toggleFaq(btn) {
+          const item = btn.closest('.faq-item');
+          const isOpen = item.classList.contains('open');
+          document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+          if (!isOpen) item.classList.add('open');
         }
-      });
+
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+          document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.scrollY;
+          const docHeight = document.body.scrollHeight - window.innerHeight;
+          document.getElementById('progressBar').style.width = (scrollTop / docHeight * 100) + '%';
+        });
+        let fired = false;
+        window.addEventListener('scroll', () => {
+          if (fired) return;
+          if ((window.scrollY / (document.body.scrollHeight - window.innerHeight)) >= 0.8) {
+            fired = true;
+            if (typeof gtag === 'function') gtag('event', 'article_read', { event_category: 'blog', event_label: 'minimum-due-trap' });
+          }
+        });
+      </script>
+    <script src="/comments/comments.js" type="module">
     </script>
-  <script src="/comments/comments.js" type="module">
-  </script>
   </body>
 </html>
